@@ -1,0 +1,167 @@
+{
+  "domain": "iptu",
+  "label": "IPTU / Cadastro Imobiliario",
+  "description": "Catalogo inicial para analises de IPTU e cadastro imobiliario no schema cadastro.",
+  "primary_schema": "cadastro",
+  "intents": {
+    "compare_periods": {
+      "description": "Compara metricas entre dois periodos ou exercicios.",
+      "triggers": ["compare", "comparar", "aumento", "reducao", "redução", "variacao", "variação", "evolucao", "evolução"],
+      "comparison_strategy": "same_entity",
+      "required_dimensions": ["time"],
+      "required_entity_key": true,
+      "default_template": "compare_periods_same_entity",
+      "rules": [
+        "Comparar a mesma entidade quando houver entity_key.",
+        "Nao usar media por periodo como unica evidencia de variacao.",
+        "Nao inferir causa sem metrica retornada."
+      ]
+    },
+    "count_records": {
+      "description": "Conta registros de uma entidade ou tabela.",
+      "triggers": ["quantos", "quantas", "total", "contar", "existem", "existe"],
+      "default_aggregation": "count"
+    }
+  },
+  "metrics": {
+    "valor_terreno": {
+      "label": "Valor do terreno",
+      "table": "cadastro.iptucalc",
+      "expression": "j23_vlrter",
+      "unit": "BRL",
+      "grain": ["matricula", "exercicio"],
+      "explain_variation": true,
+      "is_final_metric": false,
+      "effect_on_final_value": "increases_when_increases",
+      "forbidden_aliases": ["iptu", "valor_iptu", "avg_iptu"]
+    },
+    "valor_m2_terreno": {
+      "label": "Valor do metro quadrado do terreno",
+      "table": "cadastro.iptucalc",
+      "expression": "j23_m2terr",
+      "unit": "BRL/m2",
+      "grain": ["matricula", "exercicio"],
+      "explain_variation": true,
+      "is_final_metric": false,
+      "effect_on_final_value": "increases_when_increases"
+    },
+    "area_lote": {
+      "label": "Area do lote",
+      "table": "cadastro.iptucalc",
+      "expression": "j23_arealo",
+      "unit": "m2",
+      "grain": ["matricula", "exercicio"],
+      "explain_variation": true,
+      "effect_on_final_value": "increases_when_increases"
+    },
+    "area_edificada": {
+      "label": "Area edificada",
+      "table": "cadastro.iptucalc",
+      "expression": "j23_areaed",
+      "unit": "m2",
+      "grain": ["matricula", "exercicio"],
+      "explain_variation": true,
+      "effect_on_final_value": "increases_when_increases"
+    },
+    "aliquota": {
+      "label": "Aliquota",
+      "table": "cadastro.iptucalc",
+      "expression": "j23_aliq",
+      "grain": ["matricula", "exercicio"],
+      "explain_variation": true,
+      "effect_on_final_value": "increases_when_increases"
+    },
+    "valor_isencao": {
+      "label": "Valor de isencao",
+      "table": "cadastro.iptucalc",
+      "expression": "j23_vlrisen",
+      "unit": "BRL",
+      "grain": ["matricula", "exercicio"],
+      "explain_variation": true,
+      "is_final_metric": false,
+      "effect_on_final_value": "decreases_when_increases"
+    }
+  },
+  "templates": {
+    "compare_periods_same_entity": {
+      "intent": "compare_periods",
+      "strategy": "self_join_same_table",
+      "requires": ["table", "entity_key", "time_key", "metrics", "period_a", "period_b"],
+      "allowed_aggregations": ["count", "avg_delta", "sum_delta", "avg_period"]
+    }
+  },
+  "tables": {
+    "cadastro.iptucalc": {
+      "description": "Tabela de calculo do IPTU por exercicio e matricula. Ajuda a explicar fatores de variacao, calculos anuais e geracao financeira, mas nao representa por si so a quantidade cadastral de imoveis ativos.",
+      "primary_key": ["j23_anousu", "j23_matric"],
+      "grain": ["exercicio", "matricula"],
+      "entity_key": ["j23_matric"],
+      "time_key": "j23_anousu",
+      "default_filters": ["coalesce({alias}.j23_gerafinanc, true) = true"],
+      "foreign_keys": [
+        {
+          "column": "j23_matric",
+          "references": "cadastro.iptubase.j01_matric"
+        }
+      ],
+      "recommended": true,
+      "columns": {
+        "j23_anousu": {"label": "Ano/exercicio do calculo", "semantic_role": "time_key", "type": "integer"},
+        "j23_matric": {"label": "Matricula do imovel", "semantic_role": "entity_key", "type": "integer"},
+        "j23_arealo": {"label": "Area do lote", "semantic_role": "measure", "metric": "area_lote", "type": "numeric"},
+        "j23_areaed": {"label": "Area edificada", "semantic_role": "measure", "metric": "area_edificada", "type": "numeric"},
+        "j23_m2terr": {"label": "Valor do metro quadrado do terreno", "semantic_role": "measure", "metric": "valor_m2_terreno", "type": "numeric"},
+        "j23_vlrter": {"label": "Valor do terreno", "semantic_role": "measure", "metric": "valor_terreno", "type": "numeric", "unit": "BRL", "is_final_metric": false, "forbidden_aliases": ["iptu", "valor_iptu", "avg_iptu"]},
+        "j23_aliq": {"label": "Aliquota", "semantic_role": "measure", "metric": "aliquota", "type": "numeric"},
+        "j23_vlrisen": {"label": "Valor de isencao", "semantic_role": "measure", "metric": "valor_isencao", "type": "numeric", "unit": "BRL", "is_final_metric": false},
+        "j23_tipoim": {"label": "Tipo do imovel", "semantic_role": "dimension"},
+        "j23_tipocalculo": {"label": "Tipo de calculo", "semantic_role": "dimension"},
+        "j23_gerafinanc": {"label": "Indica se gerou debito financeiro", "semantic_role": "filter", "type": "boolean"}
+      },
+      "blocked_columns": ["j23_manual"]
+    },
+    "cadastro.iptubase": {
+      "description": "Base cadastral da matricula imobiliaria. Todos os imoveis, ativos ou inativos",
+      "primary_key": ["j01_matric"],
+      "entity_key": ["j01_matric"],
+      "columns": {
+        "j01_matric": {"label": "Matricula do imovel", "semantic_role": "entity_key", "type": "integer"},
+        "j01_numcgm": {"label": "CGM vinculado ao imovel"},
+        "j01_baixa": {"label": "Data de baixa da matricula. Quando nula, indica matricula sem baixa no cadastro.", "semantic_role": "status_filter"},
+        "j01_situcad": {"label": "Situacao cadastral textual quando preenchida"},
+        "j01_tipoimovel": {"label": "Tipo do imovel"},
+        "j01_datacad": {"label": "Data de cadastro"}
+      }
+    },
+    "cadastro.iptucalv": {
+      "description": "Tabela relacionada a valores do calculo. Deve ser validada antes de ser usada como valor final do IPTU.",
+      "columns": {}
+    },
+    "cadastro.iptunump": {
+      "description": "Tabela relacionada a numeracao/parcelas do IPTU. Deve ser validada antes de analises financeiras finais.",
+      "columns": {}
+    },
+    "cadastro.iptucale": {
+      "description": "Tabela auxiliar do calculo do IPTU.",
+      "columns": {}
+    },
+    "cadastro.lote": {
+      "description": "Informacoes de lote.",
+      "columns": {}
+    },
+    "cadastro.bairro": {
+      "description": "Bairros usados em agrupamentos territoriais.",
+      "columns": {}
+    },
+    "cadastro.setor": {
+      "description": "Setores cadastrais/fiscais.",
+      "columns": {}
+    },
+    "cadastro.ruas": {
+      "description": "Logradouros.",
+      "columns": {}
+    }
+  },
+  "examples": [
+  ]
+}
