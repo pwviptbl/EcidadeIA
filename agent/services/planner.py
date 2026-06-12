@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections import deque
 from dataclasses import dataclass
 from typing import Any
 
@@ -230,6 +231,9 @@ class AgentPlanner:
         if not asks_sum:
             return None
 
+        if self._question_needs_dimension_route(question_text, candidates, table):
+            return None
+
         log_event(
             "route.validated_query_shortcut",
             {
@@ -242,6 +246,44 @@ class AgentPlanner:
             "tables": [table],
             "reasoning": "Tabela escolhida por consulta validada aderente no catalogo/RAG.",
         }
+
+    def _question_needs_dimension_route(self, question_text: str, candidates: list[dict], primary_table: str) -> bool:
+        asks_ranking_or_grouping = any(
+            term in question_text
+            for term in (
+                "maior",
+                "maiores",
+                "menor",
+                "menores",
+                "top",
+                "ranking",
+                "rank",
+                "por ",
+                "por_",
+                "em cada",
+                "para cada",
+                "agrup",
+            )
+        )
+        if not asks_ranking_or_grouping:
+            return False
+
+        question_terms = {
+            self._singular(term)
+            for term in re.findall(r"[a-z0-9_]+", question_text)
+            if len(term) >= 3 and not term.isdigit()
+        }
+        for row in candidates[1:8]:
+            table = str(row.get("table") or "")
+            if not table or table == primary_table:
+                continue
+            leaf = table.split(".", 1)[-1].lower()
+            description = str(row.get("description") or "").lower()
+            if self._singular(leaf) in question_terms:
+                return True
+            if any(term in description for term in question_terms if len(term) >= 4):
+                return True
+        return False
 
     def _select_tables_with_llm(self, question: str, candidates: list[dict]) -> dict:
         if not candidates:
@@ -410,6 +452,12 @@ class AgentPlanner:
         selected_catalog = self._selected_catalog(tables)
         self._merge_catalog_metadata(selected_catalog, metadata_tables)
         expanded_tables = self._expand_context_from_catalog_rules(question, selected_catalog, metadata_tables, metadata_errors)
+        expanded_tables = self._expand_context_from_relationship_paths(
+            selected_catalog,
+            expanded_tables,
+            metadata_tables,
+            metadata_errors,
+        )
 
         relationships = {}
         if route.get("needs_relationships", True) or len(expanded_tables) > len(tables):
@@ -422,6 +470,7 @@ class AgentPlanner:
             "question": question,
             "recent_history": self._compact_history(history),
             "route": route,
+            "expanded_tables": expanded_tables,
             "catalog": selected_catalog,
             "available_schemas": metadata_schemas,
             "metadata_tables": metadata_tables,
@@ -624,6 +673,7 @@ class AgentPlanner:
                 "Pode descrever totais, medias, contagens, rankings e variacoes presentes no resultado.",
                 "Pode apontar possiveis fatores somente quando eles forem colunas ou metricas retornadas pela consulta.",
                 "Deve informar limites da analise quando o resultado for amostra, ranking ou nao trouxer causa direta.",
+                "Se a pergunta nao informou periodo/ano e a SQL nao filtrou periodo/ano, informe que o resultado considera todos os registros cobertos pela consulta.",
             ],
             "forbidden_claims_without_data": self._forbidden_claims_without_data(),
             "sql_plan": {
@@ -1021,6 +1071,89 @@ class AgentPlanner:
                     metadata_errors.append({"table": reference, "error": str(exc), "source_table": source_table})
         return expanded
 
+    def _expand_context_from_relationship_paths(
+        self,
+        selected_catalog: dict,
+        expanded_tables: list[str],
+        metadata_tables: list[dict],
+        metadata_errors: list[dict],
+    ) -> list[str]:
+        tables = selected_catalog.get("tables", {})
+        selected = list(dict.fromkeys(expanded_tables))
+        if len(selected) <= 1:
+            return selected
+
+        known_tables = self.catalog.compact_index().get("tables", {})
+        additions: list[str] = []
+        for index, source in enumerate(selected):
+            for target in selected[index + 1:]:
+                path = self._relationship_path(source, target, max_depth=4)
+                if not path:
+                    continue
+                for table_name in path:
+                    if table_name in tables or table_name in additions:
+                        continue
+                    if table_name not in known_tables:
+                        continue
+                    schema, table = self._split_table(table_name)
+                    try:
+                        metadata = self._compact_table_metadata(self.client.table(schema, table))
+                        metadata_tables.append(metadata)
+                        selected_catalog["tables"][table_name] = known_tables.get(table_name, {})
+                        self._merge_catalog_metadata(selected_catalog, [metadata])
+                        additions.append(table_name)
+                    except Exception as exc:
+                        metadata_errors.append({"table": table_name, "error": str(exc), "source_table": source, "target_table": target})
+                if len(path) > 2:
+                    log_event(
+                        "context.expanded_by_relationship_path",
+                        {
+                            "source_table": source,
+                            "target_table": target,
+                            "path": path,
+                        },
+                    )
+
+        return list(dict.fromkeys([*selected, *additions]))
+
+    def _relationship_path(self, source: str, target: str, max_depth: int = 4) -> list[str]:
+        if source == target:
+            return [source]
+
+        graph = self._catalog_relationship_graph()
+        queue = deque([(source, [source])])
+        seen = {source}
+        while queue:
+            current, path = queue.popleft()
+            if len(path) > max_depth + 1:
+                continue
+            for neighbor in graph.get(current, []):
+                if neighbor in seen:
+                    continue
+                next_path = [*path, neighbor]
+                if neighbor == target:
+                    return next_path
+                seen.add(neighbor)
+                queue.append((neighbor, next_path))
+        return []
+
+    def _catalog_relationship_graph(self) -> dict[str, set[str]]:
+        graph: dict[str, set[str]] = {}
+        for table_name, table_info in (self.catalog.data.get("tables") or {}).items():
+            if not isinstance(table_info, dict):
+                continue
+            for fk in self._table_foreign_keys(table_info):
+                reference = str(fk.get("references") or fk.get("referencia") or "").strip()
+                if not reference:
+                    continue
+                graph.setdefault(table_name, set()).add(reference)
+                graph.setdefault(reference, set()).add(table_name)
+        return graph
+
+    def _table_foreign_keys(self, table_info: dict) -> list[dict]:
+        rows = table_info.get("foreign_keys") or table_info.get("chaves_estrangeiras") or []
+        return [row for row in rows if isinstance(row, dict)]
+
     def _question_needs_type_classification(self, question: str) -> bool:
         lowered = str(question or "").lower()
         return any(
@@ -1206,6 +1339,9 @@ Score e rag_evidence sao auxiliares, nao decisao final.
         if usable:
             return None
 
+        if self._relationships_connect_selected_graph([*relationship_rows, *foreign_keys, *heuristics], tables):
+            return None
+
         catalog_rule = self._catalog_rule_connects_selected_tables(context, tables)
         if catalog_rule:
             log_event("relationship.guard.catalog_rule", catalog_rule)
@@ -1237,6 +1373,37 @@ Score e rag_evidence sao auxiliares, nao decisao final.
         }
         leaves = {value.split(".", 1)[-1] for value in values if value}
         return bool(selected_full.intersection(values) or selected_names.intersection(values) or selected_names.intersection(leaves))
+
+    def _relationships_connect_selected_graph(self, relationships: list[dict], tables: list[str]) -> bool:
+        selected = {str(table) for table in tables}
+        if len(selected) <= 1:
+            return True
+
+        graph: dict[str, set[str]] = {}
+        for relationship in relationships:
+            if not isinstance(relationship, dict):
+                continue
+            source = str(relationship.get("source") or relationship.get("source_table") or relationship.get("table") or "").strip()
+            target = str(relationship.get("target") or relationship.get("target_table") or relationship.get("references") or "").strip()
+            if not source or not target:
+                continue
+            graph.setdefault(source, set()).add(target)
+            graph.setdefault(target, set()).add(source)
+
+        if not graph:
+            return False
+
+        start = next(iter(selected))
+        seen = {start}
+        queue = deque([start])
+        while queue:
+            current = queue.popleft()
+            for neighbor in graph.get(current, set()):
+                if neighbor in seen:
+                    continue
+                seen.add(neighbor)
+                queue.append(neighbor)
+        return selected.issubset(seen)
 
     def _catalog_rule_connects_selected_tables(self, context: dict, tables: list[str]) -> dict | None:
         selected = {str(table) for table in tables}
@@ -1291,6 +1458,12 @@ Score e rag_evidence sao auxiliares, nao decisao final.
         target = str(relationship.get("target_table") or relationship.get("references") or "")
         target_leaf = target.split(".", 1)[-1] if target else ""
         return source in selected_names and target_leaf in selected_names
+
+    def _singular(self, value: str) -> str:
+        text = str(value or "").lower()
+        if len(text) > 3 and text.endswith("s"):
+            return text[:-1]
+        return text
 
     def _relationship_guard_answer(self, error: dict) -> str:
         tables = ", ".join(error.get("tables") or [])
