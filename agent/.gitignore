@@ -4,3 +4,4 @@ __pycache__/
 */__pycache__/
 data/*.sqlite3
 data/*.sqlite3-*
+data/agente.log
