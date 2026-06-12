@@ -36,7 +36,9 @@ Ao adicionar novo conhecimento:
 
 - regra curta e estruturada entra em `catalog/`;
 - explicacao longa, exemplo ou anotacao do consultor entra em `knowledge/manual/`;
-- regra operacional curta para IA entra em `knowledge/rag/`;
-- se editar o manual, rode `python3 tools/build_knowledge_rag.py`;
-- depois rode `python3 tools/build_rag_documents.py`;
+- regra operacional curta para IA e gerada em `knowledge/rag/`;
+- se editar o manual, rode `python3 tools/run_knowledge_pipeline.py --schema cadastro`;
+- se extrair novamente do banco, rode `python3 tools/run_knowledge_pipeline.py --schema cadastro --from-db`;
 - valide a pergunta no agente.
+
+Sequencia detalhada: `docs/pipeline-conhecimento.md`.

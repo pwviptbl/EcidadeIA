@@ -37,7 +37,7 @@ class AgentPlanner:
     """
 
     MAX_ATTEMPTS = 5
-    BUILD_ID = "2026-06-11-top-iptu-route-v1"
+    BUILD_ID = "planner-generic-rag-v1"
 
     def __init__(
         self,
@@ -125,8 +125,6 @@ class AgentPlanner:
         candidates = self._compact_search_results(self.catalog.search(question, limit=10))
         selected = self._validated_query_route(question, candidates)
         if not selected:
-            selected = self._top_iptu_route(question, candidates)
-        if not selected:
             selected = self._simple_count_route(question, candidates)
         if not selected:
             selected = self._select_tables_with_llm(question, candidates)
@@ -200,38 +198,6 @@ class AgentPlanner:
             "reasoning": "Tabela escolhida por atalho deterministico de contagem simples.",
         }
 
-    def _top_iptu_route(self, question: str, candidates: list[dict]) -> dict | None:
-        if not candidates:
-            return None
-
-        question_text = str(question or "").lower()
-        if "iptu" not in question_text or not self._question_asks_ranking(question_text):
-            return None
-
-        preferred = next(
-            (
-                row
-                for row in candidates[:5]
-                if str(row.get("table") or "").strip() == "cadastro.iptucalv"
-            ),
-            None,
-        )
-        if not preferred:
-            return None
-
-        log_event(
-            "route.top_iptu_shortcut",
-            {
-                "table": "cadastro.iptucalv",
-                "reason": "iptu_ranking_question",
-                "score": preferred.get("score"),
-            },
-        )
-        return {
-            "tables": ["cadastro.iptucalv"],
-            "reasoning": "Tabela escolhida por atalho deterministico de ranking de IPTU.",
-        }
-
     def _validated_query_route(self, question: str, candidates: list[dict]) -> dict | None:
         if not candidates:
             return None
@@ -249,9 +215,6 @@ class AgentPlanner:
             return None
 
         question_text = str(question or "").lower()
-        if self._question_asks_ranking(question_text):
-            return None
-
         asks_sum = any(
             term in question_text
             for term in (
@@ -262,8 +225,6 @@ class AgentPlanner:
                 "qual a soma",
                 "qual e a soma",
                 "qual é a soma",
-                "total do iptu",
-                "valor total do iptu",
             )
         )
         if not asks_sum:
@@ -326,7 +287,6 @@ class AgentPlanner:
                 if table in allowed_tables
             ]
             if selected:
-                selected = self._repair_route_selection(question, selected, candidates)
                 log_event("route.llm_selection", {"tables": selected, "reasoning": result.get("reasoning")})
                 return {"tables": selected[:3], "reasoning": result.get("reasoning") or "Tabelas escolhidas pela IA."}
             log_event(
@@ -339,59 +299,6 @@ class AgentPlanner:
             if isinstance(exc, LLMError):
                 raise
             raise LLMError(f"Falha na selecao de tabelas pela IA: {exc}") from exc
-
-    def _repair_route_selection(self, question: str, selected: list[str], candidates: list[dict]) -> list[str]:
-        question_text = str(question or "").lower()
-        asks_value = any(term in question_text for term in ("soma", "somar", "valor", "total", "calcule", "calcular"))
-        if not asks_value:
-            return selected
-
-        strong_kinds = {
-            "validated_query",
-            "classification",
-            "filter_semantics",
-            "grouping_rule",
-            "markdown_rule",
-            "markdown_sql",
-        }
-        strong_candidates = [
-            row for row in candidates[:5]
-            if row.get("table")
-            and any(evidence.get("kind") in strong_kinds for evidence in (row.get("rag_evidence") or []))
-        ]
-        if not strong_candidates:
-            return selected
-
-        primary = str(strong_candidates[0].get("table"))
-        primary_evidence = strong_candidates[0].get("rag_evidence") or []
-        primary_has_validated_query = any(
-            evidence.get("kind") == "validated_query"
-            for evidence in primary_evidence
-            if isinstance(evidence, dict)
-        )
-
-        if primary_has_validated_query:
-            repaired = [primary]
-        else:
-            selected_set = set(selected)
-            strong_tables = {str(row.get("table")) for row in strong_candidates if row.get("table")}
-            repaired = [primary]
-            for table in selected:
-                if table in strong_tables and table not in repaired:
-                    repaired.append(table)
-            if selected_set and selected_set.issubset(strong_tables):
-                repaired = [table for table in selected if table in strong_tables]
-
-        if repaired != selected:
-            log_event(
-                "route.selection_repaired",
-                {
-                    "original": selected,
-                    "repaired": repaired,
-                    "reason": "validated_query_or_classification_evidence",
-                },
-            )
-        return repaired
 
     def _fallback_candidate_tables(self, candidates: list[dict]) -> list[str]:
         if not candidates:
@@ -549,7 +456,6 @@ class AgentPlanner:
                 "Para contar registros, use count(1).",
                 "Para comparacoes temporais com entity_key, compare a mesma entidade entre periodos.",
                 "Quando o contexto trouxer classificacao_por_tipo, use a tabela de classificacao indicada antes de somar ou filtrar valores.",
-                "Se a pergunta pedir hist/historico de IPTU, use cadastro.iptucalh para classificar cadastro.iptucalv.j21_codhis.",
                 "SQL somente SELECT/WITH e aliases ASCII.",
             ],
             "response_schema": {
@@ -770,8 +676,6 @@ class AgentPlanner:
     def _detect_intent_from_catalog(self, question: str, context: dict) -> dict:
         years = [int(year) for year in re.findall(r"\b(20\d{2})\b", str(question or "").lower())]
         question_text = str(question or "").lower()
-        if "iptu" in question_text and self._question_asks_ranking(question_text):
-            return {"intent": "top_iptu_matricula", "years": years, "source": "fallback"}
         if any(
             term in question_text
             for term in (
@@ -795,8 +699,6 @@ class AgentPlanner:
     def _deterministic_sql_plan(self, context: dict) -> dict | None:
         plan = (
             self._template_sql_plan(context)
-            or self._top_iptu_matricula_sql_plan(context)
-            or self._sum_records_sql_plan(context)
             or self._count_records_sql_plan(context)
         )
         if plan:
@@ -842,72 +744,6 @@ class AgentPlanner:
 
     def _count_filtered_sql_plan(self, context: dict) -> dict | None:
         return None
-
-    def _sum_records_sql_plan(self, context: dict) -> dict | None:
-        question = str(context.get("question") or "").lower()
-        years = context.get("semantic_intent", {}).get("years", [])
-        if self._question_asks_ranking(question):
-            return None
-        if "iptu" not in question or not years:
-            return None
-
-        has_iptucalv = bool(self.catalog.table("cadastro.iptucalv"))
-        has_iptucalh = bool(self.catalog.table("cadastro.iptucalh"))
-        if not (has_iptucalv and has_iptucalh):
-            return None
-
-        year = int(years[0])
-        return {
-            "sql": (
-                "select coalesce(sum(v.j21_valor), 0) as total_valor "
-                "from cadastro.iptucalv v "
-                "join cadastro.iptucalh h on h.j17_codhis = v.j21_codhis "
-                f"where v.j21_anousu = {year} "
-                "and position('iptu' in lower(h.j17_descr)) > 0"
-            ),
-            "limit": 1,
-            "template": "sum_iptu_year",
-            "year": year,
-        }
-
-    def _top_iptu_matricula_sql_plan(self, context: dict) -> dict | None:
-        if context.get("semantic_intent", {}).get("intent") != "top_iptu_matricula":
-            return None
-
-        has_iptucalv = bool(self.catalog.table("cadastro.iptucalv"))
-        has_iptucalh = bool(self.catalog.table("cadastro.iptucalh"))
-        if not (has_iptucalv and has_iptucalh):
-            return None
-
-        years = context.get("semantic_intent", {}).get("years") or []
-        filters = ["position('iptu' in lower(h.j17_descr)) > 0"]
-        select_parts = [
-            "v.j21_matric as matricula",
-            "coalesce(sum(v.j21_valor), 0) as total_valor",
-        ]
-        group_parts = ["v.j21_matric"]
-        if years:
-            year = int(years[0])
-            filters.insert(0, f"v.j21_anousu = {year}")
-            select_parts.insert(1, "v.j21_anousu as ano")
-            group_parts.append("v.j21_anousu")
-
-        return {
-            "sql": (
-                "select "
-                + ", ".join(select_parts)
-                + " from cadastro.iptucalv v "
-                "join cadastro.iptucalh h on h.j17_codhis = v.j21_codhis "
-                "where "
-                + " and ".join(filters)
-                + " group by "
-                + ", ".join(group_parts)
-                + " order by total_valor desc limit 1"
-            ),
-            "limit": 1,
-            "template": "top_iptu_matricula",
-            "year": int(years[0]) if years else None,
-        }
 
     def _select_template_table(self, context: dict) -> dict | None:
         selected = context.get("catalog", {}).get("tables", {})
@@ -1015,24 +851,7 @@ class AgentPlanner:
             if known_columns and column_name not in known_columns:
                 errors.append(f"Coluna nao listada no contexto: {column_name}.")
 
-        if self._question_needs_iptu_history_filter(context.get("question") or ""):
-            if "cadastro.iptucalv" in lowered and "j21_valor" in lowered:
-                has_history_join = "cadastro.iptucalh" in lowered and "j21_codhis" in lowered and "j17_codhis" in lowered
-                has_history_filter = "j17_descr" in lowered or "codhis" in lowered and ("iptu" in lowered or "hist" in lowered)
-                if not has_history_join or not has_history_filter:
-                    errors.append(
-                        "Pergunta pede hist/historico de IPTU; soma de cadastro.iptucalv.j21_valor exige "
-                        "classificar pelo historico em cadastro.iptucalh antes de agregar."
-                    )
-
         return errors
-
-    def _question_needs_iptu_history_filter(self, question: str) -> bool:
-        lowered = str(question or "").lower()
-        mentions_iptu = "iptu" in lowered
-        mentions_history = any(token in lowered for token in ("hist", "historico", "histórico", "somente", "apenas"))
-        mentions_sum = any(token in lowered for token in ("soma", "somar", "total", "calcule", "calcular"))
-        return mentions_iptu and mentions_sum and mentions_history
 
     def _metrics_for_sql(self, sql: str) -> list[dict]:
         lowered = str(sql or "").lower()
@@ -1210,7 +1029,6 @@ class AgentPlanner:
                 "hist",
                 "historico",
                 "histórico",
-                "iptu",
                 "receita",
                 "rec",
                 "tipo",
@@ -1256,31 +1074,6 @@ class AgentPlanner:
             detail = f" ({description})" if description else ""
             return f"Temos {value} registros em {table_name}{detail}."
 
-        if template == "sum_iptu_year":
-            value = first_row.get("total_valor")
-            if value is None:
-                return ""
-            years = context.get("semantic_intent", {}).get("years") or []
-            year_text = f" de {years[0]}" if years else ""
-            return f"A soma do IPTU{year_text} é de R$ {self._format_brl(value)}."
-
-        if template == "top_iptu_matricula":
-            matricula = first_row.get("matricula")
-            value = first_row.get("total_valor")
-            if matricula is None or value is None:
-                return ""
-            ano = first_row.get("ano") or sql_plan.get("year")
-            if ano:
-                return (
-                    f"A matrícula com maior valor de IPTU em {ano} é {matricula}, "
-                    f"com total de R$ {self._format_brl(value)}."
-                )
-            return (
-                f"A matrícula com maior valor de IPTU é {matricula}, "
-                f"com total de R$ {self._format_brl(value)}. "
-                "Como a pergunta não informou exercício, a consulta considerou todos os exercícios disponíveis."
-            )
-
         return ""
 
     def _format_brl(self, value: Any) -> str:
@@ -1290,29 +1083,6 @@ class AgentPlanner:
             return str(value)
         formatted = f"{number:,.2f}"
         return formatted.replace(",", "X").replace(".", ",").replace("X", ".")
-
-    def _question_asks_ranking(self, question_text: str) -> bool:
-        lowered = str(question_text or "").lower()
-        return any(
-            term in lowered
-            for term in (
-                "maior",
-                "maiores",
-                "menor",
-                "menores",
-                "maximo",
-                "máximo",
-                "minimo",
-                "mínimo",
-                "ranking",
-                "rank",
-                "top",
-                "mais alto",
-                "mais alta",
-                "mais baixo",
-                "mais baixa",
-            )
-        )
 
     def _forbidden_claims_without_data(self) -> list[str]:
         return [
@@ -1401,13 +1171,14 @@ Score e rag_evidence sao auxiliares, nao decisao final.
         if not isinstance(relationships, dict) or relationships.get("error"):
             return relationships
 
+        selected_full = {str(table) for table in tables}
         table_names = {self._split_table(table)[1] for table in tables}
         filtered = {}
-        for key in ("foreign_keys", "heuristics"):
+        for key in ("relationships", "foreign_keys", "heuristics"):
             rows = relationships.get(key, [])
             filtered[key] = [
                 row for row in rows
-                if row.get("source_table") in table_names or row.get("target_table") in table_names
+                if self._relationship_mentions_any_selected_table(row, selected_full, table_names)
             ][:80]
         return filtered
 
@@ -1424,22 +1195,81 @@ Score e rag_evidence sao auxiliares, nao decisao final.
                 "relationships": relationships,
             }
 
+        relationship_rows = relationships.get("relationships") or []
         foreign_keys = relationships.get("foreign_keys") or []
         heuristics = relationships.get("heuristics") or []
         usable = [
             row
-            for row in [*foreign_keys, *heuristics]
+            for row in [*relationship_rows, *foreign_keys, *heuristics]
             if isinstance(row, dict) and self._relationship_connects_selected_tables(row, tables)
         ]
         if usable:
             return None
 
+        catalog_rule = self._catalog_rule_connects_selected_tables(context, tables)
+        if catalog_rule:
+            log_event("relationship.guard.catalog_rule", catalog_rule)
+            return None
+
         return {
             "tables": tables,
             "reason": "A IA selecionou mais de uma tabela, mas o catalogo nao trouxe relacionamento claro entre elas.",
+            "relationships": relationship_rows[:10],
             "foreign_keys": foreign_keys[:10],
             "heuristics": heuristics[:10],
         }
+
+    def _relationship_mentions_any_selected_table(
+        self,
+        relationship: dict,
+        selected_full: set[str],
+        selected_names: set[str],
+    ) -> bool:
+        if not isinstance(relationship, dict):
+            return False
+        values = {
+            str(relationship.get("source") or ""),
+            str(relationship.get("target") or ""),
+            str(relationship.get("source_table") or ""),
+            str(relationship.get("target_table") or ""),
+            str(relationship.get("table") or ""),
+            str(relationship.get("references") or ""),
+        }
+        leaves = {value.split(".", 1)[-1] for value in values if value}
+        return bool(selected_full.intersection(values) or selected_names.intersection(values) or selected_names.intersection(leaves))
+
+    def _catalog_rule_connects_selected_tables(self, context: dict, tables: list[str]) -> dict | None:
+        selected = {str(table) for table in tables}
+        catalog_tables = context.get("catalog", {}).get("tables", {})
+        if not isinstance(catalog_tables, dict):
+            return None
+
+        for source_table, table_info in catalog_tables.items():
+            if source_table not in selected or not isinstance(table_info, dict):
+                continue
+            classifications = table_info.get("type_classification") or {}
+            if not isinstance(classifications, dict):
+                continue
+            for rule_name, details in classifications.items():
+                if not isinstance(details, dict):
+                    continue
+                reference_table = str(
+                    details.get("tabela_referencia")
+                    or details.get("reference_table")
+                    or details.get("target_table")
+                    or ""
+                ).strip()
+                if not reference_table or reference_table not in selected:
+                    continue
+                return {
+                    "source_table": source_table,
+                    "reference_table": reference_table,
+                    "rule": rule_name,
+                    "reason": "type_classification",
+                    "source_column": details.get("coluna_origem") or details.get("source_column"),
+                    "reference_column": details.get("coluna_referencia") or details.get("reference_column"),
+                }
+        return None
 
     def _relationship_connects_selected_tables(self, relationship: dict, tables: list[str]) -> bool:
         selected_full = {str(table) for table in tables}
