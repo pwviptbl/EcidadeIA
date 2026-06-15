@@ -36,6 +36,14 @@ def ensure_list(value: object) -> list:
 
 
 def infer_markdown_table(path: Path, text: str) -> str | None:
+    if path.stem.lower() in {
+        "conceitos",
+        "relacionamentos_negocio",
+        "relacionamentos",
+        "regras_negocio",
+    }:
+        return None
+
     patterns = [
         r"Tabela Principal:\s*`([^`]+)`",
         r"Tabela principal:\s*`([^`]+)`",
@@ -97,20 +105,19 @@ def markdown_sections(text: str) -> list[dict]:
     return [section for section in sections if compact_text(section.get("content"))]
 
 
-def markdown_sql_blocks(content: str) -> list[str]:
-    blocks = []
-    for match in re.finditer(r"```(?:sql|postgresql)?\s*\n(.*?)```", content, flags=re.I | re.S):
-        sql = match.group(1).strip()
-        if sql and re.search(r"\b(select|with)\b", sql, flags=re.I):
-            blocks.append(sql)
-    return blocks
-
-
 def markdown_section_kind(title: str, content: str) -> str:
     title_text = title.lower()
     haystack = f"{title} {content}".lower()
-    if markdown_sql_blocks(content):
-        return "markdown_sql"
+    if any(term in haystack for term in ("conceito de negocio", "conceito de negócio")):
+        return "business_concept"
+    if any(term in haystack for term in ("receita de relacionamento", "caminho de negocio", "caminho de negócio")):
+        return "relationship_recipe"
+    if any(term in haystack for term in ("filtro de negocio", "filtro de negócio")):
+        return "business_filter"
+    if any(term in haystack for term in ("papel de tabela", "papel da tabela")):
+        return "table_role"
+    if "regra de contagem" in haystack:
+        return "counting_rule"
     if any(term in title_text for term in ("método", "metodo", "coluna", "auditoria", "crud", "campos obrigatórios", "campos obrigatorios")):
         return "markdown_reference"
     if any(term in haystack for term in ("regra", "cuidado", "risco", "importante", "atenção", "atencao", "não ", "nao ")):
@@ -157,31 +164,6 @@ def build_markdown_docs() -> list[dict]:
                     "text": section_text,
                 }
             )
-
-            for sql_index, sql in enumerate(markdown_sql_blocks(content)):
-                docs.append(
-                    {
-                        "id": doc_id("markdown_sql", str(relative), str(index), str(sql_index), sql[:120]),
-                        "kind": "markdown_sql",
-                        "metadata": {
-                            "domain": domain,
-                            "schema": domain,
-                            "source_file": str(relative),
-                            "table": table_name,
-                            "section": title,
-                        },
-                        "text": "\n".join(
-                            item
-                            for item in [
-                                f"SQL documentada em Markdown: {relative}",
-                                f"Tabela: {table_name}" if table_name else "",
-                                f"Secao: {title}",
-                                f"SQL: {compact_text(sql)}",
-                            ]
-                            if item
-                        ),
-                    }
-                )
     return docs
 
 
@@ -464,7 +446,6 @@ def build_business_rule_docs(domain: str, source_file: str, table_name: str, tab
     for index, query in enumerate(table_validated_queries(table_info)):
         question = compact_text(query.get("pergunta") or query.get("question"))
         rule = compact_text(query.get("regra") or query.get("rule"))
-        sql = compact_text(query.get("sql_exemplo") or query.get("sql"))
         docs.append(
             {
                 "id": doc_id("validated_query", table_name, str(index), question),
@@ -482,7 +463,6 @@ def build_business_rule_docs(domain: str, source_file: str, table_name: str, tab
                         f"Consulta validada: {table_name}",
                         f"Pergunta: {question}",
                         f"Regra: {rule}",
-                        f"SQL validada: {sql}",
                     ]
                     if item
                 ),

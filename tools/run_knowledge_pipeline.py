@@ -41,6 +41,23 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Exporta catalogo JSON para Markdown em docs/exemplos/obsidian.",
     )
+    parser.add_argument(
+        "--export-business-scaffold",
+        action="store_true",
+        help="Gera esqueletos de conceitos e relacionamentos de negocio em docs/exemplos/obsidian.",
+    )
+    parser.add_argument(
+        "--skip-business-scaffold",
+        action="store_true",
+        help="Nao gera os esqueletos de curadoria de negocio ao exportar para Obsidian.",
+    )
+    parser.add_argument(
+        "--overwrite-business-scaffold",
+        action="store_true",
+        help="Sobrescreve esqueletos de negocio ja existentes.",
+    )
+    parser.add_argument("--max-concept-tables", type=int, default=20)
+    parser.add_argument("--max-relationship-recipes", type=int, default=80)
     return parser.parse_args()
 
 
@@ -69,6 +86,25 @@ def main() -> None:
                 str(ROOT_DIR / "docs" / "exemplos" / "obsidian"),
             ]
         )
+
+    if (args.export_obsidian or args.export_business_scaffold) and not args.skip_business_scaffold:
+        scaffold_cmd = [
+            python,
+            str(TOOLS_DIR / "scaffold_business_knowledge.py"),
+            "--domain",
+            args.schema,
+            "--catalog-dir",
+            str(ROOT_DIR / "catalog"),
+            "--output-dir",
+            str(ROOT_DIR / "docs" / "exemplos" / "obsidian"),
+            "--max-concept-tables",
+            str(args.max_concept_tables),
+            "--max-relationship-recipes",
+            str(args.max_relationship_recipes),
+        ]
+        if args.overwrite_business_scaffold:
+            scaffold_cmd.append("--overwrite")
+        run(scaffold_cmd)
 
     if not args.skip_knowledge_rag:
         run(

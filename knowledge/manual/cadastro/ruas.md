@@ -38,9 +38,6 @@ Filtra a rua pelo nome normalizado, removendo acentos/caracteres especiais e com
 
 Regra SQL equivalente:
 
-```sql
-where upper(to_ascii(j14_nome)) = :nome_normalizado
-```
 
 Parâmetro:
 
@@ -54,9 +51,6 @@ Adiciona join com a tabela `ruascep`.
 
 SQL equivalente:
 
-```sql
-join ruascep on ruascep.j29_codigo = ruas.j14_codigo
-```
 
 ### `scopeCep(Builder $query, $cep)`
 
@@ -64,70 +58,25 @@ Filtra pelo CEP após o join com `ruascep`.
 
 SQL equivalente:
 
-```sql
-where ruascep.j29_cep = :cep
-```
 
 ## Queries SQL prontas
 
 ### 1. Buscar rua pelo código
 
-```sql
-select
-    ruas.*
-from ruas
-where ruas.j14_codigo = :codigo_rua;
-```
 
 ### 2. Buscar rua pelo nome normalizado
 
-```sql
-select
-    ruas.*
-from ruas
-where upper(to_ascii(ruas.j14_nome)) = upper(to_ascii(:nome_rua));
-```
 
 Uso recomendado: aplicar no parâmetro a mesma normalização usada pela aplicação (`DBString::removerCaracteresEspeciaisAcentos`) antes da consulta.
 
 ### 3. Buscar rua por CEP
 
-```sql
-select
-    ruas.*,
-    ruascep.j29_cep
-from ruas
-inner join ruascep
-        on ruascep.j29_codigo = ruas.j14_codigo
-where ruascep.j29_cep = :cep;
-```
 
 ### 4. Buscar rua por nome e CEP
 
-```sql
-select
-    ruas.*,
-    ruascep.j29_cep
-from ruas
-inner join ruascep
-        on ruascep.j29_codigo = ruas.j14_codigo
-where upper(to_ascii(ruas.j14_nome)) = upper(to_ascii(:nome_rua))
-  and ruascep.j29_cep = :cep;
-```
 
 ### 5. Listar CEPs de uma rua
 
-```sql
-select
-    ruas.j14_codigo,
-    ruas.j14_nome,
-    ruascep.j29_cep
-from ruas
-inner join ruascep
-        on ruascep.j29_codigo = ruas.j14_codigo
-where ruas.j14_codigo = :codigo_rua
-order by ruascep.j29_cep;
-```
 
 ## Filtros seguros e recomendados
 

@@ -127,70 +127,18 @@ Campos com default aplicado antes da inclusão:
 
 ### Parâmetros do exercício
 
-```sql
-select *
-  from cfiptu
- where j18_anousu = :anousu;
-```
 
 ### Consulta principal com relacionamentos
 
-```sql
-select *
-  from cfiptu
- inner join tipoisen on tipoisen.j45_tipo = cfiptu.j18_tipoisen
- left join tabrec on tabrec.k02_codigo = cfiptu.j18_receitacreditorecalculo
- inner join inflan on inflan.i01_codigo = cfiptu.j18_infla
- left join arretipo on arretipo.k00_tipo = cfiptu.j18_tipodebitorecalculo
- inner join db_sysfuncoes on db_sysfuncoes.codfuncao = cfiptu.j18_db_sysfuncoes
- left join iptucalh on iptucalh.j17_codhis = cfiptu.j18_iptuhistisen
- where cfiptu.j18_anousu = :anousu;
-```
 
 ### Verificar receitas inválidas do exercício
 
-```sql
-select tabrec.k02_codigo,
-       tabrec.k02_descr,
-       tabrec.k02_limite as limite_receita_principal,
-       juros.k02_limite as limite_receita_juros,
-       multa.k02_limite as limite_receita_multa
-  from tabrec
-  left join tabrec juros on juros.k02_codigo = tabrec.k02_recjur
-  left join tabrec multa on multa.k02_codigo = tabrec.k02_recmul
- where tabrec.k02_codigo in (
-       select j08_tabrec from iptucadtaxaexe where j08_anousu = :anousu
-       union
-       select j18_rterri from cfiptu where j18_anousu = :anousu
-       union
-       select j18_rpredi from cfiptu where j18_anousu = :anousu
- )
-   and (
-       tabrec.k02_limite < (:anousu || '-01-01')::date
-       or juros.k02_limite < (:anousu || '-01-01')::date
-       or multa.k02_limite < (:anousu || '-01-01')::date
-   );
-```
 
 ### Receita de crédito do recálculo
 
-```sql
-select *
-  from cfiptu
- inner join tabrec on j18_receitacreditorecalculo = k02_codigo
- where j18_anousu = :anousu;
-```
 
 ### Tipo de débito do recálculo
 
-```sql
-select *
-  from cfiptu
- inner join arretipo on j18_tipodebitorecalculo = k00_tipo
- inner join cadtipo on arretipo.k03_tipo = cadtipo.k03_tipo
- where j18_anousu = :anousu
-   and cadtipo.k03_tipo = :cad_tipo;
-```
 
 ## Perguntas que esta tabela ajuda a responder
 

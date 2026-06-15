@@ -14,9 +14,6 @@
 
 A classe trabalha com chave lógica composta:
 
-```sql
-j42_matric + j42_numcgm
-```
 
 Não há geração por sequence nesta classe. A inclusão exige que matrícula e CGM sejam recebidos como parâmetros de `incluir($j42_matric, $j42_numcgm)`.
 
@@ -44,142 +41,33 @@ Não há geração por sequence nesta classe. A inclusão exige que matrícula e
 | `sql_query_enderecoEntrega(...)` | Busca dados de proprietários com possível endereço de entrega. |
 | `sql_outrosProprietarios($matricula)` | Lista proprietários da matrícula com descrição do tipo de proprietário. |
 
-## SQLs prontos
-
+## Regras operacionais recorrentes
 ### 1. Buscar coproprietário por matrícula e CGM
 
-```sql
-select *
-  from propri
- where j42_matric = :matricula
-   and j42_numcgm = :numcgm;
-```
 
 ### 2. Buscar todos os coproprietários de uma matrícula
 
-```sql
-select propri.*
-  from propri
- where j42_matric = :matricula
- order by j42_numcgm;
-```
 
 ### 3. Buscar coproprietários com dados do CGM
 
-```sql
-select
-    propri.j42_matric,
-    propri.j42_numcgm,
-    cgm.z01_nome,
-    propri.j42_fracaoproprietario,
-    propri.j42_arealoteproprietario,
-    propri.j42_tipoproprietario
-from propri
-inner join cgm
-        on cgm.z01_numcgm = propri.j42_numcgm
-where propri.j42_matric = :matricula
-order by cgm.z01_nome;
-```
 
 ### 4. Buscar coproprietários com dados da matrícula e lote
 
-```sql
-select
-    propri.*,
-    iptubase.j01_idbql,
-    lote.j34_setor,
-    lote.j34_quadra,
-    lote.j34_lote,
-    lote.j34_area,
-    cgm.z01_nome as nome_coproprietario,
-    a.z01_nome as nome_proprietario_principal
-from propri
-inner join iptubase
-        on iptubase.j01_matric = propri.j42_matric
-inner join cgm
-        on cgm.z01_numcgm = propri.j42_numcgm
-inner join lote
-        on lote.j34_idbql = iptubase.j01_idbql
-inner join cgm as a
-        on a.z01_numcgm = iptubase.j01_numcgm
-where propri.j42_matric = :matricula;
-```
 
 ### 5. Buscar matrículas em que um CGM aparece como coproprietário
 
-```sql
-select
-    propri.j42_matric,
-    propri.j42_numcgm,
-    propri.j42_fracaoproprietario,
-    propri.j42_arealoteproprietario,
-    propri.j42_tipoproprietario
-from propri
-where propri.j42_numcgm = :numcgm
-order by propri.j42_matric;
-```
 
 ### 6. Buscar endereço de entrega por CGM proprietário
 
-```sql
-select
-    propri.*,
-    iptubase.j01_matric,
-    iptubase.j01_idbql,
-    iptuender.*
-from propri
-inner join iptubase
-        on iptubase.j01_matric = propri.j42_matric
-left join iptuender
-       on iptuender.j43_matric = iptubase.j01_matric
-where propri.j42_numcgm = :numcgm;
-```
 
 ### 7. Listar outros proprietários com tipo
 
-```sql
-select
-    cgm.z01_numcgm,
-    cgm.z01_nome,
-    propri.j42_tipoproprietario || ' - ' || tipoproprietario.j163_descricao as tipoproprietario
-from propri
-inner join cgm
-        on cgm.z01_numcgm = propri.j42_numcgm
-inner join tipoproprietario
-        on tipoproprietario.j163_tipoproprietario = propri.j42_tipoproprietario
-where propri.j42_matric = :matricula;
-```
 
 ### 8. Conferir total de fração por matrícula
 
-```sql
-select
-    j42_matric,
-    sum(coalesce(j42_fracaoproprietario, 0)) as total_fracao
-from propri
-where j42_matric = :matricula
-group by j42_matric;
-```
 
 ### 9. Conferir área proporcional por proprietário contra área do lote
 
-```sql
-select
-    propri.j42_matric,
-    iptubase.j01_idbql,
-    lote.j34_area,
-    sum(coalesce(propri.j42_arealoteproprietario, 0)) as total_area_proprietarios
-from propri
-inner join iptubase
-        on iptubase.j01_matric = propri.j42_matric
-inner join lote
-        on lote.j34_idbql = iptubase.j01_idbql
-where propri.j42_matric = :matricula
-group by
-    propri.j42_matric,
-    iptubase.j01_idbql,
-    lote.j34_area;
-```
 
 ## Relação com o cadastro imobiliário
 

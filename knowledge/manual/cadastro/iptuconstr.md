@@ -32,9 +32,6 @@ A tabela `iptuconstr` representa as construções/edificações vinculadas a uma
 
 ### Chave lógica
 
-```sql
-j39_matric, j39_idcons
-```
 
 A classe trata `j39_matric + j39_idcons` como identificador do registro nas operações de inclusão, alteração, exclusão e consulta direta.
 
@@ -44,11 +41,6 @@ A classe trata `j39_matric + j39_idcons` como identificador do registro nas oper
 
 A classe carrega parâmetros de `cadastro.cfiptu` no construtor:
 
-```sql
-select *
-  from cadastro.cfiptu
- where j18_anousu = db_getsession('DB_anousu')
-```
 
 Quando `j18_validarano = 'f'`, a propriedade `validar_j39_ano` é ativada, exigindo que `j39_ano` seja informado com 4 caracteres.
 
@@ -106,172 +98,50 @@ Quando `j18_validarano = 'f'`, a propriedade `validar_j39_ano` é ativada, exigi
 
 ---
 
-## 5. SQLs prontos para IA
-
+## Regras operacionais recorrentes
 ### 5.1 Buscar construção por matrícula e código da construção
 
-```sql
-select *
-  from iptuconstr
- where j39_matric = :matricula
-   and j39_idcons = :id_construcao;
-```
 
 ### 5.2 Buscar todas as construções de uma matrícula
 
-```sql
-select *
-  from iptuconstr
- where j39_matric = :matricula
- order by j39_idcons;
-```
 
 ### 5.3 Buscar construções ativas de uma matrícula
 
 Construções ativas são as que não possuem data de demolição.
 
-```sql
-select *
-  from iptuconstr
- where j39_matric = :matricula
-   and j39_dtdemo is null
- order by j39_idcons;
-```
 
 ### 5.4 Buscar construção com dados do imóvel, lote, proprietário e logradouro
 
-```sql
-select iptuconstr.*,
-       iptubase.j01_numcgm,
-       cgm.z01_nome,
-       iptubase.j01_idbql,
-       lote.j34_setor,
-       lote.j34_quadra,
-       lote.j34_lote,
-       ruas.j14_codigo,
-       ruas.j14_nome,
-       ruastipo.j88_sigla,
-       ruastipo.j88_descr
-  from iptuconstr
-       inner join ruas
-               on ruas.j14_codigo = iptuconstr.j39_codigo
-       inner join iptubase
-               on iptubase.j01_matric = iptuconstr.j39_matric
-       inner join lote
-               on lote.j34_idbql = iptubase.j01_idbql
-       inner join cgm
-               on cgm.z01_numcgm = iptubase.j01_numcgm
-       left join ruastipo
-              on ruastipo.j88_codigo = ruas.j14_tipo
- where iptuconstr.j39_matric = :matricula
- order by iptuconstr.j39_idcons;
-```
 
 ### 5.5 Somar área construída ativa por matrícula
 
-```sql
-select j39_matric,
-       sum(j39_area) as area_construida_ativa
-  from iptuconstr
- where j39_matric = :matricula
-   and j39_dtdemo is null
- group by j39_matric;
-```
 
 ### 5.6 Somar área privada ativa por matrícula
 
-```sql
-select j39_matric,
-       sum(j39_areap) as area_privada_ativa
-  from iptuconstr
- where j39_matric = :matricula
-   and j39_dtdemo is null
- group by j39_matric;
-```
 
 ### 5.7 Buscar construção principal da matrícula
 
-```sql
-select *
-  from iptuconstr
- where j39_matric = :matricula
-   and j39_idprinc = 't'
-   and j39_dtdemo is null
- order by j39_idcons;
-```
 
 ### 5.8 Buscar construções demolidas
 
-```sql
-select *
-  from iptuconstr
- where j39_matric = :matricula
-   and j39_dtdemo is not null
- order by j39_dtdemo desc, j39_idcons;
-```
 
 ### 5.9 Buscar construções por logradouro
 
-```sql
-select iptuconstr.*,
-       ruas.j14_nome
-  from iptuconstr
-       inner join ruas
-               on ruas.j14_codigo = iptuconstr.j39_codigo
- where iptuconstr.j39_codigo = :codigo_logradouro
- order by iptuconstr.j39_matric,
-          iptuconstr.j39_numero,
-          iptuconstr.j39_idcons;
-```
 
 ### 5.10 Buscar características da construção e proprietário
 
 Baseado em `sql_query_proprietario_nome`.
 
-```sql
-select iptuconstr.*,
-       proprietario_nome.*,
-       caracter.*,
-       cargrup.*
-  from iptuconstr
-       inner join carconstr
-               on carconstr.j48_matric = iptuconstr.j39_matric
-              and carconstr.j48_idcons = iptuconstr.j39_idcons
-       inner join proprietario_nome
-               on proprietario_nome.j01_matric = carconstr.j48_matric
-       inner join caracter
-               on caracter.j31_codigo = carconstr.j48_caract
-       inner join cargrup
-               on cargrup.j32_grupo = caracter.j31_grupo
- where iptuconstr.j39_matric = :matricula
-   and iptuconstr.j39_idcons = :id_construcao
- order by cargrup.j32_grupo,
-          caracter.j31_codigo;
-```
 
 ### 5.11 Atualizar área da construção
 
 Baseado em `sql_query_update_area`.
 
-```sql
-update iptuconstr
-   set j39_area = :area
- where j39_matric = :matricula
-   and j39_idcons = :id_construcao;
-```
 
 ### 5.12 Verificar construções com ano inválido
 
 Útil quando a parametrização exige ano com 4 dígitos.
 
-```sql
-select *
-  from iptuconstr
- where j39_ano is null
-    or length(j39_ano::text) <> 4
- order by j39_matric,
-          j39_idcons;
-```
 
 ---
 

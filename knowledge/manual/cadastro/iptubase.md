@@ -174,297 +174,48 @@ Usada na inclusão quando `j01_matric` não é informado. A classe chama `nextva
 
 ### 1. Busca completa por matrícula
 
-```sql
-SELECT :campos
-FROM iptubase
-INNER JOIN lote
-        ON lote.j34_idbql = iptubase.j01_idbql
-INNER JOIN cgm
-        ON cgm.z01_numcgm = iptubase.j01_numcgm
-INNER JOIN bairro
-        ON bairro.j13_codi = lote.j34_bairro
-INNER JOIN setor
-        ON setor.j30_codi = lote.j34_setor
-INNER JOIN zonas
-        ON zonas.j50_zona = lote.j34_zona
-INNER JOIN tipoproprietario
-        ON tipoproprietario.j163_tipoproprietario = iptubase.j01_tipoproprietario
-WHERE iptubase.j01_matric = :matricula;
-```
 
 ### 2. Busca simples na tabela principal
 
-```sql
-SELECT :campos
-FROM iptubase
-WHERE iptubase.j01_matric = :matricula;
-```
 
 ### 3. Busca ampla com registro imobiliário, testada, construção e baixa
 
-```sql
-SELECT :campos
-FROM iptubase
-INNER JOIN lote
-        ON lote.j34_idbql = iptubase.j01_idbql
-INNER JOIN cgm
-        ON cgm.z01_numcgm = iptubase.j01_numcgm
-LEFT JOIN testpri
-       ON testpri.j49_idbql = iptubase.j01_idbql
-LEFT JOIN testada
-       ON testada.j36_idbql = testpri.j49_idbql
-      AND testada.j36_face = testpri.j49_face
-      AND testada.j36_codigo = testpri.j49_codigo
-LEFT JOIN testadanumero
-       ON testadanumero.j15_idbql = testada.j36_idbql
-      AND testadanumero.j15_face = testada.j36_face
-LEFT JOIN face
-       ON face.j37_face = testada.j36_face
-LEFT JOIN ruas
-       ON ruas.j14_codigo = testpri.j49_codigo
-LEFT JOIN iptuconstr
-       ON iptuconstr.j39_matric = iptubase.j01_matric
-LEFT JOIN iptuant
-       ON iptuant.j40_matric = iptubase.j01_matric
-LEFT JOIN iptubaseregimovel
-       ON iptubaseregimovel.j04_matric = iptubase.j01_matric
-LEFT JOIN setorregimovel
-       ON setorregimovel.j69_sequencial = iptubaseregimovel.j04_setorregimovel
-LEFT JOIN loteloc
-       ON loteloc.j06_idbql = iptubase.j01_idbql
-LEFT JOIN setorloc
-       ON setorloc.j05_codigo = loteloc.j06_setorloc
-LEFT JOIN iptubaixa
-       ON iptubaixa.j02_matric = iptubase.j01_matric
-LEFT JOIN lotesetorfiscal
-       ON lotesetorfiscal.j91_idbql = iptubase.j01_idbql
-LEFT JOIN setorfiscal
-       ON setorfiscal.j90_codigo = lotesetorfiscal.j91_codigo
-WHERE iptubase.j01_matric = :matricula;
-```
 
 ### 4. Busca por CGM — proprietário principal, coproprietário e promitente
 
-```sql
-SELECT DISTINCT dados.*
-FROM (
-    SELECT
-        j01_matric,
-        'PROPRIETARIO'::varchar(12) AS proprietario,
-        j01_idbql,
-        cgm.z01_nome,
-        j01_baixa
-    FROM iptubase
-    INNER JOIN cgm ON j01_numcgm = z01_numcgm
-    WHERE j01_numcgm = :numcgm
-
-    UNION
-
-    SELECT
-        j01_matric,
-        'OUTRO PROPR'::varchar(12) AS proprietario,
-        j01_idbql,
-        cgm.z01_nome,
-        j01_baixa
-    FROM propri
-    INNER JOIN iptubase ON j42_matric = j01_matric
-    INNER JOIN cgm ON j42_numcgm = z01_numcgm
-    WHERE j42_numcgm = :numcgm
-
-    UNION
-
-    SELECT
-        j01_matric,
-        'PROMITENTE'::varchar(12) AS proprietario,
-        j01_idbql,
-        cgm.z01_nome,
-        j01_baixa
-    FROM promitente
-    INNER JOIN iptubase ON j41_matric = j01_matric
-    INNER JOIN cgm ON j41_numcgm = z01_numcgm
-    WHERE j41_numcgm = :numcgm
-) AS dados
-INNER JOIN lote ON j34_idbql = j01_idbql
-LEFT JOIN testpri ON j49_idbql = j01_idbql
-LEFT JOIN ruas ON j49_codigo = j14_codigo
-LEFT JOIN ruastipo ON j88_codigo = j14_tipo
-LEFT JOIN bairro ON j34_bairro = j13_codi;
-```
 
 ### 5. Busca por imobiliária
 
-```sql
-SELECT DISTINCT *
-FROM (
-    SELECT
-        j01_matric,
-        c.z01_nome AS proprietario,
-        j01_idbql,
-        cgm.z01_nome
-    FROM imobil
-    INNER JOIN iptubase ON j44_matric = j01_matric
-    INNER JOIN cgm ON j01_numcgm = cgm.z01_numcgm
-    INNER JOIN cgm c ON j44_numcgm = c.z01_numcgm
-    WHERE j44_numcgm = :numcgm_imobiliaria
-) AS dados
-INNER JOIN lote ON j34_idbql = j01_idbql
-LEFT JOIN testpri ON j49_idbql = j01_idbql
-LEFT JOIN ruas ON j49_codigo = j14_codigo
-LEFT JOIN bairro ON j34_bairro = j13_codi;
-```
 
 ### 6. Busca por setor
 
-```sql
-SELECT
-    lote.j34_idbql AS db_lote,
-    j34_setor,
-    j34_quadra,
-    j34_lote,
-    j34_area,
-    j34_areal,
-    j01_matric,
-    ruas.j14_nome,
-    bairro.j13_descr
-FROM lote
-INNER JOIN bairro ON j13_codi = j34_bairro
-INNER JOIN iptubase ON j01_idbql = j34_idbql
-LEFT JOIN testpri ON j34_idbql = j49_idbql
-LEFT JOIN ruas ON j14_codigo = j49_codigo
-WHERE j34_setor = :setor;
-```
 
 ### 7. Busca por setor e quadra
 
-```sql
-SELECT
-    lote.j34_idbql AS db_lote,
-    j34_setor,
-    j34_quadra,
-    j34_lote,
-    j34_area,
-    j34_areal,
-    j01_matric,
-    ruas.j14_nome,
-    bairro.j13_descr
-FROM lote
-INNER JOIN bairro ON j13_codi = j34_bairro
-INNER JOIN iptubase ON j01_idbql = j34_idbql
-LEFT JOIN testpri ON j34_idbql = j49_idbql
-LEFT JOIN ruas ON j14_codigo = j49_codigo
-WHERE j34_setor = :setor
-  AND j34_quadra = :quadra;
-```
 
 ### 8. Busca por bairro
 
-```sql
-SELECT
-    iptubase.j01_matric,
-    cgm.z01_nome,
-    cgm.z01_ender,
-    cgm.z01_munic,
-    cgm.z01_cep,
-    cgm.z01_uf,
-    lote.*
-FROM lote
-INNER JOIN iptubase ON j34_idbql = j01_idbql
-INNER JOIN cgm ON z01_numcgm = j01_numcgm
-WHERE j34_bairro = :bairro;
-```
 
 ### 9. Área total de lotes ativos por setor/quadra/lote
 
-```sql
-SELECT COALESCE(SUM(j34_area), 0) AS area_total
-FROM (
-    SELECT DISTINCT j34_idbql, j34_area
-    FROM lote
-    INNER JOIN iptubase ON j01_idbql = j34_idbql
-    WHERE j34_setor = :setor
-      AND j34_quadra = :quadra
-      AND j34_lote = :lote
-      AND j01_baixa IS NULL
-) AS x;
-```
 
 ### 10. Área construída ativa por matrícula
 
-```sql
-SELECT COALESCE(SUM(j39_area), 0) AS area_construida
-FROM iptuconstr
-INNER JOIN iptubase ON j01_matric = j39_matric
-WHERE j39_matric = :matricula
-  AND j39_dtdemo IS NULL
-  AND j01_baixa IS NULL;
-```
 
 ### 11. Endereço de entrega por proprietário ou filtro customizado
 
-```sql
-SELECT :campos
-FROM iptubase
-LEFT JOIN iptuender ON j43_matric = j01_matric
-WHERE j01_numcgm = :numcgm;
-```
 
 ### 12. Promitentes da matrícula
 
-```sql
-SELECT
-    j41_numcgm,
-    z01_nome,
-    j41_tipopro AS principal,
-    j41_promitipo
-FROM promitente
-INNER JOIN cgm ON z01_numcgm = j41_numcgm
-WHERE j41_matric = :matricula;
-```
 
 ### 13. Proprietário principal e coproprietários
 
-```sql
-SELECT
-    j01_numcgm,
-    z01_nome,
-    TRUE AS principal
-FROM iptubase
-INNER JOIN cgm ON z01_numcgm = j01_numcgm
-WHERE j01_matric = :matricula
-
-UNION
-
-SELECT
-    j42_numcgm AS j01_numcgm,
-    z01_nome,
-    FALSE AS principal
-FROM propri
-INNER JOIN cgm ON z01_numcgm = j42_numcgm
-WHERE j42_matric = :matricula;
-```
 
 ### 14. Cálculo IPTU por matrícula e exercício
 
-```sql
-SELECT
-    *
-FROM iptucalc
-INNER JOIN iptubase ON j01_matric = j23_matric
-WHERE j23_matric = :matricula
-  AND j23_anousu = :ano;
-```
 
 ### 15. Ocorrências da matrícula
 
-```sql
-SELECT
-    ar23_ocorrencia
-FROM histocorrenciamatric
-INNER JOIN histocorrencia
-        ON histocorrencia.ar23_sequencial = histocorrenciamatric.ar25_histocorrencia
-WHERE ar25_matric = :matricula
-  AND ar23_tipo = 1;
-```
 
 ---
 

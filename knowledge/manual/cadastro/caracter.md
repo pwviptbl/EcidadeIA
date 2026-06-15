@@ -6,15 +6,9 @@ A classe `cl_caracter` representa a entidade `caracter`, usada no cadastro imobi
 
 Tabela principal:
 
-```sql
-caracter
-```
 
 Chave primária lógica:
 
-```sql
-j31_codigo
-```
 
 ## 2. Colunas da tabela principal
 
@@ -59,27 +53,11 @@ Campos obrigatórios na inclusão:
 
 Sequência utilizada:
 
-```sql
-caracter_j31_codigo_seq
-```
 
 Se o código for informado manualmente, a classe compara com `last_value` da sequência e rejeita valores maiores que o último número da sequência.
 
 SQL base da inclusão:
 
-```sql
-insert into caracter (
-  j31_codigo,
-  j31_descr,
-  j31_grupo,
-  j31_pontos
-) values (
-  :j31_codigo,
-  :j31_descr,
-  :j31_grupo,
-  :j31_pontos
-);
-```
 
 ## 5. Regras de alteração
 
@@ -100,14 +78,6 @@ Tratamento especial:
 
 SQL base:
 
-```sql
-update caracter
-   set j31_descr = :descricao,
-       j31_grupo = :grupo,
-       j31_pontos = :pontos,
-       j31_data_limite = :data_limite
- where j31_codigo = :codigo;
-```
 
 ## 6. Regras de exclusão
 
@@ -121,10 +91,6 @@ A exclusão pode ocorrer por código ou por uma cláusula livre recebida em `$db
 
 SQL equivalente:
 
-```sql
-delete from caracter
- where j31_codigo = :codigo;
-```
 
 ## 7. Consulta principal
 
@@ -136,13 +102,6 @@ sql_query($j31_codigo = null, $campos = "*", $ordem = null, $dbwhere = "")
 
 Consulta a tabela `caracter` com junção ao grupo da característica:
 
-```sql
-select *
-  from caracter
- inner join cargrup
-         on cargrup.j32_grupo = caracter.j31_grupo
- where caracter.j31_codigo = :codigo;
-```
 
 ## 8. Consulta direta da tabela
 
@@ -154,11 +113,6 @@ sql_query_file($j31_codigo = null, $campos = "*", $ordem = null, $dbwhere = "")
 
 Consulta apenas a tabela principal:
 
-```sql
-select *
-  from caracter
- where caracter.j31_codigo = :codigo;
-```
 
 ## 9. Consulta de característica por construção
 
@@ -172,30 +126,6 @@ Esse método recebe uma matrícula, um identificador de construção e uma lista
 
 Estrutura lógica:
 
-```sql
-with buscagrupo as (
-  select j31_grupo as grupo,
-         j31_codigo as caract
-    from caracter
-   where j31_codigo in (:caracteristicas)
-),
-buscacaracter as (
-  select j48_caract as caractmatric,
-         j31_grupo as grupomatric,
-         j48_matric as matricula
-    from caracter
-    join carconstr
-      on j48_matric = :matricula
-     and j48_idcons = :id_construcao
-     and j48_caract = caracter.j31_codigo
-   where j31_grupo in (select j31_grupo from buscagrupo)
-)
-select caract,
-       coalesce(caractmatric, 0) as caractmatric
-  from buscagrupo
-  left join buscacaracter
-         on grupomatric = grupo;
-```
 
 Uso provável:
 
@@ -227,46 +157,12 @@ Diferente de várias classes legadas do e-Cidade, esta classe não executa inser
 
 ### Buscar característica com grupo
 
-```sql
-select caracter.j31_codigo,
-       caracter.j31_descr,
-       caracter.j31_grupo,
-       cargrup.j32_descr,
-       caracter.j31_pontos,
-       caracter.j31_data_limite
-  from caracter
- inner join cargrup
-         on cargrup.j32_grupo = caracter.j31_grupo
- where caracter.j31_codigo = :codigo;
-```
 
 ### Listar características de um grupo
 
-```sql
-select j31_codigo,
-       j31_descr,
-       j31_pontos,
-       j31_data_limite
-  from caracter
- where j31_grupo = :grupo
- order by j31_descr;
-```
 
 ### Verificar características vinculadas a uma construção
 
-```sql
-select carconstr.j48_matric,
-       carconstr.j48_idcons,
-       caracter.j31_codigo,
-       caracter.j31_descr,
-       caracter.j31_grupo,
-       caracter.j31_pontos
-  from carconstr
- inner join caracter
-         on caracter.j31_codigo = carconstr.j48_caract
- where carconstr.j48_matric = :matricula
-   and carconstr.j48_idcons = :id_construcao;
-```
 
 ## 13. Perguntas que esta referência ajuda a responder
 

@@ -10,6 +10,17 @@ DEFAULT_MANUAL_DIR = ROOT_DIR / "knowledge" / "manual"
 DEFAULT_OUTPUT_DIR = ROOT_DIR / "knowledge" / "rag"
 
 IMPORTANT_TERMS = (
+    "conceito",
+    "conceito de negocio",
+    "conceito de negócio",
+    "receita de relacionamento",
+    "caminho de negocio",
+    "caminho de negócio",
+    "papel de tabela",
+    "papel da tabela",
+    "regra de contagem",
+    "filtro de negocio",
+    "filtro de negócio",
     "resumo",
     "resumo tecnico",
     "grao",
@@ -29,7 +40,6 @@ IMPORTANT_TERMS = (
     "não usar",
     "cuidado",
     "risco",
-    "sql validado",
 )
 
 DROP_TERMS = (
@@ -106,12 +116,18 @@ def trim_section(content: str, max_lines: int = 14) -> str:
 
 def snippet_text(table_title: str, source_label: str, text: str) -> str:
     selected: list[str] = []
+    section_limit = 80 if any(
+        marker in f"{table_title} {source_label}".lower()
+        for marker in ("conceitos", "relacionamentos_negocio", "relacionamentos")
+    ) else 8
     for section in sections(text):
         title = section["title"]
         content = section["content"]
         if not keep_section(title, content):
             continue
-        trimmed = trim_section(content)
+        title_lower = title.lower()
+        max_lines = 26 if any(term in title_lower for term in ("conceito de negocio", "conceito de negócio", "receita de relacionamento")) else 14
+        trimmed = trim_section(content, max_lines=max_lines)
         if trimmed:
             selected.append(f"### {title}\n\n{trimmed}")
 
@@ -124,7 +140,7 @@ def snippet_text(table_title: str, source_label: str, text: str) -> str:
             "",
             f"> Fonte manual: `{source_label}`",
             "",
-            *selected[:8],
+            *selected[:section_limit],
             "",
         ]
     ).rstrip() + "\n"
@@ -166,6 +182,11 @@ def build_snippets(path: Path, manual_dir: Path) -> list[tuple[Path, str]]:
     return [(relative, snippet_text(table_title, source_label, text))]
 
 
+def should_skip_manual(path: Path, manual_dir: Path) -> bool:
+    relative = path.relative_to(manual_dir)
+    return any(part.startswith("_") for part in relative.parts)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Gera snippets curtos para RAG a partir do manual humano.")
     parser.add_argument("--manual-dir", type=Path, default=DEFAULT_MANUAL_DIR)
@@ -181,6 +202,8 @@ def main() -> None:
 
     count = 0
     for path in sorted(manual_dir.rglob("*.md")):
+        if should_skip_manual(path, manual_dir):
+            continue
         for relative, snippet in build_snippets(path, manual_dir):
             target = output_dir / relative
             target.parent.mkdir(parents=True, exist_ok=True)

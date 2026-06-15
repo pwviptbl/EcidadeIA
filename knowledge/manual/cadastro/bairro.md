@@ -26,10 +26,6 @@ Tabela de vínculo entre logradouro e bairro, usada em `sql_getBairroByCodRua()`
 
 Relacionamento identificado:
 
-```sql
-ruasbairro.j16_bairro = bairro.j13_codi
-ruasbairro.j16_lograd = ruas.j14_codigo
-```
 
 Uso principal: descobrir o bairro associado a um código de rua/logradouro.
 
@@ -39,9 +35,6 @@ Tabela de logradouros, usada na consulta por código de rua.
 
 Relacionamento identificado:
 
-```sql
-ruas.j14_codigo = ruasbairro.j16_lograd
-```
 
 ### `cepbairrosfaixa`
 
@@ -72,16 +65,9 @@ A classe não faz `JOIN` explícito com `bairro` nessa query, mas o campo `cp02_
 | `sql_getBairroByCodRua($iCodRua)` | Busca bairro vinculado a uma rua/logradouro. |
 | `sql_buscaBairroPorCep($cep)` | Busca faixa de CEP que contém o CEP informado. |
 
-## SQLs prontos para uso por IA
-
+## Regras operacionais recorrentes
 ### 1. Buscar bairro por código
 
-```sql
-select
-    bairro.*
-from bairro
-where bairro.j13_codi = :codigo_bairro;
-```
 
 Parâmetros:
 
@@ -91,16 +77,6 @@ Parâmetros:
 
 ### 2. Listar bairros por nome
 
-```sql
-select
-    bairro.j13_codi,
-    bairro.j13_descr,
-    bairro.j13_codant,
-    bairro.j13_rural
-from bairro
-where bairro.j13_descr ilike '%' || :nome_bairro || '%'
-order by bairro.j13_descr;
-```
 
 Parâmetros:
 
@@ -110,16 +86,6 @@ Parâmetros:
 
 ### 3. Listar bairros rurais ou urbanos
 
-```sql
-select
-    bairro.j13_codi,
-    bairro.j13_descr,
-    bairro.j13_codant,
-    bairro.j13_rural
-from bairro
-where bairro.j13_rural = :rural
-order by bairro.j13_descr;
-```
 
 Parâmetros:
 
@@ -129,16 +95,6 @@ Parâmetros:
 
 ### 4. Buscar bairro por código de logradouro
 
-```sql
-select
-    bairro.*
-from ruasbairro
-inner join ruas
-        on ruas.j14_codigo = ruasbairro.j16_lograd
-inner join bairro
-        on bairro.j13_codi = ruasbairro.j16_bairro
-where ruas.j14_codigo = :codigo_rua;
-```
 
 Parâmetros:
 
@@ -148,16 +104,6 @@ Parâmetros:
 
 ### 5. Buscar bairro por CEP dentro de faixa
 
-```sql
-select
-    cepbairrosfaixa.cp02_codbairro,
-    cepbairrosfaixa.cp02_faixa,
-    cepbairrosfaixa.cp02_cepinicial,
-    cepbairrosfaixa.cp02_cepfinal
-from cepbairrosfaixa
-where cepbairrosfaixa.cp02_cepinicial::int <= :cep::int
-  and cepbairrosfaixa.cp02_cepfinal::int >= :cep::int;
-```
 
 Parâmetros:
 
@@ -167,22 +113,6 @@ Parâmetros:
 
 ### 6. Buscar dados completos do bairro por CEP com descrição
 
-```sql
-select
-    bairro.j13_codi,
-    bairro.j13_descr,
-    bairro.j13_codant,
-    bairro.j13_rural,
-    cepbairrosfaixa.cp02_faixa,
-    cepbairrosfaixa.cp02_cepinicial,
-    cepbairrosfaixa.cp02_cepfinal
-from cepbairrosfaixa
-inner join bairro
-        on bairro.j13_codi = cepbairrosfaixa.cp02_codbairro
-where cepbairrosfaixa.cp02_cepinicial::int <= :cep::int
-  and cepbairrosfaixa.cp02_cepfinal::int >= :cep::int
-order by bairro.j13_descr;
-```
 
 Parâmetros:
 
@@ -192,19 +122,6 @@ Parâmetros:
 
 ### 7. Contar lotes por bairro
 
-```sql
-select
-    bairro.j13_codi,
-    bairro.j13_descr,
-    count(lote.j34_idbql) as quantidade_lotes
-from bairro
-left join lote
-       on lote.j34_bairro = bairro.j13_codi
-group by
-    bairro.j13_codi,
-    bairro.j13_descr
-order by bairro.j13_descr;
-```
 
 Observação: a tabela `lote` não aparece diretamente nesta classe, mas é uma relação importante no cadastro imobiliário, pois `lote.j34_bairro` referencia `bairro.j13_codi` em outras classes extraídas.
 

@@ -21,9 +21,6 @@ A tabela funciona como associação N:N entre `iptuconstr` e `caracter`, identif
 
 A chave lógica da tabela é composta por:
 
-```sql
-j48_matric, j48_idcons, j48_caract
-```
 
 Ela identifica uma característica aplicada a uma construção específica de uma matrícula.
 
@@ -83,42 +80,12 @@ Operações auditadas: inclusão (`I`), alteração (`A`) e exclusão (`E`).
 
 ## SQL principal normalizado
 
-```sql
-select *
-from carconstr
-inner join iptuconstr
-        on iptuconstr.j39_matric = carconstr.j48_matric
-       and iptuconstr.j39_idcons = carconstr.j48_idcons
-inner join ruas
-        on ruas.j14_codigo = iptuconstr.j39_codigo
-inner join iptubase
-        on iptubase.j01_matric = iptuconstr.j39_matric
-where carconstr.j48_matric = :matricula
-  and carconstr.j48_idcons = :id_construcao
-  and carconstr.j48_caract = :caracteristica;
-```
 
 ## Consulta direta da tabela
 
-```sql
-select *
-from carconstr
-where carconstr.j48_matric = :matricula
-  and carconstr.j48_idcons = :id_construcao
-  and carconstr.j48_caract = :caracteristica;
-```
 
 ## Características da construção
 
-```sql
-select *
-from carconstr
-left join caracter on j31_codigo = j48_caract
-left join cargrup  on j32_grupo  = j31_grupo
-                  and j32_tipo   = 'C'
-where j48_matric = :matricula
-  and j48_idcons = :id_construcao;
-```
 
 ## Seleção de características disponíveis
 
@@ -133,16 +100,6 @@ A regra considera:
 
 ## Características selecionadas por grupo
 
-```sql
-select *
-from carconstr
-inner join caracter on j31_codigo = j48_caract
-inner join cargrup  on j32_grupo = j31_grupo
-                   and j32_tipo = 'C'
-where j48_matric = :matricula
-  and j48_idcons = :id_construcao
-  and j31_grupo in (:grupos);
-```
 
 ## Perguntas que esta tabela ajuda a responder
 
@@ -156,18 +113,9 @@ where j48_matric = :matricula
 
 Use preferencialmente:
 
-```sql
-j48_matric = :matricula
-j48_idcons = :id_construcao
-j48_caract = :caracteristica
-j32_tipo = 'C'
-```
 
 Para listas de grupos:
 
-```sql
-j31_grupo in (:grupos)
-```
 
 ## Cuidados e riscos
 

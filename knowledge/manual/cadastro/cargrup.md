@@ -50,18 +50,6 @@ Quando `j32_grupo` é informado manualmente, a classe consulta o `last_value` da
 
 A inclusão grava apenas:
 
-```sql
-insert into cargrup (
-  j32_grupo,
-  j32_descr,
-  j32_tipo
-)
-values (
-  :j32_grupo,
-  :j32_descr,
-  :j32_tipo
-);
-```
 
 Observação: apesar de `j32_data_limite` existir em `$campos` e ser tratado na alteração, ele não é incluído no `INSERT` desta classe.
 
@@ -88,13 +76,6 @@ Regra específica de `j32_data_limite`:
 
 SQL equivalente:
 
-```sql
-update cargrup
-   set j32_descr = :descricao,
-       j32_tipo = :tipo,
-       j32_data_limite = :data_limite
- where j32_grupo = :grupo;
-```
 
 ## 6. Regras de exclusão
 
@@ -102,10 +83,6 @@ Método: `excluir($j32_grupo = null, $dbwhere = null)`
 
 A exclusão remove registros de `cargrup` por chave ou por condição livre.
 
-```sql
-delete from cargrup
- where j32_grupo = :grupo;
-```
 
 Se `$dbwhere` for informado, ele substitui o filtro por chave.
 
@@ -115,23 +92,11 @@ Se `$dbwhere` for informado, ele substitui o filtro por chave.
 
 Consulta a tabela `cargrup`.
 
-```sql
-select *
-  from cargrup
- where cargrup.j32_grupo = :grupo
- order by :ordem;
-```
 
 ### `sql_query_file($j32_grupo = null, $campos = "*", $ordem = null, $dbwhere = "")`
 
 Consulta direta para leitura/auditoria da tabela `cargrup`.
 
-```sql
-select *
-  from cargrup
- where cargrup.j32_grupo = :grupo
- order by :ordem;
-```
 
 ## 8. Relacionamentos conhecidos
 

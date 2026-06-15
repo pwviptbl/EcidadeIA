@@ -57,87 +57,21 @@ Esta referência foi estruturada para uso por IA e por consultas SQL diretas, se
 
 ### Consulta principal com joins
 
-```sql
-select
-    {campos}
-from promitente
-inner join tipopromitente
-        on promitente.j41_promitipo = tipopromitente.j164_promitipo
-        or tipopromitente.j164_tipopromitente = promitente.j41_tipopromitente
-inner join iptubase
-        on iptubase.j01_matric = promitente.j41_matric
-inner join cgm
-        on cgm.z01_numcgm = promitente.j41_numcgm
-inner join lote
-        on lote.j34_idbql = iptubase.j01_idbql
-inner join cgm as a
-        on a.z01_numcgm = iptubase.j01_numcgm
-where promitente.j41_matric = :matricula
-  and promitente.j41_numcgm = :numcgm;
-```
 
 ### Consulta simples da tabela
 
-```sql
-select
-    *
-from promitente
-where j41_matric = :matricula
-  and j41_numcgm = :numcgm;
-```
 
 ### Inserção normalizada
 
-```sql
-insert into promitente (
-    j41_matric,
-    j41_numcgm,
-    j41_tipopro,
-    j41_promitipo,
-    j41_tipopromitente,
-    j41_fracao
-) values (
-    :matricula,
-    :numcgm,
-    :responsavel,
-    :promitipo,
-    :tipopromitente,
-    :fracao
-);
-```
 
 ### Endereço de entrega do promitente
 
-```sql
-select
-    {campos}
-from promitente
-inner join iptubase
-        on iptubase.j01_matric = promitente.j41_matric
-left join iptuender
-       on iptuender.j43_matric = iptubase.j01_matric
-where promitente.j41_numcgm = :numcgm_promitente;
-```
 
 ### Atualização normalizada
 
-```sql
-update promitente
-   set j41_tipopro = :responsavel,
-       j41_promitipo = :promitipo,
-       j41_tipopromitente = :tipopromitente,
-       j41_fracao = :fracao
- where j41_matric = :matricula
-   and j41_numcgm = :numcgm;
-```
 
 ### Exclusão normalizada
 
-```sql
-delete from promitente
- where j41_matric = :matricula
-   and j41_numcgm = :numcgm;
-```
 
 ## Métodos relevantes
 

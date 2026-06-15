@@ -22,9 +22,6 @@ A tabela `setor` é usada como dimensão territorial/localizacional do cadastro 
 
 Chave principal/lógica:
 
-```sql
-setor.j30_codi
-```
 
 Não há uso de sequence na inclusão. O código do setor é recebido como parâmetro em `incluir($j30_codi)`.
 
@@ -56,19 +53,6 @@ Campos obrigatórios:
 
 SQL base de inclusão:
 
-```sql
-INSERT INTO setor (
-  j30_codi,
-  j30_descr,
-  j30_alipre,
-  j30_aliter
-) VALUES (
-  :j30_codi,
-  :j30_descr,
-  :j30_alipre,
-  :j30_aliter
-);
-```
 
 ## Regras de alteração
 
@@ -83,23 +67,11 @@ A alteração monta o `UPDATE` dinamicamente conforme os campos informados. Quan
 
 SQL lógico:
 
-```sql
-UPDATE setor
-   SET j30_codi   = :j30_codi,
-       j30_descr  = :j30_descr,
-       j30_alipre = :j30_alipre,
-       j30_aliter = :j30_aliter
- WHERE j30_codi   = :j30_codi;
-```
 
 ## Exclusão
 
 A exclusão remove por `j30_codi` ou por `$dbwhere` customizado.
 
-```sql
-DELETE FROM setor
- WHERE j30_codi = :j30_codi;
-```
 
 ## Auditoria
 
@@ -118,25 +90,11 @@ Código da tabela na auditoria: `16`.
 
 ### Consulta principal da tabela
 
-```sql
-SELECT *
-  FROM setor
- WHERE setor.j30_codi = :setor
- ORDER BY j30_codi;
-```
 
 ### Consulta de vínculos do setor
 
 Método: `vinculosSetor(array $aCampos, array $aWhere)`
 
-```sql
-SELECT {campos}
-  FROM setor
-       LEFT JOIN face            ON j37_setor = j30_codi
-       LEFT JOIN lote            ON j34_setor = j30_codi
-       LEFT JOIN zonassetorvalor ON j141_setor = j30_codi
- WHERE {condicoes};
-```
 
 Esse método é útil para verificar se determinado setor possui vínculos em cadastros dependentes antes de manutenção ou exclusão.
 
@@ -152,39 +110,12 @@ Esse método é útil para verificar se determinado setor possui vínculos em ca
 
 ### Buscar setor por código
 
-```sql
-SELECT *
-  FROM setor
- WHERE j30_codi = :setor;
-```
 
 ### Listar setores com quantidade de lotes
 
-```sql
-SELECT s.j30_codi,
-       s.j30_descr,
-       COUNT(l.j34_idbql) AS quantidade_lotes
-  FROM setor s
-  LEFT JOIN lote l ON l.j34_setor = s.j30_codi
- GROUP BY s.j30_codi, s.j30_descr
- ORDER BY s.j30_codi;
-```
 
 ### Verificar vínculos antes de excluir setor
 
-```sql
-SELECT s.j30_codi,
-       s.j30_descr,
-       COUNT(DISTINCT f.j37_setor) AS possui_face,
-       COUNT(DISTINCT l.j34_idbql) AS qtd_lotes,
-       COUNT(DISTINCT z.j141_setor) AS possui_valor_zona_setor
-  FROM setor s
-  LEFT JOIN face f            ON f.j37_setor = s.j30_codi
-  LEFT JOIN lote l            ON l.j34_setor = s.j30_codi
-  LEFT JOIN zonassetorvalor z ON z.j141_setor = s.j30_codi
- WHERE s.j30_codi = :setor
- GROUP BY s.j30_codi, s.j30_descr;
-```
 
 ## Convenções de prefixo
 

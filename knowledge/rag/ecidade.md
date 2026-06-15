@@ -52,6 +52,27 @@ Uso comum:
 - Controle orçamentário ou operacional;
 - Filtro em relatórios internos.
 
+### 5.5 Fonte de recurso
+
+A **fonte de recurso** identifica a origem ou vinculação dos recursos utilizados em operações orçamentárias, financeiras e contábeis.
+
+É um conceito importante principalmente para análises de:
+
+- Receita;
+- Despesa;
+- Empenho;
+- Orçamento;
+- Prestação de contas;
+- Relatórios contábeis;
+- Execução financeira por origem de recurso.
+
+A fonte de recurso ajuda a responder perguntas como:
+
+- De onde veio o recurso?
+- Qual recurso financiou determinada despesa?
+- Quais despesas estão vinculadas a uma fonte específica?
+- Como os recursos foram executados por exercício, órgão ou programa?
+
 ### 6. Relações entre tabelas
 
 As tabelas do e-Cidade geralmente se relacionam por meio de **foreign keys**.

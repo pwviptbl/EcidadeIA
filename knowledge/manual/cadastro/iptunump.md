@@ -86,143 +86,36 @@ A consulta `sql_query_ender_taxa` une os `numpre` de IPTU principal (`iptunump`)
 
 ### 1. Buscar vínculo IPTU → numpre por exercício e matrícula
 
-```sql
-SELECT *
-FROM iptunump
-WHERE j20_anousu = :ano
-  AND j20_matric = :matricula;
-```
 
 ### 2. Buscar numpre com dados cadastrais básicos
 
 Extraído de `sql_query`.
 
-```sql
-SELECT *
-FROM iptunump
-INNER JOIN iptubase
-        ON iptubase.j01_matric = iptunump.j20_matric
-INNER JOIN lote
-        ON lote.j34_idbql = iptubase.j01_idbql
-INNER JOIN cgm
-        ON cgm.z01_numcgm = iptubase.j01_numcgm
-WHERE iptunump.j20_anousu = :ano
-  AND iptunump.j20_matric = :matricula;
-```
 
 ### 3. Buscar numpre com endereço principal do imóvel
 
 Extraído de `sql_query_ender`.
 
-```sql
-SELECT *
-FROM iptunump
-INNER JOIN iptubase
-        ON iptubase.j01_matric = iptunump.j20_matric
-INNER JOIN lote
-        ON lote.j34_idbql = iptubase.j01_idbql
-INNER JOIN testada
-        ON j34_idbql = j36_idbql
-INNER JOIN testpri
-        ON j49_idbql = j36_idbql
-       AND j49_face = j36_face
-       AND j49_codigo = j36_codigo
-INNER JOIN bairro
-        ON j34_bairro = j13_codi
-INNER JOIN ruas
-        ON j14_codigo = j36_codigo
-INNER JOIN zonas
-        ON j50_zona = j34_zona
-INNER JOIN setor
-        ON j30_codi = j34_setor
-WHERE iptunump.j20_anousu = :ano
-  AND iptunump.j20_matric = :matricula;
-```
 
 ### 4. Buscar endereço considerando IPTU principal e taxas separadas
 
 Extraído de `sql_query_ender_taxa`.
 
-```sql
-SELECT *
-FROM iptubase
-INNER JOIN (
-    SELECT
-        j20_matric,
-        j20_anousu,
-        j20_numpre
-    FROM iptunump
-    WHERE j20_anousu = :ano
-
-    UNION
-
-    SELECT
-        j151_matric AS j20_matric,
-        j08_anousu AS j20_anousu,
-        j151_numpre AS j20_numpre
-    FROM iptutaxanump txnump
-    INNER JOIN iptucadtaxaexe txexe
-            ON txexe.j08_iptucadtaxaexe = txnump.j151_iptucadtaxaexe
-    WHERE txexe.j08_anousu = :ano
-) nump
-        ON iptubase.j01_matric = nump.j20_matric
-INNER JOIN lote
-        ON lote.j34_idbql = iptubase.j01_idbql
-INNER JOIN testada
-        ON j34_idbql = j36_idbql
-INNER JOIN testpri
-        ON j49_idbql = j36_idbql
-       AND j49_face = j36_face
-       AND j49_codigo = j36_codigo
-INNER JOIN bairro
-        ON j34_bairro = j13_codi
-INNER JOIN ruas
-        ON j14_codigo = j36_codigo
-INNER JOIN zonas
-        ON j50_zona = j34_zona
-INNER JOIN setor
-        ON j30_codi = j34_setor
-WHERE nump.j20_anousu = :ano
-  AND nump.j20_matric = :matricula;
-```
 
 ### 5. Inserir vínculo de numpre
 
 Extraído de `incluir`.
 
-```sql
-INSERT INTO iptunump (
-    j20_anousu,
-    j20_matric,
-    j20_numpre
-)
-VALUES (
-    :ano,
-    :matricula,
-    :numpre
-);
-```
 
 ### 6. Alterar numpre
 
 Extraído de `alterar`.
 
-```sql
-UPDATE iptunump
-SET j20_numpre = :numpre
-WHERE j20_anousu = :ano
-  AND j20_matric = :matricula;
-```
 
 ### 7. Excluir vínculo
 
 Extraído de `excluir`.
 
-```sql
-DELETE FROM iptunump
-WHERE j20_anousu = :ano
-  AND j20_matric = :matricula;
-```
 
 ## Perguntas que esta tabela ajuda a responder
 

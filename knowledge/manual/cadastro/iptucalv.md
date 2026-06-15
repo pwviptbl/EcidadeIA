@@ -99,191 +99,36 @@ Isso não é necessariamente “quantidade de imóveis únicos”, porque a mesm
 
 Para contar imóveis únicos, usar:
 
-```sql
-count(distinct j21_matric)
-```
 
 ## Consultas SQL prontas
 
 ### 1. Buscar valores de cálculo por matrícula e exercício
 
-```sql
-SELECT
-  v.j21_anousu,
-  v.j21_matric,
-  v.j21_receit,
-  r.k02_descr AS receita_descricao,
-  v.j21_codhis,
-  h.j17_descr AS historico_descricao,
-  v.j21_valor,
-  v.j21_quant
-FROM cadastro.iptucalv v
-LEFT JOIN cadastro.iptucalh h
-       ON h.j17_codhis = v.j21_codhis
-LEFT JOIN caixa.tabrec r
-       ON r.k02_codigo = v.j21_receit
-WHERE v.j21_anousu = :ano
-  AND v.j21_matric = :matricula
-ORDER BY v.j21_receit, v.j21_codhis;
-```
 
 ### 2. Somar valores calculados por exercício e receita
 
-```sql
-SELECT
-  v.j21_anousu AS ano,
-  v.j21_receit AS codigo_receita,
-  r.k02_descr AS descricao_receita,
-  count(*) AS quantidade_linhas,
-  count(DISTINCT v.j21_matric) AS quantidade_matriculas,
-  round(sum(v.j21_valor)::numeric, 2) AS valor_total
-FROM cadastro.iptucalv v
-LEFT JOIN caixa.tabrec r
-       ON r.k02_codigo = v.j21_receit
-WHERE v.j21_anousu = :ano
-GROUP BY
-  v.j21_anousu,
-  v.j21_receit,
-  r.k02_descr
-ORDER BY v.j21_receit;
-```
 
 ### 3. Somar somente valores positivos calculados
 
-```sql
-SELECT
-  v.j21_anousu AS ano,
-  v.j21_receit AS codigo_receita,
-  r.k02_descr AS descricao_receita,
-  count(DISTINCT v.j21_matric) AS quantidade_matriculas,
-  round(sum(CASE WHEN v.j21_valor > 0 THEN v.j21_valor ELSE 0 END)::numeric, 2) AS valor_calculado
-FROM cadastro.iptucalv v
-LEFT JOIN caixa.tabrec r
-       ON r.k02_codigo = v.j21_receit
-WHERE v.j21_anousu = :ano
-GROUP BY
-  v.j21_anousu,
-  v.j21_receit,
-  r.k02_descr
-ORDER BY v.j21_receit;
-```
 
 ### 4. Identificar valores por histórico de cálculo
 
-```sql
-SELECT
-  v.j21_anousu AS ano,
-  v.j21_codhis AS codigo_historico,
-  h.j17_descr AS historico_descricao,
-  count(*) AS quantidade_linhas,
-  count(DISTINCT v.j21_matric) AS quantidade_matriculas,
-  round(sum(v.j21_valor)::numeric, 2) AS valor_total
-FROM cadastro.iptucalv v
-LEFT JOIN cadastro.iptucalh h
-       ON h.j17_codhis = v.j21_codhis
-WHERE v.j21_anousu = :ano
-GROUP BY
-  v.j21_anousu,
-  v.j21_codhis,
-  h.j17_descr
-ORDER BY v.j21_codhis;
-```
 
 ### 5. Consulta para “somente IPTU” por histórico
 
-```sql
-SELECT
-  v.j21_anousu AS ano,
-  count(DISTINCT v.j21_matric) AS quantidade_matriculas,
-  round(sum(v.j21_valor)::numeric, 2) AS valor_iptu
-FROM cadastro.iptucalv v
-JOIN cadastro.iptucalh h
-  ON h.j17_codhis = v.j21_codhis
-WHERE v.j21_anousu = :ano
-  AND position('iptu' IN lower(h.j17_descr)) > 0
-GROUP BY v.j21_anousu;
-```
 
 > Validar no município se o histórico do IPTU sempre contém a palavra `iptu`. Em bases customizadas, o filtro pode exigir código fixo de histórico ou receita.
 
 ### 6. Comparar valores entre dois exercícios por matrícula
 
-```sql
-WITH base AS (
-  SELECT
-    v.j21_matric,
-    v.j21_anousu,
-    sum(v.j21_valor) AS valor_total
-  FROM cadastro.iptucalv v
-  WHERE v.j21_anousu IN (:ano_anterior, :ano_atual)
-  GROUP BY v.j21_matric, v.j21_anousu
-)
-SELECT
-  coalesce(a.j21_matric, b.j21_matric) AS matricula,
-  coalesce(a.valor_total, 0) AS valor_ano_anterior,
-  coalesce(b.valor_total, 0) AS valor_ano_atual,
-  coalesce(b.valor_total, 0) - coalesce(a.valor_total, 0) AS diferenca_valor,
-  CASE
-    WHEN coalesce(a.valor_total, 0) = 0 THEN NULL
-    ELSE round(((coalesce(b.valor_total, 0) - a.valor_total) / a.valor_total * 100)::numeric, 2)
-  END AS variacao_percentual
-FROM base a
-FULL JOIN base b
-       ON b.j21_matric = a.j21_matric
-      AND b.j21_anousu = :ano_atual
-WHERE a.j21_anousu = :ano_anterior
-   OR b.j21_anousu = :ano_atual
-ORDER BY abs(coalesce(b.valor_total, 0) - coalesce(a.valor_total, 0)) DESC;
-```
 
 ### 7. Unir valores de IPTU e taxas da classe `sql_query_taxa`
 
-```sql
-SELECT
-  calv.j21_valor
-FROM (
-  SELECT
-    j21_valor
-  FROM cadastro.iptucalv
-  WHERE j21_anousu = :ano
-    AND j21_matric = :matricula
-
-  UNION
-
-  SELECT
-    j152_valor AS j21_valor
-  FROM cadastro.iptutaxacalv
-  INNER JOIN cadastro.iptutaxanump
-          ON j151_codigo = j152_iptutaxanump
-  INNER JOIN cadastro.iptucadtaxaexe
-          ON j08_iptucadtaxaexe = j151_iptucadtaxaexe
-  WHERE j08_anousu = :ano
-    AND j151_matric = :matricula
-) calv;
-```
 
 ### 8. Relatório financeiro consolidado por receita
 
 Versão simplificada da intenção de `sql_queryValoresCalculoIptu`:
 
-```sql
-SELECT
-  v.j21_anousu AS ano_calculo,
-  v.j21_receit AS codigo_receita,
-  r.k02_descr AS descricao_receita,
-  coalesce(round(sum(CASE WHEN v.j21_valor > 0 THEN v.j21_valor ELSE 0 END)::numeric, 2), 0) AS valor_calculado,
-  coalesce(round(sum(CASE WHEN v.j21_valor < 0 THEN v.j21_valor * -1 ELSE 0 END)::numeric, 2), 0) AS valor_negativo,
-  count(DISTINCT v.j21_matric) AS quantidade_matriculas
-FROM cadastro.iptucalv v
-LEFT JOIN caixa.tabrec r
-       ON r.k02_codigo = v.j21_receit
-WHERE v.j21_anousu = :ano
-GROUP BY
-  v.j21_anousu,
-  v.j21_receit,
-  r.k02_descr
-ORDER BY v.j21_receit;
-```
 
 ## Perguntas que esta tabela ajuda a responder
 

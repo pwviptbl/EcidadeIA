@@ -16,9 +16,6 @@ A tabela `carlote` representa o vínculo entre um lote (`lote`) e uma caracterí
 
 O vínculo principal é composto por:
 
-```sql
-j35_idbql + j35_caract
-```
 
 Na prática, a classe permite consultar quais características estão associadas a um lote e, por meio dos joins, recuperar também o grupo da característica, dados do lote, bairro e setor.
 
@@ -36,10 +33,6 @@ Na prática, a classe permite consultar quais características estão associadas
 
 A classe trata como chave lógica a combinação:
 
-```sql
-carlote.j35_idbql = :id_lote
-and carlote.j35_caract = :caracteristica
-```
 
 Não há sequence própria na classe. Os dois identificadores são recebidos por parâmetro em `incluir($j35_idbql, $j35_caract)`.
 
@@ -113,55 +106,15 @@ Operações usadas:
 
 ### Consulta completa da classe
 
-```sql
-select *
-from carlote
-inner join caracter
-        on caracter.j31_codigo = carlote.j35_caract
-inner join lote
-        on lote.j34_idbql = carlote.j35_idbql
-inner join cargrup
-        on cargrup.j32_grupo = caracter.j31_grupo
-inner join bairro
-        on bairro.j13_codi = lote.j34_bairro
-inner join setor
-        on setor.j30_codi = lote.j34_setor
-where carlote.j35_idbql = :id_lote
-  and carlote.j35_caract = :caracteristica
-order by :ordem;
-```
 
 ### Consulta simples da tabela
 
-```sql
-select *
-from carlote
-where carlote.j35_idbql = :id_lote
-  and carlote.j35_caract = :caracteristica
-order by :ordem;
-```
 
 ### Inserção normalizada
 
-```sql
-insert into carlote (
-  j35_idbql,
-  j35_caract,
-  j35_dtlanc
-) values (
-  :id_lote,
-  :caracteristica,
-  :data_lancamento
-);
-```
 
 ### Exclusão por chave
 
-```sql
-delete from carlote
-where j35_idbql = :id_lote
-  and j35_caract = :caracteristica;
-```
 
 ## Perguntas que esta tabela ajuda a responder
 
@@ -175,32 +128,16 @@ where j35_idbql = :id_lote
 
 Use preferencialmente filtros explícitos por chave:
 
-```sql
-where carlote.j35_idbql = :id_lote
-```
 
 ou:
 
-```sql
-where carlote.j35_idbql = :id_lote
-  and carlote.j35_caract = :caracteristica
-```
 
 Para análises cadastrais por grupo:
 
-```sql
-where caracter.j31_grupo = :grupo
-```
 
 Para recortes territoriais:
 
-```sql
-where lote.j34_bairro = :bairro
-```
 
-```sql
-where lote.j34_setor = :setor
-```
 
 ## Cuidados e riscos
 
@@ -227,17 +164,5 @@ Ao responder perguntas sobre características de lote, tratar `carlote` como tab
 
 Caminho típico:
 
-```sql
-lote
-  -> carlote
-  -> caracter
-  -> cargrup
-```
 
 Para contextualização territorial, incluir:
-
-```sql
-lote
-  -> bairro
-  -> setor
-```

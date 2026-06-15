@@ -40,15 +40,53 @@ Uso:
 - guardar exemplos SQL maiores;
 - documentar quando usar ou nao usar uma tabela;
 - documentar cuidados e limites.
+- documentar conceitos de negocio em `knowledge/manual/<schema>/conceitos.md`;
+- documentar caminhos entre entidades em `knowledge/manual/<schema>/relacionamentos_negocio.md`.
 
 O manual completo nao deve ser enviado inteiro para o RAG. Ele e a base humana.
 
-### 3. Conhecimento operacional
+### 3. Rascunhos para curadoria no Obsidian
+
+Fonte auxiliar para criar material preenchivel pelo consultor/analista:
+
+- `docs/exemplos/obsidian/*.catalogo.md`
+- `docs/exemplos/obsidian/*.conceitos.md`
+- `docs/exemplos/obsidian/*.relacionamentos_negocio.md`
+
+Scripts:
+
+```bash
+cd /home/dbseller/Modelos/MVP
+python3 tools/export_catalog_markdown.py --domain cadastro
+python3 tools/scaffold_business_knowledge.py --domain cadastro
+```
+
+Ou pelo pipeline:
+
+```bash
+python3 tools/run_knowledge_pipeline.py --schema cadastro --export-obsidian --skip-knowledge-rag --skip-rag-documents
+```
+
+Uso:
+
+- revisar estrutura tecnica no Obsidian;
+- preencher conceitos de negocio antes de escrever SQL;
+- validar caminhos entre entidades, especialmente quando FK isolada nao explica o caminho esperado;
+- copiar apenas secoes validadas para `knowledge/manual/<schema>/conceitos.md` ou `knowledge/manual/<schema>/relacionamentos_negocio.md`.
+
+Esses rascunhos nao entram no RAG diretamente.
+
+### 4. Conhecimento operacional
 
 Fonte curta para IA:
 
 - `knowledge/rag/<schema>.md`
 - `knowledge/rag/<schema>/<tabela>.md`
+
+Tambem pode conter snippets de conceitos e receitas:
+
+- `knowledge/rag/<schema>/conceitos.md`
+- `knowledge/rag/<schema>/relacionamentos_negocio.md`
 
 Script:
 
@@ -63,7 +101,18 @@ Saida:
 
 Esses arquivos sao gerados a partir de `knowledge/manual/`. Nao edite `knowledge/rag/` como fonte principal; ajuste o manual e gere novamente.
 
-### 4. JSONL de busca
+O gerador classifica secoes de conceito e relacionamento como tipos proprios no
+RAG:
+
+- `business_concept`
+- `relationship_recipe`
+- `business_filter`
+- `table_role`
+- `counting_rule`
+
+Esses tipos devem ajudar o agente a entender a regra antes de pensar na SQL.
+
+### 5. JSONL de busca
 
 Artefato final consumido pelo MCP/RAG:
 
@@ -88,6 +137,27 @@ Saida:
 Nao edite esse arquivo manualmente.
 
 ## Sequencia recomendada
+
+## Modo conhecimento primeiro
+
+Enquanto o catalogo estiver sendo enriquecido, mantenha:
+
+```bash
+AGENTE_ALLOW_GENERIC_SQL=false
+```
+
+Com essa configuracao, o agente continua fazendo rota, expansao de contexto,
+busca RAG e leitura de regras de negocio, mas nao gera SQL livre quando falta
+plano deterministico. A resposta passa a indicar o que falta curar no manual:
+conceito, regra de contagem, receita de relacionamento, filtro de negocio ou
+plano analitico estruturado.
+
+Depois que os conceitos e receitas estiverem maduros, habilite SQL livre apenas
+para testes controlados:
+
+```bash
+AGENTE_ALLOW_GENERIC_SQL=true
+```
 
 ### Quando mudou somente o manual
 
@@ -127,7 +197,9 @@ python3 tools/run_knowledge_pipeline.py --schema cadastro --export-obsidian --sk
 
 Saida:
 
-- `docs/exemplos/obsidian/cadastro_extraido.catalogo.md` ou arquivo equivalente ao nome do JSON.
+- `docs/exemplos/obsidian/cadastro_extraido.catalogo.md`
+- `docs/exemplos/obsidian/cadastro_extraido.conceitos.md`
+- `docs/exemplos/obsidian/cadastro_extraido.relacionamentos_negocio.md`
 
 ## Como repetir para outros schemas
 
@@ -135,13 +207,17 @@ Para outro schema:
 
 ```bash
 python3 tools/run_knowledge_pipeline.py --schema arrecadacao --from-db
+python3 tools/run_knowledge_pipeline.py --schema arrecadacao --export-obsidian --skip-knowledge-rag --skip-rag-documents
 ```
 
-Depois crie ou edite:
+Depois revise os rascunhos em `docs/exemplos/obsidian/` e promova as secoes
+validadas para:
 
 ```text
 knowledge/manual/arrecadacao.md
 knowledge/manual/arrecadacao/<tabela>.md
+knowledge/manual/arrecadacao/conceitos.md
+knowledge/manual/arrecadacao/relacionamentos_negocio.md
 ```
 
 E gere novamente:
@@ -172,6 +248,8 @@ Arquivos gerados por script:
 
 - `catalog/*_extraido.json`
 - `docs/exemplos/obsidian/*.catalogo.md`
+- `docs/exemplos/obsidian/*.conceitos.md`
+- `docs/exemplos/obsidian/*.relacionamentos_negocio.md`
 - `knowledge/rag/**/*.md`
 - `rag/catalog_documents.jsonl`
 

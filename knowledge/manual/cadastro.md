@@ -1515,6 +1515,7 @@ tags:
 - Quais características estão associadas a imóveis com maior aumento de IPTU?
 - Quais características possuem maior pontuação?
 - Como o município parametrizou os tipos de características usados no cadastro imobiliário?
+- Qual característica ?
 
 ### Filtros e regras reaproveitaveis
 
@@ -1597,23 +1598,6 @@ tags:
   - Cruzar com `carface` para medir uso da característica em faces de quadra.
   - Agrupar por `j31_grupo` para analisar quantidade de características por grupo.
   - Agrupar por `j31_pontos` para analisar distribuição de pontuação.
-
-- O que nao pode ser inferido a partir dela?
-
-  - Não inferir quais lotes possuem a característica sem consultar `carlote`.
-  - Não inferir quais construções possuem a característica sem consultar `carconstr`.
-  - Não inferir quais faces possuem a característica sem consultar `carface`.
-  - Não inferir se a característica é de lote, construção ou face apenas pela descrição; cruzar com `cargrup`.
-  - Não inferir valor de IPTU.
-  - Não inferir valor venal de terreno ou construção.
-  - Não inferir pagamento, débito, arrecadação ou parcelamento.
-  - Não inferir área, testada, bairro, setor ou zona.
-  - Não inferir proprietário, contribuinte ou matrícula.
-  - Não inferir que a pontuação é usada no cálculo sem validar a regra municipal.
-  - Não inferir que uma característica impacta financeiramente o cálculo apenas por existir no cadastro.
-  - Não inferir que o mesmo código ou descrição possui o mesmo significado em municípios diferentes.
-  - Não inferir histórico de alterações, pois a tabela não possui coluna de tempo.
-  - Não inferir padrão construtivo, territorial ou fiscal completo a partir de uma característica isolada.
 
 ### Cuidados / riscos
 
@@ -1912,7 +1896,7 @@ tags:
 - Coluna de tempo: Nao informada.
 - Grao: Uma linha por matrícula, construção e característica.
 - Recomendada: sim
-- Significado da contagem: Conta vínculos de características em construções. Não conta imóveis nem construções diretamente. Para contar construções com determinada característica, usar `COUNT(DISTINCT (j48_matric, j48_idcons))`. Para contar imóveis com determinada característica, usar `COUNT(DISTINCT j48_matric)`.
+- Significado da contagem: Conta vínculos de características em construções. Uma linha identifica uma característica aplicada a uma construção (`j48_matric, j48_idcons, j48_caract`). Para contar construções por característica partindo apenas de `carconstr`, agrupar por `j48_caract` e usar `COUNT(1)`. Use `COUNT(DISTINCT (j48_matric, j48_idcons))` somente se joins adicionais puderem multiplicar linhas. Para contar imóveis com determinada característica, usar `COUNT(DISTINCT j48_matric)`.
 - Candidatas a chave de negocio: j48_matric, j48_idcons, j48_caract
 - Candidatas a coluna de tempo: Nenhuma inferida automaticamente.
 

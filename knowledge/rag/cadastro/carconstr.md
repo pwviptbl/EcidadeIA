@@ -14,7 +14,7 @@
 - Coluna de tempo: Nao informada.
 - Grao: Uma linha por matrícula, construção e característica.
 - Recomendada: sim
-- Significado da contagem: Conta vínculos de características em construções. Não conta imóveis nem construções diretamente. Para contar construções com determinada característica, usar `COUNT(DISTINCT (j48_matric, j48_idcons))`. Para contar imóveis com determinada característica, usar `COUNT(DISTINCT j48_matric)`.
+- Significado da contagem: Conta vínculos de características em construções. Uma linha identifica uma característica aplicada a uma construção (`j48_matric, j48_idcons, j48_caract`). Para contar construções por característica partindo apenas de `carconstr`, agrupar por `j48_caract` e usar `COUNT(1)`. Use `COUNT(DISTINCT (j48_matric, j48_idcons))` somente se joins adicionais puderem multiplicar linhas. Para contar imóveis com determinada característica, usar `COUNT(DISTINCT j48_matric)`.
 - Candidatas a chave de negocio: j48_matric, j48_idcons, j48_caract
 - Candidatas a coluna de tempo: Nenhuma inferida automaticamente.
 

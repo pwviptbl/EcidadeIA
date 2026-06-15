@@ -55,55 +55,15 @@ Cada registro representa o resultado principal do cálculo de IPTU de uma matrí
 
 ### 2. Buscar cálculo por exercício e matrícula, com dados cadastrais
 
-```sql
-SELECT *
-FROM iptucalc
-INNER JOIN iptubase
-        ON iptubase.j01_matric = iptucalc.j23_matric
-INNER JOIN lote
-        ON lote.j34_idbql = iptubase.j01_idbql
-INNER JOIN cgm
-        ON cgm.z01_numcgm = iptubase.j01_numcgm
-WHERE iptucalc.j23_anousu = :anousu
-  AND iptucalc.j23_matric = :matricula;
-```
 
 ### 3. Buscar cálculo somente na tabela `iptucalc`
 
-```sql
-SELECT *
-FROM iptucalc
-WHERE iptucalc.j23_anousu = :anousu
-  AND iptucalc.j23_matric = :matricula;
-```
 
 ### 4. Atualizar cálculo por chave composta
 
-```sql
-UPDATE iptucalc
-SET
-    j23_testad = :testada_calculo,
-    j23_arealo = :area_calculada,
-    j23_areafr = :area_fracionada,
-    j23_areaed = :area_total_edificada,
-    j23_m2terr = :valor_m2_terreno,
-    j23_vlrter = :valor_venal_terreno,
-    j23_aliq = :aliquota_iptu,
-    j23_vlrisen = :valor_isencao,
-    j23_tipoim = :tipo_imposto,
-    j23_manual = :log_calculo,
-    j23_tipocalculo = :tipo_calculo
-WHERE j23_anousu = :anousu
-  AND j23_matric = :matricula;
-```
 
 ### 5. Excluir cálculo por chave composta
 
-```sql
-DELETE FROM iptucalc
-WHERE j23_anousu = :anousu
-  AND j23_matric = :matricula;
-```
 
 ## Perguntas que esta tabela ajuda a responder
 

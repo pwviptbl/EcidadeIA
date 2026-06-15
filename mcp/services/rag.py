@@ -73,9 +73,28 @@ KIND_WEIGHTS = {
     "filter_semantics": 1.9,
     "validated_query": 2.0,
     "grouping_rule": 1.55,
+    "business_concept": 2.35,
+    "relationship_recipe": 2.4,
+    "business_filter": 2.2,
+    "table_role": 1.8,
+    "counting_rule": 2.25,
     "markdown_rule": 2.15,
-    "markdown_sql": 1.95,
     "markdown_reference": 1.35,
+}
+
+RICH_EVIDENCE_KINDS = {
+    "business_rule",
+    "classification",
+    "filter_semantics",
+    "validated_query",
+    "grouping_rule",
+    "business_concept",
+    "relationship_recipe",
+    "business_filter",
+    "table_role",
+    "counting_rule",
+    "markdown_rule",
+    "markdown_reference",
 }
 
 
@@ -170,33 +189,26 @@ class RagIndex:
         grouped: dict[str, dict[str, Any]] = {}
         for document in documents:
             metadata = document.get("metadata") or {}
-            table_name = metadata.get("table")
-            if not table_name or table_name not in catalog.data.get("tables", {}):
+            table_names = self._document_table_names(document, catalog)
+            if not table_names:
                 continue
 
-            group = grouped.setdefault(
-                table_name,
-                {
-                    "table": table_name,
-                    "score": 0.0,
-                    "scores": [],
-                    "evidence": [],
-                },
-            )
-            doc_score = float(document.get("score") or 0)
-            group["scores"].append(doc_score)
-            if len(group["evidence"]) < 5:
+            for table_name in table_names:
+                group = grouped.setdefault(
+                    table_name,
+                    {
+                        "table": table_name,
+                        "score": 0.0,
+                        "scores": [],
+                        "evidence": [],
+                    },
+                )
+                doc_score = float(document.get("score") or 0)
+                group["scores"].append(doc_score)
+                if len(group["evidence"]) >= 5:
+                    continue
                 evidence_text = first_line(document.get("text"))
-                if document.get("kind") in {
-                    "business_rule",
-                    "classification",
-                    "filter_semantics",
-                    "validated_query",
-                    "grouping_rule",
-                    "markdown_rule",
-                    "markdown_sql",
-                    "markdown_reference",
-                }:
+                if document.get("kind") in RICH_EVIDENCE_KINDS:
                     evidence_text = compact_document_text(document.get("text"), limit=700)
                 group["evidence"].append(
                     {
@@ -234,6 +246,21 @@ class RagIndex:
 
         results.sort(key=lambda item: (item["score"], item["recommended"]), reverse=True)
         return results[: max(1, min(int(limit or 20), 100))]
+
+    def _document_table_names(self, document: dict[str, Any], catalog) -> list[str]:
+        known_tables = set(catalog.data.get("tables", {}).keys())
+        metadata = document.get("metadata") or {}
+        table_name = metadata.get("table")
+        if table_name in known_tables:
+            return [table_name]
+
+        text = str(document.get("text") or "")
+        names = []
+        for match in re.finditer(r"\b([a-z_][a-z0-9_]*)\.([a-z_][a-z0-9_]*)\b", text, flags=re.I):
+            full_name = f"{match.group(1).lower()}.{match.group(2).lower()}"
+            if full_name in known_tables and full_name not in names:
+                names.append(full_name)
+        return names[:8]
 
     def _table_name_boost(self, query: str, table_name: str) -> float:
         terms = tokenize(query)

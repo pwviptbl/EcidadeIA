@@ -191,13 +191,10 @@ def render_table_section(table_name: str, info: dict[str, Any]) -> str:
             continue
         pergunta = text(item.get("pergunta"))
         regra = text(item.get("regra"))
-        sql = text(item.get("sql_exemplo"))
         if pergunta:
             validated_queries.append(f"- Pergunta: {pergunta}")
         if regra:
             validated_queries.append(f"  - Regra: {regra}")
-        if sql:
-            validated_queries.append(f"  - SQL: `{sql}`")
     classification_lines = render_type_classification(info)
     time_candidates = infer_time_candidates(info.get("colunas") or {})
     business_key_candidates = infer_business_key_candidates(info.get("colunas") or {})
@@ -342,7 +339,14 @@ def resolve_user_path(path: Path) -> Path:
 def selected_paths(catalog_dir: Path, domain: str) -> list[Path]:
     if domain.lower() == "all":
         return sorted(catalog_dir.glob("*.json"))
-    return [catalog_dir / f"{domain}.json"]
+    candidates = [
+        catalog_dir / f"{domain}.json",
+        catalog_dir / f"{domain}_extraido.json",
+    ]
+    existing = [path for path in candidates if path.exists()]
+    if existing:
+        return existing
+    return sorted(catalog_dir.glob(f"{domain}*.json")) or [catalog_dir / f"{domain}.json"]
 
 
 def main() -> None:

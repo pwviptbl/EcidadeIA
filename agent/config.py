@@ -53,6 +53,7 @@ AGENTE_PORT = int(os.getenv("AGENTE_PORT", "5055"))
 AGENTE_DEBUG = os.getenv("AGENTE_DEBUG", "false").lower() in ("1", "true", "yes", "on")
 AGENTE_VALIDATE_RESULTS = os.getenv("AGENTE_VALIDATE_RESULTS", "false").lower() in ("1", "true", "yes", "on")
 AGENTE_STOP_AFTER_STAGE = str(os.getenv("AGENTE_STOP_AFTER_STAGE", "")).strip().lower()
+AGENTE_ALLOW_GENERIC_SQL = os.getenv("AGENTE_ALLOW_GENERIC_SQL", "false").lower() in ("1", "true", "yes", "on")
 
 DATABASE_PATH = DATA_DIR / "chat.sqlite3"
 DEFAULT_LIMIT = int(os.getenv("AGENTE_QUERY_LIMIT", "1000"))

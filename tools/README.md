@@ -19,9 +19,29 @@ cd /home/dbseller/Modelos/MVP
 python3 tools/run_knowledge_pipeline.py --schema cadastro --from-db
 ```
 
+Quando quiser mandar material para curadoria no Obsidian:
+
+```bash
+cd /home/dbseller/Modelos/MVP
+python3 tools/run_knowledge_pipeline.py --schema cadastro --export-obsidian --skip-knowledge-rag --skip-rag-documents
+```
+
 Guia completo:
 
 - `docs/pipeline-conhecimento.md`
+
+## Modo conhecimento primeiro
+
+Durante a curadoria, deixe o agente sem SQL livre:
+
+```bash
+AGENTE_ALLOW_GENERIC_SQL=false
+```
+
+Assim perguntas sem plano deterministico viram diagnostico de conhecimento:
+rota, tabelas, evidencias RAG e lacunas para preencher no manual. Use
+`AGENTE_ALLOW_GENERIC_SQL=true` apenas quando quiser testar novamente a geracao
+livre de SQL.
 
 ## Scripts
 
@@ -58,6 +78,25 @@ python3 tools/export_catalog_markdown.py --domain cadastro
 Saida padrao:
 
 - `docs/exemplos/obsidian/*.catalogo.md`
+
+### `scaffold_business_knowledge.py`
+
+Gera esqueletos de curadoria para o novo modelo de conhecimento de negocio:
+
+```bash
+python3 tools/scaffold_business_knowledge.py --domain cadastro
+```
+
+Saida padrao:
+
+- `docs/exemplos/obsidian/*.conceitos.md`
+- `docs/exemplos/obsidian/*.relacionamentos_negocio.md`
+
+Esses arquivos sao rascunhos para consultor/analista. Depois de validar uma
+secao, promova o conteudo para:
+
+- `knowledge/manual/<schema>/conceitos.md`
+- `knowledge/manual/<schema>/relacionamentos_negocio.md`
 
 ### `build_knowledge_rag.py`
 
@@ -103,6 +142,7 @@ Executa a sequencia padrao para reduzir erro operacional:
 python3 tools/run_knowledge_pipeline.py --schema cadastro
 python3 tools/run_knowledge_pipeline.py --schema cadastro --from-db
 python3 tools/run_knowledge_pipeline.py --schema cadastro --export-obsidian --skip-knowledge-rag --skip-rag-documents
+python3 tools/run_knowledge_pipeline.py --schema cadastro --export-business-scaffold --skip-knowledge-rag --skip-rag-documents
 ```
 
 ## Saidas
@@ -119,6 +159,9 @@ O JSON gerado segue o formato aceito pelo MCP:
 O JSONL do RAG gera documentos a partir do catalogo estruturado e de
 `knowledge/rag/`. O manual completo em `knowledge/manual/` nao e indexado
 diretamente.
+
+Os rascunhos em `docs/exemplos/obsidian/` tambem nao sao indexados diretamente.
+Eles servem para curadoria antes da promocao para `knowledge/manual/`.
 
 Depois da extracao automatica, os analistas podem enriquecer o mesmo JSON com:
 

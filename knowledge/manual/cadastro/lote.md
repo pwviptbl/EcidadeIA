@@ -107,249 +107,44 @@ A tabela `lote` é uma das bases centrais do cadastro imobiliário. Ela identifi
 
 ---
 
-## 6. SQLs prontos
-
+## Regras operacionais recorrentes
 ### 6.1. Buscar lote por código com bairro, setor e zona
 
-```sql
-SELECT
-  lote.*,
-  bairro.j13_descr AS bairro_descricao,
-  setor.j30_descr  AS setor_descricao,
-  zonas.*
-FROM lote
-INNER JOIN bairro ON bairro.j13_codi = lote.j34_bairro
-INNER JOIN setor  ON setor.j30_codi  = lote.j34_setor
-INNER JOIN zonas  ON zonas.j50_zona  = lote.j34_zona
-WHERE lote.j34_idbql = :idbql;
-```
 
 ### 6.2. Buscar somente dados da tabela `lote`
 
-```sql
-SELECT *
-FROM lote
-WHERE lote.j34_idbql = :idbql;
-```
 
 ### 6.3. Buscar lotes por setor, quadra e lote
 
-```sql
-SELECT *
-FROM lote
-WHERE j34_setor  = :setor
-  AND j34_quadra = :quadra
-  AND j34_lote   = :lote;
-```
 
 ### 6.4. Buscar lote com matrícula e proprietário
 
-```sql
-SELECT
-  lote.*,
-  iptubase.j01_matric,
-  iptubase.j01_numcgm,
-  cgm.z01_nome
-FROM lote
-INNER JOIN iptubase ON iptubase.j01_idbql = lote.j34_idbql
-INNER JOIN cgm      ON cgm.z01_numcgm     = iptubase.j01_numcgm
-WHERE lote.j34_idbql = :idbql;
-```
 
 ### 6.5. Buscar dados de referência anterior do lote
 
-```sql
-SELECT
-  lote.*,
-  iptubase.j01_matric,
-  cgm.z01_nome,
-  iptuconstr.j39_idcons,
-  iptuconstr.j39_area,
-  ruas.j14_nome,
-  iptuant.*,
-  loteloc.*
-FROM lote
-INNER JOIN iptubase        ON iptubase.j01_idbql  = lote.j34_idbql
-INNER JOIN cgm             ON cgm.z01_numcgm      = iptubase.j01_numcgm
-LEFT JOIN iptuconstr       ON iptuconstr.j39_matric = iptubase.j01_matric
-                           AND iptuconstr.j39_idprinc IS TRUE
-LEFT JOIN testpri          ON testpri.j49_idbql   = iptubase.j01_idbql
-LEFT JOIN ruas             ON ruas.j14_codigo     = testpri.j49_codigo
-LEFT JOIN iptuant          ON iptuant.j40_matric  = iptubase.j01_matric
-LEFT JOIN loteloc          ON loteloc.j06_idbql   = lote.j34_idbql
-WHERE lote.j34_idbql = :idbql;
-```
 
 ### 6.6. Buscar lote com localização complementar
 
-```sql
-SELECT
-  lote.*,
-  bairro.j13_descr,
-  setor.j30_descr,
-  zonas.*,
-  loteloc.*,
-  setorloc.*
-FROM lote
-INNER JOIN bairro   ON bairro.j13_codi    = lote.j34_bairro
-INNER JOIN setor    ON setor.j30_codi     = lote.j34_setor
-INNER JOIN zonas    ON zonas.j50_zona     = lote.j34_zona
-LEFT JOIN loteloc   ON loteloc.j06_idbql  = lote.j34_idbql
-LEFT JOIN setorloc  ON setorloc.j05_codigo = loteloc.j06_setorloc
-WHERE lote.j34_idbql = :idbql;
-```
 
 ### 6.7. Buscar lote para cartão numérico
 
-```sql
-SELECT
-  lote.*,
-  iptubase.j01_matric,
-  cgm.z01_nome,
-  bairro.j13_descr,
-  setor.j30_descr,
-  ruas.j14_nome,
-  loteloc.*,
-  setorloc.*
-FROM lote
-INNER JOIN iptubase ON iptubase.j01_idbql = lote.j34_idbql
-INNER JOIN cgm      ON cgm.z01_numcgm     = iptubase.j01_numcgm
-INNER JOIN bairro   ON bairro.j13_codi    = lote.j34_bairro
-INNER JOIN setor    ON setor.j30_codi     = lote.j34_setor
-INNER JOIN zonas    ON zonas.j50_zona     = lote.j34_zona
-LEFT JOIN testpri   ON testpri.j49_idbql  = lote.j34_idbql
-LEFT JOIN ruas      ON ruas.j14_codigo    = testpri.j49_codigo
-LEFT JOIN loteloc   ON loteloc.j06_idbql  = lote.j34_idbql
-LEFT JOIN setorloc  ON setorloc.j05_codigo = loteloc.j06_setorloc
-WHERE lote.j34_idbql = :idbql;
-```
 
 ### 6.8. Buscar lote detalhado com testada, rua, CEP e loteamento
 
-```sql
-SELECT
-  lote.j34_setor,
-  setor.j30_descr,
-  lote.j34_quadra,
-  lote.j34_lote,
-  lote.j34_area,
-  lote.j34_bairro,
-  bairro.j13_descr,
-  lote.j34_areal,
-  lote.j34_totcon,
-  lote.j34_zona,
-  lote.j34_quamat,
-  lote.j34_areapreservada,
-  lote.j34_areaprivativa,
-  lote.j34_areausocomum,
-  lote.j34_zonadesurb,
-  lote.j34_idbql,
-  ruas.j14_codigo,
-  ruas.j14_nome,
-  ruascep.j29_cep,
-  testada.j36_testad,
-  loteam.j34_loteam,
-  loteam.j34_descr,
-  ruastipo.j88_codigo,
-  ruastipo.j88_sigla
-FROM lote
-INNER JOIN setor         ON setor.j30_codi          = lote.j34_setor
-INNER JOIN bairro        ON bairro.j13_codi         = lote.j34_bairro
-INNER JOIN testada       ON testada.j36_idbql       = lote.j34_idbql
-INNER JOIN testpri       ON testpri.j49_idbql       = testada.j36_idbql
-                         AND testpri.j49_face       = testada.j36_face
-LEFT JOIN testadanumero  ON testadanumero.j15_idbql = testpri.j49_idbql
-INNER JOIN ruas          ON ruas.j14_codigo         = testpri.j49_codigo
-LEFT JOIN ruastipo       ON ruastipo.j88_codigo     = ruas.j14_tipo
-LEFT JOIN ruascep        ON ruascep.j29_codigo      = ruas.j14_codigo
-LEFT JOIN loteloteam     ON loteloteam.j34_idbql    = lote.j34_idbql
-LEFT JOIN loteam         ON loteam.j34_loteam       = loteloteam.j34_loteam
-WHERE lote.j34_idbql = :idbql;
-```
 
 ### 6.9. Listar lotes ativos com dados para georreferenciamento
 
-```sql
-SELECT DISTINCT j01_idbql
-FROM iptubase
-INNER JOIN lote    ON lote.j34_idbql   = iptubase.j01_idbql
-INNER JOIN bairro  ON lote.j34_bairro  = bairro.j13_codi
-INNER JOIN testada ON testada.j36_idbql = lote.j34_idbql
-INNER JOIN testpri ON testpri.j49_idbql = testada.j36_idbql
-                  AND testpri.j49_face  = testada.j36_face
-INNER JOIN ruas    ON ruas.j14_codigo   = testpri.j49_codigo
-WHERE iptubase.j01_baixa IS NULL;
-```
 
 ### 6.10. Buscar dados completos do lote
 
-```sql
-SELECT
-  lote.*,
-  iptubase.j01_matric,
-  iptubase.j01_numcgm,
-  cgm.z01_nome,
-  iptuconstr.j39_idcons,
-  iptuconstr.j39_area,
-  ruas.j14_nome,
-  iptuant.*,
-  loteloc.*,
-  testada.*,
-  testadanumero.*
-FROM lote
-INNER JOIN iptubase           ON iptubase.j01_idbql  = lote.j34_idbql
-INNER JOIN cgm                ON cgm.z01_numcgm      = iptubase.j01_numcgm
-LEFT JOIN iptuconstr          ON iptuconstr.j39_matric = iptubase.j01_matric
-                              AND iptuconstr.j39_idprinc IS TRUE
-LEFT JOIN testpri             ON testpri.j49_idbql   = iptubase.j01_idbql
-LEFT JOIN ruas                ON ruas.j14_codigo     = testpri.j49_codigo
-LEFT JOIN iptuant             ON iptuant.j40_matric  = iptubase.j01_matric
-LEFT JOIN loteloc             ON loteloc.j06_idbql   = lote.j34_idbql
-LEFT JOIN testada             ON testada.j36_idbql   = lote.j34_idbql
-LEFT JOIN testadanumero       ON testadanumero.j15_idbql = testpri.j49_idbql
-                              AND testadanumero.j15_face = testpri.j49_face
-WHERE lote.j34_idbql = :idbql;
-```
 
 ### 6.11. Listar construções ativas de um lote
 
-```sql
-SELECT
-  iptubase.j01_matric,
-  iptuconstr.*
-FROM lote
-INNER JOIN iptubase    ON iptubase.j01_idbql = lote.j34_idbql
-INNER JOIN iptuconstr  ON iptuconstr.j39_matric = iptubase.j01_matric
-WHERE iptubase.j01_baixa IS NULL
-  AND iptuconstr.j39_dtdemo IS NULL
-  AND lote.j34_idbql = :idbql;
-```
 
 ### 6.12. Listar construções ativas de um lote marcando área irregular
 
 Use quando houver uma lista de códigos de características consideradas irregulares.
 
-```sql
-SELECT
-  (
-    (
-      SELECT COUNT(carconstr.j48_caract)
-      FROM carconstr
-      INNER JOIN caracter ON caracter.j31_codigo = carconstr.j48_caract
-      WHERE carconstr.j48_idcons = iptuconstr.j39_idcons
-        AND carconstr.j48_matric = iptuconstr.j39_matric
-        AND carconstr.j48_caract IN (:codigos_caracteristicas)
-    ) = 0
-  ) AS regular,
-  iptubase.j01_matric,
-  iptuconstr.*
-FROM lote
-INNER JOIN iptubase   ON iptubase.j01_idbql = lote.j34_idbql
-INNER JOIN iptuconstr ON iptuconstr.j39_matric = iptubase.j01_matric
-WHERE iptubase.j01_baixa IS NULL
-  AND iptuconstr.j39_dtdemo IS NULL
-  AND lote.j34_idbql = :idbql;
-```
 
 ---
 

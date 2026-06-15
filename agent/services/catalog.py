@@ -113,13 +113,33 @@ class Catalog:
 
     def _normalize_table_info(self, info: dict) -> dict:
         columns = info.get("columns") or info.get("colunas") or {}
+        foreign_keys = []
+        for fk in info.get("foreign_keys") or info.get("chaves_estrangeiras") or []:
+            if not isinstance(fk, dict):
+                continue
+            foreign_keys.append(
+                {
+                    **fk,
+                    "references": fk.get("references") or fk.get("referencia"),
+                    "referenced_columns": fk.get("referenced_columns") or fk.get("colunas_referenciadas") or [],
+                }
+            )
         return {
             **info,
             "description": info.get("description") or info.get("descricao") or "",
             "columns": columns,
+            "primary_key": info.get("primary_key") or info.get("chave_primaria") or [],
             "grain": info.get("grain") or info.get("grao") or [],
             "entity_key": info.get("entity_key") or info.get("chave_negocio") or [],
             "time_key": info.get("time_key") or info.get("coluna_tempo"),
+            "default_filters": info.get("default_filters") or info.get("filtros_padrao") or [],
+            "foreign_keys": foreign_keys,
+            "business_logic": info.get("business_logic") or info.get("logica_negocio") or [],
+            "filter_semantics": info.get("filter_semantics") or info.get("semantica_filtros") or {},
+            "type_classification": info.get("type_classification") or info.get("classificacao_por_tipo") or {},
+            "recommended_groupings": info.get("recommended_groupings") or info.get("agrupamentos_recomendados") or [],
+            "validated_queries": info.get("validated_queries") or info.get("consultas_validadas") or [],
+            "business_notes": info.get("business_notes") or info.get("observacoes_negocio") or [],
             "recommended": bool(info.get("recommended") if "recommended" in info else info.get("recomendada")),
         }
 

@@ -72,60 +72,12 @@ Sequência usada para geração automática: `iptuisen_j46_codigo_seq`.
 
 ### Consultar isenção com dados cadastrais principais
 
-```sql
-select
-  iptuisen.*,
-  iptubase.*,
-  tipoisen.*,
-  lote.*,
-  cgm.*,
-  isentaxa.*
-from iptuisen
-inner join iptubase on iptubase.j01_matric = iptuisen.j46_matric
-inner join tipoisen on tipoisen.j45_tipo = iptuisen.j46_tipo
-inner join lote on lote.j34_idbql = iptubase.j01_idbql
-inner join cgm on cgm.z01_numcgm = iptubase.j01_numcgm
-left join isentaxa on isentaxa.j56_codigo = iptuisen.j46_codigo
-where iptuisen.j46_codigo = :codigo;
-```
 
 ### Consultar isenções por exercício e matrícula
 
-```sql
-select
-  j45_tipo,
-  j45_descr
-from iptuisen
-inner join isenexe on j46_codigo = j47_codigo
-inner join tipoisen on j46_tipo = j45_tipo
-where j46_matric = :matricula
-  and j47_anousu = :exercicio;
-```
 
 ### Consulta ampliada de isenção
 
-```sql
-select
-  iptuisen.*,
-  tipoisen.*,
-  proprietario.*,
-  isenproc.*,
-  promitente.*,
-  cgm.*,
-  cgm_propri.*,
-  iptubasecondominio.*,
-  condominio.*
-from iptuisen
-inner join tipoisen on j45_tipo = j46_tipo
-inner join proprietario on j01_matric = j46_matric
-left join isenproc on j61_codigo = j46_codigo
-left join promitente on promitente.j41_matric = j46_matric
-left join cgm on promitente.j41_numcgm = cgm.z01_numcgm
-left join cgm as cgm_propri on proprietario.z01_numcgm = cgm_propri.z01_numcgm
-left join iptubasecondominio on j46_matric = j108_matric
-left join condominio on j108_condominio = j107_sequencial
-where iptuisen.j46_codigo = :codigo;
-```
 
 ## Perguntas que esta referência ajuda a responder
 
@@ -142,23 +94,6 @@ where iptuisen.j46_codigo = :codigo;
 
 ## Filtros seguros sugeridos
 
-```sql
--- Por código da isenção
-where iptuisen.j46_codigo = :codigo
-
--- Por matrícula
-where iptuisen.j46_matric = :matricula
-
--- Por tipo de isenção
-where iptuisen.j46_tipo = :tipo_isencao
-
--- Por vigência em uma data
-where iptuisen.j46_dtini <= :data_referencia
-  and (iptuisen.j46_dtfim is null or iptuisen.j46_dtfim >= :data_referencia)
-
--- Por exercício, usando isenexe
-where isenexe.j47_anousu = :exercicio
-```
 
 ## Cuidados de uso
 

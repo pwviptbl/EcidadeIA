@@ -1,7 +1,9 @@
 {
   "descricao": "Catalogo extraido automaticamente para o schema cadastro.",
   "domain": "cadastro",
-  "exemplos": [],
+  "exemplos": [
+
+  ],
   "intencoes": {
     "comparar_periodos": {
       "descricao": "Compara metricas entre dois periodos ou exercicios.",
@@ -40,12 +42,15 @@
       ]
     }
   },
-  "metricas": {},
+  "metricas": {
+  },
   "rotulo": "Cadastro",
   "schema_principal": "cadastro",
   "tabelas": {
     "cadastro.arquivocdniptubase": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j151_iptubase",
         "j151_arquivocdn"
@@ -94,12 +99,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.atualizacaoiptuschema": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j142_sequencial"
       ],
@@ -125,12 +136,18 @@
         }
       },
       "descricao": "Guarda a informação da importação dos dados dos imóveis e em qual schema estão as informações.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.atualizacaoiptuschemaarquivo": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j143_sequencial"
       ],
@@ -174,12 +191,18 @@
         }
       },
       "descricao": "Arquivos importados para atualização de cadastros imobiliários.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.atualizacaoiptuschemamatricula": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j144_sequencial"
       ],
@@ -235,12 +258,18 @@
         }
       },
       "descricao": "Guarda as matrículas que foram atualizadas o cadastro imobiliário.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.atualizacaoiptuschemamotivorejeicao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j146_atualizacaoiptuschemamatricula"
       ],
@@ -278,12 +307,18 @@
         }
       },
       "descricao": "Tabela que guarda o motivo de rejeição.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averba": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j55_codave"
       ],
@@ -349,12 +384,18 @@
         }
       },
       "descricao": "Cadastro das averbacoes das matriculas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbacao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j75_codigo"
       ],
@@ -432,12 +473,18 @@
         }
       },
       "descricao": "Averbação",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbacgm": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j76_codigo"
       ],
@@ -517,12 +564,18 @@
         }
       },
       "descricao": "novos promitentes ou proprietarios",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbacgmold": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j79_codigo"
       ],
@@ -582,12 +635,18 @@
         }
       },
       "descricao": "guarda cgms de antigo proprietarios e promitentes",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbadecisaojudicial": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j101_sequencial"
       ],
@@ -625,12 +684,18 @@
         }
       },
       "descricao": "Averba Decisão Judicial",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbaescritura": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j94_codigo"
       ],
@@ -686,12 +751,18 @@
         }
       },
       "descricao": "averbaescritura",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbaformalpartilha": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j100_sequencial"
       ],
@@ -735,12 +806,18 @@
         }
       },
       "descricao": "Averbação formal",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbaformalpartilhacgm": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j102_sequencial"
       ],
@@ -788,12 +865,18 @@
         }
       },
       "descricao": "Averba formal partilha",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbagrupo": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j105_sequencial"
       ],
@@ -813,12 +896,18 @@
         }
       },
       "descricao": "Grupo",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbaguia": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j104_sequencial"
       ],
@@ -856,12 +945,18 @@
         }
       },
       "descricao": "Averba Guia",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbaguiaitbi": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j103_sequencial"
       ],
@@ -909,12 +1004,18 @@
         }
       },
       "descricao": "Averba Guia Itbi",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbaprocesso": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j77_averbacao"
       ],
@@ -956,12 +1057,18 @@
         }
       },
       "descricao": "averbaprocesso",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbaregimovel": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j78_averbacao"
       ],
@@ -999,12 +1106,18 @@
         }
       },
       "descricao": "averbaregimovel",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.averbatipo": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j93_codigo"
       ],
@@ -1054,12 +1167,18 @@
         }
       },
       "descricao": "tipos de averbação",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.bairro": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j13_codi"
       ],
@@ -1091,12 +1210,18 @@
         }
       },
       "descricao": "Cadastro para identificar o nome dos bairros no município.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.bairrofator": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j112_sequencial"
       ],
@@ -1140,12 +1265,18 @@
         }
       },
       "descricao": "Bairro Fator",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.cadimobil": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j63_numcgm"
       ],
@@ -1171,12 +1302,18 @@
         }
       },
       "descricao": "cadastro de imobiliárias",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.caracter": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j31_codigo"
       ],
@@ -1220,12 +1357,18 @@
         }
       },
       "descricao": "Cadastro das caracteristicas para lote, face de quadra e construcoes.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.caractercaracter": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j138_sequencial"
       ],
@@ -1297,12 +1440,18 @@
         }
       },
       "descricao": "Vinculação das caracteristicas com as caracteristicas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.caractercaracteristica": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "db143_sequencial"
       ],
@@ -1350,12 +1499,18 @@
         }
       },
       "descricao": "Vinculo entra caracteristica iptu e catacteristica",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.caraliq": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j73_anousu",
         "j73_caract"
@@ -1394,12 +1549,18 @@
         }
       },
       "descricao": "Aliquotas por caracteristica e ano",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carbairro": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j114_sequencial"
       ],
@@ -1447,12 +1608,18 @@
         }
       },
       "descricao": "carbairro",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carcaractervalor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j119_sequencial"
       ],
@@ -1512,12 +1679,18 @@
         }
       },
       "descricao": "Caracteristica Caracter Valor",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carconstr": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j48_matric",
         "j48_idcons",
@@ -1557,12 +1730,18 @@
         }
       },
       "descricao": "cadastro das caracteristicas de uma construcao",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carconstrvalorm2": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "ano": {
@@ -1597,12 +1776,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carface": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j38_face",
         "j38_caract"
@@ -1651,12 +1836,18 @@
         }
       },
       "descricao": "Cadastro das caracteristicas que identificam uma face de quadra.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carfator": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j74_anousu",
         "j74_caract"
@@ -1701,12 +1892,18 @@
         }
       },
       "descricao": "Fator por caracteristica",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.cargrup": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j32_grupo"
       ],
@@ -1732,12 +1929,18 @@
         }
       },
       "descricao": "Cadastro dos grupos para identificar as caracteristicas que identificao uma mesma propriedade.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carlote": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j35_idbql",
         "j35_caract"
@@ -1786,12 +1989,18 @@
         }
       },
       "descricao": "Cadastro das caracteristicas dos lotes",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carpadrao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j33_codgrupo"
       ],
@@ -1833,12 +2042,18 @@
         }
       },
       "descricao": "Tabela que contém as caracteristicas padrões dos grupos",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carvalor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j71_codigo"
       ],
@@ -1912,12 +2127,18 @@
         }
       },
       "descricao": "Valores das caracteristicas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carzonafator": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j96_sequencial"
       ],
@@ -1977,12 +2198,18 @@
         }
       },
       "descricao": "Cargo Zona Fator",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.carzonavalor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chaves_estrangeiras": [
         {
           "columns": [
@@ -2075,12 +2302,18 @@
         }
       },
       "descricao": "Valores das caracteristicas por zona",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.cdd_rj": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "cdd": {
@@ -2157,12 +2390,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.cdd_rj_final": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "cdd_desc": {
@@ -2203,12 +2442,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.cdd_rj_v2": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "cdd_desc": {
@@ -2249,12 +2494,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.certidaoexistencia": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j133_sequencial"
       ],
@@ -2392,12 +2643,18 @@
         }
       },
       "descricao": "certidão de existência de construção",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.certidaoexistenciaprotprocesso": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j134_sequencial"
       ],
@@ -2445,12 +2702,18 @@
         }
       },
       "descricao": "Processo certidão existência",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.certidoesdiversas": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j183_id"
       ],
@@ -2572,12 +2835,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.certidoesdiversasprotprocesso": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j184_id"
       ],
@@ -2625,12 +2894,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.cfiptu": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j18_anousu"
       ],
@@ -2886,12 +3161,18 @@
         }
       },
       "descricao": "Controle dos dados para calculo do iptu",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.civitasinfoscomplementar": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "matricula"
       ],
@@ -2917,12 +3198,18 @@
         }
       },
       "descricao": "Tabela que quarda informacoes complementares.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.cliente": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j99_codigo"
       ],
@@ -2948,12 +3235,18 @@
         }
       },
       "descricao": "Cadastro de clientes",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.clientedebito": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j98_sequencia"
       ],
@@ -2991,12 +3284,18 @@
         }
       },
       "descricao": "Cliente Debito",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.condominio": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j107_sequencial"
       ],
@@ -3040,12 +3339,18 @@
         }
       },
       "descricao": "Condomínio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.condominiocgm": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j106_sequencial"
       ],
@@ -3093,12 +3398,18 @@
         }
       },
       "descricao": "CGM do Condomínio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.condominioprocesso": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j179_sequencial"
       ],
@@ -3146,12 +3457,18 @@
         }
       },
       "descricao": "condominio condominio > condominiosgm condominio > condominioprocesso",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.configuracaogrupocaracteristicas": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "db144_sequencial"
       ],
@@ -3183,12 +3500,18 @@
         }
       },
       "descricao": "Configuração Grupo de Características",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.constrcar": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j53_matric",
         "j53_idcons",
@@ -3234,12 +3557,18 @@
         }
       },
       "descricao": "Cadastro das caracteristicas das construcoes escrituradas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.constrescr": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j52_matric",
         "j52_idcons"
@@ -3336,12 +3665,18 @@
         }
       },
       "descricao": "cadastro das Construcoes escrituradas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.db_imgsitbi": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "arq": {
@@ -3364,12 +3699,18 @@
         }
       },
       "descricao": "tabela de imagens do ITBI",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.dne": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "d01_bairro": {
@@ -3470,12 +3811,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.doi": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j180_id"
       ],
@@ -3547,12 +3894,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.doi_importacao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j181_id"
       ],
@@ -3642,12 +3995,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.doi_inconsistencias": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j182_id"
       ],
@@ -3691,12 +4050,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.face": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j37_face"
       ],
@@ -3798,12 +4163,18 @@
         }
       },
       "descricao": "Cadastro das faces de quadras do municipio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.facevalor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j81_codigo"
       ],
@@ -3853,12 +4224,18 @@
         }
       },
       "descricao": "Valores da face por ano",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.histocorrenciaprocesso": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "ar26_sequencial"
       ],
@@ -3896,12 +4273,18 @@
         }
       },
       "descricao": "Guarda os processos vinculados a ocorrencia",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.imobil": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j44_matric"
       ],
@@ -3943,12 +4326,18 @@
         }
       },
       "descricao": "Cadastro para identificar a imobiliaria que responde pelo imovel.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptuant": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j40_matric"
       ],
@@ -3986,12 +4375,18 @@
         }
       },
       "descricao": "cadastro para identificar as matricula quando troca oo nunmero nas conversoes de sistemas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptubaixa": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j02_matric"
       ],
@@ -4057,12 +4452,18 @@
         }
       },
       "descricao": "Tabela das baixas de matricula",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptubaixaproc": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j03_matric"
       ],
@@ -4104,12 +4505,18 @@
         }
       },
       "descricao": "Processo de protocolo da baixa de matricula",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptubase": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j01_matric"
       ],
@@ -4201,12 +4608,18 @@
         }
       },
       "descricao": "Cadastro das matricula que identificam proprietarios de um determinado lote.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptubasecep": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "cep": {
@@ -4223,12 +4636,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptubasecondominio": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j108_sequencial"
       ],
@@ -4276,12 +4695,18 @@
         }
       },
       "descricao": "IPTU Base do Condomínio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptubasepredio": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j109_sequencial"
       ],
@@ -4329,12 +4754,18 @@
         }
       },
       "descricao": "IPTU Base Prédio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptubaseregimovel": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j04_sequencial"
       ],
@@ -4400,12 +4831,18 @@
         }
       },
       "descricao": "dados do registro de imóveis",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucadlogcalc": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j62_codigo"
       ],
@@ -4431,12 +4868,18 @@
         }
       },
       "descricao": "Cadastro dos tipos de log do calculo de IPTU",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucadtaxa": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j07_iptucadtaxa"
       ],
@@ -4456,12 +4899,18 @@
         }
       },
       "descricao": "Cadastro de taxas para calculo de Iptu",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucadtaxaexe": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j08_iptucadtaxaexe"
       ],
@@ -4573,12 +5022,18 @@
         }
       },
       "descricao": "Cadastro de dados da taxa por ano",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucadzonaentrega": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j85_codigo"
       ],
@@ -4604,12 +5059,18 @@
         }
       },
       "descricao": "Cadastro das zonas de entrega",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucadzonaentregaend": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j87_sequencial"
       ],
@@ -4669,12 +5130,18 @@
         }
       },
       "descricao": "Codigo do logradouro, numero do imovel e complemento do cadastro de zona de entrega",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalc": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j23_anousu",
         "j23_matric"
@@ -4773,12 +5240,18 @@
         }
       },
       "descricao": "Dados dos calculos de iptu, onde consta o valor venal do terreno e outros dados.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalc_caracteristica_lote": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j234_sequencial"
       ],
@@ -4816,12 +5289,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalcareaconstr": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j237_idconstr",
         "j237_matric",
@@ -4897,12 +5376,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalcarealote": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j236_idbql",
         "j236_matric",
@@ -4960,12 +5445,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalcconfrec": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j23_sequencial"
       ],
@@ -5031,12 +5522,18 @@
         }
       },
       "descricao": "Configuracao de calculo por matricula",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalcconfrec_backup": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "j23_anousu": {
@@ -5077,12 +5574,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalclog": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j27_codigo"
       ],
@@ -5150,12 +5653,18 @@
         }
       },
       "descricao": "Log do calculo do iptu",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalclogmat": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j28_codigo",
         "j28_matric"
@@ -5220,12 +5729,18 @@
         }
       },
       "descricao": "Matriculas do log do calculo do iptu",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalcpadrao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j10_sequencial"
       ],
@@ -5281,12 +5796,18 @@
         }
       },
       "descricao": "Calculo padrão do iptu",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalcpadraoconstr": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j11_sequencial"
       ],
@@ -5352,12 +5873,18 @@
         }
       },
       "descricao": "Construções",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalcpadraolog": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j19_sequencial"
       ],
@@ -5417,12 +5944,18 @@
         }
       },
       "descricao": "Log do calculo padrão",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalcpadraoorigem": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j27_sequencial"
       ],
@@ -5482,12 +6015,18 @@
         }
       },
       "descricao": "dados da origem da importação",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucale": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j22_anousu",
         "j22_matric",
@@ -5557,12 +6096,18 @@
         }
       },
       "descricao": "Registra os valores venais calculados para as construcoes",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucale_caracteristica_construcao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j235_sequencial"
       ],
@@ -5600,8 +6145,12 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalh": {
@@ -5632,7 +6181,9 @@
         }
       },
       "descricao": "Históricos do cálculo do IPTU",
-      "filtros_padrao": [],
+      "filtros_padrao": [
+
+      ],
       "grao": [
         "uma linha por tipo de historico/classificacao de valor do calculo"
       ],
@@ -5662,7 +6213,9 @@
       "recomendada": false
     },
     "cadastro.iptucalhconf": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j89_sequencial"
       ],
@@ -5710,8 +6263,12 @@
         }
       },
       "descricao": "Configuracao do iptucalh",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptucalv": {
@@ -5795,7 +6352,9 @@
         }
       },
       "descricao": "Valores gerados no calculo para o imóvel/matricula, ex: iptu, taxa lixo, ...",
-      "filtros_padrao": [],
+      "filtros_padrao": [
+
+      ],
       "grao": [
         "uma linha por matricula, exercicio e tipo de historico do valor gerado"
       ],
@@ -5844,18 +6403,15 @@
       "consultas_validadas": [
         {
           "pergunta": "Qual e a soma do IPTU de 2025?",
-          "regra": "Usar cadastro.iptucalv com cadastro.iptucalh e classificar os valores pelo historico antes da soma.",
-          "sql_exemplo": "select coalesce(sum(v.j21_valor), 0) as soma_iptu_2025 from cadastro.iptucalv v join cadastro.iptucalh h on h.j17_codhis = v.j21_codhis where v.j21_anousu = 2025 and position('iptu' in lower(h.j17_descr)) > 0"
+          "regra": "Usar cadastro.iptucalv com cadastro.iptucalh e classificar os valores pelo historico antes da soma."
         },
         {
           "pergunta": "Calcule a soma do IPTU de 2025 considerando apenas o hist de IPTU.",
-          "regra": "Quando o usuario citar hist/historico de IPTU, usar j21_codhis para relacionar cadastro.iptucalv com cadastro.iptucalh; o exercicio fica em j21_anousu.",
-          "sql_exemplo": "select coalesce(sum(v.j21_valor), 0) as soma_iptu_2025 from cadastro.iptucalv v join cadastro.iptucalh h on h.j17_codhis = v.j21_codhis where v.j21_anousu = 2025 and position('iptu' in lower(h.j17_descr)) > 0"
+          "regra": "Quando o usuario citar hist/historico de IPTU, usar j21_codhis para relacionar cadastro.iptucalv com cadastro.iptucalh; o exercicio fica em j21_anousu."
         },
         {
           "pergunta": "Mostre a composicao dos valores de 2025 por historico do IPTU.",
-          "regra": "Para auditar a soma, agrupar por h.j17_descr antes de decidir qual historico entra como IPTU.",
-          "sql_exemplo": "select h.j17_descr, coalesce(sum(v.j21_valor), 0) as total_valor from cadastro.iptucalv v join cadastro.iptucalh h on h.j17_codhis = v.j21_codhis where v.j21_anousu = 2025 group by h.j17_descr order by total_valor desc"
+          "regra": "Para auditar a soma, agrupar por h.j17_descr antes de decidir qual historico entra como IPTU."
         }
       ],
       "semantica_filtros": {
@@ -5865,7 +6421,9 @@
       "recomendada": true
     },
     "cadastro.iptuconstr": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j39_matric",
         "j39_idcons"
@@ -6010,12 +6568,18 @@
         }
       },
       "descricao": "Cadastro das construcoes que foram medidas pelo municipio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptuconstrdemo": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j60_matric",
         "j60_idcons",
@@ -6097,12 +6661,18 @@
         }
       },
       "descricao": "Tabela com demolições de construções",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptuconstrhabite": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j131_sequencial"
       ],
@@ -6194,12 +6764,18 @@
         }
       },
       "descricao": "Habite-se das construções",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptuconstrobrasconstr": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j132_sequencial"
       ],
@@ -6259,12 +6835,18 @@
         }
       },
       "descricao": "Tabela de ligação entre iptuconstr e obrasconstr",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptuconstrpontos": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j83_codigo"
       ],
@@ -6314,12 +6896,18 @@
         }
       },
       "descricao": "Pontos por construcao",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptudiversos": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j80_matric"
       ],
@@ -6357,12 +6945,18 @@
         }
       },
       "descricao": "Informações diversas sobre a matricula",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptuender": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j43_matric"
       ],
@@ -6454,12 +7048,18 @@
         }
       },
       "descricao": "Cadastro de endereco de entrega dos carnes de iptu",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptuerro": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "j24_anousu": {
@@ -6494,12 +7094,18 @@
         }
       },
       "descricao": "Resgistro dos erros do iptu quando executado um calculo. Esta tabela nao tem e referencia, pois é utilizada somente para registrar os erro para serem resolvidos posteriormente",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptufrac": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j25_anousu",
         "j25_matric"
@@ -6544,12 +7150,18 @@
         }
       },
       "descricao": "Fracionamento dos lotes. É utilizado para calcular a area ou testada fracionada para uma matricula. É bastante comum utilizar em lote que tenham construcoes do tipo apartamento, onde devemos fracionar o valor vanel de um imovel",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptuisen": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j46_codigo"
       ],
@@ -6639,12 +7251,18 @@
         }
       },
       "descricao": "cadastro das matricula com suas isencoes",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptumatzonaentrega": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j86_sequencial"
       ],
@@ -6692,12 +7310,18 @@
         }
       },
       "descricao": "Ligacao das matriculas com a zona de entrega",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptunaogeracarne": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j66_sequencial"
       ],
@@ -6735,12 +7359,18 @@
         }
       },
       "descricao": "Nao gera carne",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptunaogeracarnecgm": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j68_sequencial"
       ],
@@ -6788,12 +7418,18 @@
         }
       },
       "descricao": "Cgms que nao devem gerar carne na emissao geral do IPTU",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptunaogeracarnematric": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j131_sequencial"
       ],
@@ -6841,12 +7477,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptunaogeracarnesetqua": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j67_sequencial"
       ],
@@ -6890,12 +7532,18 @@
         }
       },
       "descricao": "Setor/Quadra que nao gera carne",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptunump": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j20_anousu",
         "j20_matric"
@@ -6934,12 +7582,18 @@
         }
       },
       "descricao": "Contem dados referentes aos numpres (códigos de arrecadacao) gerados para os carnês",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptunumpold": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j130_sequencial"
       ],
@@ -6971,12 +7625,18 @@
         }
       },
       "descricao": "iptunumpold",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptupadraoconstr": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j115_sequencial"
       ],
@@ -6996,12 +7656,18 @@
         }
       },
       "descricao": "Padrão Construção",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptupadraoconstrarea": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j116_sequencial"
       ],
@@ -7073,12 +7739,18 @@
         }
       },
       "descricao": "Construção Padrao Área",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptupadraoconstrfator": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j117_sequencial"
       ],
@@ -7122,12 +7794,18 @@
         }
       },
       "descricao": "Iptu Padrão Construção Fator",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptupadraoconstrpontos": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j118_sequencial"
       ],
@@ -7199,12 +7877,18 @@
         }
       },
       "descricao": "Iptu Padrão Construção Ponto",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptupercentualexercicio": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j145_sequencial"
       ],
@@ -7230,12 +7914,18 @@
         }
       },
       "descricao": "Percentual do Exercício",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptusocial": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j151_sequencial"
       ],
@@ -7291,12 +7981,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutabelas": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j121_sequencial"
       ],
@@ -7328,12 +8024,18 @@
         }
       },
       "descricao": "iptutabelas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutabelasconfig": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j122_sequencial"
       ],
@@ -7365,12 +8067,18 @@
         }
       },
       "descricao": "iptutabelasconfig",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutabelasconfigcampochave": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j124_sequencial"
       ],
@@ -7418,12 +8126,18 @@
         }
       },
       "descricao": "iptutabelasconfigcampochave",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutabelasconfigcampocorrecao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j123_sequencial"
       ],
@@ -7471,12 +8185,18 @@
         }
       },
       "descricao": "iptutabelasconfigcampocorrecao",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutabelasconfigvirada": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j129_sequencial"
       ],
@@ -7514,12 +8234,18 @@
         }
       },
       "descricao": "iptutabelasconfigvirada",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutabelasdepend": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j128_sequencial"
       ],
@@ -7567,12 +8293,18 @@
         }
       },
       "descricao": "iptutabelasdepend",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutaxa": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j19_anousu",
         "j19_receit"
@@ -7611,12 +8343,18 @@
         }
       },
       "descricao": "Esta tabela contem as taxas que serao cobradas juntamente com o iptu",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutaxamatric": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j09_iptutaxamatric"
       ],
@@ -7670,12 +8408,18 @@
         }
       },
       "descricao": "Tabela que ligação com a iptucadtaxa por matricula",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.iptutaxamatricexe": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j10_iptutaxamatricexe"
       ],
@@ -7713,12 +8457,18 @@
         }
       },
       "descricao": "Exercicios da tabela iptutaxamatric",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.isenexe": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j47_codigo",
         "j47_anousu"
@@ -7751,12 +8501,18 @@
         }
       },
       "descricao": "Cadastro dos exercicios da isencao",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.isenproc": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chaves_estrangeiras": [
         {
           "columns": [
@@ -7795,12 +8551,18 @@
         }
       },
       "descricao": "guarda o codigo de isenção da matricula e o codigo do processo",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.isentaxa": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j56_codigo",
         "j56_receit"
@@ -7839,12 +8601,18 @@
         }
       },
       "descricao": "Cadastro das taxas a serem isentas para uma determinada isencao. Se estiverem neste arquivo estao isentas.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.localidaderural": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j137_sequencial"
       ],
@@ -7876,12 +8644,18 @@
         }
       },
       "descricao": "cadastro de localidade rural",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.logradcep": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chaves_estrangeiras": [
         {
           "columns": [
@@ -7920,12 +8694,18 @@
         }
       },
       "descricao": "Cep por logradouro, utilizada para casos em que o municipio tem cep por logradouro e esta tabela interliga o cadastro imobiliario ao cadastro de ceps",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.lote": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j34_idbql"
       ],
@@ -8021,12 +8801,18 @@
         }
       },
       "descricao": "cadastro de Lotes do Municipio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.loteam": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j34_loteam"
       ],
@@ -8064,12 +8850,18 @@
         }
       },
       "descricao": "Cadastro dos Loteamentos Incluidos e liberados pelo Municipio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.loteamcgm": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j120_sequencial"
       ],
@@ -8117,12 +8909,18 @@
         }
       },
       "descricao": "Loteamento CGM",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.lotecentroide": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j85_sequencial"
       ],
@@ -8178,12 +8976,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.lotedist": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j54_idbql"
       ],
@@ -8247,12 +9051,18 @@
         }
       },
       "descricao": "Identificacao da distancia do lote em relacao ao logradouro mais próximo",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.loteloc": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j06_idbql"
       ],
@@ -8306,12 +9116,18 @@
         }
       },
       "descricao": "loteloc",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.loteloteam": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j34_idbql",
         "j34_loteam"
@@ -8354,12 +9170,18 @@
         }
       },
       "descricao": "Arquivo para identificar o loteamento de um determinado lote",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.lotenumero": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j12_codigo"
       ],
@@ -8419,12 +9241,18 @@
         }
       },
       "descricao": "Armazena o numero do Lote",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.lotenumero_proc": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j11_codigo"
       ],
@@ -8466,12 +9294,18 @@
         }
       },
       "descricao": "armazena o numero do processo",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.lotesetorfiscal": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j91_idbql"
       ],
@@ -8513,12 +9347,18 @@
         }
       },
       "descricao": "Lote Setor Fiscal",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.massafalida": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j58_codigo"
       ],
@@ -8562,12 +9402,18 @@
         }
       },
       "descricao": "Tabela de massas falidas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.massamat": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j59_codigo",
         "j59_matric"
@@ -8610,12 +9456,18 @@
         }
       },
       "descricao": "Tabela com massas falidas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.matricobs": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j26_matric"
       ],
@@ -8635,12 +9487,18 @@
         }
       },
       "descricao": "Observações da matrícula",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.mobimportacao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j95_codimporta"
       ],
@@ -8684,12 +9542,18 @@
         }
       },
       "descricao": "Dados Importados",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.moblevantamentoedi": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j96_sequen"
       ],
@@ -8823,12 +9687,18 @@
         }
       },
       "descricao": "Constrições das Matrículas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.moblevantamentolog": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j98_sequen"
       ],
@@ -8926,12 +9796,18 @@
         }
       },
       "descricao": "Logradouros da Matricula",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.moblevatamento": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j97_sequen"
       ],
@@ -9023,12 +9899,18 @@
         }
       },
       "descricao": "Levantamento do cadastro PDA",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.orientacao": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j64_sequencial"
       ],
@@ -9048,12 +9930,18 @@
         }
       },
       "descricao": "Cadastro de Orientaçoes",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.predio": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j111_sequencial"
       ],
@@ -9091,12 +9979,18 @@
         }
       },
       "descricao": "Prédio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.processadne": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "aviso": {
@@ -9137,12 +10031,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.promitente": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j41_matric",
         "j41_numcgm"
@@ -9197,12 +10097,18 @@
         }
       },
       "descricao": "Cadastro dos promitente compradores. Identificacao dos contribuintes que compram imoveis financiados e so averbam em seu nome apos o termino do pagamento.",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.propri": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j42_matric",
         "j42_numcgm"
@@ -9265,12 +10171,18 @@
         }
       },
       "descricao": "Cadastro dos outros proprietarios do imovel",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.ruas": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j14_codigo"
       ],
@@ -9344,12 +10256,18 @@
         }
       },
       "descricao": "Cadastro de todas as ruas e avenidas do municipio",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.ruasbairro": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j16_codigo"
       ],
@@ -9397,12 +10315,18 @@
         }
       },
       "descricao": "Bairro da rua",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.ruascep": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j29_codigo",
         "j29_inicio"
@@ -9447,12 +10371,18 @@
         }
       },
       "descricao": "Cadastro dos ceps das ruas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.ruashistorico": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j136_sequencial"
       ],
@@ -9524,12 +10454,18 @@
         }
       },
       "descricao": "Histórico das alterações do cadastro de ruas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.ruastipo": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j88_codigo"
       ],
@@ -9555,12 +10491,18 @@
         }
       },
       "descricao": "Cadastro de Tipos de Logradouros (Rua, Avenida, Travessa, Viela, etc)",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.setor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j30_codi"
       ],
@@ -9592,12 +10534,18 @@
         }
       },
       "descricao": "Cadastro dos setores que identificao os lotes incluido no sistema",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.setorfiscal": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j90_codigo"
       ],
@@ -9623,12 +10571,18 @@
         }
       },
       "descricao": "Setor Fiscal",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.setorfiscalvalor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j82_codigo"
       ],
@@ -9672,12 +10626,18 @@
         }
       },
       "descricao": "Valores por ano dos setores fiscais de m2 terreno",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.setorloc": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j05_codigo"
       ],
@@ -9703,12 +10663,18 @@
         }
       },
       "descricao": "setorloc",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.setorlocvalor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "coluna_tempo": null,
       "colunas": {
         "j05_anousu": {
@@ -9737,12 +10703,18 @@
         }
       },
       "descricao": "setorlocvalor",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.setorregimovel": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j69_sequencial"
       ],
@@ -9762,12 +10734,18 @@
         }
       },
       "descricao": "Setor do registro de imóveis",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.tesinter": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j39_sequencial"
       ],
@@ -9827,12 +10805,18 @@
         }
       },
       "descricao": "Cadastro das testadas internas dos lotes",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.tesinterlote": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j69_tesinter"
       ],
@@ -9874,12 +10858,18 @@
         }
       },
       "descricao": "Ligacao da tabela lote com tesinter",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.tesinteroutros": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chaves_estrangeiras": [
         {
           "columns": [
@@ -9918,12 +10908,18 @@
         }
       },
       "descricao": "tesinteroutros",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.tesintertipo": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j92_sequencial"
       ],
@@ -9943,12 +10939,18 @@
         }
       },
       "descricao": "Cadastro de tipo de testadas internas",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.testada": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j36_idbql",
         "j36_face"
@@ -10009,12 +11011,18 @@
         }
       },
       "descricao": "Cadastro para identificar a testada dos lotes",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.testadanumero": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j15_codigo"
       ],
@@ -10076,12 +11084,18 @@
         }
       },
       "descricao": "Numero do imovel",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.testpri": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j49_idbql",
         "j49_face"
@@ -10120,12 +11134,18 @@
         }
       },
       "descricao": "Testada principal ou testadas principais",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.tipocontribuinte": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j147_sequencial"
       ],
@@ -10151,12 +11171,18 @@
         }
       },
       "descricao": "",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.tipoisen": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j45_tipo"
       ],
@@ -10194,12 +11220,18 @@
         }
       },
       "descricao": "Cadastro dos Tipos de Isencao",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.zonafator": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j110_sequencial"
       ],
@@ -10243,12 +11275,18 @@
         }
       },
       "descricao": "Zona Fator",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.zonafatorarea": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j113_sequencial"
       ],
@@ -10304,12 +11342,18 @@
         }
       },
       "descricao": "Zona Fator Area",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.zonas": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j50_zona"
       ],
@@ -10329,12 +11373,18 @@
         }
       },
       "descricao": "Zonas fiscais",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.zonasaliq": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j70_zona"
       ],
@@ -10360,12 +11410,18 @@
         }
       },
       "descricao": "Aliquotas por zona",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.zonassetorvalor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j141_anousu",
         "j141_zonas",
@@ -10433,12 +11489,18 @@
         }
       },
       "descricao": "Estrutura criada para armazenar valor por zona e setor",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.zonastaxa": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j57_zona",
         "j57_receit",
@@ -10494,12 +11556,18 @@
         }
       },
       "descricao": "Taxas por zona/ano",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     },
     "cadastro.zonasvalor": {
-      "chave_negocio": [],
+      "chave_negocio": [
+
+      ],
       "chave_primaria": [
         "j51_zona",
         "j51_anousu"
@@ -10544,8 +11612,12 @@
         }
       },
       "descricao": "Valores por zona fiscal e por ano",
-      "filtros_padrao": [],
-      "grao": [],
+      "filtros_padrao": [
+
+      ],
+      "grao": [
+
+      ],
       "recomendada": false
     }
   },

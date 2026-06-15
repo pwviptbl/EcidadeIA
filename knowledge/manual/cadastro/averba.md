@@ -53,15 +53,6 @@ Cada registro representa uma averbação associada a uma matrícula do IPTU.
 
 Equivalente ao método `sql_query()`:
 
-```sql
-select *
-  from averba
-       inner join iptubase on iptubase.j01_matric = averba.j55_matric
-       inner join cgm on cgm.z01_numcgm = averba.j55_numcgm
-       inner join lote on lote.j34_idbql = iptubase.j01_idbql
-       inner join cgm as a on a.z01_numcgm = iptubase.j01_numcgm
- where averba.j55_codave = :codave;
-```
 
 Uso recomendado: obter dados completos da averbação, matrícula, lote, CGM vinculado à averbação e CGM principal da matrícula.
 
@@ -69,11 +60,6 @@ Uso recomendado: obter dados completos da averbação, matrícula, lote, CGM vin
 
 Equivalente ao método `sql_query_file()`:
 
-```sql
-select *
-  from averba
- where averba.j55_codave = :codave;
-```
 
 Uso recomendado: buscar apenas os dados brutos da averbação.
 
@@ -81,12 +67,6 @@ Uso recomendado: buscar apenas os dados brutos da averbação.
 
 Equivalente ao método `sql_query_nomeant()`:
 
-```sql
-select *
-  from averba
-       inner join cgm on cgm.z01_numcgm = averba.j55_numcgm
- where averba.j55_codave = :codave;
-```
 
 Uso recomendado: recuperar dados cadastrais do CGM vinculado à averbação.
 
@@ -103,52 +83,15 @@ Uso recomendado: recuperar dados cadastrais do CGM vinculado à averbação.
 
 ### 11.1 Averbações por matrícula
 
-```sql
-select *
-  from averba
- where j55_matric = :matricula
- order by j55_data, j55_codave;
-```
 
 ### 11.2 Averbações por CGM
 
-```sql
-select *
-  from averba
- where j55_numcgm = :numcgm
- order by j55_data, j55_codave;
-```
 
 ### 11.3 Averbações por período
 
-```sql
-select *
-  from averba
- where j55_data between :data_inicial and :data_final
- order by j55_data, j55_codave;
-```
 
 ### 11.4 Averbações com dados da matrícula e proprietário principal
 
-```sql
-select
-  averba.j55_codave,
-  averba.j55_matric,
-  averba.j55_data,
-  averba.j55_regimo,
-  averba.j55_cidade,
-  averba.j55_numcgm,
-  cgm.z01_nome as nome_cgm_averbacao,
-  iptubase.j01_numcgm as numcgm_proprietario_atual,
-  proprietario_atual.z01_nome as nome_proprietario_atual,
-  lote.j34_idbql
-from averba
-     inner join iptubase on iptubase.j01_matric = averba.j55_matric
-     inner join lote on lote.j34_idbql = iptubase.j01_idbql
-     inner join cgm on cgm.z01_numcgm = averba.j55_numcgm
-     inner join cgm as proprietario_atual on proprietario_atual.z01_numcgm = iptubase.j01_numcgm
-where averba.j55_codave = :codave;
-```
 
 ## 12. Cuidados e riscos
 

@@ -7,6 +7,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from config import (
+    AGENTE_ALLOW_GENERIC_SQL,
     AGENTE_ANSWER_LLM_MODEL,
     AGENTE_ANSWER_LLM_PROVIDER,
     AGENTE_PLANNER_LLM_MODEL,
@@ -73,6 +74,8 @@ class AgentPlanner:
             log_event("route.done", route)
             context = self._build_context(question, route, history)
             context["semantic_intent"] = self._detect_intent_from_catalog(question, context)
+            context["query_spec"] = self._build_query_spec(question, context)
+            context["query_spec_errors"] = self._validate_query_spec(context.get("query_spec"), context)
             log_event(
                 "context.done",
                 {
@@ -80,6 +83,8 @@ class AgentPlanner:
                     "context_bytes": len(json.dumps(context, ensure_ascii=False, default=str)),
                     "metadata_errors": context.get("metadata_errors", []),
                     "semantic_intent": context.get("semantic_intent", {}),
+                    "query_spec": context.get("query_spec"),
+                    "query_spec_errors": context.get("query_spec_errors", []),
                 },
             )
             log_event("route.rag_context", self._route_debug_payload(route, context))
@@ -103,7 +108,21 @@ class AgentPlanner:
                         "context": context,
                     },
                 )
-            sql_plan = self._deterministic_sql_plan(context) or self._create_sql(question, context)
+            sql_plan = self._deterministic_sql_plan(context)
+            if not sql_plan and not AGENTE_ALLOW_GENERIC_SQL:
+                payload = self._knowledge_first_payload(route, context)
+                log_event("sql.generic_sql.disabled", payload)
+                return AgentResult(
+                    answer=self._knowledge_first_answer(route, context),
+                    metadata={
+                        "stage": "knowledge_first",
+                        "route": route,
+                        "context": self._route_debug_payload(route, context),
+                        "knowledge_first": payload,
+                    },
+                )
+            if not sql_plan:
+                sql_plan = self._create_sql(question, context)
             log_event("sql.plan", {"sql": sql_plan.get("sql"), "limit": sql_plan.get("limit"), "plan": sql_plan.get("plan")})
             return self._execute_and_validate(question, context, sql_plan)
         except LLMError as exc:
@@ -304,7 +323,7 @@ class AgentPlanner:
             "candidate_selection_rules": [
                 "Compare semanticamente a pergunta com table e description antes de considerar o score.",
                 "Se uma candidata tiver rag_evidence kind=validated_query aderente a pergunta, escolha essa tabela.",
-                "Evidencias markdown_rule e markdown_sql vieram de documentacao humana; priorize essas evidencias sobre nome de coluna isolado.",
+                "Evidencias markdown_rule vieram de documentacao humana; priorize essas evidencias sobre nome de coluna isolado.",
                 "Se a pergunta pedir soma/valor, escolha a tabela que possui a medida/valor; tabela de historico/classificacao deve entrar apenas como apoio.",
                 "Quando houver evidencia classification/filter_semantics, inclua a tabela principal e a tabela de classificacao necessaria.",
                 "Nao escolha tabela operacional, configuracao, historico ou dominio auxiliar quando houver tabela principal de cadastro/fato.",
@@ -428,15 +447,19 @@ class AgentPlanner:
             docs.extend(
                 self.client.search_rag_docs(
                     question,
-                    limit=12,
+                    limit=24,
                     kinds=[
                         "business_rule",
                         "classification",
                         "filter_semantics",
                         "validated_query",
                         "grouping_rule",
+                        "business_concept",
+                        "relationship_recipe",
+                        "business_filter",
+                        "table_role",
+                        "counting_rule",
                         "markdown_rule",
-                        "markdown_sql",
                         "markdown_reference",
                     ],
                 ).get("results", [])
@@ -493,36 +516,50 @@ class AgentPlanner:
     def _create_sql(self, question: str, context: dict, previous_error: dict | None = None) -> dict:
         system = self._system_prompt()
         sql_context = self._sql_context(context)
-        user = {
-            "task": "Monte apenas uma SQL PostgreSQL read-only para responder a pergunta. Responda JSON compacto.",
-            "question": question,
-            "context": sql_context,
-            "previous_error": previous_error,
-            "sql_compatibility_rules": [
-                "Use somente tabelas e colunas listadas no contexto.",
-                "Use schema.tabela em FROM/JOIN; aliases declarados em FROM/JOIN sao permitidos.",
-                "CTEs declaradas no WITH podem ser referenciadas sem schema.",
-                "Para contar registros, use count(1).",
-                "Para comparacoes temporais com entity_key, compare a mesma entidade entre periodos.",
-                "Quando o contexto trouxer classificacao_por_tipo, use a tabela de classificacao indicada antes de somar ou filtrar valores.",
-                "SQL somente SELECT/WITH e aliases ASCII.",
-            ],
-            "response_schema": {
-                "sql": "SQL SELECT/WITH sem ponto-e-virgula",
-                "limit": DEFAULT_LIMIT
-            },
-        }
-        result = self.planner_llm.json(system, json.dumps(user, ensure_ascii=False))
-        log_event("llm.sql.raw", result)
-        sql = self._extract_sql(result)
-        result["sql"] = sql
-        result["limit"] = self._safe_limit(result.get("limit"))
-        if not sql:
-            raise LLMError(f"IA nao retornou SQL em formato reconhecivel. Resposta: {self._compact_error_payload(result)}")
-        semantic_errors = self._semantic_validate_sql(sql, context)
-        if semantic_errors:
-            raise LLMError("SQL nao passou na validacao semantica do catalogo: " + "; ".join(semantic_errors))
-        return result
+        current_error = previous_error
+        last_errors: list[str] = []
+
+        for generation_attempt in range(1, 4):
+            user = {
+                "task": "Monte apenas uma SQL PostgreSQL read-only para responder a pergunta. Responda JSON compacto.",
+                "question": question,
+                "context": sql_context,
+                "previous_error": current_error,
+                "sql_compatibility_rules": [
+                    "Use somente tabelas e colunas listadas no contexto.",
+                    "Use schema.tabela em FROM/JOIN; aliases declarados em FROM/JOIN sao permitidos.",
+                    "CTEs declaradas no WITH podem ser referenciadas sem schema.",
+                    "Para contar registros, use count(1).",
+                    "Para comparacoes temporais com entity_key, compare a mesma entidade entre periodos.",
+                    "Quando o contexto trouxer classificacao_por_tipo, use a tabela de classificacao indicada antes de somar ou filtrar valores.",
+                    "Quando usar cadastro.iptucalv para IPTU, classifique pelo historico em cadastro.iptucalh se essa tabela estiver no contexto.",
+                    "SQL somente SELECT/WITH e aliases ASCII.",
+                ],
+                "response_schema": {
+                    "sql": "SQL SELECT/WITH sem ponto-e-virgula",
+                    "limit": DEFAULT_LIMIT
+                },
+            }
+            result = self.planner_llm.json(system, json.dumps(user, ensure_ascii=False))
+            log_event("llm.sql.raw", result)
+            sql = self._extract_sql(result)
+            result["sql"] = sql
+            result["limit"] = self._safe_limit(result.get("limit"))
+            if not sql:
+                raise LLMError(f"IA nao retornou SQL em formato reconhecivel. Resposta: {self._compact_error_payload(result)}")
+            semantic_errors = self._semantic_validate_sql(sql, context)
+            if not semantic_errors:
+                return result
+            last_errors = semantic_errors
+            current_error = {
+                "stage": "semantic_validation",
+                "attempt": generation_attempt,
+                "sql": sql,
+                "error": "SQL nao passou na validacao semantica do catalogo: " + "; ".join(semantic_errors),
+            }
+            log_event("llm.sql.semantic_error", current_error)
+
+        raise LLMError("SQL nao passou na validacao semantica do catalogo: " + "; ".join(last_errors))
 
     def _execute_and_validate(self, question: str, context: dict, sql_plan: dict) -> AgentResult:
         attempts = []
@@ -726,6 +763,28 @@ class AgentPlanner:
     def _detect_intent_from_catalog(self, question: str, context: dict) -> dict:
         years = [int(year) for year in re.findall(r"\b(20\d{2})\b", str(question or "").lower())]
         question_text = str(question or "").lower()
+        if len(years) >= 2 and any(
+            term in question_text
+            for term in (
+                "compare",
+                "comparar",
+                "comparacao",
+                "comparação",
+                "aumento",
+                "reducao",
+                "redução",
+                "variacao",
+                "variação",
+                "evolucao",
+                "evolução",
+            )
+        ):
+            return {
+                "intent": "compare_periods",
+                "years": years[:2],
+                "source": "fallback",
+                "comparison_strategy": "same_entity",
+            }
         if any(
             term in question_text
             for term in (
@@ -741,10 +800,263 @@ class AgentPlanner:
             )
         ):
             return {"intent": "count_records", "years": years, "source": "fallback"}
-        return {"intent": "generic_sql", "years": years, "source": "fallback"}
+        return {
+            "intent": "knowledge_review",
+            "years": years,
+            "source": "fallback",
+            "sql_generation": "disabled_until_catalog_rule",
+        }
+
+    def _build_query_spec(self, question: str, context: dict) -> dict | None:
+        selected_tables = list(((context.get("catalog") or {}).get("tables") or {}).keys())
+        if not selected_tables:
+            return None
+
+        user = {
+            "task": (
+                "Leia a pergunta e as regras de negocio. Monte um plano analitico estruturado "
+                "antes de qualquer SQL. Responda somente JSON curto. Nao escreva SQL."
+            ),
+            "question": question,
+            "semantic_intent": context.get("semantic_intent", {}),
+            "selected_tables": self._compact_context_tables(context),
+            "relationships": (context.get("relationships") or {}).get("relationships", [])[:20],
+            "business_rules": self._compact_rag_rules(context)[:10],
+            "metrics_catalog": self._compact_metrics(),
+            "response_schema": {
+                "intent": "compare_periods | count_records | knowledge_review | other",
+                "entity": "entidade principal da analise",
+                "grain": ["chaves do grao logico"],
+                "time_axis": "coluna temporal ou exercicio",
+                "comparison_years": [2025, 2026],
+                "final_metric": {
+                    "name": "nome curto",
+                    "table": "schema.tabela",
+                    "expression": "uma unica coluna existente no catalogo",
+                    "aggregation": "sum | count_distinct | avg | other",
+                },
+                "explanatory_metrics": [
+                    {
+                        "name": "nome curto",
+                        "table": "schema.tabela",
+                        "expression": "uma unica coluna existente no catalogo",
+                        "aggregation": "sum | avg | count_distinct | other",
+                    }
+                ],
+                "required_filters": ["filtros de negocio obrigatorios"],
+                "join_path": ["schema.tabela_a", "schema.tabela_b"],
+                "answer_shape": "como a resposta deve ser explicada",
+                "business_rationale": ["regras principais que justificam o plano"],
+                "open_questions": ["lacunas ou validacoes ainda necessarias"],
+            },
+        }
+        try:
+            spec = self.planner_llm.json(
+                self._routing_system_prompt(),
+                "/no_think\n" + json.dumps(user, ensure_ascii=False),
+                num_predict=320,
+            )
+        except Exception as exc:
+            log_event("query_spec.error", {"error": str(exc)})
+            return None
+
+        if not isinstance(spec, dict):
+            return None
+
+        normalized = {
+            "intent": str(spec.get("intent") or context.get("semantic_intent", {}).get("intent") or "").strip(),
+            "entity": str(spec.get("entity") or "").strip(),
+            "grain": [str(item).strip() for item in (spec.get("grain") or []) if str(item).strip()],
+            "time_axis": str(spec.get("time_axis") or "").strip(),
+            "comparison_years": [int(item) for item in (spec.get("comparison_years") or []) if str(item).isdigit()],
+            "final_metric": spec.get("final_metric") if isinstance(spec.get("final_metric"), dict) else {},
+            "explanatory_metrics": [
+                item for item in (spec.get("explanatory_metrics") or [])
+                if isinstance(item, dict)
+            ][:8],
+            "required_filters": [str(item).strip() for item in (spec.get("required_filters") or []) if str(item).strip()],
+            "join_path": [str(item).strip() for item in (spec.get("join_path") or []) if str(item).strip()],
+            "answer_shape": str(spec.get("answer_shape") or "").strip(),
+            "business_rationale": [str(item).strip() for item in (spec.get("business_rationale") or []) if str(item).strip()][:8],
+            "open_questions": [str(item).strip() for item in (spec.get("open_questions") or []) if str(item).strip()][:6],
+        }
+        normalized = self._repair_query_spec(normalized, context)
+        if not any(normalized.values()):
+            return None
+        log_event("query_spec.done", normalized)
+        return normalized
+
+    def _repair_query_spec(self, spec: dict, context: dict) -> dict:
+        selected_tables = (context.get("catalog") or {}).get("tables") or {}
+        known_columns = {
+            table_name: set((table_info.get("columns") or {}).keys())
+            for table_name, table_info in selected_tables.items()
+            if isinstance(table_info, dict)
+        }
+
+        repaired = dict(spec)
+        final_metric = dict(repaired.get("final_metric") or {})
+        repaired_metrics: list[dict] = []
+        seen_metric_keys: set[tuple[str, str]] = set()
+
+        def split_metric(metric: dict) -> list[dict]:
+            table_name = str(metric.get("table") or "").strip()
+            expression = str(metric.get("expression") or "").strip()
+            name = str(metric.get("name") or expression or "metrica").strip()
+            aggregation = str(metric.get("aggregation") or "sum").strip() or "sum"
+            if not table_name or not expression:
+                return []
+
+            if expression in known_columns.get(table_name, set()):
+                return [{
+                    "name": name,
+                    "table": table_name,
+                    "expression": expression,
+                    "aggregation": aggregation,
+                }]
+
+            atoms = re.findall(r"\bj\d+_[a-z0-9_]+\b", expression.lower())
+            valid_atoms = [atom for atom in atoms if atom in {column.lower() for column in known_columns.get(table_name, set())}]
+            if not valid_atoms:
+                return []
+
+            rebuilt = []
+            for atom in valid_atoms:
+                original = next((column for column in known_columns.get(table_name, set()) if column.lower() == atom), atom)
+                rebuilt.append(
+                    {
+                        "name": self._query_spec_metric_label(original),
+                        "table": table_name,
+                        "expression": original,
+                        "aggregation": aggregation,
+                    }
+                )
+            return rebuilt
+
+        final_candidates = split_metric(final_metric)
+        if final_candidates:
+            repaired["final_metric"] = final_candidates[0]
+
+        for metric in repaired.get("explanatory_metrics") or []:
+            for candidate in split_metric(metric):
+                key = (candidate.get("table") or "", candidate.get("expression") or "")
+                if key in seen_metric_keys:
+                    continue
+                seen_metric_keys.add(key)
+                repaired_metrics.append(candidate)
+
+        if not repaired_metrics and repaired.get("intent") == "compare_periods":
+            repaired_metrics = self._default_compare_periods_metrics(context)
+
+        repaired["explanatory_metrics"] = repaired_metrics[:8]
+
+        final_table = str((repaired.get("final_metric") or {}).get("table") or "").strip()
+        if repaired.get("intent") == "compare_periods" and final_table == "cadastro.iptucalv":
+            filters = list(repaired.get("required_filters") or [])
+            if not any("position('iptu'" in item.lower() for item in filters):
+                filters.append("position('iptu' in lower(cadastro.iptucalh.j17_descr)) > 0")
+            repaired["required_filters"] = filters
+
+            join_path = list(repaired.get("join_path") or [])
+            for table_name in ("cadastro.iptucalv", "cadastro.iptucalh", "cadastro.iptucalc"):
+                if table_name not in join_path:
+                    join_path.append(table_name)
+            repaired["join_path"] = join_path
+
+        return repaired
+
+    def _query_spec_metric_label(self, column_name: str) -> str:
+        mapping = {
+            "j23_vlrter": "valor_venal_territorial",
+            "j23_m2terr": "valor_m2_terreno",
+            "j23_areaed": "area_total_edificada",
+            "j23_arealo": "area_gerada_calculo",
+            "j23_areafr": "area_fracionada_calculo",
+            "j23_aliq": "aliquota",
+            "j23_vlrisen": "valor_isencao",
+            "j21_valor": "valor_iptu",
+        }
+        return mapping.get(str(column_name or "").lower(), str(column_name or "").lower())
+
+    def _default_compare_periods_metrics(self, context: dict) -> list[dict]:
+        preferred = [
+            ("cadastro.iptucalc", "j23_vlrter", "sum"),
+            ("cadastro.iptucalc", "j23_m2terr", "avg"),
+            ("cadastro.iptucalc", "j23_areaed", "sum"),
+            ("cadastro.iptucalc", "j23_arealo", "sum"),
+            ("cadastro.iptucalc", "j23_areafr", "sum"),
+            ("cadastro.iptucalc", "j23_aliq", "avg"),
+            ("cadastro.iptucalc", "j23_vlrisen", "sum"),
+        ]
+        tables = (context.get("catalog") or {}).get("tables") or {}
+        metrics = []
+        for table_name, column_name, aggregation in preferred:
+            columns = (tables.get(table_name) or {}).get("columns") or {}
+            if column_name not in columns:
+                continue
+            metrics.append(
+                {
+                    "name": self._query_spec_metric_label(column_name),
+                    "table": table_name,
+                    "expression": column_name,
+                    "aggregation": aggregation,
+                }
+            )
+        return metrics[:6]
+
+    def _validate_query_spec(self, spec: dict | None, context: dict) -> list[str]:
+        if not isinstance(spec, dict) or not spec:
+            return ["query_spec ausente"]
+
+        errors: list[str] = []
+        selected_tables = set(((context.get("catalog") or {}).get("tables") or {}).keys())
+        known_tables = set(selected_tables)
+        known_columns = {
+            table_name: set((table_info.get("columns") or {}).keys())
+            for table_name, table_info in ((context.get("catalog") or {}).get("tables") or {}).items()
+            if isinstance(table_info, dict)
+        }
+
+        intent = str(spec.get("intent") or "")
+        if not intent:
+            errors.append("intent ausente")
+
+        final_metric = spec.get("final_metric") or {}
+        if not isinstance(final_metric, dict) or not final_metric.get("table") or not final_metric.get("expression"):
+            errors.append("final_metric incompleta")
+        else:
+            table_name = str(final_metric.get("table") or "").strip()
+            expression = str(final_metric.get("expression") or "").strip()
+            if table_name not in known_tables:
+                errors.append(f"final_metric.table fora do contexto: {table_name}")
+            elif expression and expression not in known_columns.get(table_name, set()):
+                errors.append(f"final_metric.expression fora do catalogo da tabela {table_name}: {expression}")
+
+        for metric in spec.get("explanatory_metrics") or []:
+            table_name = str(metric.get("table") or "").strip()
+            expression = str(metric.get("expression") or "").strip()
+            if not table_name or not expression:
+                errors.append("explanatory_metric incompleta")
+                continue
+            if table_name not in known_tables:
+                errors.append(f"explanatory_metric.table fora do contexto: {table_name}")
+                continue
+            if expression not in known_columns.get(table_name, set()):
+                errors.append(f"explanatory_metric.expression fora do catalogo da tabela {table_name}: {expression}")
+
+        join_path = spec.get("join_path") or []
+        if join_path:
+            for table_name in join_path:
+                if table_name not in known_tables:
+                    errors.append(f"join_path fora do contexto: {table_name}")
+
+        if intent == "compare_periods" and len(spec.get("comparison_years") or []) < 2:
+            errors.append("compare_periods exige ao menos dois anos")
+
+        return errors
 
     def _template_sql_plan(self, context: dict) -> dict | None:
-        return None
+        return self._compare_periods_query_spec_plan(context)
 
     def _deterministic_sql_plan(self, context: dict) -> dict | None:
         plan = (
@@ -761,6 +1073,198 @@ class AgentPlanner:
                 },
             )
         return plan
+
+    def _compare_periods_query_spec_plan(self, context: dict) -> dict | None:
+        intent = context.get("semantic_intent", {}) or {}
+        spec = context.get("query_spec") or {}
+        if intent.get("intent") != "compare_periods":
+            return None
+        if not isinstance(spec, dict):
+            return None
+        if context.get("query_spec_errors"):
+            return None
+
+        final_metric = spec.get("final_metric") or {}
+        final_table = str(final_metric.get("table") or "").strip()
+        final_expression = str(final_metric.get("expression") or "").strip()
+        final_aggregation = str(final_metric.get("aggregation") or "").strip().lower()
+        years = spec.get("comparison_years") or intent.get("years") or []
+        if len(years) < 2:
+            return None
+        year_a, year_b = int(years[0]), int(years[1])
+        explanatory_metrics = spec.get("explanatory_metrics") or []
+
+        if final_table != "cadastro.iptucalv":
+            return None
+        if final_expression != "j21_valor" or final_aggregation != "sum":
+            return None
+
+        selected_tables = (context.get("catalog") or {}).get("tables") or {}
+        if "cadastro.iptucalh" not in selected_tables or "cadastro.iptucalc" not in selected_tables:
+            return None
+
+        metric_definitions = []
+        for metric in explanatory_metrics:
+            table_name = str(metric.get("table") or "").strip()
+            expression = str(metric.get("expression") or "").strip()
+            aggregation = str(metric.get("aggregation") or "").strip().lower()
+            if table_name != "cadastro.iptucalc":
+                return None
+            if expression not in (selected_tables.get("cadastro.iptucalc", {}).get("columns") or {}):
+                return None
+            if aggregation not in {"sum", "avg", "count_distinct"}:
+                return None
+            alias = self._safe_alias(metric.get("name") or expression)
+            metric_definitions.append(
+                {
+                    "table": table_name,
+                    "expression": expression,
+                    "aggregation": aggregation,
+                    "alias": alias,
+                }
+            )
+
+        if not metric_definitions:
+            return None
+
+        values_cte = self._compile_cte_from_descriptor(
+            {
+                "name": "valores_iptu",
+                "base_table": "cadastro.iptucalv",
+                "alias": "v",
+                "time_column": "j21_anousu",
+                "time_alias": "exercicio",
+                "metrics": [
+                    {
+                        "expression": "j21_valor",
+                        "aggregation": "sum",
+                        "alias": "valor_iptu",
+                    }
+                ],
+                "joins": [
+                    {
+                        "type": "join",
+                        "table": "cadastro.iptucalh",
+                        "alias": "h",
+                        "on": ["h.j17_codhis = v.j21_codhis"],
+                    }
+                ],
+                "filters": [
+                    f"v.j21_anousu in ({year_a}, {year_b})",
+                    "position('iptu' in lower(h.j17_descr)) > 0",
+                ],
+                "group_by": ["v.j21_anousu"],
+            }
+        )
+        factors_cte = self._compile_cte_from_descriptor(
+            {
+                "name": "fatores_calculo",
+                "base_table": "cadastro.iptucalc",
+                "alias": "c",
+                "time_column": "j23_anousu",
+                "time_alias": "exercicio",
+                "metrics": metric_definitions,
+                "filters": [
+                    f"c.j23_anousu in ({year_a}, {year_b})",
+                ],
+                "group_by": ["c.j23_anousu"],
+            }
+        )
+        sql = self._compile_select_from_ctes(
+            ctes=[values_cte, factors_cte],
+            select_parts=[
+                "f.exercicio",
+                "coalesce(v.valor_iptu, 0) as valor_iptu",
+                *[f"f.{item['alias']}" for item in metric_definitions],
+            ],
+            from_clause="fatores_calculo f",
+            joins=[
+                {
+                    "type": "left join",
+                    "table": "valores_iptu",
+                    "alias": "v",
+                    "on": ["v.exercicio = f.exercicio"],
+                }
+            ],
+            order_by=["f.exercicio"],
+        )
+        return {
+            "sql": sql,
+            "limit": 10,
+            "template": "compare_periods_query_spec",
+        }
+
+    def _sql_aggregation(self, aggregation: str, alias: str, expression: str) -> str:
+        if aggregation == "avg":
+            return f"avg({alias}.{expression})"
+        if aggregation == "count_distinct":
+            return f"count(distinct {alias}.{expression})"
+        return f"sum({alias}.{expression})"
+
+    def _compile_cte_from_descriptor(self, descriptor: dict) -> str:
+        name = str(descriptor.get("name") or "").strip()
+        base_table = str(descriptor.get("base_table") or "").strip()
+        alias = str(descriptor.get("alias") or "").strip()
+        time_column = str(descriptor.get("time_column") or "").strip()
+        time_alias = str(descriptor.get("time_alias") or "exercicio").strip()
+        metrics = descriptor.get("metrics") or []
+        filters = descriptor.get("filters") or []
+        joins = descriptor.get("joins") or []
+        group_by = descriptor.get("group_by") or []
+
+        select_parts = [f"{alias}.{time_column} as {time_alias}"]
+        for metric in metrics:
+            select_parts.append(
+                f"{self._sql_aggregation(str(metric.get('aggregation') or 'sum'), alias, str(metric.get('expression') or ''))} as {metric.get('alias')}"
+            )
+
+        lines = [
+            f"{name} as (",
+            "  select",
+            "    " + ",\n    ".join(select_parts),
+            f"  from {base_table} {alias}",
+        ]
+        for join in joins:
+            lines.append(self._compile_join_clause(join, indent="  "))
+        if filters:
+            lines.append("  where " + "\n    and ".join(filters))
+        if group_by:
+            lines.append("  group by " + ", ".join(group_by))
+        lines.append(")")
+        return "\n".join(lines)
+
+    def _compile_select_from_ctes(
+        self,
+        *,
+        ctes: list[str],
+        select_parts: list[str],
+        from_clause: str,
+        joins: list[dict] | None = None,
+        order_by: list[str] | None = None,
+    ) -> str:
+        lines = [
+            "with " + ",\n".join(ctes),
+            "select",
+            "  " + ",\n  ".join(select_parts),
+            f"from {from_clause}",
+        ]
+        for join in joins or []:
+            lines.append(self._compile_join_clause(join))
+        if order_by:
+            lines.append("order by " + ", ".join(order_by))
+        return "\n".join(lines)
+
+    def _compile_join_clause(self, join: dict, indent: str = "") -> str:
+        join_type = str(join.get("type") or "join").strip()
+        table = str(join.get("table") or "").strip()
+        alias = str(join.get("alias") or "").strip()
+        on_clauses = join.get("on") or []
+        rendered = f"{indent}{join_type} {table}"
+        if alias:
+            rendered += f" {alias}"
+        if on_clauses:
+            rendered += "\n" + indent + "  on " + "\n" + indent + "  and ".join(on_clauses)
+        return rendered
 
     def _template_debug_info(self, context: dict) -> dict:
         intent = context.get("semantic_intent", {})
@@ -1170,6 +1674,10 @@ class AgentPlanner:
                 "taxa",
                 "valor",
                 "soma",
+                "iptu",
+                "compar",
+                "aumento",
+                "fator",
             )
         )
 
@@ -1598,6 +2106,7 @@ Score e rag_evidence sao auxiliares, nao decisao final.
 
     def _compact_rag_rules(self, context: dict) -> list[dict]:
         selected_tables = set((context.get("catalog") or {}).get("tables", {}).keys())
+        rich_kinds = self._rich_rag_kinds()
         compact = []
         seen = set()
         for doc in context.get("docs", []) or []:
@@ -1606,7 +2115,11 @@ Score e rag_evidence sao auxiliares, nao decisao final.
             metadata = doc.get("metadata") or {}
             table = metadata.get("table")
             kind = doc.get("kind")
-            if selected_tables and table and table not in selected_tables:
+            text = str(doc.get("text") or "")
+            mentions_selected_table = any(table_name in text for table_name in selected_tables)
+            if selected_tables and table and table not in selected_tables and not (
+                kind in rich_kinds and mentions_selected_table
+            ):
                 continue
             if kind not in {
                 "business_rule",
@@ -1614,8 +2127,12 @@ Score e rag_evidence sao auxiliares, nao decisao final.
                 "filter_semantics",
                 "validated_query",
                 "grouping_rule",
+                "business_concept",
+                "relationship_recipe",
+                "business_filter",
+                "table_role",
+                "counting_rule",
                 "markdown_rule",
-                "markdown_sql",
                 "markdown_reference",
             }:
                 continue
@@ -1636,9 +2153,13 @@ Score e rag_evidence sao auxiliares, nao decisao final.
                     },
                 }
             )
-            if len(compact) >= 12:
-                break
-        return compact
+        compact.sort(
+            key=lambda item: (
+                0 if item.get("kind") in rich_kinds else 1,
+                -(float(item.get("score") or 0)),
+            )
+        )
+        return compact[:12]
 
     def _compact_metrics(self) -> dict:
         compact = {}
@@ -1795,6 +2316,236 @@ Score e rag_evidence sao auxiliares, nao decisao final.
             ]
         )
         return "\n".join(lines)
+
+    def _knowledge_first_payload(self, route: dict, context: dict) -> dict:
+        return {
+            "reason": "no_deterministic_or_validated_plan",
+            "generic_sql_enabled": bool(AGENTE_ALLOW_GENERIC_SQL),
+            "semantic_intent": context.get("semantic_intent", {}),
+            "selected_tables": route.get("tables", []),
+            "expanded_tables": context.get("expanded_tables", []),
+            "business_rules": self._knowledge_first_evidence(route, context)[:8],
+            "query_spec": context.get("query_spec"),
+            "query_spec_errors": context.get("query_spec_errors", []),
+            "template_debug": self._template_debug_info(context),
+            "next_steps": self._knowledge_first_next_steps(context),
+        }
+
+    def _knowledge_first_answer(self, route: dict, context: dict) -> str:
+        intent = context.get("semantic_intent", {})
+        selected_tables = route.get("tables", []) or []
+        expanded_tables = context.get("expanded_tables", []) or list(
+            ((context.get("catalog") or {}).get("tables") or {}).keys()
+        )
+        rules = self._knowledge_first_evidence(route, context)[:5]
+        next_steps = self._knowledge_first_next_steps(context)
+        query_spec = context.get("query_spec") or {}
+        query_spec_errors = context.get("query_spec_errors") or []
+
+        lines = [
+            "Modo conhecimento primeiro: nao executei SQL.",
+            (
+                "O agente montou a rota e o contexto, mas ainda nao existe plano "
+                "deterministico ou consulta validada para responder sem `generic_sql`."
+            ),
+            "",
+            f"Intent detectada: {intent.get('intent')}",
+            f"Anos detectados: {intent.get('years', [])}",
+            f"Tabelas selecionadas: {', '.join(selected_tables) or 'nenhuma'}",
+            f"Tabelas no contexto: {', '.join(expanded_tables) or 'nenhuma'}",
+            "",
+            "Plano analitico inferido:",
+        ]
+
+        if query_spec:
+            final_metric = query_spec.get("final_metric") or {}
+            lines.extend(
+                [
+                    f"- Entidade principal: {query_spec.get('entity') or 'nao inferida'}",
+                    f"- Grao: {', '.join(query_spec.get('grain') or []) or 'nao inferido'}",
+                    f"- Eixo temporal: {query_spec.get('time_axis') or 'nao inferido'}",
+                    (
+                        f"- Medida final: {final_metric.get('name') or '-'} | "
+                        f"tabela={final_metric.get('table') or '-'} | "
+                        f"expressao={final_metric.get('expression') or '-'} | "
+                        f"agregacao={final_metric.get('aggregation') or '-'}"
+                    ),
+                ]
+            )
+            explanatory = query_spec.get("explanatory_metrics") or []
+            if explanatory:
+                lines.append("- Fatores explicativos:")
+                for metric in explanatory[:6]:
+                    lines.append(
+                        f"  - {metric.get('name') or '-'} | tabela={metric.get('table') or '-'} | "
+                        f"expressao={metric.get('expression') or '-'} | agregacao={metric.get('aggregation') or '-'}"
+                    )
+            if query_spec.get("required_filters"):
+                lines.append(f"- Filtros obrigatorios: {', '.join(query_spec.get('required_filters') or [])}")
+            if query_spec.get("join_path"):
+                lines.append(f"- Caminho de relacionamento: {' -> '.join(query_spec.get('join_path') or [])}")
+            if query_spec.get("answer_shape"):
+                lines.append(f"- Forma esperada da resposta: {query_spec.get('answer_shape')}")
+            if query_spec_errors and query_spec_errors != ["query_spec ausente"]:
+                lines.append(f"- Pendencias de validacao do plano: {', '.join(query_spec_errors)}")
+        else:
+            lines.append("- O agente ainda nao conseguiu estruturar um plano analitico coerente.")
+
+        lines.extend([
+            "",
+            "Evidencias de negocio mais relevantes:",
+        ])
+
+        if rules:
+            for rule in rules:
+                metadata = rule.get("metadata") or {}
+                source = metadata.get("section") or metadata.get("source_file") or rule.get("table") or "-"
+                text = re.sub(r"\s+", " ", str(rule.get("text") or "")).strip()
+                if len(text) > 260:
+                    text = text[:257].rstrip() + "..."
+                lines.append(f"- {rule.get('kind')} | {source}: {text}")
+        else:
+            lines.append("- Nenhuma evidencia de negocio especifica foi encontrada no RAG.")
+
+        lines.extend(["", "O que falta enriquecer antes de executar:"])
+        for step in next_steps:
+            lines.append(f"- {step}")
+        return "\n".join(lines)
+
+    def _knowledge_first_evidence(self, route: dict, context: dict) -> list[dict]:
+        selected_tables = set(route.get("tables", []) or [])
+        rich_kinds = self._rich_rag_kinds()
+        question_terms = self._knowledge_terms(context.get("question"))
+        evidence = []
+        seen = set()
+
+        def add_item(kind: str, table: str | None, score: Any, text: str, metadata: dict | None = None):
+            text = re.sub(r"\s+", " ", str(text or "")).strip()
+            if not text:
+                return
+            key = (kind, table, text[:180])
+            if key in seen:
+                return
+            seen.add(key)
+            evidence.append(
+                {
+                    "kind": kind,
+                    "table": table,
+                    "score": score,
+                    "text": text[:900],
+                    "metadata": metadata or {},
+                }
+            )
+
+        for item in self._compact_rag_rules(context):
+            add_item(
+                str(item.get("kind") or ""),
+                item.get("table"),
+                item.get("score"),
+                str(item.get("text") or ""),
+                item.get("metadata") or {},
+            )
+
+        for candidate in route.get("candidate_tables", []) or []:
+            candidate_table = candidate.get("table")
+            for raw in candidate.get("rag_evidence", []) or []:
+                if not isinstance(raw, dict):
+                    continue
+                kind = str(raw.get("kind") or "")
+                text = str(raw.get("text") or "")
+                mentions_selected = any(table_name in text for table_name in selected_tables)
+                if candidate_table not in selected_tables and kind in rich_kinds and not mentions_selected:
+                    continue
+                if candidate_table not in selected_tables and kind not in rich_kinds:
+                    continue
+                metadata = {
+                    name: raw.get(name)
+                    for name in ("column", "metric")
+                    if raw.get(name) not in (None, "", [], {})
+                }
+                section = self._extract_evidence_section(text)
+                if section:
+                    metadata["section"] = section
+                add_item(
+                    kind,
+                    candidate_table,
+                    raw.get("score"),
+                    text,
+                    metadata,
+                )
+
+        evidence.sort(
+            key=lambda item: (
+                0 if item.get("kind") in rich_kinds else 1,
+                -self._knowledge_evidence_match_score(item, question_terms),
+                -(float(item.get("score") or 0)),
+            )
+        )
+        return evidence
+
+    def _knowledge_terms(self, question: Any) -> set[str]:
+        terms = set()
+        for term in re.findall(r"[a-z0-9_]+", str(question or "").lower()):
+            if term.isdigit() or len(term) < 4:
+                continue
+            terms.add(term)
+            terms.add(self._singular(term))
+        return terms
+
+    def _knowledge_evidence_match_score(self, item: dict, question_terms: set[str]) -> int:
+        text = str(item.get("text") or "").lower()
+        metadata = item.get("metadata") or {}
+        section = str(metadata.get("section") or "").lower()
+        score = 0
+        for term in question_terms:
+            if not term:
+                continue
+            if term in section:
+                score += 4
+            elif term in text:
+                score += 1
+        return score
+
+    def _extract_evidence_section(self, text: str) -> str:
+        match = re.search(r"\bSecao:\s*(.*?)\s+-\s+", str(text or ""))
+        return match.group(1).strip() if match else ""
+
+    def _knowledge_first_next_steps(self, context: dict) -> list[str]:
+        intent = context.get("semantic_intent", {}) or {}
+        intent_name = intent.get("intent")
+        query_spec_errors = context.get("query_spec_errors") or []
+        if query_spec_errors and query_spec_errors != ["query_spec ausente"]:
+            return [
+                "corrigir o planner para usar apenas colunas atomicas existentes no catalogo;",
+                "normalizar o query_spec antes da compilacao para separar metricas compostas em metricas validas;",
+                "compilar SQL deterministico a partir do query_spec validado;",
+            ]
+        steps = [
+            "registrar ou revisar o conceito de negocio que define a pergunta;",
+            "registrar a receita de relacionamento entre as entidades envolvidas;",
+            "validar se o query_spec ficou coerente com entidade, grao, medida final e fatores explicativos;",
+            "criar compilador SQL deterministico apenas depois da regra estar clara;",
+        ]
+        if intent_name == "compare_periods":
+            steps.insert(
+                0,
+                "definir a medida final da comparacao, o grao da entidade e os fatores que explicam variacao entre exercicios;",
+            )
+        elif intent_name == "knowledge_review":
+            steps.insert(
+                0,
+                "classificar a pergunta em conceito, entidade principal, medida esperada e dimensoes/filtros;",
+            )
+        return steps
+
+    def _rich_rag_kinds(self) -> set[str]:
+        return {
+            "business_concept",
+            "relationship_recipe",
+            "business_filter",
+            "table_role",
+            "counting_rule",
+        }
 
     def _route_candidates_for_llm(self, candidates: list[dict]) -> list[dict]:
         return [

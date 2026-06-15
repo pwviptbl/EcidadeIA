@@ -41,9 +41,6 @@ Ela se conecta à construção cadastrada em `iptuconstr`, à matrícula em `ipt
 
 ### Chave primária lógica
 
-```sql
-(j22_anousu, j22_matric, j22_idcons)
-```
 
 ### Chaves de negócio candidatas
 
@@ -78,115 +75,24 @@ A classe não usa sequence. Os três campos da chave são recebidos como parâme
 
 ### 4. Consulta simples por chave
 
-```sql
-SELECT *
-FROM iptucale
-WHERE j22_anousu = :anousu
-  AND j22_matric = :matric
-  AND j22_idcons = :idcons;
-```
 
 ### 5. Consulta com relacionamento da construção
 
-```sql
-SELECT *
-FROM iptucale
-INNER JOIN iptuconstr
-        ON iptuconstr.j39_matric = iptucale.j22_matric
-       AND iptuconstr.j39_idcons = iptucale.j22_idcons
-INNER JOIN ruas
-        ON ruas.j14_codigo = iptuconstr.j39_codigo
-INNER JOIN iptubase
-        ON iptubase.j01_matric = iptuconstr.j39_matric
-WHERE iptucale.j22_anousu = :anousu
-  AND iptucale.j22_matric = :matric
-  AND iptucale.j22_idcons = :idcons;
-```
 
 ### 6. Consulta de valor venal por construção em um exercício
 
-```sql
-SELECT
-    j22_anousu,
-    j22_matric,
-    j22_idcons,
-    j22_areaed,
-    j22_vm2,
-    j22_pontos,
-    j22_valor
-FROM iptucale
-WHERE j22_anousu = :anousu
-  AND j22_matric = :matric
-ORDER BY j22_idcons;
-```
 
 ### 7. Total de valor venal das construções por matrícula
 
-```sql
-SELECT
-    j22_anousu,
-    j22_matric,
-    SUM(j22_areaed) AS area_construida_total,
-    SUM(j22_valor)  AS valor_venal_construcoes
-FROM iptucale
-WHERE j22_anousu = :anousu
-GROUP BY
-    j22_anousu,
-    j22_matric;
-```
 
 ### 8. Comparação de valor venal de construções entre exercícios
 
-```sql
-SELECT
-    atual.j22_matric,
-    atual.j22_idcons,
-    anterior.j22_valor AS valor_anterior,
-    atual.j22_valor    AS valor_atual,
-    atual.j22_valor - anterior.j22_valor AS diferenca_valor,
-    CASE
-        WHEN anterior.j22_valor = 0 THEN NULL
-        ELSE ROUND(((atual.j22_valor - anterior.j22_valor) / anterior.j22_valor)::numeric * 100, 2)
-    END AS variacao_percentual
-FROM iptucale atual
-LEFT JOIN iptucale anterior
-       ON anterior.j22_matric = atual.j22_matric
-      AND anterior.j22_idcons = atual.j22_idcons
-      AND anterior.j22_anousu = :ano_anterior
-WHERE atual.j22_anousu = :ano_atual;
-```
 
 ### 9. Imóveis com maior valor venal de construção
 
-```sql
-SELECT
-    j22_anousu,
-    j22_matric,
-    SUM(j22_valor) AS valor_venal_construcoes
-FROM iptucale
-WHERE j22_anousu = :anousu
-GROUP BY
-    j22_anousu,
-    j22_matric
-ORDER BY valor_venal_construcoes DESC
-LIMIT :limite;
-```
 
 ### 10. Construções com maior valor de m²
 
-```sql
-SELECT
-    j22_anousu,
-    j22_matric,
-    j22_idcons,
-    j22_areaed,
-    j22_vm2,
-    j22_valor
-FROM iptucale
-WHERE j22_anousu = :anousu
-ORDER BY j22_vm2 DESC
-LIMIT :limite;
-```
 
 ## Auditoria
 
@@ -228,32 +134,14 @@ A classe registra operações em tabelas de auditoria do e-Cidade:
 
 ### Filtros padrão
 
-```sql
-j22_anousu = :anousu
-```
 
-```sql
-j22_matric = :matric
-```
 
-```sql
-j22_idcons = :idcons
-```
 
 ### Filtro por exercício e matrícula
 
-```sql
-j22_anousu = :anousu
-AND j22_matric = :matric
-```
 
 ### Filtro por construção específica
 
-```sql
-j22_anousu = :anousu
-AND j22_matric = :matric
-AND j22_idcons = :idcons
-```
 
 ## Regras de negócio inferidas
 
@@ -293,37 +181,6 @@ A tabela `iptucale` é útil para decompor o impacto do recadastramento sobre as
 
 ### Consulta base para impacto entre exercícios
 
-```sql
-WITH anterior AS (
-    SELECT
-        j22_matric,
-        SUM(j22_areaed) AS area_construida_anterior,
-        SUM(j22_valor)  AS valor_edificado_anterior
-    FROM iptucale
-    WHERE j22_anousu = :ano_anterior
-    GROUP BY j22_matric
-),
-atual AS (
-    SELECT
-        j22_matric,
-        SUM(j22_areaed) AS area_construida_atual,
-        SUM(j22_valor)  AS valor_edificado_atual
-    FROM iptucale
-    WHERE j22_anousu = :ano_atual
-    GROUP BY j22_matric
-)
-SELECT
-    COALESCE(atual.j22_matric, anterior.j22_matric) AS matricula,
-    anterior.area_construida_anterior,
-    atual.area_construida_atual,
-    atual.area_construida_atual - anterior.area_construida_anterior AS diferenca_area,
-    anterior.valor_edificado_anterior,
-    atual.valor_edificado_atual,
-    atual.valor_edificado_atual - anterior.valor_edificado_anterior AS diferenca_valor
-FROM atual
-FULL JOIN anterior
-       ON anterior.j22_matric = atual.j22_matric;
-```
 
 ## Convenção de prefixos
 
