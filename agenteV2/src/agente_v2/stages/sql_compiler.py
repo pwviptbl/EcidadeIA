@@ -265,8 +265,12 @@ def _compile_filters(filters: list[Any], aliases: dict[str, str]) -> list[str]:
             if rule_code == "common_entities_across_periods" and table and column:
                 where_parts.append(_compile_rule_common_entities(expr, aliases, rule_params))
                 continue
-            if rule_code in {"matricula_ativa", "is_null", "null"} and table and column:
+            if rule_code in {"matricula_ativa", "active_enrollments", "is_null", "null"} and table and column:
                 where_parts.append(f"{expr} IS NULL")
+                continue
+            if rule_code == "iptu_classification" and table and column:
+                keyword = str(rule_params.get("keyword") or rule_params.get("value") or "iptu").strip()
+                where_parts.append(f"position(lower({_sql_literal(keyword)}) in lower({expr})) > 0")
                 continue
             if not table or not column:
                 continue
@@ -278,7 +282,7 @@ def _compile_filters(filters: list[Any], aliases: dict[str, str]) -> list[str]:
                 where_parts.append(f"position(lower({_sql_literal(str(value))}) in lower({expr})) > 0")
             else:
                 where_parts.append(f"{expr} {operator} {_sql_literal(value)}")
-        elif operator in {"=", "EQ"}:
+        elif operator in {"=", "EQ", "EQUAL"}:
             where_parts.append(f"{expr} = {_sql_literal(value)}")
     return where_parts
 

@@ -12,6 +12,7 @@ sys.path.insert(0, str(SRC))
 from agente_v2.stages.business_resolver import BusinessResolver
 from agente_v2.stages.answer_synthesizer import AnswerSynthesizer
 from agente_v2.stages.executor import Executor
+from agente_v2.stages.intent_extractor import IntentExtractor
 from agente_v2.stages.schema_planner import SchemaPlanner
 from agente_v2.contracts.models import SqlArtifact
 from agente_v2.stages.sql_compiler import SqlCompiler
@@ -22,6 +23,18 @@ FIXTURES = ROOT / "tests" / "fixtures"
 
 
 class ContractNormalizationTest(unittest.TestCase):
+    def test_intent_fallback_detects_count_without_por(self) -> None:
+        extractor = IntentExtractor(None)  # type: ignore[arg-type]
+        spec = extractor._fallback("Quantas matrículas imobiliárias ativas existem atualmente no município?")
+        self.assertEqual(spec.intent, "count_by_dimension")
+
+    def test_intent_fallback_detects_ranking_with_typo(self) -> None:
+        extractor = IntentExtractor(None)  # type: ignore[arg-type]
+        spec = extractor._fallback("Qual Bairro teve o meior IPTU em 2025?")
+        self.assertEqual(spec.intent, "ranking")
+        self.assertEqual(spec.ranking_direction, "DESC")
+        self.assertEqual(spec.ranking_limit, 1)
+
     def test_business_resolver_normalizes_filters_without_sql_condition(self) -> None:
         resolver = BusinessResolver(None)  # type: ignore[arg-type]
         raw = {
@@ -355,6 +368,60 @@ class RegressionFixturesTest(unittest.TestCase):
         critic = SqlCritic().run(artifact, business, schema_plan)
         self.assertIn("COUNT(DISTINCT t1.j01_matric)", artifact.sql)
         self.assertIn("t1.j01_baixa IS NULL", artifact.sql)
+        self.assertTrue(critic.ok)
+
+    def test_compile_and_critic_ranking_uses_iptu_classification_rule(self) -> None:
+        intent = {"intent": "ranking", "ranking_direction": "DESC", "ranking_limit": 1}
+        business = {
+            "metrics": [
+                {
+                    "metric_name": "IPTU",
+                    "table": "cadastro.iptucalv",
+                    "column": "j21_valor",
+                    "aggregation": "SUM",
+                }
+            ],
+            "filters": [
+                {"table": "cadastro.iptucalv", "column": "j21_anousu", "operator": "EQUAL", "value": 2025},
+                {
+                    "table": "cadastro.iptucalh",
+                    "column": "j17_descr",
+                    "rule_code": "iptu_classification",
+                    "rule_params": {"column": "cadastro.iptucalh.j17_descr", "keyword": "iptu"},
+                    "description": "Classificar o valor calculado como IPTU.",
+                },
+            ],
+        }
+        schema_plan = {
+            "entity": "Bairro",
+            "grain": ["cadastro.bairro.j13_codi", "cadastro.bairro.j13_descr"],
+            "time_axis": {"table": "cadastro.iptucalv", "column": "j21_anousu"},
+            "tables": ["cadastro.bairro", "cadastro.lote", "cadastro.iptubase", "cadastro.iptucalv", "cadastro.iptucalh"],
+            "joins": [
+                {"source_table": "cadastro.bairro", "source_columns": ["j13_codi"], "target_table": "cadastro.lote", "target_columns": ["j34_bairro"], "join_type": "JOIN"},
+                {"source_table": "cadastro.lote", "source_columns": ["j34_idbql"], "target_table": "cadastro.iptubase", "target_columns": ["j01_idbql"], "join_type": "JOIN"},
+                {"source_table": "cadastro.iptubase", "source_columns": ["j01_matric"], "target_table": "cadastro.iptucalv", "target_columns": ["j21_matric"], "join_type": "JOIN"},
+                {"source_table": "cadastro.iptucalv", "source_columns": ["j21_codhis"], "target_table": "cadastro.iptucalh", "target_columns": ["j17_codhis"], "join_type": "JOIN"},
+            ],
+            "group_by": [{"table": "cadastro.bairro", "column": "j13_codi"}, {"table": "cadastro.bairro", "column": "j13_descr"}],
+            "metrics": [{"metric_name": "IPTU", "table": "cadastro.iptucalv", "column": "j21_valor", "aggregation": "SUM"}],
+            "filters": [
+                {"table": "cadastro.iptucalv", "column": "j21_anousu", "operator": "EQUAL", "value": 2025},
+                {
+                    "table": "cadastro.iptucalh",
+                    "column": "j17_descr",
+                    "rule_code": "iptu_classification",
+                    "rule_params": {"column": "cadastro.iptucalh.j17_descr", "keyword": "iptu"},
+                    "description": "Classificar o valor calculado como IPTU.",
+                },
+            ],
+            "risks": [],
+            "open_questions": [],
+        }
+        artifact = SqlCompiler().run(intent, business, schema_plan, question="Qual Bairro teve o maior IPTU em 2025?")
+        critic = SqlCritic().run(artifact, business, schema_plan)
+        self.assertIn("position(lower('iptu') in lower(t5.j17_descr)) > 0", artifact.sql.lower())
+        self.assertIn("t4.j21_anousu = 2025", artifact.sql)
         self.assertTrue(critic.ok)
 
     def test_executor_uses_readonly_query(self) -> None:

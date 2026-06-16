@@ -58,6 +58,13 @@ def normalize_filter(item: Any) -> dict[str, Any]:
 
     table = str(item.get("table") or item.get("base_table") or item.get("source_table") or "").strip()
     column = str(item.get("column") or item.get("base_column") or item.get("source_column") or "").strip()
+    rule_params = item.get("rule_params") if isinstance(item.get("rule_params"), dict) else {}
+    if not table or not column:
+        qualified = str(rule_params.get("column") or "").strip()
+        if qualified and "." in qualified:
+            inferred_table, inferred_column = split_qualified_ref(qualified)
+            table = table or inferred_table
+            column = column or inferred_column
     if not table and "." in column:
         table, column = split_qualified_ref(column)
 
@@ -83,8 +90,8 @@ def normalize_filter(item: Any) -> dict[str, Any]:
         out["description"] = item.get("description")
     if item.get("rule_code"):
         out["rule_code"] = str(item.get("rule_code")).strip()
-    if isinstance(item.get("rule_params"), dict) and item.get("rule_params"):
-        out["rule_params"] = item.get("rule_params")
+    if isinstance(rule_params, dict) and rule_params:
+        out["rule_params"] = rule_params
 
     return {key: value for key, value in out.items() if value not in ("", None, [], {})}
 

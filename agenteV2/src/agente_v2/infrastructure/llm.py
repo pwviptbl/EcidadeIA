@@ -50,6 +50,8 @@ class LLMClient:
                 "model": self.model,
                 "url": f"{url}?key=***",
                 "prompt_bytes": len(json.dumps({"system": system, "prompt": prompt}, ensure_ascii=False)),
+                "system_prompt": self._preview(system),
+                "user_prompt": self._preview(prompt),
             },
         )
         try:
@@ -60,7 +62,15 @@ class LLMClient:
             raise LLMError(f"Gemini HTTP {response.status_code}: {self._sanitize(response.text[:500])}")
         data = response.json()
         text = self._extract_text(data)
-        log_event("llm.response", {"model": self.model, "response_bytes": len(text.encode("utf-8")), "usage": data.get("usageMetadata")})
+        log_event(
+            "llm.response",
+            {
+                "model": self.model,
+                "response_bytes": len(text.encode("utf-8")),
+                "response_preview": self._preview(text),
+                "usage": data.get("usageMetadata"),
+            },
+        )
         if not text:
             raise LLMError("Gemini retornou resposta vazia.")
         return text
@@ -95,3 +105,6 @@ class LLMClient:
         if GEMINI_API_KEY:
             sanitized = sanitized.replace(GEMINI_API_KEY, "***")
         return sanitized
+
+    def _preview(self, value: str, limit: int = 1200) -> str:
+        return self._sanitize(value if len(value) <= limit else value[:limit] + "...[truncated]")

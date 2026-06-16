@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import re
+import unicodedata
+from difflib import SequenceMatcher
 from typing import Any
 
 from agente_v2.contracts.models import IntentSpec
@@ -47,18 +49,19 @@ class IntentExtractor:
         return spec
 
     def _fallback(self, question: str) -> IntentSpec:
-        text = question.lower()
+        text = _normalize_text(question)
+        tokens = re.findall(r"[a-z0-9]+", text)
         years = [int(item) for item in re.findall(r"\b(20\d{2})\b", text)]
         ranking_direction = ""
         ranking_limit = 0
-        if len(years) >= 2 and any(term in text for term in ("compare", "compar", "aumento", "variacao", "variação")):
+        if len(years) >= 2 and _contains_keyword(text, tokens, ("compare", "compar", "aumento", "variacao", "variação")):
             intent = "compare_periods"
-        elif any(term in text for term in ("maior", "menor", "top", "ranking", "melhor", "pior", "mais alto", "mais baixo")):
+        elif _contains_keyword(text, tokens, ("maior", "menor", "top", "ranking", "melhor", "pior", "mais alto", "mais baixo", "meior")):
             intent = "ranking"
             ranking_direction, ranking_limit = _infer_ranking_hint(text)
-        elif any(term in text for term in ("quantos", "quantas", "quantidade", "total de")):
-            intent = "count_by_dimension" if "por " in text else "detail_listing"
-        elif any(term in text for term in ("soma", "valor", "total")):
+        elif _contains_keyword(text, tokens, ("quantos", "quantas", "quantidade", "total", "contagem", "quantas matrículas", "quantidade de")):
+            intent = "count_by_dimension"
+        elif _contains_keyword(text, tokens, ("soma", "valor", "total")):
             intent = "sum_by_dimension"
         else:
             intent = "knowledge_review"
@@ -80,8 +83,10 @@ _SYSTEM = (
 
 
 def _infer_ranking_hint(text: str) -> tuple[str, int]:
+    text = _normalize_text(text)
+    tokens = re.findall(r"[a-z0-9]+", text)
     direction = "DESC"
-    if any(term in text for term in ("menor", "menos", "pior", "mais baixo")):
+    if _contains_keyword(text, tokens, ("menor", "menos", "pior", "mais baixo")):
         direction = "ASC"
     limit = 10
     match = re.search(r"\btop\s*(\d+)\b", text)
@@ -89,6 +94,28 @@ def _infer_ranking_hint(text: str) -> tuple[str, int]:
         match = re.search(r"\bprimeir[oa]s?\s*(\d+)\b", text)
     if match:
         limit = max(1, int(match.group(1)))
-    elif any(term in text for term in ("maior", "menor", "melhor", "pior")):
+    elif _contains_keyword(text, tokens, ("maior", "menor", "melhor", "pior", "meior")):
         limit = 1
     return direction, limit
+
+
+def _contains_keyword(text: str, tokens: list[str], keywords: tuple[str, ...]) -> bool:
+    for keyword in keywords:
+        normalized = _normalize_text(keyword).strip()
+        if not normalized:
+            continue
+        if " " in normalized:
+            if normalized in text:
+                return True
+            continue
+        if normalized in tokens:
+            return True
+        for token in tokens:
+            if SequenceMatcher(None, normalized, token).ratio() >= 0.84:
+                return True
+    return False
+
+
+def _normalize_text(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value.casefold())
+    return "".join(ch for ch in normalized if not unicodedata.combining(ch))
