@@ -19,8 +19,6 @@ class BusinessResolver:
                 "Resolva termos humanos usando somente as evidencias de negocio do contexto. "
                 "Nao gere SQL. Retorne regras, metricas, filtros e riscos em JSON. "
                 "Filtros devem ser estruturados com table/column/operator/value. "
-                "Exemplos: matricula_ativa -> {table: cadastro.iptubase, column: j01_baixa, operator: IS NULL}; "
-                "historico_iptu_local -> {table: cadastro.iptucalh, column: j17_descr, operator: CONTAINS, value: iptu}. "
                 "Quando a regra vier do catalogo, use o nome da regra apenas como referencia e mantenha a execucao em operador generico. "
                 "Nao use condition com SQL bruto."
             ),
@@ -82,8 +80,6 @@ _SYSTEM = (
     "Use apenas regras de negocio, conceitos e receitas presentes no contexto. "
     "Nao escreva SQL. Nao invente coluna. "
     "Filtros devem sair como table/column/operator/value. "
-    "Exemplos: matricula_ativa usa cadastro.iptubase.j01_baixa com operador IS NULL; "
-    "historico_iptu_local usa cadastro.iptucalh.j17_descr com operador CONTAINS e valor iptu. "
     "Se a regra de negocio estiver catalogada, cite-a na descricao, mas mantenha a parte executavel como operador generico. "
     "Saida somente JSON."
 )
