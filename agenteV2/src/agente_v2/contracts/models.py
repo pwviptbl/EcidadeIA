@@ -74,6 +74,59 @@ class SqlArtifact:
     filters: list[dict] = field(default_factory=list)
     metrics: list[dict] = field(default_factory=list)
     group_by: list[Any] = field(default_factory=list)
+    time_axis: dict = field(default_factory=dict)
+    notes: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class SqlCriticResult:
+    ok: bool
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    notes: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class RepairArtifact:
+    ok: bool
+    attempts: int
+    original_sql: str
+    repaired_sql: str
+    repairs: list[str] = field(default_factory=list)
+    critic_before: dict = field(default_factory=dict)
+    critic_after: dict = field(default_factory=dict)
+    notes: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class ExecutionArtifact:
+    ok: bool
+    sql: str
+    limit: int
+    row_count: int = 0
+    duration_ms: int = 0
+    rows: list[dict] = field(default_factory=list)
+    error: str = ""
+    notes: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
+class AnswerArtifact:
+    ok: bool
+    answer: str
+    sql: str
     notes: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict:

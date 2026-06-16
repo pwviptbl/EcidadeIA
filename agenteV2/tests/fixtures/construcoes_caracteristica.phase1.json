@@ -1,0 +1,68 @@
+{
+  "question": "Quero uma relacao das construcoes por caracteristica, com quantidade de construcoes por caracteristica.",
+  "intent_spec": {
+    "intent": "count_by_dimension",
+    "confidence": 0.9,
+    "years": [],
+    "literal_filters": [],
+    "requested_entities": ["construcoes"],
+    "requested_metrics": ["quantidade de construcoes"],
+    "requested_dimensions": ["caracteristica"],
+    "ambiguities": []
+  },
+  "business_spec": {
+    "resolved_terms": [],
+    "metrics": [
+      {
+        "metric_name": "quantidade de construcoes",
+        "table": "cadastro.carconstr",
+        "column": "j48_idcons",
+        "aggregation": "COUNT_DISTINCT"
+      }
+    ],
+    "filters": [],
+    "dimensions": [
+      {
+        "dimension_name": "caracteristica",
+        "table": "cadastro.caracter",
+        "column": "j31_descr"
+      }
+    ],
+    "business_risks": [],
+    "evidence": [],
+    "open_questions": []
+  },
+  "schema_plan": {
+    "entity": "construcao",
+    "grain": ["cadastro.carconstr.j48_matric", "cadastro.carconstr.j48_idcons"],
+    "time_axis": {},
+    "tables": ["cadastro.carconstr", "cadastro.caracter"],
+    "joins": [
+      {
+        "source_table": "cadastro.carconstr",
+        "source_columns": ["j48_caract"],
+        "target_table": "cadastro.caracter",
+        "target_columns": ["j31_codigo"],
+        "join_type": "INNER JOIN"
+      }
+    ],
+    "group_by": [
+      {
+        "table": "cadastro.caracter",
+        "column": "j31_descr",
+        "dimension_name": "caracteristica"
+      }
+    ],
+    "metrics": [
+      {
+        "metric_name": "quantidade de construcoes",
+        "table": "cadastro.carconstr",
+        "column": "j48_idcons",
+        "aggregation": "COUNT_DISTINCT"
+      }
+    ],
+    "filters": [],
+    "risks": [],
+    "open_questions": []
+  }
+}

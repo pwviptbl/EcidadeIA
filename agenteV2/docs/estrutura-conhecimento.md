@@ -27,8 +27,8 @@ Use para conceitos que aparecem nas perguntas dos usuarios.
 Exemplos:
 
 - `matricula_ativa`
-- `iptu_calculado`
-- `comparacao_iptu_entre_exercicios`
+- `valor_total_por_exercicio`
+- `comparacao_entre_exercicios`
 - `caracteristica_da_construcao`
 - `bairro_do_imovel`
 
@@ -40,8 +40,8 @@ Use para caminhos entre entidades.
 
 Exemplos:
 
-- bairro -> lote -> iptubase
-- iptucalv -> iptucalh
+- entidade -> movimento
+- movimento -> classificacao
 - carconstr -> caracter -> cargrup
 
 Esse arquivo responde: "como sair de uma entidade e chegar em outra?"

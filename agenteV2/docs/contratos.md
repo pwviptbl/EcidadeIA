@@ -10,9 +10,9 @@ JSON validavel a texto livre.
   "intent": "compare_periods",
   "confidence": 0.86,
   "years": [2025, 2026],
-  "literal_filters": ["imoveis ativos"],
-  "requested_entities": ["imovel"],
-  "requested_metrics": ["valor de IPTU"],
+  "literal_filters": ["entidades ativas"],
+  "requested_entities": ["entidade"],
+  "requested_metrics": ["valor total"],
   "requested_dimensions": [],
   "ambiguities": []
 }
@@ -24,33 +24,34 @@ JSON validavel a texto livre.
 {
   "resolved_terms": [
     {
-      "term": "imoveis ativos",
-      "meaning": "matriculas imobiliarias sem baixa cadastral",
+      "term": "entidades ativas",
+      "meaning": "entidades com status ativo",
       "filter": {
-        "table": "cadastro.iptubase",
-        "column": "j01_baixa",
-        "operator": "is_null"
+        "table": "dim.entidade",
+        "column": "status",
+        "operator": "=",
+        "value": "ATIVA"
       },
-      "evidence": "knowledge/manual/cadastro/iptubase.md"
+      "evidence": "knowledge/manual/fin/entidade.md"
     }
   ],
   "metrics": [
     {
-      "name": "valor_iptu",
-      "meaning": "valor de IPTU gerado no calculo",
-      "table": "cadastro.iptucalv",
-      "column": "j21_valor",
+      "name": "valor_total",
+      "meaning": "valor total registrado por exercicio",
+      "table": "fin.mov",
+      "column": "valor",
       "aggregation": "sum",
       "required_classification": {
-        "table": "cadastro.iptucalh",
-        "join": "cadastro.iptucalv.j21_codhis = cadastro.iptucalh.j17_codhis",
-        "filter": "descricao do historico representa IPTU"
+        "table": "dim.entidade",
+        "join": "fin.mov.entidade_id = dim.entidade.entidade_id",
+        "filter": "status da entidade representa a situacao valida do registro"
       }
     }
   ],
   "business_risks": [
-    "iptucalv mistura IPTU, taxas e outros valores",
-    "joins podem multiplicar matriculas se o grao nao for respeitado"
+    "movimentos podem misturar categorias diferentes sem filtro adequado",
+    "joins podem multiplicar entidades se o grao nao for respeitado"
   ]
 }
 ```
@@ -59,31 +60,30 @@ JSON validavel a texto livre.
 
 ```json
 {
-  "entity": "matricula_imobiliaria",
-  "grain": ["exercicio", "matricula"],
+  "entity": "entidade",
+  "grain": ["exercicio", "entidade"],
   "time_axis": {
-    "table": "cadastro.iptucalv",
-    "column": "j21_anousu"
+    "table": "fin.mov",
+    "column": "ano"
   },
   "tables": [
-    "cadastro.iptubase",
-    "cadastro.iptucalv",
-    "cadastro.iptucalh"
+    "fin.mov",
+    "dim.entidade"
   ],
   "joins": [
     {
-      "left_table": "cadastro.iptubase",
-      "left_column": "j01_matric",
-      "right_table": "cadastro.iptucalv",
-      "right_column": "j21_matric",
+      "left_table": "fin.mov",
+      "left_column": "entidade_id",
+      "right_table": "dim.entidade",
+      "right_column": "entidade_id",
       "kind": "inner",
       "evidence": "catalog_fk_or_relationship_recipe"
     }
   ],
   "group_by": [
     {
-      "table": "cadastro.iptucalv",
-      "column": "j21_anousu",
+      "table": "fin.mov",
+      "column": "ano",
       "alias": "exercicio"
     }
   ]
@@ -96,16 +96,16 @@ JSON validavel a texto livre.
 {
   "operation": "compare_periods",
   "intent": "compare_periods",
-  "entity": "matricula_imobiliaria",
+  "entity": "entidade",
   "grain": ["exercicio"],
   "periods": [2025, 2026],
   "final_metrics": [
     {
-      "name": "valor_iptu",
-      "table": "cadastro.iptucalv",
-      "column": "j21_valor",
+      "name": "valor_total",
+      "table": "fin.mov",
+      "column": "valor",
       "aggregation": "sum",
-      "alias": "valor_iptu"
+      "alias": "valor_total"
     }
   ],
   "explanatory_metrics": [],

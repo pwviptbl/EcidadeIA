@@ -28,11 +28,12 @@ class Database:
                 cursor.execute("select current_database() as database, current_user as user")
                 return dict(cursor.fetchone())
 
-    def fetch_all(self, sql: str, params: tuple | None = None) -> dict:
+    def fetch_all(self, sql: str, params: tuple | None = None, statement_timeout_ms: int | None = None) -> dict:
         started = time.monotonic()
+        timeout_ms = int(statement_timeout_ms or STATEMENT_TIMEOUT_MS)
         with self.connect() as conn:
             conn.execute("begin read only")
-            conn.execute(f"set local statement_timeout = {int(STATEMENT_TIMEOUT_MS)}")
+            conn.execute(f"set local statement_timeout = {timeout_ms}")
             with conn.cursor() as cursor:
                 cursor.execute(sql, params or ())
                 rows = [self._normalize_row(row) for row in cursor.fetchall()]

@@ -43,7 +43,7 @@ Entregas:
 Pergunta alvo:
 
 ```text
-Compare o IPTU 2025 e 2026 e explique os principais fatores de aumento
+Compare o valor total de movimentacoes de 2025 e 2026 e explique os principais fatores de variacao
 ```
 
 Resultado esperado:
@@ -51,6 +51,27 @@ Resultado esperado:
 - plano completo;
 - evidencias de negocio;
 - zero SQL gerado nessa fase.
+
+## Fase 1.5 - Normalizacao de contrato e regressao
+
+Status: iniciado.
+
+Objetivo: estabilizar o contrato entre `BusinessResolver`, `SchemaPlanner` e
+`SqlCompiler` antes de ampliar executor e UI.
+
+Entregas:
+
+- metricas normalizadas com `table`, `column`, `aggregation`;
+- filtros normalizados com `operator/value` ou `rule_code/rule_params`;
+- joins normalizados com `source_columns[]` e `target_columns[]`;
+- `grain` e `group_by` apontando para colunas reais, nao rotulos humanos;
+- cenarios fixos de regressao para perguntas-base.
+
+Regras:
+
+- nao deixar SQL bruto em `condition`;
+- nao deixar regra de negocio hardcoded no compilador/critic;
+- fixture quebrada bloqueia evolucao do pipeline.
 
 ## Fase 2 - Compilador generico
 
@@ -76,6 +97,8 @@ Entregas:
 
 ## Fase 3 - Critic e RepairLoop
 
+Status: iniciado.
+
 Objetivo: revisar e corrigir antes/depois da execucao.
 
 Entregas:
@@ -87,6 +110,8 @@ Entregas:
 
 ## Fase 4 - UI e auditoria
 
+Status: planejado.
+
 Objetivo: resposta humana com fonte recolhivel.
 
 Entregas:
@@ -95,3 +120,29 @@ Entregas:
 - tabelas e filtros;
 - evidencias do manual;
 - limitacoes.
+
+## Fase 5 - Executor
+
+Status: iniciado.
+
+Objetivo: executar SQL read-only aprovada e registrar retorno auditavel.
+
+Entregas:
+
+- `Executor`;
+- runner com `ecidade_readonly_query`;
+- retorno com `row_count`, `duration_ms` e `rows`;
+- erro exposto sem mascarar a SQL executada.
+
+## Fase 6 - AnswerSynthesizer
+
+Status: iniciado.
+
+Objetivo: produzir resposta humana com a SQL recolhida por padrao.
+
+Entregas:
+
+- resposta curta e direta;
+- fonte tecnica em bloco recolhivel;
+- SQL completa preservada para validacao;
+- saida estruturada para UI e debug.

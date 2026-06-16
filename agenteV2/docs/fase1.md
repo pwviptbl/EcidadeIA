@@ -26,13 +26,13 @@ Fora de escopo:
 
 ```bash
 cd /home/dbseller/Modelos/MVP
-python3 agenteV2/run_phase1.py "Compare o IPTU 2025 e 2026 e explique os principais fatores de aumento"
+python3 agenteV2/run_phase1.py "Compare o valor total de movimentacoes de 2025 e 2026 e explique os principais fatores de variacao"
 ```
 
 Para ver o payload completo:
 
 ```bash
-python3 agenteV2/run_phase1.py --json "Compare o IPTU 2025 e 2026 e explique os principais fatores de aumento"
+python3 agenteV2/run_phase1.py --json "Compare o valor total de movimentacoes de 2025 e 2026 e explique os principais fatores de variacao"
 ```
 
 ## Dependencias

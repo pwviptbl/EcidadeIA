@@ -32,6 +32,12 @@ class McpClient:
     def relationships(self, tables: list[str]) -> dict:
         return self.call_tool("ecidade_get_relationships", {"tables": tables})
 
+    def readonly_query(self, sql: str, limit: int = 1000, statement_timeout_ms: int | None = None) -> dict:
+        arguments: dict[str, Any] = {"sql": sql, "limit": limit}
+        if statement_timeout_ms is not None:
+            arguments["statement_timeout_ms"] = int(statement_timeout_ms)
+        return self.call_tool("ecidade_readonly_query", arguments)
+
     def call_tool(self, name: str, arguments: dict[str, Any]) -> dict:
         log_event("mcp.tool.start", {"tool": name, "arguments": arguments})
         self._ensure_session()

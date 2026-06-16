@@ -27,16 +27,22 @@ class PlanValidator:
             errors.append("grain ausente no schema_plan")
 
         time_axis = schema_plan.get("time_axis") or {}
+        requires_time_axis = str((schema_plan.get("time_axis") or {}).get("column") or "").strip() or any(
+            str(item.get("value") or "").strip() for item in (schema_plan.get("filters") or []) if isinstance(item, dict)
+        )
         if time_axis:
             self._validate_column_ref(time_axis, known_columns, errors, "time_axis")
-        else:
+        elif requires_time_axis:
             warnings.append("time_axis nao informado")
 
         metrics = _resolve_named_items(schema_plan.get("metrics") or [], business_spec.get("metrics") or [], "metric_name")
         filters = _resolve_named_items(schema_plan.get("filters") or [], business_spec.get("filters") or [], "filter_name")
 
         for index, metric in enumerate(metrics):
-            self._validate_column_ref(metric, known_columns, errors, f"metric[{index}]")
+            if isinstance(metric, dict) and str(metric.get("aggregation") or "").upper() in {"COUNT", "COUNT_DISTINCT"}:
+                self._validate_count_metric(metric, known_columns, errors, f"metric[{index}]")
+            else:
+                self._validate_column_ref(metric, known_columns, errors, f"metric[{index}]")
             if isinstance(metric, dict) and not metric.get("aggregation"):
                 warnings.append(f"metric[{index}] sem aggregation")
 
@@ -77,7 +83,7 @@ class PlanValidator:
         if isinstance(item, str):
             table, column = _split_column_ref(item)
         elif isinstance(item, dict):
-            table = str(item.get("table") or item.get("source_table") or "").strip()
+            table = str(item.get("table") or item.get("source_table") or item.get("base_table") or "").strip()
             column = str(item.get("column") or item.get("source_column") or item.get("base_column") or item.get("expression") or "").strip()
             if not table and "." in column:
                 table, column = _split_column_ref(column)
@@ -122,6 +128,18 @@ class PlanValidator:
             errors.append(f"{label}.{side}_table fora do contexto: {table}")
         elif column not in known_columns[table]:
             errors.append(f"{label}.{side}_column fora do catalogo de {table}: {column}")
+
+    def _validate_count_metric(self, item: dict[str, Any], known_columns: dict[str, set[str]], errors: list[str], label: str) -> None:
+        table = str(item.get("table") or item.get("base_table") or item.get("source_table") or "").strip()
+        column = str(item.get("column") or item.get("base_column") or item.get("source_column") or "").strip()
+        if not table:
+            errors.append(f"{label} sem table")
+            return
+        if table not in known_columns:
+            errors.append(f"{label}.table fora do contexto: {table}")
+            return
+        if column and column not in {"1", "*"} and column not in known_columns.get(table, set()):
+            errors.append(f"{label}.column fora do catalogo de {table}: {column}")
 
 
 def _columns_from_describe(payload: dict) -> list[str]:

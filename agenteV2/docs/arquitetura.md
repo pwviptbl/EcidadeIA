@@ -51,9 +51,9 @@ Fontes:
 
 Exemplos:
 
-- "imovel ativo" -> `cadastro.iptubase.j01_baixa IS NULL`;
-- "valor de IPTU" -> valor calculado em `cadastro.iptucalv.j21_valor`,
-  classificado por historico em `cadastro.iptucalh`;
+- "entidade ativa" -> `dim.entidade.status = 'ATIVA'`;
+- "valor total" -> valor agregado em `fin.mov.valor`,
+  filtrado e relacionado conforme o conhecimento estruturado;
 - "caracteristica da construcao" -> caminho entre `carconstr` e `caracter`.
 
 Saida: `business_spec`.
@@ -170,6 +170,12 @@ Regras:
 - mencionar limitacoes relevantes;
 - incluir fonte dos dados em bloco recolhivel;
 - nunca esconder que houve fallback, reparo ou pendencia.
+
+Saida sugerida:
+
+- resposta curta e direta;
+- bloco recolhivel com `sql` e fonte tecnica;
+- payload estruturado para debug e auditoria.
 
 ## Nao Objetivos
 

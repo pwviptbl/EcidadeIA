@@ -1,0 +1,56 @@
+{
+  "question": "quantas ruas temos ?",
+  "intent_spec": {
+    "intent": "count_by_dimension",
+    "confidence": 0.9,
+    "years": [],
+    "literal_filters": [],
+    "requested_entities": ["ruas"],
+    "requested_metrics": ["count"],
+    "requested_dimensions": ["ruas"],
+    "ambiguities": []
+  },
+  "business_spec": {
+    "resolved_terms": [
+      {
+        "human_term": "ruas",
+        "resolved_value": "cadastro.ruas",
+        "resolution_type": "table_name",
+        "description": "Cadastro de todas as ruas e avenidas do municipio"
+      }
+    ],
+    "metrics": [
+      {
+        "metric_name": "quantidade de ruas",
+        "table": "cadastro.ruas",
+        "column": "j14_codigo",
+        "aggregation": "COUNT_DISTINCT",
+        "description": "Contagem distinta de logradouros cadastrados no sistema."
+      }
+    ],
+    "filters": [],
+    "dimensions": [],
+    "business_risks": [],
+    "evidence": [],
+    "open_questions": []
+  },
+  "schema_plan": {
+    "entity": "ruas",
+    "grain": ["cadastro.ruas.j14_codigo"],
+    "time_axis": {},
+    "tables": ["cadastro.ruas"],
+    "joins": [],
+    "group_by": [],
+    "metrics": [
+      {
+        "metric_name": "quantidade de ruas",
+        "table": "cadastro.ruas",
+        "column": "j14_codigo",
+        "aggregation": "COUNT_DISTINCT"
+      }
+    ],
+    "filters": [],
+    "risks": [],
+    "open_questions": []
+  }
+}

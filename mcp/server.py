@@ -173,12 +173,12 @@ def ecidade_get_relationships(tables: list[str] | None = None) -> dict[str, Any]
 
 
 @mcp.tool()
-def ecidade_readonly_query(sql: str, limit: int = 1000) -> dict[str, Any]:
+def ecidade_readonly_query(sql: str, limit: int = 1000, statement_timeout_ms: int | None = None) -> dict[str, Any]:
     """Executa uma consulta SELECT/WITH read-only em tabelas permitidas pelo catalogo."""
-    log_event("tool.query.start", {"sql": sql, "limit": limit})
+    log_event("tool.query.start", {"sql": sql, "limit": limit, "statement_timeout_ms": statement_timeout_ms})
     validated_sql = guard.validate(sql)
     limited_sql, safe_limit = guard.enforce_limit(validated_sql, limit)
-    payload = db.fetch_all(limited_sql)
+    payload = db.fetch_all(limited_sql, statement_timeout_ms=statement_timeout_ms)
     result = {
         "sql": validated_sql,
         "limit": safe_limit,
@@ -191,12 +191,22 @@ def ecidade_readonly_query(sql: str, limit: int = 1000) -> dict[str, Any]:
         {
             "sql": validated_sql,
             "limit": safe_limit,
+            "statement_timeout_ms": statement_timeout_ms,
             "row_count": payload["row_count"],
             "duration_ms": payload["duration_ms"],
             "tables": [f"{schema}.{table}" for schema, table in guard.referenced_tables(validated_sql)],
         },
     )
-    log_event("tool.query.done", {"sql": validated_sql, "limit": safe_limit, "row_count": payload["row_count"], "duration_ms": payload["duration_ms"]})
+    log_event(
+        "tool.query.done",
+        {
+            "sql": validated_sql,
+            "limit": safe_limit,
+            "statement_timeout_ms": statement_timeout_ms,
+            "row_count": payload["row_count"],
+            "duration_ms": payload["duration_ms"],
+        },
+    )
     return result
 
 
