@@ -23,7 +23,7 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `cadastro.iptubase`
 - Grao esperado: uma linha por matricula em `iptubase`.
 - Filtros de negocio:
-  - Regra catalogada `matricula_ativa`: `iptubase.j01_baixa IS NULL`
+  - Regra catalogada `matricula_ativa`: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`
 - Regra de contagem:
   - Para contar matriculas ativas, usar `COUNT(DISTINCT j01_matric)` ou `COUNT(1)` quando a consulta partir diretamente de `iptubase` sem multiplicar por joins.
 - O que nao inferir:
@@ -45,7 +45,7 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `cadastro.iptuconstr`
 - Grao esperado: uma linha por `j39_matric, j39_idcons`.
 - Filtros de negocio:
-  - `iptuconstr.j39_dtdemo IS NULL`
+  - Obrigatório aplicar filtro na coluna `iptuconstr.j39_dtdemo` com operador `IS NULL`
 - Regra de contagem:
   - Para contar construcoes, usar a combinacao `j39_matric, j39_idcons`.
   - Se a consulta parte de `iptuconstr`, `COUNT(1)` conta construcoes cadastradas.
@@ -122,10 +122,9 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `iptucalv.j21_codhis -> iptucalh.j17_codhis`
 - Filtros de negocio:
   - Exercicio em `iptucalv.j21_anousu`.
-  - Regra catalogada `historico_iptu_local`: `iptucalh.j17_descr` com conteudo de IPTU, ou a regra local equivalente do municipio.
+  - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `CONTAINS_CI` e valor `iptu`, ou a regra local equivalente do municipio.
 - Regra de contagem/soma:
   - Para somar IPTU, nao somar `j21_valor` puro por ano sem classificar o historico.
-  - Usar `position('iptu' in lower(iptucalh.j17_descr)) > 0` quando o catalogo nao trouxer codigo de receita validado, ou a regra local equivalente do municipio.
 - O que nao inferir:
   - Nao confundir valor calculado com valor pago/arrecadado.
   - Nao misturar IPTU, taxa de lixo, isencao e desconto sem filtro de historico/classificacao.

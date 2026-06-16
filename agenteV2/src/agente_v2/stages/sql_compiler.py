@@ -261,8 +261,30 @@ def _compile_filters(filters: list[Any], aliases: dict[str, str]) -> list[str]:
             expr = _column_expr(table, column, aliases)
         else:
             expr = ""
-        if rule_code == "common_entities_across_periods" and table and column:
+            
+        rule_code_lower = rule_code.lower()
+        if not operator:
+            if rule_code_lower == "is_null":
+                operator = "IS NULL"
+            elif rule_code_lower == "is_not_null":
+                operator = "IS NOT NULL"
+            elif rule_code_lower in {"equals", "eq"}:
+                operator = "="
+            elif rule_code_lower in {"contains_case_insensitive", "contains_ci"}:
+                operator = "CONTAINS_CI"
+                value = rule_params.get("value")
+            elif rule_code_lower == "contains":
+                operator = "CONTAINS"
+                value = rule_params.get("value")
+
+        if rule_code.lower() == "common_entities_across_periods" and table and column:
             where_parts.append(_compile_rule_common_entities(expr, aliases, rule_params))
+            continue
+        if rule_code.lower() == "contains_case_insensitive" and table and column and "value" in rule_params:
+            where_parts.append(f"position(lower({_sql_literal(str(rule_params['value']))}) in lower({expr})) > 0")
+            continue
+        if rule_code.lower() == "contains" and table and column and "value" in rule_params:
+            where_parts.append(f"position({_sql_literal(str(rule_params['value']))} in {expr}) > 0")
             continue
         if not table or not column:
             continue
@@ -271,7 +293,7 @@ def _compile_filters(filters: list[Any], aliases: dict[str, str]) -> list[str]:
             where_parts.append(f"{expr} IN ({values_sql})")
         elif operator in {"LIKE", "ILIKE"}:
             where_parts.append(f"{expr} {operator} {_sql_literal(value)}")
-        elif operator in {"CONTAINS", "CONTAINS_CI"}:
+        elif operator in {"CONTAINS", "CONTAINS_CI", "CONTAINS_CASE_INSENSITIVE"}:
             if value is not None:
                 where_parts.append(f"position(lower({_sql_literal(str(value))}) in lower({expr})) > 0")
         elif operator == "IS NULL":
