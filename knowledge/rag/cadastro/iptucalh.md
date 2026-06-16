@@ -8,7 +8,7 @@
 
 ### Resumo tecnico
 
-- Descricao: Históricos do cálculo do IPTU
+- Descricao: Históricos de cálculo e classificação dos lançamentos do IPTU e receitas correlatas.
 - Chave primaria: j17_codhis
 - Chave de negocio: Nao informada.
 - Coluna de tempo: Nao informada.
@@ -28,7 +28,10 @@
 
 ### Semantica de filtros
 
-- Nenhuma semantica de filtro catalogada.
+- `j17_descr` e uma classificacao local do historico, nao um nome fixo universal.
+- Pode representar IPTU, taxa de lixo, isencao, desconto ou outro componente tributario conforme o municipio.
+- Para IPTU puro, usar a classificacao local equivalente a IPTU; quando nao houver codificacao valida, a descricao contendo IPTU e a regra padrao.
+- Para perguntas de soma de IPTU, o historico e obrigatorio; `j01_baixa` nao entra se a pergunta nao pedir imoveis ativos.
 
 ### Regra de negocio para enriquecer
 
@@ -40,4 +43,5 @@
 
 ### Cuidados / riscos
 
-- Preencher com ambiguidades, excecoes e limites conhecidos.
+- `j17_descr` pode variar entre municipios e ate entre configuracoes do mesmo ambiente.
+- `j01_baixa` nao e um filtro necessario para valor calculado, salvo quando a pergunta pedir ativos.

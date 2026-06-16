@@ -81,6 +81,10 @@ def normalize_filter(item: Any) -> dict[str, Any]:
 
     if item.get("description"):
         out["description"] = item.get("description")
+    if item.get("rule_code"):
+        out["rule_code"] = str(item.get("rule_code")).strip()
+    if isinstance(item.get("rule_params"), dict) and item.get("rule_params"):
+        out["rule_params"] = item.get("rule_params")
 
     return {key: value for key, value in out.items() if value not in ("", None, [], {})}
 

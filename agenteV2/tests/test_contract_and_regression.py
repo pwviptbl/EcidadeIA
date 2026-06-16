@@ -305,6 +305,58 @@ class RegressionFixturesTest(unittest.TestCase):
         self.assertIn("SUM(t1.valor)", artifact.sql)
         self.assertTrue(critic.ok)
 
+    def test_compile_and_critic_count_active_matriculas(self) -> None:
+        intent = {"intent": "count_by_dimension"}
+        business = {
+            "metrics": [
+                {
+                    "metric_name": "quantidade de matrículas imobiliárias ativas",
+                    "table": "cadastro.iptubase",
+                    "column": "j01_matric",
+                    "aggregation": "COUNT_DISTINCT",
+                }
+            ],
+            "filters": [
+                {
+                    "table": "cadastro.iptubase",
+                    "column": "j01_baixa",
+                    "rule_code": "is_null",
+                    "description": "Filtra matrículas que não possuem data de baixa, indicando que estão ativas.",
+                }
+            ],
+        }
+        schema_plan = {
+            "entity": "cadastro.iptubase.j01_matric",
+            "grain": ["cadastro.iptubase.j01_matric"],
+            "time_axis": {},
+            "tables": ["cadastro.iptubase"],
+            "joins": [],
+            "group_by": [],
+            "metrics": [
+                {
+                    "metric_name": "quantidade de matrículas imobiliárias ativas",
+                    "table": "cadastro.iptubase",
+                    "column": "j01_matric",
+                    "aggregation": "COUNT_DISTINCT",
+                }
+            ],
+            "filters": [
+                {
+                    "table": "cadastro.iptubase",
+                    "column": "j01_baixa",
+                    "rule_code": "is_null",
+                    "description": "Filtra matrículas que não possuem data de baixa, indicando que estão ativas.",
+                }
+            ],
+            "risks": [],
+            "open_questions": [],
+        }
+        artifact = SqlCompiler().run(intent, business, schema_plan)
+        critic = SqlCritic().run(artifact, business, schema_plan)
+        self.assertIn("COUNT(DISTINCT t1.j01_matric)", artifact.sql)
+        self.assertIn("t1.j01_baixa IS NULL", artifact.sql)
+        self.assertTrue(critic.ok)
+
     def test_executor_uses_readonly_query(self) -> None:
         class FakeMcp:
             def __init__(self) -> None:

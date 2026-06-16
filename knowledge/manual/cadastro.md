@@ -249,14 +249,21 @@ tags:
 ### Regra de negocio para enriquecer
 
 - O que esta tabela representa no negocio?
+- Históricos que classificam o tipo de valor calculado e separam IPTU de outras receitas, como taxa de lixo, isenção e descontos.
 - Quando ela deve ser preferida sobre outras tabelas parecidas?
+- Quando a pergunta depende da classificação do valor calculado e não apenas do valor bruto.
 - Que perguntas ela responde bem?
+- Quais históricos classificam IPTU, taxa de lixo, isenção ou desconto?
+- Qual componente foi lançado no cálculo?
 - Que filtros de negocio sao seguros?
+- Classificação local do histórico.
 - O que nao pode ser inferido a partir dela?
+- Não inferir que toda descrição com IPTU seja padrão nacional; a nomenclatura pode variar por município.
 
 ### Cuidados / riscos
 
-- Preencher com ambiguidades, excecoes e limites conhecidos.
+- `j17_descr` pode variar entre municípios e até entre configurações do mesmo ambiente.
+- `j01_baixa` não é um filtro necessário para valor calculado, salvo quando a pergunta pedir ativos.
 
 ## cadastro.atualizacaoiptuschema
 
@@ -5889,7 +5896,7 @@ tags:
 
 ### Resumo tecnico
 
-- Descricao: Históricos do cálculo do IPTU
+- Descricao: Históricos de cálculo e classificação dos lançamentos do IPTU e receitas correlatas.
 - Chave primaria: j17_codhis
 - Chave de negocio: Nao informada.
 - Coluna de tempo: Nao informada.
@@ -5904,7 +5911,7 @@ tags:
 | coluna | tipo | papel | metrica | descricao |
 | --- | --- | --- | --- | --- |
 | j17_codhis | bigint |  |  | Código do histórico de cálculo do IPTU |
-| j17_descr | character varying |  |  | Descrição do histórico do cálculo do IPTU |
+| j17_descr | character varying |  |  | Descrição/classificação do histórico de cálculo. Pode variar por município e incluir IPTU, taxa de lixo, isenção, desconto ou outros componentes tributários. |
 
 ### Relacionamentos
 
@@ -5922,7 +5929,10 @@ tags:
 
 #### Semantica de filtros
 
-- Nenhuma semantica de filtro catalogada.
+- `j17_descr` deve ser tratado como classificação local do histórico, não como nome fixo universal.
+- Para IPTU puro, identificar o histórico cujo texto contenha IPTU ou a regra local equivalente.
+- Para perguntas de soma de IPTU, a classificação do histórico é obrigatória; `j01_baixa` não é filtro necessário se a pergunta não pedir imóveis ativos.
+- Para taxas, isenções e descontos, usar a descrição do histórico para separar o componente correto.
 
 ### Regra de negocio para enriquecer
 

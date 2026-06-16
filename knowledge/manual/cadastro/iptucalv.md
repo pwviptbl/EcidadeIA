@@ -46,7 +46,7 @@
 - Matricula: `j21_matric`.
 - Receita: `j21_receit`.
 - Historico: `j21_codhis`.
-- Somente IPTU: classificar por `cadastro.iptucalh` usando `j21_codhis`.
+- Somente IPTU: classificar por `cadastro.iptucalh` usando `j21_codhis`; a descrição do histórico pode variar entre municípios e incluir IPTU, taxa de lixo, isenção ou desconto.
 
 ## Classificacao obrigatoria
 
@@ -55,6 +55,8 @@
 - Caminho recomendado:
   - `iptucalv.j21_codhis -> iptucalh.j17_codhis`
   - validar descricao ou regra local do historico para identificar IPTU.
+- Em perguntas de valor calculado, `iptubase.j01_baixa` nao e filtro obrigatorio; use-o apenas quando a pergunta pedir imoveis ativos.
+- A classificacao do historico deve ser lida como regra local do municipio; `j17_descr` pode representar IPTU, taxa de lixo, isencao ou desconto.
 
 ## Regra de contagem
 

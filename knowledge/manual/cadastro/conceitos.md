@@ -114,13 +114,13 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `iptucalv.j21_codhis -> iptucalh.j17_codhis`
 - Filtros de negocio:
   - Exercicio em `iptucalv.j21_anousu`.
-  - Classificar IPTU pela descricao do historico em `iptucalh.j17_descr`.
+  - Classificar o componente pelo historico em `iptucalh.j17_descr`; a descricao pode variar entre municipios e incluir IPTU, taxa de lixo, isencao ou desconto.
 - Regra de contagem/soma:
   - Para somar IPTU, nao somar `j21_valor` puro por ano sem classificar o historico.
-  - Usar `position('iptu' in lower(iptucalh.j17_descr)) > 0` quando o catalogo nao trouxer codigo de receita validado.
+  - Usar `position('iptu' in lower(iptucalh.j17_descr)) > 0` quando o catalogo nao trouxer codigo de receita validado, ou a regra local equivalente do municipio.
 - O que nao inferir:
   - Nao confundir valor calculado com valor pago/arrecadado.
-  - Nao misturar IPTU, taxa de lixo e outros componentes sem filtro.
+  - Nao misturar IPTU, taxa de lixo, isencao e desconto sem filtro de historico/classificacao.
 
 ## Conceito de negocio: comparacao_iptu_entre_exercicios
 
@@ -140,7 +140,7 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - Fatores: uma linha por `j23_anousu, j23_matric` em `iptucalc`.
 - Filtros de negocio:
   - Exercicios em `iptucalv.j21_anousu` e `iptucalc.j23_anousu`.
-  - Somente IPTU via `iptucalv.j21_codhis -> iptucalh.j17_codhis` e descricao contendo IPTU.
+  - Somente IPTU via `iptucalv.j21_codhis -> iptucalh.j17_codhis` e classificacao local do historico.
 - Caminho de negocio:
   - `iptucalv.j21_codhis -> iptucalh.j17_codhis`
   - `iptucalv.j21_matric, j21_anousu -> iptucalc.j23_matric, j23_anousu`

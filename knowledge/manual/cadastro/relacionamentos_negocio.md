@@ -64,10 +64,11 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `iptucalv.j21_codhis = iptucalh.j17_codhis`
 - Filtros recomendados:
   - Exercicio: `iptucalv.j21_anousu = :ano`.
-  - Somente IPTU: `position('iptu' in lower(iptucalh.j17_descr)) > 0`.
-  - Matriculas ativas: `iptubase.j01_baixa IS NULL`.
+  - Somente IPTU: `position('iptu' in lower(iptucalh.j17_descr)) > 0`, ou a regra local equivalente do municipio.
+  - Matriculas ativas: `iptubase.j01_baixa IS NULL`, somente quando a pergunta pedir imoveis ativos.
 - Cuidados:
   - Nao somar `iptucalv.j21_valor` sem classificar o historico.
+  - O historico pode variar entre municipios e incluir IPTU, taxa de lixo, isencao ou desconto.
   - Se filtrar construcoes, preferir `EXISTS` para nao multiplicar o valor calculado.
 
 ## Receita de relacionamento: bairro_para_ranking_iptu
@@ -90,7 +91,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `iptucalv.j21_codhis = iptucalh.j17_codhis`
 - Filtros recomendados:
   - Exercicio: `iptucalv.j21_anousu = :ano`.
-  - Somente IPTU: `position('iptu' in lower(iptucalh.j17_descr)) > 0`.
+  - Somente IPTU: `position('iptu' in lower(iptucalh.j17_descr)) > 0`, ou a regra local equivalente do municipio.
   - Matriculas ativas: `iptubase.j01_baixa IS NULL`, se a pergunta pedir imoveis ativos.
 - Regra de ranking:
   - Agrupar por `bairro.j13_codi` e `bairro.j13_descr`.
@@ -98,6 +99,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - Para o maior IPTU, usar `LIMIT 1` ou `FETCH FIRST 1 ROW ONLY`.
 - Cuidados:
   - Nao usar apenas `bairro` para ranking; o valor vem de `iptucalv` com classificacao de `iptucalh`.
+  - O historico pode variar entre municipios e incluir IPTU, taxa de lixo, isencao ou desconto.
   - Nao explicar o resultado sem o filtro de historico de IPTU.
   - Se a pergunta pedir "bairro com maior IPTU", esse caminho tem prioridade sobre listagens genéricas de bairro.
 
@@ -181,10 +183,11 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
 - Join logico:
   - `iptucalv.j21_codhis = iptucalh.j17_codhis`
 - Filtros recomendados:
-  - Somente IPTU: descricao do historico contendo IPTU.
+  - Somente IPTU: descricao do historico contendo IPTU, ou a classificacao equivalente local.
   - Exercicio: `iptucalv.j21_anousu = :ano`.
 - Cuidados:
   - `iptucalv` pode misturar IPTU, taxas e outros componentes.
+  - `iptucalh.j17_descr` nao e um codigo padrao universal; e uma descricao/classificacao local do historico.
 
 ## Receita de relacionamento: valor_iptu_para_fatores_calculo
 

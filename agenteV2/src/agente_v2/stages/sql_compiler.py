@@ -265,6 +265,9 @@ def _compile_filters(filters: list[Any], aliases: dict[str, str]) -> list[str]:
             if rule_code == "common_entities_across_periods" and table and column:
                 where_parts.append(_compile_rule_common_entities(expr, aliases, rule_params))
                 continue
+            if rule_code in {"matricula_ativa", "is_null", "null"} and table and column:
+                where_parts.append(f"{expr} IS NULL")
+                continue
             if not table or not column:
                 continue
         if operator == "IN" and isinstance(value, list):
