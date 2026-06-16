@@ -17,6 +17,8 @@ class IntentSpec:
     intent: str = "knowledge_review"
     confidence: float = 0.0
     years: list[int] = field(default_factory=list)
+    ranking_direction: str = ""
+    ranking_limit: int = 0
     literal_filters: list[str] = field(default_factory=list)
     requested_entities: list[str] = field(default_factory=list)
     requested_metrics: list[str] = field(default_factory=list)
@@ -30,6 +32,8 @@ class IntentSpec:
             intent=str(data.get("intent") or "knowledge_review"),
             confidence=float(data.get("confidence") or 0.0),
             years=[int(item) for item in clean_list(data.get("years")) if str(item).isdigit()],
+            ranking_direction=str(data.get("ranking_direction") or "").strip().upper(),
+            ranking_limit=int(data.get("ranking_limit") or 0) if str(data.get("ranking_limit") or "").isdigit() else 0,
             literal_filters=[str(item) for item in clean_list(data.get("literal_filters")) if str(item).strip()],
             requested_entities=[str(item) for item in clean_list(data.get("requested_entities")) if str(item).strip()],
             requested_metrics=[str(item) for item in clean_list(data.get("requested_metrics")) if str(item).strip()],

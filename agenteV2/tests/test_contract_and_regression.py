@@ -221,6 +221,53 @@ class RegressionFixturesTest(unittest.TestCase):
         self.assertIn("COUNT(DISTINCT", artifact.sql)
         self.assertTrue(critic.ok)
 
+    def test_compile_and_critic_ranking_uses_order_by_and_limit(self) -> None:
+        intent = {"intent": "ranking", "ranking_direction": "DESC", "ranking_limit": 1}
+        business = {
+            "metrics": [
+                {
+                    "metric_name": "IPTU",
+                    "table": "cadastro.iptucalv",
+                    "column": "j21_valor",
+                    "aggregation": "SUM",
+                }
+            ],
+            "dimensions": [
+                {
+                    "dimension_name": "Bairro",
+                    "table": "cadastro.bairro",
+                    "column": "j13_descr",
+                }
+            ],
+        }
+        schema_plan = {
+            "entity": "Bairro",
+            "grain": ["cadastro.bairro.j13_codi"],
+            "time_axis": {},
+            "tables": ["cadastro.bairro", "cadastro.lote", "cadastro.iptubase", "cadastro.iptucalv", "cadastro.iptucalh"],
+            "joins": [
+                {"source_table": "cadastro.bairro", "source_columns": ["j13_codi"], "target_table": "cadastro.lote", "target_columns": ["j34_bairro"], "join_type": "JOIN"},
+                {"source_table": "cadastro.lote", "source_columns": ["j34_idbql"], "target_table": "cadastro.iptubase", "target_columns": ["j01_idbql"], "join_type": "JOIN"},
+                {"source_table": "cadastro.iptubase", "source_columns": ["j01_matric"], "target_table": "cadastro.iptucalv", "target_columns": ["j21_matric"], "join_type": "JOIN"},
+                {"source_table": "cadastro.iptucalv", "source_columns": ["j21_codhis"], "target_table": "cadastro.iptucalh", "target_columns": ["j17_codhis"], "join_type": "JOIN"},
+            ],
+            "group_by": [{"table": "cadastro.bairro", "column": "j13_codi"}, {"table": "cadastro.bairro", "column": "j13_descr"}],
+            "metrics": [{"metric_name": "IPTU", "table": "cadastro.iptucalv", "column": "j21_valor", "aggregation": "SUM"}],
+            "filters": [
+                {"table": "cadastro.iptucalv", "column": "j21_anousu", "operator": "EQUAL", "value": 2025},
+                {"table": "cadastro.iptucalh", "column": "j17_descr", "operator": "CONTAINS", "value": "IPTU"},
+            ],
+            "risks": [],
+            "open_questions": [],
+        }
+        artifact = SqlCompiler().run(intent, business, schema_plan, question="Qual Bairro teve o maior IPTU em 2025?")
+        critic = SqlCritic().run(artifact, business, schema_plan)
+        self.assertEqual(artifact.operation, "ranking")
+        self.assertIn("order by iptu desc", artifact.sql.lower())
+        self.assertIn("LIMIT 1", artifact.sql)
+        self.assertIn("GROUP BY", artifact.sql)
+        self.assertTrue(critic.ok)
+
     def test_compile_and_critic_sum_by_dimension(self) -> None:
         intent = {"intent": "sum_by_dimension"}
         business = {

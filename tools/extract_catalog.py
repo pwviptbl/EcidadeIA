@@ -4,7 +4,7 @@ import argparse
 import json
 import os
 import sys
-from collections import defaultdict
+from collections import defaultdict, deque
 from pathlib import Path
 from typing import Any
 
@@ -188,6 +188,99 @@ def fetch_foreign_keys(conn, schemas: list[str]) -> dict[tuple[str, str], list[d
         foreign_keys[(source_schema, source_table)].append(grouped[(source_schema, source_table, _)])
 
     return dict(foreign_keys)
+
+
+def render_join_expression(source_table: str, source_columns: list[str], target_table: str, target_columns: list[str]) -> str:
+    parts = []
+    for source_column, target_column in zip(source_columns, target_columns):
+        parts.append(f"{source_table}.{source_column} = {target_table}.{target_column}")
+    return " AND ".join(parts)
+
+
+def build_semantic_relationships(catalogs: dict[str, dict[str, Any]], max_hops: int = 4, max_paths: int = 24) -> None:
+    graph: dict[str, list[dict[str, Any]]] = defaultdict(list)
+
+    for schema_catalog in catalogs.values():
+        for source_table, table_info in schema_catalog.get("tabelas", {}).items():
+            for fk in table_info.get("chaves_estrangeiras") or []:
+                if not isinstance(fk, dict):
+                    continue
+                target_table = str(fk.get("referencia") or "").strip()
+                source_columns = [str(item).strip() for item in (fk.get("columns") or []) if str(item).strip()]
+                target_columns = [str(item).strip() for item in (fk.get("colunas_referenciadas") or []) if str(item).strip()]
+                constraint = str(fk.get("constraint") or "").strip()
+                if not target_table or not source_columns or not target_columns:
+                    continue
+                forward_join = render_join_expression(source_table, source_columns, target_table, target_columns)
+                reverse_join = render_join_expression(target_table, target_columns, source_table, source_columns)
+                graph[source_table].append(
+                    {
+                        "source_table": source_table,
+                        "target_table": target_table,
+                        "source_columns": source_columns,
+                        "target_columns": target_columns,
+                        "constraint": constraint,
+                        "direction": "forward",
+                        "join": forward_join,
+                    }
+                )
+                graph[target_table].append(
+                    {
+                        "source_table": target_table,
+                        "target_table": source_table,
+                        "source_columns": target_columns,
+                        "target_columns": source_columns,
+                        "constraint": constraint,
+                        "direction": "reverse",
+                        "join": reverse_join,
+                    }
+                )
+
+    for schema_catalog in catalogs.values():
+        for origin, table_info in schema_catalog.get("tabelas", {}).items():
+            paths = _semantic_paths_from(origin, graph, max_hops=max_hops, max_paths=max_paths)
+            if paths:
+                table_info["semantic_relationships"] = paths
+
+
+def _semantic_paths_from(
+    origin: str,
+    graph: dict[str, list[dict[str, Any]]],
+    max_hops: int,
+    max_paths: int,
+) -> list[dict[str, Any]]:
+    queue: deque[tuple[str, list[dict[str, Any]]]] = deque([(origin, [])])
+    paths: list[dict[str, Any]] = []
+    seen_targets: set[str] = set()
+
+    while queue and len(paths) < max_paths:
+        current, path = queue.popleft()
+        if len(path) >= max_hops:
+            continue
+        visited_tables = {origin}
+        visited_tables.update(step["source_table"] for step in path)
+        visited_tables.update(step["target_table"] for step in path)
+        for edge in graph.get(current, []):
+            target = edge["target_table"]
+            if target in visited_tables:
+                continue
+            new_path = path + [edge]
+            if target not in seen_targets:
+                seen_targets.add(target)
+                paths.append(
+                    {
+                        "origin": origin,
+                        "target": target,
+                        "hops": len(new_path),
+                        "path": new_path,
+                        "join_chain": [step["join"] for step in new_path],
+                    }
+                )
+                if len(paths) >= max_paths:
+                    break
+            queue.append((target, new_path))
+
+    return paths
 
 
 def fetch_dictionary(conn) -> tuple[dict[str, dict[str, Any]], dict[tuple[str, str], dict[str, Any]]]:
@@ -465,6 +558,7 @@ def main() -> None:
         dict_tables=dict_tables,
         dict_columns=dict_columns,
     )
+    build_semantic_relationships(catalogs)
 
     written = []
     for schema, catalog in catalogs.items():

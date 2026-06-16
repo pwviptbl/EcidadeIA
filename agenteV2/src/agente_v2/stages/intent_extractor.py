@@ -28,6 +28,8 @@ class IntentExtractor:
                 "intent": "string",
                 "confidence": "0..1",
                 "years": [2025, 2026],
+                "ranking_direction": "ASC|DESC",
+                "ranking_limit": 10,
                 "literal_filters": ["filtros citados literalmente"],
                 "requested_entities": ["entidades de negocio"],
                 "requested_metrics": ["metricas pedidas"],
@@ -47,15 +49,27 @@ class IntentExtractor:
     def _fallback(self, question: str) -> IntentSpec:
         text = question.lower()
         years = [int(item) for item in re.findall(r"\b(20\d{2})\b", text)]
+        ranking_direction = ""
+        ranking_limit = 0
         if len(years) >= 2 and any(term in text for term in ("compare", "compar", "aumento", "variacao", "variação")):
             intent = "compare_periods"
+        elif any(term in text for term in ("maior", "menor", "top", "ranking", "melhor", "pior", "mais alto", "mais baixo")):
+            intent = "ranking"
+            ranking_direction, ranking_limit = _infer_ranking_hint(text)
         elif any(term in text for term in ("quantos", "quantas", "quantidade", "total de")):
             intent = "count_by_dimension" if "por " in text else "detail_listing"
         elif any(term in text for term in ("soma", "valor", "total")):
             intent = "sum_by_dimension"
         else:
             intent = "knowledge_review"
-        return IntentSpec(intent=intent, confidence=0.35, years=years[:4], ambiguities=["fallback lexical usado"])
+        return IntentSpec(
+            intent=intent,
+            confidence=0.35,
+            years=years[:4],
+            ranking_direction=ranking_direction,
+            ranking_limit=ranking_limit,
+            ambiguities=["fallback lexical usado"],
+        )
 
 
 _SYSTEM = (
@@ -63,3 +77,18 @@ _SYSTEM = (
     "Sua saida deve ser JSON valido. "
     "Nao escreva SQL. Nao resolva tabelas. Nao explique."
 )
+
+
+def _infer_ranking_hint(text: str) -> tuple[str, int]:
+    direction = "DESC"
+    if any(term in text for term in ("menor", "menos", "pior", "mais baixo")):
+        direction = "ASC"
+    limit = 10
+    match = re.search(r"\btop\s*(\d+)\b", text)
+    if not match:
+        match = re.search(r"\bprimeir[oa]s?\s*(\d+)\b", text)
+    if match:
+        limit = max(1, int(match.group(1)))
+    elif any(term in text for term in ("maior", "menor", "melhor", "pior")):
+        limit = 1
+    return direction, limit

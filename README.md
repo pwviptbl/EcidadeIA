@@ -2,7 +2,7 @@
 
 Este repositorio junta runtime, conhecimento e ferramentas do MVP:
 
-- `agent/`: chat web que consulta o MCP, planeja a resposta e usa LLM para SQL/explicacao quando necessario.
+- `agenteV2/`: linha atual do agente e-Cidade, com pipeline catalogo + RAG + LLM.
 - `mcp/`: servidor MCP read-only para expor catalogo, RAG, metadata e consultas SQL seguras no banco e-Cidade.
 - `knowledge/manual/`: manual humano completo em Markdown.
 - `knowledge/rag/`: snippets operacionais derivados do manual para indexacao.
@@ -55,8 +55,8 @@ cd /home/dbseller/Modelos/MVP/mcp
 
   Em outro terminal:
 
-  cd /home/dbseller/Modelos/MVP/agent
-  .venv/bin/python app.py
+  cd /home/dbseller/Modelos/MVP/agenteV2
+  python3 run_phase6.py "sua pergunta"
 
   Antes de testar, se alterou knowledge/ ou catalog/, regenere:
 

@@ -4,7 +4,7 @@
 
 ```text
 MVP/
-  agent/
+  agenteV2/
   mcp/
   knowledge/
     manual/
@@ -21,7 +21,7 @@ Runtime fica separado de fonte de conhecimento e artefatos gerados.
 
 ## Responsabilidades
 
-- `agent/`: aplicacao web/chat.
+- `agenteV2/`: pipeline atual do agente e-Cidade.
 - `mcp/`: servidor MCP, validacao SQL e acesso read-only ao banco.
 - `knowledge/manual/`: Markdown completo editavel por humanos.
 - `knowledge/rag/`: snippets curtos consumidos pelo RAG.

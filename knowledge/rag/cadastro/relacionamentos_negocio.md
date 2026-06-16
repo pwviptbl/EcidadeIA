@@ -78,6 +78,37 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - Nao somar `iptucalv.j21_valor` sem classificar o historico.
   - Se filtrar construcoes, preferir `EXISTS` para nao multiplicar o valor calculado.
 
+### Receita de relacionamento: bairro_para_ranking_iptu
+
+- Quando usar: perguntas de maior/menor IPTU por bairro, top N de bairros ou ranking territorial do IPTU.
+- Origem de negocio: bairro.
+- Destino de negocio: valor calculado de IPTU por bairro.
+- Tabelas no caminho:
+  - `cadastro.bairro`
+  - `cadastro.lote`
+  - `cadastro.iptubase`
+  - `cadastro.iptucalv`
+  - `cadastro.iptucalh`
+- Caminho de negocio:
+  - bairro -> lote -> iptubase -> iptucalv -> iptucalh
+- Join logico:
+  - `bairro.j13_codi = lote.j34_bairro`
+  - `lote.j34_idbql = iptubase.j01_idbql`
+  - `iptubase.j01_matric = iptucalv.j21_matric`
+  - `iptucalv.j21_codhis = iptucalh.j17_codhis`
+- Filtros recomendados:
+  - Exercicio: `iptucalv.j21_anousu = :ano`.
+  - Somente IPTU: `position('iptu' in lower(iptucalh.j17_descr)) > 0`.
+  - Matriculas ativas: `iptubase.j01_baixa IS NULL`, se a pergunta pedir imoveis ativos.
+- Regra de ranking:
+  - Agrupar por `bairro.j13_codi` e `bairro.j13_descr`.
+  - Ordenar por `SUM(iptucalv.j21_valor)` em ordem decrescente.
+  - Para o maior IPTU, usar `LIMIT 1` ou `FETCH FIRST 1 ROW ONLY`.
+- Cuidados:
+  - Nao usar apenas `bairro` para ranking; o valor vem de `iptucalv` com classificacao de `iptucalh`.
+  - Nao explicar o resultado sem o filtro de historico de IPTU.
+  - Se a pergunta pedir "bairro com maior IPTU", esse caminho tem prioridade sobre listagens genéricas de bairro.
+
 ### Receita de relacionamento: matricula_para_construcoes
 
 - Quando usar: perguntas sobre construcoes de uma matricula, area construida ou construcoes ativas.

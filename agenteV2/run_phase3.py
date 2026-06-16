@@ -44,7 +44,7 @@ def main() -> None:
         question = " ".join(args.question).strip()
         phase1 = AgentV2Phase1().run(question)
 
-    artifact = SqlCompiler().run(phase1.intent_spec, phase1.business_spec, phase1.schema_plan)
+    artifact = SqlCompiler().run(phase1.intent_spec, phase1.business_spec, phase1.schema_plan, question=question)
     critic = SqlCritic().run(artifact, phase1.business_spec, phase1.schema_plan)
 
     payload = {

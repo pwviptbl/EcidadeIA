@@ -45,6 +45,7 @@
 - Para valores de IPTU por bairro, caminho recomendado:
   - `bairro -> lote -> iptubase -> iptucalv -> iptucalh`.
 - Aplicar filtro de historico para IPTU antes de somar valores.
+- Para maior IPTU por bairro, usar a receita `bairro_para_ranking_iptu`.
 
 ## Relacionamentos importantes
 
@@ -62,6 +63,7 @@
 
 - Nao inferir ruas do bairro direto de `bairro`; usar `ruasbairro`.
 - Nao inferir valores de IPTU por bairro sem passar pela matricula/lote.
+- Nao inferir ranking de IPTU por bairro sem ordenar a soma final por `iptucalv`.
 
 ## Cuidados
 

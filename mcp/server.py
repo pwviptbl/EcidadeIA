@@ -163,9 +163,23 @@ def ecidade_get_relationships(tables: list[str] | None = None) -> dict[str, Any]
         for fk in info.get("foreign_keys", []):
             relationships.append(
                 {
+                    "kind": "foreign_key",
                     "source_table": full_name,
                     "source_column": fk.get("column"),
                     "target": fk.get("references"),
+                }
+            )
+        for rel in info.get("semantic_relationships", []):
+            if not isinstance(rel, dict):
+                continue
+            relationships.append(
+                {
+                    "kind": "semantic_path",
+                    "source_table": full_name,
+                    "target_table": rel.get("target"),
+                    "hops": rel.get("hops"),
+                    "path": rel.get("path") or [],
+                    "join_chain": rel.get("join_chain") or [],
                 }
             )
     log_event("tool.relationships", {"tables": tables or [], "relationships": len(relationships)})

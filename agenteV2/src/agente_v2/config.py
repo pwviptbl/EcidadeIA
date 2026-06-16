@@ -23,7 +23,7 @@ def _load_env_file(path: Path, override: bool = False) -> None:
             os.environ[key] = value
 
 
-_load_env_file(REPO_DIR / "agent" / ".env", override=False)
+_load_env_file(REPO_DIR / ".env", override=False)
 _load_env_file(AGENTEV2_DIR / ".env", override=True)
 
 MCP_SERVER_URL = os.getenv("AGENTEV2_MCP_SERVER_URL", os.getenv("MCP_SERVER_URL", "http://127.0.0.1:8010/mcp")).rstrip("/")

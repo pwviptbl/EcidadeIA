@@ -45,7 +45,7 @@ def main() -> None:
         question = " ".join(args.question).strip()
         phase1 = AgentV2Phase1().run(question)
 
-    artifact = SqlCompiler().run(phase1.intent_spec, phase1.business_spec, phase1.schema_plan)
+    artifact = SqlCompiler().run(phase1.intent_spec, phase1.business_spec, phase1.schema_plan, question=phase1.question if hasattr(phase1, "question") else "")
     critic = SqlCritic().run(artifact, phase1.business_spec, phase1.schema_plan)
     repair = RepairLoop().run(phase1.intent_spec, phase1.business_spec, phase1.schema_plan, artifact, critic)
     execution = Executor().run(artifact, sql=repair.repaired_sql)

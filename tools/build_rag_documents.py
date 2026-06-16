@@ -260,6 +260,7 @@ def normalize_catalog(raw: dict) -> dict:
             "recommended": bool(table_info.get("recommended") if "recommended" in table_info else table_info.get("recomendada")),
             "columns": columns,
             "foreign_keys": foreign_keys,
+            "semantic_relationships": ensure_list(table_info.get("semantic_relationships") or table_info.get("relacionamentos_semanticos")),
         }
     return {
         **data,
@@ -563,6 +564,48 @@ def build_relationship_docs(domain: str, source_file: str, table_name: str, tabl
     return docs
 
 
+def build_semantic_relationship_docs(domain: str, source_file: str, table_name: str, table_info: dict) -> list[dict]:
+    docs: list[dict] = []
+    for rel in ensure_list(table_info.get("semantic_relationships")):
+        if not isinstance(rel, dict):
+            continue
+        path = rel.get("path") if isinstance(rel.get("path"), list) else []
+        path_tables = [str(step.get("source_table") or "").strip() for step in path if isinstance(step, dict)]
+        if path and isinstance(path[-1], dict):
+            path_tables.append(str(path[-1].get("target_table") or "").strip())
+        path_tables = [item for item in path_tables if item]
+        text = "\n".join(
+            [
+                f"Relacionamento semantico: {table_name} -> {rel.get('target', '')}",
+                f"Hops: {rel.get('hops', '')}",
+                f"Caminho: {' -> '.join(path_tables)}",
+                "Joins logicos:",
+                *(
+                    f"- {step.get('join', '')}"
+                    for step in path
+                    if isinstance(step, dict) and step.get("join")
+                ),
+            ]
+        )
+        docs.append(
+            {
+                "id": doc_id("semantic_relationship", table_name, rel.get("target", "") or str(rel.get("hops", ""))),
+                "kind": "relationship_recipe",
+                "metadata": {
+                    "domain": domain,
+                    "schema": domain,
+                    "source_file": source_file,
+                    "table": table_name,
+                    "target": rel.get("target"),
+                    "hops": rel.get("hops"),
+                    "semantic": True,
+                },
+                "text": text,
+            }
+        )
+    return docs
+
+
 def build_intent_docs(domain: str, source_file: str, intents: dict) -> list[dict]:
     docs: list[dict] = []
     for intent_name, info in (intents or {}).items():
@@ -672,6 +715,7 @@ def main() -> None:
             documents.append(build_table_doc(domain, source_file, table_name, table_info))
             documents.extend(build_column_docs(domain, source_file, table_name, table_info))
             documents.extend(build_relationship_docs(domain, source_file, table_name, table_info))
+            documents.extend(build_semantic_relationship_docs(domain, source_file, table_name, table_info))
             documents.extend(build_business_rule_docs(domain, source_file, table_name, table_info))
 
         documents.extend(build_intent_docs(domain, source_file, data.get("intents") or {}))

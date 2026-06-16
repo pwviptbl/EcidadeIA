@@ -60,6 +60,7 @@
 - Para contar matrículas por bairro, usar o bairro do lote vinculado à matrícula.
 - Para contar objetos de outros módulos por bairro, usar sempre o campo de bairro da tabela do módulo específico, quando existir.
 - Para análises oficiais, preferir agrupamento por `j13_codi` e exibir `j13_descr`, evitando agrupar apenas por nome.
+- Para maior IPTU por bairro, usar a receita `bairro_para_ranking_iptu` e ordenar pela soma de `iptucalv.j21_valor`.
 
 ### Regra de negocio para enriquecer
 
@@ -93,6 +94,7 @@
 - A ausência de relacionamento catalogado não significa que a tabela não seja usada por outros módulos; significa apenas que a FK não foi documentada ou inferida no catálogo.
 - Para imóveis por bairro, o caminho mais seguro é localizar o bairro no lote e depois relacionar o lote com a matrícula.
 - Para valores de IPTU por bairro, cruzar bairro com lote, iptubase e tabelas de cálculo/valores.
+- Para ranking de IPTU por bairro, usar o caminho bairro -> lote -> iptubase -> iptucalv -> iptucalh e ordenar a soma final.
 - Para alunos, contribuintes ou outros objetos por bairro, usar a tabela de endereço/localização específica do módulo.
 - Em bases migradas, bairros antigos podem ter sido consolidados, renomeados ou mantidos por compatibilidade.
 - Antes de comparar bairros entre municípios ou bases diferentes, validar se os códigos são locais e não padronizados nacionalmente.

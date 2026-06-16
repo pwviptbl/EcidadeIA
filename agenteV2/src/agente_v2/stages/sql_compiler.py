@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 import unicodedata
 from typing import Any
 
@@ -9,7 +10,13 @@ from agente_v2.infrastructure.logger import log_event
 
 
 class SqlCompiler:
-    def run(self, intent_spec: dict[str, Any], business_spec: dict[str, Any], schema_plan: dict[str, Any]) -> SqlArtifact:
+    def run(
+        self,
+        intent_spec: dict[str, Any],
+        business_spec: dict[str, Any],
+        schema_plan: dict[str, Any],
+        question: str = "",
+    ) -> SqlArtifact:
         operation = self._resolve_operation(intent_spec)
         if operation == "compare_periods":
             artifact = self._compile_compare_periods(intent_spec, business_spec, schema_plan)
@@ -17,6 +24,8 @@ class SqlCompiler:
             artifact = self._compile_count_by_dimension(business_spec, schema_plan)
         elif operation == "sum_by_dimension":
             artifact = self._compile_sum_by_dimension(business_spec, schema_plan)
+        elif operation == "ranking":
+            artifact = self._compile_ranking(question, intent_spec, business_spec, schema_plan)
         else:
             artifact = self._compile_detail_listing(business_spec, schema_plan)
         log_event("sql_compiler.done", artifact.to_dict())
@@ -24,7 +33,7 @@ class SqlCompiler:
 
     def _resolve_operation(self, intent_spec: dict[str, Any]) -> str:
         intent = str(intent_spec.get("intent") or "").strip()
-        if intent in {"compare_periods", "count_by_dimension", "sum_by_dimension", "detail_listing"}:
+        if intent in {"compare_periods", "count_by_dimension", "sum_by_dimension", "detail_listing", "ranking"}:
             return intent
         return "detail_listing"
 
@@ -145,6 +154,38 @@ class SqlCompiler:
             group_by=schema_plan.get("group_by") or [],
             time_axis=schema_plan.get("time_axis") if isinstance(schema_plan.get("time_axis"), dict) else {},
             notes=["Listagem compilada genericamente a partir do plano validado."],
+        )
+
+    def _compile_ranking(
+        self,
+        question: str,
+        intent_spec: dict[str, Any],
+        business_spec: dict[str, Any],
+        schema_plan: dict[str, Any],
+    ) -> SqlArtifact:
+        metric = _resolved_metrics(business_spec, schema_plan)[0]
+        group_by = _normalize_group_by(schema_plan.get("group_by") or [], business_spec, schema_plan)
+        if not group_by:
+            group_by = [
+                {
+                    "table": str((schema_plan.get("tables") or [""])[0]).strip(),
+                    "column": str(metric.get("column") or "").strip(),
+                }
+            ]
+        direction = _resolve_ranking_direction(question, intent_spec)
+        limit = _resolve_ranking_limit(question, intent_spec)
+        sql = _compile_ranked_aggregation(group_by=group_by, schema_plan=schema_plan, metric=metric, aggregate_alias=_metric_alias(metric), direction=direction, limit=limit)
+        return SqlArtifact(
+            operation="ranking",
+            sql=sql,
+            limit=limit,
+            tables=[_metric_table(metric, schema_plan)] if _metric_table(metric, schema_plan) else [],
+            joins=schema_plan.get("joins") or [],
+            filters=schema_plan.get("filters") or [],
+            metrics=[metric],
+            group_by=schema_plan.get("group_by") or [],
+            time_axis=schema_plan.get("time_axis") if isinstance(schema_plan.get("time_axis"), dict) else {},
+            notes=["Ranking compilado genericamente a partir do plano validado."],
         )
 
 
@@ -539,6 +580,58 @@ def _compile_direct_aggregation(schema_plan: dict[str, Any], metric: dict[str, A
     return "\n".join(lines)
 
 
+def _compile_ranked_aggregation(
+    group_by: list[dict[str, Any]],
+    schema_plan: dict[str, Any],
+    metric: dict[str, Any],
+    aggregate_alias: str,
+    direction: str,
+    limit: int,
+) -> str:
+    tables = [str(item).strip() for item in (schema_plan.get("tables") or []) if str(item).strip()]
+    aliases = {table: f"t{index + 1}" for index, table in enumerate(tables)}
+    if not tables:
+        raise ValueError("schema_plan exige tables para ranking")
+
+    select_parts = [
+        f"  {aliases[item['table']]}.{item['column']} AS {_selected_alias(item['table'], item['column'])}"
+        for item in group_by
+    ]
+    table = _metric_table(metric, schema_plan)
+    column = _metric_column(metric)
+    select_parts.append(f"  {_aggregation_expression(metric, _column_ref(aliases.get(table, table), column))} AS {aggregate_alias}")
+
+    lines = [
+        "SELECT",
+        ",\n".join(select_parts),
+        f"FROM {tables[0]} {aliases[tables[0]]}",
+    ]
+
+    for join in _merge_joins(schema_plan.get("joins") or []):
+        left_table = str(join.get("source_table") or join.get("left_table") or "").strip()
+        right_table = str(join.get("target_table") or join.get("right_table") or "").strip()
+        left_columns = _as_list(join.get("source_columns") or join.get("left_columns") or join.get("source_column") or join.get("left_column"))
+        right_columns = _as_list(join.get("target_columns") or join.get("right_columns") or join.get("target_column") or join.get("right_column"))
+        join_type = _normalize_join_type(join)
+        on_parts = []
+        for left, right in zip(left_columns, right_columns):
+            on_parts.append(f"{aliases[left_table]}.{left} = {aliases[right_table]}.{right}")
+        lines.append(f"{join_type} {right_table} {aliases[right_table]}")
+        lines.append(f"  ON {' AND '.join(on_parts)}")
+
+    where_parts = _compile_filters(schema_plan.get("filters") or [], aliases)
+    if where_parts:
+        lines.append("WHERE " + "\n  AND ".join(where_parts))
+
+    group_cols = ", ".join(f"{aliases[item['table']]}.{item['column']}" for item in group_by)
+    if group_cols:
+        lines.append(f"GROUP BY {group_cols}")
+    order_direction = "ASC" if direction.upper() == "ASC" else "DESC"
+    lines.append(f"ORDER BY {aggregate_alias} {order_direction}")
+    lines.append(f"LIMIT {max(1, int(limit or 10))}")
+    return "\n".join(lines)
+
+
 def _metric_alias(metric: dict[str, Any]) -> str:
     name = str(metric.get("metric_name") or metric.get("name") or "metric").strip().lower()
     name = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode("ascii")
@@ -581,3 +674,30 @@ def _as_list(value: Any) -> list[str]:
         return [str(item).strip() for item in value if str(item).strip()]
     text = str(value).strip()
     return [text] if text else []
+
+
+def _resolve_ranking_direction(question: str, intent_spec: dict[str, Any]) -> str:
+    direction = str(intent_spec.get("ranking_direction") or "").strip().upper()
+    if direction in {"ASC", "DESC"}:
+        return direction
+    text = question.lower()
+    if any(term in text for term in ("menor", "menos", "pior", "mais baixo")):
+        return "ASC"
+    return "DESC"
+
+
+def _resolve_ranking_limit(question: str, intent_spec: dict[str, Any]) -> int:
+    limit = intent_spec.get("ranking_limit")
+    if str(limit).isdigit():
+        value = int(limit)
+        if value > 0:
+            return value
+    text = question.lower()
+    match = re.search(r"\btop\s*(\d+)\b", text)
+    if not match:
+        match = re.search(r"\bprimeir[oa]s?\s*(\d+)\b", text)
+    if match:
+        return max(1, int(match.group(1)))
+    if any(term in text for term in ("maior", "menor", "melhor", "pior", "qual ", "quais ")):
+        return 1
+    return 10

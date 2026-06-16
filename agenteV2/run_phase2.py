@@ -22,7 +22,7 @@ def main() -> None:
 
     phase1 = AgentV2Phase1().run(args.question)
     compiler = SqlCompiler()
-    artifact = compiler.run(phase1.intent_spec, phase1.business_spec, phase1.schema_plan)
+    artifact = compiler.run(phase1.intent_spec, phase1.business_spec, phase1.schema_plan, question=phase1.question)
     payload = {
         "phase1": phase1.to_dict(),
         "sql_artifact": artifact.to_dict(),

@@ -18,11 +18,11 @@ Responsabilidades:
 
 ### Agente
 
-Diretorio: `agent/`
+Diretorio: `agenteV2/`
 
 Responsabilidades:
 
-- receber a pergunta pelo chat;
+- receber a pergunta pelo runner ou pela camada de integracao;
 - chamar ferramentas MCP;
 - selecionar rota/tabelas;
 - montar contexto para SQL;
