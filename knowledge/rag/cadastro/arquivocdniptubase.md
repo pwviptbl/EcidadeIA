@@ -34,11 +34,18 @@
 ### Regra de negocio para enriquecer
 
 - O que esta tabela representa no negocio?
+- Históricos que classificam o tipo de valor calculado e separam IPTU de outras receitas, como taxa de lixo, isenção e descontos.
 - Quando ela deve ser preferida sobre outras tabelas parecidas?
+- Quando a pergunta depende da classificação do valor calculado e não apenas do valor bruto.
 - Que perguntas ela responde bem?
+- Quais históricos classificam IPTU, taxa de lixo, isenção ou desconto?
+- Qual componente foi lançado no cálculo?
 - Que filtros de negocio sao seguros?
+- Classificação local do histórico.
 - O que nao pode ser inferido a partir dela?
+- Não inferir que toda descrição com IPTU seja padrão nacional; a nomenclatura pode variar por município.
 
 ### Cuidados / riscos
 
-- Preencher com ambiguidades, excecoes e limites conhecidos.
+- `j17_descr` pode variar entre municípios e até entre configurações do mesmo ambiente.
+- `j01_baixa` não é um filtro necessário para valor calculado, salvo quando a pergunta pedir ativos.

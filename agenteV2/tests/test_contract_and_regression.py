@@ -333,7 +333,7 @@ class RegressionFixturesTest(unittest.TestCase):
                 {
                     "table": "cadastro.iptubase",
                     "column": "j01_baixa",
-                    "rule_code": "is_null",
+                    "operator": "IS NULL",
                     "description": "Filtra matrículas que não possuem data de baixa, indicando que estão ativas.",
                 }
             ],
@@ -357,7 +357,7 @@ class RegressionFixturesTest(unittest.TestCase):
                 {
                     "table": "cadastro.iptubase",
                     "column": "j01_baixa",
-                    "rule_code": "is_null",
+                    "operator": "IS NULL",
                     "description": "Filtra matrículas que não possuem data de baixa, indicando que estão ativas.",
                 }
             ],
@@ -386,8 +386,8 @@ class RegressionFixturesTest(unittest.TestCase):
                 {
                     "table": "cadastro.iptucalh",
                     "column": "j17_descr",
-                    "rule_code": "iptu_classification",
-                    "rule_params": {"column": "cadastro.iptucalh.j17_descr", "keyword": "iptu"},
+                    "operator": "CONTAINS",
+                    "value": "iptu",
                     "description": "Classificar o valor calculado como IPTU.",
                 },
             ],
@@ -410,9 +410,8 @@ class RegressionFixturesTest(unittest.TestCase):
                 {
                     "table": "cadastro.iptucalh",
                     "column": "j17_descr",
-                    "rule_code": "iptu_classification",
-                    "rule_params": {"column": "cadastro.iptucalh.j17_descr", "keyword": "iptu"},
-                    "description": "Classificar o valor calculado como IPTU.",
+                    "operator": "CONTAINS",
+                    "value": "iptu",
                 },
             ],
             "risks": [],
@@ -423,6 +422,57 @@ class RegressionFixturesTest(unittest.TestCase):
         self.assertIn("position(lower('iptu') in lower(t5.j17_descr)) > 0", artifact.sql.lower())
         self.assertIn("t4.j21_anousu = 2025", artifact.sql)
         self.assertTrue(critic.ok)
+
+    def test_compile_and_critic_ranking_accepts_contains_case_insensitive_rule(self) -> None:
+        intent = {"intent": "ranking", "ranking_direction": "DESC", "ranking_limit": 1}
+        business = {
+            "metrics": [
+                {
+                    "metric_name": "IPTU",
+                    "table": "cadastro.iptucalv",
+                    "column": "j21_valor",
+                    "aggregation": "SUM",
+                }
+            ],
+            "filters": [
+                {"table": "cadastro.iptucalv", "column": "j21_anousu", "operator": "EQUAL", "value": 2025},
+                {
+                    "table": "cadastro.iptucalh",
+                    "column": "j17_descr",
+                    "operator": "CONTAINS",
+                    "value": "iptu",
+                    "description": "Filtrar valores que são classificados como IPTU.",
+                },
+            ],
+        }
+        schema_plan = {
+            "entity": "Bairro",
+            "grain": ["cadastro.bairro.j13_codi"],
+            "time_axis": {"table": "cadastro.iptucalv", "column": "j21_anousu"},
+            "tables": ["cadastro.bairro", "cadastro.lote", "cadastro.iptubase", "cadastro.iptucalv", "cadastro.iptucalh"],
+            "joins": [
+                {"source_table": "cadastro.bairro", "source_columns": ["j13_codi"], "target_table": "cadastro.lote", "target_columns": ["j34_bairro"], "join_type": "JOIN"},
+                {"source_table": "cadastro.lote", "source_columns": ["j34_idbql"], "target_table": "cadastro.iptubase", "target_columns": ["j01_idbql"], "join_type": "JOIN"},
+                {"source_table": "cadastro.iptubase", "source_columns": ["j01_matric"], "target_table": "cadastro.iptucalv", "target_columns": ["j21_matric"], "join_type": "JOIN"},
+                {"source_table": "cadastro.iptucalv", "source_columns": ["j21_codhis"], "target_table": "cadastro.iptucalh", "target_columns": ["j17_codhis"], "join_type": "JOIN"},
+            ],
+            "group_by": [{"table": "cadastro.bairro", "column": "j13_codi"}],
+            "metrics": [{"metric_name": "IPTU", "table": "cadastro.iptucalv", "column": "j21_valor", "aggregation": "SUM"}],
+            "filters": [
+                {"table": "cadastro.iptucalv", "column": "j21_anousu", "operator": "EQUAL", "value": 2025},
+                {
+                    "table": "cadastro.iptucalh",
+                    "column": "j17_descr",
+                    "operator": "CONTAINS",
+                    "value": "iptu",
+                },
+            ],
+            "risks": [],
+            "open_questions": [],
+        }
+        artifact = SqlCompiler().run(intent, business, schema_plan, question="Qual Bairro teve o maior IPTU em 2025?")
+        self.assertIn("position(lower('iptu') in lower(t5.j17_descr)) > 0", artifact.sql.lower())
+        self.assertIn("t4.j21_anousu = 2025", artifact.sql)
 
     def test_executor_uses_readonly_query(self) -> None:
         class FakeMcp:

@@ -80,9 +80,12 @@ def normalize_filter(item: Any) -> dict[str, Any]:
     elif isinstance(item.get("value"), list) and item.get("value"):
         out["operator"] = "IN"
         out["value"] = item["value"]
-    elif item.get("operator") and item.get("value") is not None:
-        out["operator"] = str(item.get("operator")).strip().upper()
-        out["value"] = item.get("value")
+    elif item.get("operator"):
+        operator = str(item.get("operator")).strip().upper()
+        if item.get("value") is not None or operator in {"IS NULL", "IS NOT NULL"}:
+            out["operator"] = operator
+            if item.get("value") is not None:
+                out["value"] = item.get("value")
     elif item.get("condition"):
         out.update(_parse_condition(table, column, str(item.get("condition")).strip()))
 

@@ -28,10 +28,14 @@
 
 ### Semantica de filtros
 
-- `j17_descr` e uma classificacao local do historico, nao um nome fixo universal.
-- Pode representar IPTU, taxa de lixo, isencao, desconto ou outro componente tributario conforme o municipio.
-- Para IPTU puro, usar a classificacao local equivalente a IPTU; quando nao houver codificacao valida, a descricao contendo IPTU e a regra padrao.
-- Para perguntas de soma de IPTU, o historico e obrigatorio; `j01_baixa` nao entra se a pergunta nao pedir imoveis ativos.
+- Regra catalogada `historico_iptu_local`:
+  - `table: cadastro.iptucalh`
+  - `column: j17_descr`
+  - `operator: CONTAINS`
+  - `value: iptu`
+  - Observacao: a descricao do historico deve ser tratada como classificacao local, nao como nome fixo universal.
+- Para perguntas de soma de IPTU, a classificacao do historico e obrigatoria; `j01_baixa` nao e filtro necessario se a pergunta nao pedir imoveis ativos.
+- Para taxas, isencoes e descontos, usar a descricao do historico para separar o componente correto.
 
 ### Regra de negocio para enriquecer
 
@@ -43,5 +47,4 @@
 
 ### Cuidados / riscos
 
-- `j17_descr` pode variar entre municipios e ate entre configuracoes do mesmo ambiente.
-- `j01_baixa` nao e um filtro necessario para valor calculado, salvo quando a pergunta pedir ativos.
+- Preencher com ambiguidades, excecoes e limites conhecidos.

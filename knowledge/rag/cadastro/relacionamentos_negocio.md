@@ -48,7 +48,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `lote.j34_idbql = iptubase.j01_idbql`
 - Cardinalidade: um bairro possui varios lotes; um lote pode estar ligado a uma ou mais matriculas.
 - Filtros recomendados:
-  - Matriculas ativas: `iptubase.j01_baixa IS NULL`.
+  - Regra catalogada `matricula_ativa`: `iptubase.j01_baixa IS NULL`.
 - Cuidados:
   - Para contar imoveis por bairro, usar `COUNT(DISTINCT iptubase.j01_matric)` quando houver joins com tabelas de detalhe.
 
@@ -72,8 +72,8 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `iptucalv.j21_codhis = iptucalh.j17_codhis`
 - Filtros recomendados:
   - Exercicio: `iptucalv.j21_anousu = :ano`.
-  - Somente IPTU: `position('iptu' in lower(iptucalh.j17_descr)) > 0`, ou a regra local equivalente do municipio.
-  - Matriculas ativas: `iptubase.j01_baixa IS NULL`, somente quando a pergunta pedir imoveis ativos.
+  - Regra catalogada `historico_iptu_local`: `iptucalh.j17_descr` contendo `iptu`, ou a regra local equivalente do municipio.
+  - Regra catalogada `matricula_ativa`: `iptubase.j01_baixa IS NULL`, somente quando a pergunta pedir imoveis ativos.
 - Cuidados:
   - Nao somar `iptucalv.j21_valor` sem classificar o historico.
   - O historico pode variar entre municipios e incluir IPTU, taxa de lixo, isencao ou desconto.
@@ -99,17 +99,14 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `iptucalv.j21_codhis = iptucalh.j17_codhis`
 - Filtros recomendados:
   - Exercicio: `iptucalv.j21_anousu = :ano`.
-  - Somente IPTU: `position('iptu' in lower(iptucalh.j17_descr)) > 0`, ou a regra local equivalente do municipio.
-  - Matriculas ativas: `iptubase.j01_baixa IS NULL`, se a pergunta pedir imoveis ativos.
+  - Regra catalogada `historico_iptu_local`: `iptucalh.j17_descr` contendo `iptu`, ou a regra local equivalente do municipio.
+  - Regra catalogada `matricula_ativa`: `iptubase.j01_baixa IS NULL`, se a pergunta pedir imoveis ativos.
 - Regra de ranking:
   - Agrupar por `bairro.j13_codi` e `bairro.j13_descr`.
   - Ordenar por `SUM(iptucalv.j21_valor)` em ordem decrescente.
   - Para o maior IPTU, usar `LIMIT 1` ou `FETCH FIRST 1 ROW ONLY`.
 - Cuidados:
   - Nao usar apenas `bairro` para ranking; o valor vem de `iptucalv` com classificacao de `iptucalh`.
-  - O historico pode variar entre municipios e incluir IPTU, taxa de lixo, isencao ou desconto.
-  - Nao explicar o resultado sem o filtro de historico de IPTU.
-  - Se a pergunta pedir "bairro com maior IPTU", esse caminho tem prioridade sobre listagens genéricas de bairro.
 
 ### Receita de relacionamento: matricula_para_construcoes
 

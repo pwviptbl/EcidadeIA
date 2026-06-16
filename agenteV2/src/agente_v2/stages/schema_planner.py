@@ -26,6 +26,8 @@ class SchemaPlanner:
                 "Monte um plano de esquema para responder a pergunta. "
                 "Escolha tabelas, grao, eixo temporal, joins e agrupamentos. "
                 "Nao escreva SQL. Use colunas reais no grain e filtros estruturados. "
+                "Exemplos: matricula_ativa -> cadastro.iptubase.j01_baixa com operator IS NULL; "
+                "historico_iptu_local -> cadastro.iptucalh.j17_descr com operator CONTAINS e value iptu. "
                 "Nao use condition com SQL bruto."
             ),
             "question": question,

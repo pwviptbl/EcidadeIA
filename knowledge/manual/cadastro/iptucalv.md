@@ -46,7 +46,13 @@
 - Matricula: `j21_matric`.
 - Receita: `j21_receit`.
 - Historico: `j21_codhis`.
-- Somente IPTU: classificar por `cadastro.iptucalh` usando `j21_codhis`; a descrição do histórico pode variar entre municípios e incluir IPTU, taxa de lixo, isenção ou desconto.
+- Regra catalogada: `historico_iptu_local`.
+  - table: `cadastro.iptucalh`
+  - column: `j17_descr`
+  - operator: `CONTAINS`
+  - value: `iptu`
+  - observacao: a descricao do historico pode variar entre municipios e incluir IPTU, taxa de lixo, isencao ou desconto.
+- Somente IPTU: classificar por `cadastro.iptucalh` usando `j21_codhis`.
 
 ## Classificacao obrigatoria
 

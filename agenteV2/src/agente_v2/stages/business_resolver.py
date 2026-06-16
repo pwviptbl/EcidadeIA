@@ -18,7 +18,10 @@ class BusinessResolver:
             "task": (
                 "Resolva termos humanos usando somente as evidencias de negocio do contexto. "
                 "Nao gere SQL. Retorne regras, metricas, filtros e riscos em JSON. "
-                "Filtros devem ser estruturados com operator/value ou rule_code/rule_params. "
+                "Filtros devem ser estruturados com table/column/operator/value. "
+                "Exemplos: matricula_ativa -> {table: cadastro.iptubase, column: j01_baixa, operator: IS NULL}; "
+                "historico_iptu_local -> {table: cadastro.iptucalh, column: j17_descr, operator: CONTAINS, value: iptu}. "
+                "Quando a regra vier do catalogo, use o nome da regra apenas como referencia e mantenha a execucao em operador generico. "
                 "Nao use condition com SQL bruto."
             ),
             "question": question,
@@ -63,7 +66,6 @@ class BusinessResolver:
         filters = [normalize_filter(item) for item in (result.get("filters") or []) if isinstance(item, dict)]
         dimensions = [normalize_dimension(item) for item in (result.get("dimensions") or []) if isinstance(item, dict)]
         metrics = _merge_metrics_from_resolved_terms(metrics, result.get("resolved_terms") or [])
-        filters.extend(_filters_from_resolved_terms(result.get("resolved_terms") or []))
         return {
             "resolved_terms": result.get("resolved_terms") if isinstance(result.get("resolved_terms"), list) else [],
             "metrics": metrics,
@@ -79,34 +81,12 @@ _SYSTEM = (
     "Voce e o BusinessResolver do AgenteV2. "
     "Use apenas regras de negocio, conceitos e receitas presentes no contexto. "
     "Nao escreva SQL. Nao invente coluna. "
-    "Filtros especiais devem ser representados por rule_code e rule_params, nunca por SQL bruto. "
+    "Filtros devem sair como table/column/operator/value. "
+    "Exemplos: matricula_ativa usa cadastro.iptubase.j01_baixa com operador IS NULL; "
+    "historico_iptu_local usa cadastro.iptucalh.j17_descr com operador CONTAINS e valor iptu. "
+    "Se a regra de negocio estiver catalogada, cite-a na descricao, mas mantenha a parte executavel como operador generico. "
     "Saida somente JSON."
 )
-
-
-def _filters_from_resolved_terms(resolved_terms: list[Any]) -> list[dict[str, Any]]:
-    filters: list[dict[str, Any]] = []
-    for item in resolved_terms:
-        if not isinstance(item, dict):
-            continue
-        rule_code = str(item.get("rule_code") or "").strip()
-        if not rule_code:
-            entity_type = str(item.get("entity_type") or "").strip().lower()
-            resolved_value = str(item.get("resolved_value") or "").strip().lower()
-            human_term = str(item.get("human_term") or "").strip().lower()
-            if entity_type == "rule" and any(term in f"{human_term} {resolved_value}" for term in ("ativa", "ativas", "ativo", "ativos", "atualmente")):
-                rule_code = "matricula_ativa"
-        if rule_code == "matricula_ativa":
-            filters.append(
-                {
-                    "filter_name": "matricula_ativa",
-                    "table": "cadastro.iptubase",
-                    "column": "j01_baixa",
-                    "rule_code": "matricula_ativa",
-                    "description": str(item.get("description") or item.get("resolved_value") or "Matrículas sem baixa").strip(),
-                }
-            )
-    return filters
 
 
 def _merge_metrics_from_resolved_terms(metrics: list[dict[str, Any]], resolved_terms: list[Any]) -> list[dict[str, Any]]:

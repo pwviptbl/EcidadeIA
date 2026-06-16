@@ -39,7 +39,6 @@
 - Para comparar anos, comparar a mesma `j21_matric` e, quando necessário, a mesma `j21_receit`.
 - Para análise de IPTU puro, é obrigatório identificar quais códigos de `j21_receit` correspondem ao IPTU.
 - Para análise de taxas, é obrigatório identificar quais códigos de `j21_receit` correspondem a cada taxa.
-- Sem filtro de historico/classificacao, a soma de `j21_valor` pode misturar IPTU, taxa de lixo, isencao e desconto.
 
 ### Regra de negocio para enriquecer
 
@@ -72,7 +71,6 @@
 - Para somar taxa de lixo corretamente, é necessário filtrar os códigos de receita correspondentes à taxa.
 - Sem filtro por `j21_receit`, a soma de `j21_valor` pode misturar IPTU, taxas e outros componentes.
 - Sem filtro por `j21_anousu`, a soma mistura exercícios diferentes.
-- Em perguntas de valor calculado, `iptubase.j01_baixa` nao e filtro obrigatorio; use-o apenas quando a pergunta pedir imoveis ativos.
 - Sem agrupamento correto, uma matrícula pode ser duplicada por possuir várias receitas ou históricos.
 - `j21_valor` representa valor calculado, não valor lançado definitivamente, pago ou arrecadado.
 - `j21_quant` pode ter significado diferente conforme a receita/histórico. Validar antes de usar como métrica de negócio.

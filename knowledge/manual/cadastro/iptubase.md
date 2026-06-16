@@ -34,7 +34,12 @@
 
 ## Filtros de negocio
 
-- Matricula ativa: `j01_baixa IS NULL`.
+- Regra catalogada: `matricula_ativa`.
+  - table: `cadastro.iptubase`
+  - column: `j01_baixa`
+  - operator: `IS NULL`
+  - value: `NULL`
+  - uso: perguntas de ativos.
 - Matricula baixada: `j01_baixa IS NOT NULL`.
 - Lote especifico: `j01_idbql = :idbql`.
 - Proprietario principal: `j01_numcgm = :numcgm`.
