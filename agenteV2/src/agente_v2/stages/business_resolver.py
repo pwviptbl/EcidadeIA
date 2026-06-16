@@ -27,7 +27,7 @@ class BusinessResolver:
             "context": compact_context(context),
             "response_schema": {
                 "resolved_terms": [],
-                "metrics": [],
+                "metrics": [{"metric_name": "nome", "table": "opcional", "column": "opcional", "aggregation": "opcional", "custom_expression": "opcional"}],
                 "filters": [],
                 "dimensions": [],
                 "business_risks": [],

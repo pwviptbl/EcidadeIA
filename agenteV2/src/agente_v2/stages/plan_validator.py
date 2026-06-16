@@ -39,6 +39,8 @@ class PlanValidator:
         filters = _resolve_named_items(schema_plan.get("filters") or [], business_spec.get("filters") or [], "filter_name")
 
         for index, metric in enumerate(metrics):
+            if isinstance(metric, dict) and metric.get("custom_expression"):
+                continue
             if isinstance(metric, dict) and str(metric.get("aggregation") or "").upper() in {"COUNT", "COUNT_DISTINCT"}:
                 self._validate_count_metric(metric, known_columns, errors, f"metric[{index}]")
             else:

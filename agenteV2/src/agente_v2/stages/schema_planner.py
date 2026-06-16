@@ -39,7 +39,7 @@ class SchemaPlanner:
                 "tables": [],
                 "joins": [],
                 "group_by": [],
-                "metrics": [],
+                "metrics": [{"metric_name": "nome", "table": "opcional", "column": "opcional", "aggregation": "opcional", "custom_expression": "opcional_formula_sql"}],
                 "filters": [],
                 "risks": [],
                 "open_questions": [],

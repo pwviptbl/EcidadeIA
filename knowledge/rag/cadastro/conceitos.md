@@ -207,3 +207,34 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
 - Regra de contagem:
   - Para contar lotes com caracteristica, usar `COUNT(DISTINCT j35_idbql)`.
   - Para contar matriculas/imoveis com caracteristica de lote, cruzar com `iptubase` e usar `COUNT(DISTINCT j01_matric)`.
+
+### Conceito de negocio: carga_tributaria_por_m2
+
+- Nome humano: carga tributária por metro quadrado.
+- Perguntas comuns:
+  - Qual bairro tem a maior carga tributária por m²?
+  - Calcule a razao de IPTU por area.
+- Significado: a razão entre o valor total do IPTU calculado e a área territorial considerada no momento do cálculo.
+- Entidade principal: valor derivado de calculo territorial.
+- Tabelas envolvidas:
+  - `cadastro.iptucalv`
+  - `cadastro.iptucalh`
+  - `cadastro.iptucalc`
+  - `cadastro.iptubase`
+  - `cadastro.lote`
+  - `cadastro.bairro`
+- Caminho de negocio:
+  - `iptucalv.j21_codhis -> iptucalh.j17_codhis`
+  - `iptucalv.j21_matric, iptucalv.j21_anousu -> iptucalc.j23_matric, iptucalc.j23_anousu`
+  - `iptucalv.j21_matric -> iptubase.j01_matric`
+  - `iptubase.j01_idbql -> lote.j34_idbql`
+  - `lote.j34_bairro -> bairro.j13_codi`
+- Filtros recomendados:
+  - Exercicio em `iptucalv.j21_anousu` e `iptucalc.j23_anousu`.
+  - Somente IPTU: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `CONTAINS_CI` e valor `iptu`.
+  - Matricula ativa: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`.
+- Regra de construcao de metrica:
+  - Se pedir a razao ou carga tributaria, você DEVE gerar um campo `custom_expression` no JSON da métrica em vez de `aggregation`.
+  - Exemplo de `custom_expression`: `SUM(cadastro.iptucalv.j21_valor) / NULLIF(SUM(cadastro.iptucalc.j23_arealo), 0)`
+- Cuidados:
+  - Como `iptucalv` pode ter varias receitas, o filtro `CONTAINS_CI` com valor `iptu` no `j17_descr` é estritamente necessario.

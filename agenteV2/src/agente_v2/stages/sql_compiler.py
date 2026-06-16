@@ -78,6 +78,8 @@ class SqlCompiler:
 
     def _compile_count_by_dimension(self, business_spec: dict[str, Any], schema_plan: dict[str, Any]) -> SqlArtifact:
         metric = _resolved_metrics(business_spec, schema_plan)[0]
+        if not metric.get("aggregation"):
+            metric["aggregation"] = "COUNT_DISTINCT"
         table = _metric_table(metric, schema_plan)
         column = _metric_column(metric)
         alias = _metric_alias(metric)
@@ -292,7 +294,8 @@ def _compile_filters(filters: list[Any], aliases: dict[str, str]) -> list[str]:
             values_sql = ", ".join(_sql_literal(v) for v in value)
             where_parts.append(f"{expr} IN ({values_sql})")
         elif operator in {"LIKE", "ILIKE"}:
-            where_parts.append(f"{expr} {operator} {_sql_literal(value)}")
+            escaped_val = _sql_literal(value).replace("%", "%%")
+            where_parts.append(f"{expr} {operator} {escaped_val}")
         elif operator in {"CONTAINS", "CONTAINS_CI", "CONTAINS_CASE_INSENSITIVE"}:
             if value is not None:
                 where_parts.append(f"position(lower({_sql_literal(str(value))}) in lower({expr})) > 0")
@@ -510,9 +513,17 @@ def _column_ref(table: str, column: str) -> str:
     return f"{table}.{column}" if table and column else column
 
 
-def _aggregation_expression(metric: dict[str, Any], column_ref: str) -> str:
+def _aggregation_expression(metric: dict[str, Any], column_ref: str, aliases: dict[str, str] = None) -> str:
+    custom_expr = metric.get("custom_expression")
+    if custom_expr:
+        expr = str(custom_expr)
+        if aliases:
+            for table, alias in aliases.items():
+                expr = expr.replace(f"{table}.", f"{alias}.")
+        return expr
+        
     agg = str(metric.get("aggregation") or "SUM").strip().upper()
-    if agg == "COUNT_DISTINCT" and column_ref:
+    if agg in {"COUNT_DISTINCT", "COUNT(DISTINCT)"} and column_ref:
         return f"COUNT(DISTINCT {column_ref})"
     if agg == "COUNT" and column_ref:
         return f"COUNT({column_ref})"
@@ -538,7 +549,7 @@ def _compile_grouped_aggregation(
     ]
     table = _metric_table(metric, schema_plan)
     column = _metric_column(metric)
-    select_parts.append(f"  {_aggregation_expression(metric, _column_ref(aliases.get(table, table), column))} AS {aggregate_alias}")
+    select_parts.append(f"  {_aggregation_expression(metric, _column_ref(aliases.get(table, table), column), aliases)} AS {aggregate_alias}")
 
     lines = [
         "SELECT",
@@ -580,7 +591,7 @@ def _compile_direct_aggregation(schema_plan: dict[str, Any], metric: dict[str, A
     table = _metric_table(metric, schema_plan)
     column = _metric_column(metric)
     table_alias = aliases.get(table, aliases[tables[0]])
-    select_expr = _aggregation_expression(metric, f"{table_alias}.{column}")
+    select_expr = _aggregation_expression(metric, f"{table_alias}.{column}", aliases)
     lines = [
         "SELECT",
         f"  {select_expr} AS {aggregate_alias}",
@@ -624,7 +635,7 @@ def _compile_ranked_aggregation(
     ]
     table = _metric_table(metric, schema_plan)
     column = _metric_column(metric)
-    select_parts.append(f"  {_aggregation_expression(metric, _column_ref(aliases.get(table, table), column))} AS {aggregate_alias}")
+    select_parts.append(f"  {_aggregation_expression(metric, _column_ref(aliases.get(table, table), column), aliases)} AS {aggregate_alias}")
 
     lines = [
         "SELECT",

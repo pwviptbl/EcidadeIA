@@ -28,7 +28,7 @@ def normalize_metric(item: Any) -> dict[str, Any]:
         "column": column,
         "aggregation": aggregation,
     }
-    for key in ("description", "rule_code", "rule_params"):
+    for key in ("description", "rule_code", "rule_params", "custom_expression"):
         if item.get(key):
             out[key] = item.get(key)
     return {key: value for key, value in out.items() if value not in ("", None, [], {})}
