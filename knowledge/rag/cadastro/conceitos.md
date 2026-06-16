@@ -122,7 +122,7 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `iptucalv.j21_codhis -> iptucalh.j17_codhis`
 - Filtros de negocio:
   - Exercicio em `iptucalv.j21_anousu`.
-  - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `CONTAINS_CI` e valor `iptu`, ou a regra local equivalente do municipio.
+  - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS_CI ou LIKE, pois absorvem descricoes como 'ISENÇÃO IPTU'.
 - Regra de contagem/soma:
   - Para somar IPTU, nao somar `j21_valor` puro por ano sem classificar o historico.
 - O que nao inferir:
@@ -231,10 +231,10 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `lote.j34_bairro -> bairro.j13_codi`
 - Filtros recomendados:
   - Exercicio em `iptucalv.j21_anousu` e `iptucalc.j23_anousu`.
-  - Somente IPTU: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `CONTAINS_CI` e valor `iptu`.
+  - Somente IPTU: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS ou LIKE, pois isso absorve indevidamente rubricas como 'ISENÇÃO IPTU' ou 'TAXA DE LIXO COM IPTU'.
   - Matricula ativa: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`.
 - Regra de construcao de metrica:
   - Se pedir a razao ou carga tributaria, você DEVE gerar um campo `custom_expression` no JSON da métrica em vez de `aggregation`.
   - Exemplo de `custom_expression`: `SUM(cadastro.iptucalv.j21_valor) / NULLIF(SUM(cadastro.iptucalc.j23_arealo), 0)`
 - Cuidados:
-  - Como `iptucalv` pode ter varias receitas, o filtro `CONTAINS_CI` com valor `iptu` no `j17_descr` é estritamente necessario.
+  - Como `iptucalv` pode ter varias receitas, o filtro `EQUALS` com valor exato `IPTU` no `j17_descr` é estritamente necessario.

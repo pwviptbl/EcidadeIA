@@ -72,7 +72,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `iptucalv.j21_codhis = iptucalh.j17_codhis`
 - Filtros recomendados:
   - Exercicio: `iptucalv.j21_anousu = :ano`.
-  - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `CONTAINS_CI` e valor `iptu`, ou a regra local equivalente do municipio.
+  - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS_CI ou LIKE, pois absorvem descricoes como 'ISENÇÃO IPTU'.
   - Regra catalogada `matricula_ativa`: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`, somente quando a pergunta pedir imoveis ativos.
 - Cuidados:
   - Nao somar `iptucalv.j21_valor` sem classificar o historico.
@@ -99,7 +99,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `iptucalv.j21_codhis = iptucalh.j17_codhis`
 - Filtros recomendados:
   - Exercicio: `iptucalv.j21_anousu = :ano`.
-  - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `CONTAINS_CI` e valor `iptu`, ou a regra local equivalente do municipio.
+  - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS_CI ou LIKE, pois absorvem descricoes como 'ISENÇÃO IPTU'.
   - Regra catalogada `matricula_ativa`: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`, se a pergunta pedir imoveis ativos.
 - Regra de ranking:
   - Agrupar por `bairro.j13_codi` e `bairro.j13_descr`.
@@ -188,7 +188,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
 - Join logico:
   - `iptucalv.j21_codhis = iptucalh.j17_codhis`
 - Filtros recomendados:
-  - Somente IPTU: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `CONTAINS_CI` e valor `iptu`, ou a regra local equivalente do municipio.
+  - Somente IPTU: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS_CI ou LIKE.
   - Exercicio: `iptucalv.j21_anousu = :ano`.
 - Cuidados:
   - `iptucalv` pode misturar IPTU, taxas e outros componentes.
@@ -211,7 +211,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `iptucalv.j21_matric = iptucalc.j23_matric`
   - `iptucalv.j21_anousu = iptucalc.j23_anousu`
 - Filtros recomendados:
-  - Somente IPTU: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `CONTAINS_CI` e valor `iptu`.
+  - Somente IPTU: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS_CI ou LIKE.
   - Exercicios: `iptucalv.j21_anousu IN (:ano_base, :ano_comparado)` e `iptucalc.j23_anousu IN (:ano_base, :ano_comparado)`.
 - Metricas que devem ser comparadas:
   - Valor final do IPTU por ano: `SUM(iptucalv.j21_valor)` filtrando somente IPTU.
