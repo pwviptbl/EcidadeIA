@@ -30,6 +30,18 @@ passar por plano estruturado, validacao e critica.
 
 Detalhes em [docs/arquitetura.md](docs/arquitetura.md).
 
+## Enriquecimento
+
+A V2 usa a mesma raiz `knowledge/manual/*`, mas com contrato mais claro de
+preenchimento. O guia pratico esta em
+[docs/estrutura-conhecimento.md](docs/estrutura-conhecimento.md).
+
+Modelos editaveis para consultor:
+
+- `knowledge/manual/_modelos/conceito_negocio.md`
+- `knowledge/manual/_modelos/receita_relacionamento.md`
+- `knowledge/manual/_modelos/tabela_negocio.md`
+
 ## Estrutura
 
 ```text
@@ -52,3 +64,25 @@ Padrao recomendado para a V2:
 - JSON mode ou structured output sempre que a etapa retornar contrato.
 
 Detalhes em [docs/modelos.md](docs/modelos.md).
+
+## Fase 1
+
+A primeira fase executavel monta plano e para antes de SQL.
+
+```bash
+cd /home/dbseller/Modelos/MVP
+python3 agenteV2/run_phase1.py "Compare o IPTU 2025 e 2026 e explique os principais fatores de aumento"
+```
+
+Detalhes em [docs/fase1.md](docs/fase1.md).
+
+## Fase 2
+
+Compila o plano validado para SQL auditavel.
+
+```bash
+cd /home/dbseller/Modelos/MVP
+python3 agenteV2/run_phase2.py "Compare o IPTU 2025 e 2026 e explique os principais fatores de aumento"
+```
+
+Detalhes em [docs/arquitetura.md](docs/arquitetura.md).

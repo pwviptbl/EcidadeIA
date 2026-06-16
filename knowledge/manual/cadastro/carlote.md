@@ -1,168 +1,74 @@
-# ecidade-carlote-schema-referencia
+# Tabela de negocio: `cadastro.carlote`
 
-## Metadados
+## Identidade
 
-| Item | Valor |
-|---|---|
-| Classe | `cl_carlote` |
-| Entidade / tabela principal | `carlote` |
-| Módulo | `cadastro` |
-| Arquivo sugerido | `ecidade-carlote-schema-referencia.md` |
-| Finalidade | Registrar características associadas a um lote imobiliário. |
+- Nome humano: caracteristicas vinculadas a lotes.
+- O que representa: cada linha associa uma caracteristica cadastrada a um lote.
+- Quando usar:
+  - listar caracteristicas de lotes;
+  - contar lotes por caracteristica;
+  - filtrar lotes por atributo territorial;
+  - analisar caracteristicas de lote por bairro, setor ou zona.
+- Quando evitar:
+  - para caracteristicas de construcao, usar `carconstr`;
+  - para listar cadastro mestre de caracteristicas, usar `caracter`;
+  - para contar matriculas por caracteristica sem cruzar com `iptubase`.
 
-## Resumo
+## Grao e chaves
 
-A tabela `carlote` representa o vínculo entre um lote (`lote`) e uma característica cadastral (`caracter`). Ela funciona como tabela associativa para qualificar o lote com atributos previamente cadastrados, agrupados em `cargrup`.
+- Grao: uma linha por lote e caracteristica.
+- Entidade principal: vinculo lote-caracteristica.
+- Chave de negocio:
+  - `j35_idbql`
+  - `j35_caract`
+- Coluna temporal:
+  - `j35_dtlanc`, data de lancamento da caracteristica no lote.
 
-O vínculo principal é composto por:
+## Colunas principais
 
+- `j35_idbql`: identificador do lote.
+- `j35_caract`: codigo da caracteristica.
+- `j35_dtlanc`: data de lancamento.
 
-Na prática, a classe permite consultar quais características estão associadas a um lote e, por meio dos joins, recuperar também o grupo da característica, dados do lote, bairro e setor.
+## Filtros de negocio
 
-## Tabela principal
+- Lote: `j35_idbql`.
+- Caracteristica: `j35_caract`.
+- Data de lancamento: `j35_dtlanc`.
+- Caracteristica de lote: confirmar via `caracter -> cargrup` quando precisar separar tipo.
 
-### `carlote`
+## Regra de contagem
 
-| Coluna | Tipo | Descrição | Observações |
-|---|---:|---|---|
-| `j35_idbql` | `int4` | Id lote | Parte da chave lógica. Referencia `lote.j34_idbql`. |
-| `j35_caract` | `int4` | Característica | Parte da chave lógica. Referencia `caracter.j31_codigo`. |
-| `j35_dtlanc` | `date` | Data de lançamento | Campo opcional no insert; pode ser `null`. |
+- Para contar vinculos de caracteristicas em lotes, contar linhas de `carlote`.
+- Para contar lotes com caracteristica, usar `COUNT(DISTINCT j35_idbql)`.
+- Para contar matriculas com caracteristica de lote, cruzar com `iptubase` por `j01_idbql` e usar `COUNT(DISTINCT j01_matric)`.
 
-## Chave lógica
+## Regra de agregacao
 
-A classe trata como chave lógica a combinação:
+- Agrupar por `j35_caract` ou por `caracter.j31_descr` para uso por caracteristica.
+- Quando agrupar por descricao, incluir codigo para evitar mistura de descricoes duplicadas.
 
+## Relacionamentos importantes
 
-Não há sequence própria na classe. Os dois identificadores são recebidos por parâmetro em `incluir($j35_idbql, $j35_caract)`.
+- `carlote.j35_idbql = lote.j34_idbql`
+- `carlote.j35_caract = caracter.j31_codigo`
+- `caracter.j31_grupo = cargrup.j32_grupo`
+- `lote.j34_idbql = iptubase.j01_idbql`
+- `lote.j34_bairro = bairro.j13_codi`
 
-## Relacionamentos identificados
+## Riscos de duplicidade
 
-| Origem | Destino | Condição | Tipo |
-|---|---|---|---|
-| `carlote` | `caracter` | `caracter.j31_codigo = carlote.j35_caract` | `inner join` |
-| `carlote` | `lote` | `lote.j34_idbql = carlote.j35_idbql` | `inner join` |
-| `caracter` | `cargrup` | `cargrup.j32_grupo = caracter.j31_grupo` | `inner join` |
-| `lote` | `bairro` | `bairro.j13_codi = lote.j34_bairro` | `inner join` |
-| `lote` | `setor` | `setor.j30_codi = lote.j34_setor` | `inner join` |
+- Um lote pode ter varias caracteristicas.
+- Um lote pode estar ligado a mais de uma matricula.
+- Uma caracteristica pode aparecer em muitos lotes.
 
-## Métodos relevantes
+## O que nao inferir
 
-| Método | Papel |
-|---|---|
-| `__construct()` | Inicializa rótulos da tabela `carlote` e página de retorno. |
-| `erro($mostra, $retorna)` | Exibe mensagem de erro e opcionalmente retorna para a página. |
-| `atualizacampos($exclusao=false)` | Alimenta propriedades a partir de `HTTP_POST_VARS`; em exclusão atualiza apenas chave. |
-| `incluir($j35_idbql, $j35_caract)` | Insere vínculo entre lote e característica. |
-| `alterar($j35_idbql=null, $j35_caract=null)` | Atualiza vínculo existente, principalmente `j35_dtlanc`. |
-| `excluir($j35_idbql=null, $j35_caract=null, $dbwhere=null)` | Remove vínculo por chave ou por cláusula customizada. |
-| `sql_record($sql)` | Executa SQL e controla `numrows`/erro. |
-| `sql_query(...)` | Consulta completa com joins para lote, característica, grupo, bairro e setor. |
-| `sql_query_file(...)` | Consulta simples diretamente em `carlote`. |
+- Nao inferir caracteristica de construcao por `carlote`.
+- Nao contar matriculas sem passar por `iptubase`.
+- Nao inferir regra financeira completa a partir da caracteristica.
 
-## Regras de validação e defaults
+## Cuidados
 
-### Inclusão
-
-`incluir($j35_idbql, $j35_caract)` exige:
-
-| Campo | Regra |
-|---|---|
-| `j35_idbql` | Obrigatório. Se vazio, retorna erro de chave primária zerada. |
-| `j35_caract` | Obrigatório. Se vazio, retorna erro de chave primária zerada. |
-| `j35_dtlanc` | Opcional. Se vazio ou `"null"`, grava `null`. |
-
-### Alteração
-
-`alterar($j35_idbql, $j35_caract)` pode alterar:
-
-| Campo | Regra |
-|---|---|
-| `j35_idbql` | Se informado/postado, não pode ser nulo. |
-| `j35_caract` | Se informado/postado, não pode ser nulo. |
-| `j35_dtlanc` | Se data postada, grava a data; se o campo de data foi postado vazio, grava `null`, mas a validação interna ainda trata ausência como erro em alguns cenários. |
-
-## Auditoria
-
-A classe registra auditoria nas operações de inclusão, alteração e exclusão usando `db_acount`.
-
-| Código | Campo |
-|---:|---|
-| `96` | `j35_idbql` |
-| `97` | `j35_caract` |
-| `8069` | `j35_dtlanc` |
-
-Código da tabela na auditoria: `23`.
-
-Operações usadas:
-
-| Operação | Marcador |
-|---|---|
-| Inclusão | `I` |
-| Alteração | `A` |
-| Exclusão | `E` |
-
-## SQLs extraídos e normalizados
-
-### Consulta completa da classe
-
-
-### Consulta simples da tabela
-
-
-### Inserção normalizada
-
-
-### Exclusão por chave
-
-
-## Perguntas que esta tabela ajuda a responder
-
-- Quais características estão associadas a determinado lote?
-- Quais lotes possuem determinada característica?
-- Qual grupo (`cargrup`) organiza uma característica vinculada ao lote?
-- Quais características de lote podem ser cruzadas com bairro e setor?
-- Quando uma característica foi lançada no lote?
-
-## Filtros seguros para IA/SQL
-
-Use preferencialmente filtros explícitos por chave:
-
-
-ou:
-
-
-Para análises cadastrais por grupo:
-
-
-Para recortes territoriais:
-
-
-
-## Cuidados e riscos
-
-- `carlote` é uma tabela de associação; não descreve a característica por si só. Para obter descrição, grupo e pontos, juntar com `caracter`.
-- A classe permite `dbwhere` livre em consultas e exclusões; isso exige cuidado para evitar filtros inseguros ou amplos demais.
-- `j35_dtlanc` é opcional na inclusão, mas a alteração tem lógica sensível ao envio dos campos de data separados (`dia`, `mes`, `ano`).
-- A chave lógica depende da combinação lote + característica; repetir a mesma característica no mesmo lote tende a gerar erro de duplicidade.
-- A data é montada manualmente no formato `YYYY-MM-DD` a partir de campos separados.
-
-## Convenção de prefixo
-
-| Prefixo | Tabela principal provável |
-|---|---|
-| `j35_` | `carlote` |
-| `j31_` | `caracter` |
-| `j32_` | `cargrup` |
-| `j34_` | `lote` |
-| `j13_` | `bairro` |
-| `j30_` | `setor` |
-
-## Uso recomendado para IA
-
-Ao responder perguntas sobre características de lote, tratar `carlote` como tabela ponte entre `lote` e `caracter`.
-
-Caminho típico:
-
-
-Para contextualização territorial, incluir:
+- Caracteristicas de lote sao parametrizaveis por municipio.
+- `j35_dtlanc` indica lancamento cadastral da caracteristica, nao necessariamente data real da condicao fisica.

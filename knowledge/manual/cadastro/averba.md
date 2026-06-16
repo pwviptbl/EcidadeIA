@@ -1,116 +1,65 @@
-# e-Cidade — Cadastro Imobiliário — `averba`
+# Tabela de negocio: `cadastro.averba`
 
-A classe pertence ao módulo `cadastro` e representa a entidade `averba`. No contexto do cadastro imobiliário, a tabela registra averbações vinculadas a matrículas imobiliárias, com data, registro de imóvel, cidade e CGM associado.
+## Identidade
 
-## 2. Tabela principal: `averba`
+- Nome humano: averbacoes da matricula imobiliaria.
+- O que representa: cada linha registra uma averbacao vinculada a uma matricula, com data, registro de imovel, cidade e CGM associado.
+- Quando usar:
+  - listar averbacoes de uma matricula;
+  - analisar eventos cartoriais associados ao imovel;
+  - identificar CGM associado a uma averbacao;
+  - filtrar averbacoes por periodo.
+- Quando evitar:
+  - para titularidade atual completa, usar tambem `iptubase`, `propri`, `promitente` e regras de titularidade;
+  - para afirmar transferencia efetiva de propriedade sem regra funcional adicional.
 
-Cada registro representa uma averbação associada a uma matrícula do IPTU.
+## Grao e chaves
 
-| Coluna | Tipo | Papel | Descrição |
-|---|---:|---|---|
-| `j55_codave` | `int4` | PK | Código da averbação |
-| `j55_matric` | `int4` | FK provável → `iptubase.j01_matric` | Matrícula do imóvel |
-| `j55_data` | `date` | Data do evento | Data da averbação |
-| `j55_regimo` | `varchar(20)` | Atributo cartorial | Registro de imóvel |
-| `j55_cidade` | `varchar(20)` | Atributo cartorial/localidade | Cidade do registro de imóvel |
-| `j55_numcgm` | `int4` | FK provável → `cgm.z01_numcgm` | Número do CGM associado à averbação |
+- Grao: uma linha por averbacao.
+- Entidade principal: averbacao.
+- Chave de negocio:
+  - `j55_codave`
+- Coluna temporal:
+  - `j55_data`
 
-## 3. Campos extraídos da propriedade `$campos`
+## Colunas principais
 
-| Campo | Tipo | Rótulo original |
-|---|---:|---|
-| `j55_codave` | `int4` | Codigo Averbacao |
-| `j55_matric` | `int4` | Matricula |
-| `j55_data` | `date` | Data |
-| `j55_regimo` | `varchar(20)` | Registro Imovel |
-| `j55_cidade` | `varchar(20)` | Cidade |
-| `j55_numcgm` | `int4` | Número Cgm |
+- `j55_codave`: codigo da averbacao.
+- `j55_matric`: matricula.
+- `j55_data`: data da averbacao.
+- `j55_regimo`: registro de imovel.
+- `j55_cidade`: cidade do registro.
+- `j55_numcgm`: CGM associado a averbacao.
 
+## Filtros de negocio
 
-## 6. Relacionamentos extraídos dos SQLs
+- Matricula: `j55_matric`.
+- CGM: `j55_numcgm`.
+- Periodo: `j55_data`.
+- Codigo da averbacao: `j55_codave`.
 
-### 6.1 Relacionamentos diretos
+## Regra de contagem
 
-| Tabela | Relação | Uso |
-|---|---|---|
-| `iptubase` | `iptubase.j01_matric = averba.j55_matric` | Vincula a averbação à matrícula imobiliária |
-| `cgm` | `cgm.z01_numcgm = averba.j55_numcgm` | Recupera o CGM associado à averbação |
-| `lote` | `lote.j34_idbql = iptubase.j01_idbql` | Recupera o lote da matrícula |
-| `cgm as a` | `a.z01_numcgm = iptubase.j01_numcgm` | Recupera o CGM do proprietário principal da matrícula |
+- Contar linhas de `averba` conta averbacoes.
+- Para contar matriculas com averbacao, usar `COUNT(DISTINCT j55_matric)`.
+- Para contar CGMs envolvidos, usar `COUNT(DISTINCT j55_numcgm)`.
 
-### 6.2 Interpretação dos vínculos
+## Relacionamentos importantes
 
-- `j55_matric` aponta para a matrícula do imóvel em `iptubase`.
-- `j55_numcgm` representa o CGM vinculado à averbação.
-- A consulta principal também busca o proprietário atual/principal da matrícula por `iptubase.j01_numcgm`.
-- A tabela pode envolver troca ou registro de titularidade, mas a classe isolada não prova a regra completa de alteração de proprietário.
+- `averba.j55_matric = iptubase.j01_matric`
+- `averba.j55_numcgm` se relaciona logicamente com CGM.
+- `iptubase.j01_idbql = lote.j34_idbql`, quando precisar do lote.
 
-## 7. Operações CRUD
+## Riscos de duplicidade
 
-## 8. Consultas SQL extraídas e normalizadas
+- Uma matricula pode ter varias averbacoes.
+- Uma consulta pode envolver dois CGMs: CGM da averbacao e CGM principal da matricula.
 
-### 8.1 Consulta completa por averbação
+## O que nao inferir
 
-Equivalente ao método `sql_query()`:
+- Nao inferir que `j55_numcgm` e sempre proprietario anterior.
+- Nao inferir troca de titularidade apenas por existir averbacao.
 
+## Cuidados
 
-Uso recomendado: obter dados completos da averbação, matrícula, lote, CGM vinculado à averbação e CGM principal da matrícula.
-
-### 8.2 Consulta direta da tabela
-
-Equivalente ao método `sql_query_file()`:
-
-
-Uso recomendado: buscar apenas os dados brutos da averbação.
-
-### 8.3 Consulta do nome anterior / CGM associado
-
-Equivalente ao método `sql_query_nomeant()`:
-
-
-Uso recomendado: recuperar dados cadastrais do CGM vinculado à averbação.
-
-## 10. Perguntas que esta tabela ajuda a responder
-
-- Quais averbações existem para uma matrícula?
-- Qual CGM está associado a uma averbação?
-- Em que data uma averbação foi registrada?
-- Qual registro de imóvel e cidade estão associados à averbação?
-- Quais averbações estão ligadas a determinado CGM?
-- Quais averbações ocorreram em determinado período?
-
-## 11. Consultas úteis para análise
-
-### 11.1 Averbações por matrícula
-
-
-### 11.2 Averbações por CGM
-
-
-### 11.3 Averbações por período
-
-
-### 11.4 Averbações com dados da matrícula e proprietário principal
-
-
-## 12. Cuidados e riscos
-
-- A classe usa SQL concatenado diretamente; em uso moderno, converter para placeholders parametrizados.
-- `j55_data` é montado manualmente a partir de dia, mês e ano, sem validação forte de data.
-- `sql_query()` faz dois joins com `cgm`: um para o CGM da averbação e outro para o CGM do proprietário principal da matrícula.
-- O método `sql_query_nomeant()` sugere consulta de “nome anterior”, mas a classe sozinha não comprova que `j55_numcgm` é sempre proprietário anterior; validar com a regra funcional da averbação.
-- A alteração permite atualizar a própria chave `j55_codave`, o que pode causar inconsistência se usado sem cuidado.
-- A exclusão aceita `dbwhere` livre; risco alto se a condição for montada com entrada externa.
-
-## 13. Resumo para IA
-
-Use `averba` quando a pergunta envolver averbações de matrícula, eventos cartoriais ligados ao imóvel, data de averbação, registro de imóvel, cidade e CGM associado à averbação.
-
-Prefira juntar com:
-
-- `iptubase` para chegar à matrícula/imóvel;
-- `lote` para dados territoriais;
-- `cgm` para nomes dos envolvidos;
-- tabelas do grupo `averbacao`, `averbatipo`, `averbacgm`, quando a pergunta exigir regra moderna/completa de troca de titularidade.
-
-Não inferir apenas por esta classe que houve troca efetiva de proprietário. Ela registra dados de averbação, mas a efetivação da titularidade pode depender de outras tabelas e rotinas.
+- Averbacao registra evento/dado cartorial, mas a regra de titularidade pode depender de outras tabelas.

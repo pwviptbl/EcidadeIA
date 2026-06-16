@@ -37,6 +37,11 @@ def parse_args() -> argparse.Namespace:
         help="Nao regenera rag/catalog_documents.jsonl.",
     )
     parser.add_argument(
+        "--skip-validate",
+        action="store_true",
+        help="Nao valida o padrao dos manuais/RAG apos a geracao.",
+    )
+    parser.add_argument(
         "--export-obsidian",
         action="store_true",
         help="Exporta catalogo JSON para Markdown em docs/exemplos/obsidian.",
@@ -120,6 +125,16 @@ def main() -> None:
 
     if not args.skip_rag_documents:
         run([python, str(TOOLS_DIR / "build_rag_documents.py")])
+
+    if not args.skip_validate:
+        run(
+            [
+                python,
+                str(TOOLS_DIR / "validate_knowledge_manual.py"),
+                "--schema",
+                args.schema if args.schema.lower() != "all" else "cadastro",
+            ]
+        )
 
 
 if __name__ == "__main__":

@@ -1,98 +1,69 @@
-# e-Cidade — Cadastro Imobiliário
+# Tabela de negocio: `cadastro.propri`
 
-## Tabela principal: `propri`
+## Identidade
 
-| Campo | Tipo | Descrição | Observações |
-|---|---:|---|---|
-| `j42_matric` | `int4` | Matrícula | Parte da chave lógica. Relaciona com `iptubase.j01_matric`. |
-| `j42_numcgm` | `int4` | Numcgm | Parte da chave lógica. Relaciona com `cgm.z01_numcgm`. |
-| `j42_fracaoproprietario` | `float8` | Fração por proprietário | Valor padrão `0` quando não informado. |
-| `j42_arealoteproprietario` | `float8` | Área do lote por proprietário | Valor padrão `0` quando não informado. |
-| `j42_tipoproprietario` | `int4` | Tipo de proprietário | Existe no CRUD/auditoria, embora não esteja listado em `$campos`; padrão `0` quando não informado. Relaciona com `tipoproprietario.j163_tipoproprietario`. |
+- Nome humano: outros proprietarios/coparticipantes da matricula.
+- O que representa: cada linha registra um CGM proprietario adicional ou participante associado a uma matricula.
+- Quando usar:
+  - listar coproprietarios de uma matricula;
+  - identificar CGMs que participam da titularidade;
+  - analisar fracao por proprietario;
+  - complementar o proprietario principal de `iptubase`.
+- Quando evitar:
+  - para proprietario principal isolado, usar `iptubase.j01_numcgm`;
+  - para promitentes compradores, usar `promitente`;
+  - para titularidade completa sem combinar todas as fontes de envolvidos.
 
-## Chave e identidade
+## Grao e chaves
 
-A classe trabalha com chave lógica composta:
+- Grao: uma linha por matricula e CGM proprietario.
+- Entidade principal: vinculo matricula-proprietario.
+- Chave de negocio:
+  - `j42_matric`
+  - `j42_numcgm`
+- Coluna temporal:
+  - nao informada.
 
+## Colunas principais
 
-Não há geração por sequence nesta classe. A inclusão exige que matrícula e CGM sejam recebidos como parâmetros de `incluir($j42_matric, $j42_numcgm)`.
+- `j42_matric`: matricula.
+- `j42_numcgm`: CGM do proprietario/coparticipante.
+- `j42_fracaoproprietario`: fracao do proprietario.
+- `j42_arealoteproprietario`: area do lote atribuida ao proprietario.
+- `j42_tipoproprietario`: tipo de proprietario.
 
-## Tabelas relacionadas
+## Filtros de negocio
 
-| Tabela/View | Relação | Uso |
-|---|---|---|
-| `iptubase` | `iptubase.j01_matric = propri.j42_matric` | Matrícula principal do imóvel. |
-| `cgm` | `cgm.z01_numcgm = propri.j42_numcgm` | Dados cadastrais do coproprietário. |
-| `lote` | `lote.j34_idbql = iptubase.j01_idbql` | Dados do lote da matrícula. |
-| `cgm as a` | `a.z01_numcgm = iptubase.j01_numcgm` | CGM do proprietário principal na matrícula base. |
-| `iptuender` | `iptuender.j43_matric = iptubase.j01_matric` | Endereço de entrega vinculado à matrícula. |
-| `tipoproprietario` | `tipoproprietario.j163_tipoproprietario = propri.j42_tipoproprietario` | Descrição do tipo de proprietário. |
+- Matricula: `j42_matric`.
+- CGM: `j42_numcgm`.
+- Tipo de proprietario: `j42_tipoproprietario`.
 
-## Métodos relevantes
+## Regra de contagem
 
-| Método | Finalidade |
-|---|---|
-| `incluir($j42_matric, $j42_numcgm)` | Insere coproprietário/outro proprietário na matrícula. |
-| `alterar($j42_matric = null, $j42_numcgm = null)` | Atualiza dados do coproprietário. |
-| `excluir($j42_matric = null, $j42_numcgm = null, $dbwhere = null)` | Remove vínculo de proprietário. |
-| `sql_record($sql)` | Executa SQL e controla estado de erro/quantidade. |
-| `sql_query(...)` | Consulta `propri` com joins em `iptubase`, `cgm`, `lote` e CGM principal. |
-| `sql_query_file(...)` | Consulta direta na tabela `propri`. |
-| `sql_query_enderecoEntrega(...)` | Busca dados de proprietários com possível endereço de entrega. |
-| `sql_outrosProprietarios($matricula)` | Lista proprietários da matrícula com descrição do tipo de proprietário. |
+- Contar linhas de `propri` conta vinculos matricula-proprietario.
+- Para contar proprietarios distintos, usar `COUNT(DISTINCT j42_numcgm)`.
+- Para contar matriculas com coproprietario, usar `COUNT(DISTINCT j42_matric)`.
 
-## Regras operacionais recorrentes
-### 1. Buscar coproprietário por matrícula e CGM
+## Regra de agregacao
 
+- Fracao e area por proprietario podem ser somadas por matricula para conferir consistencia, mas nao devem ser usadas como valor financeiro.
 
-### 2. Buscar todos os coproprietários de uma matrícula
+## Relacionamentos importantes
 
+- `propri.j42_matric = iptubase.j01_matric`
+- `propri.j42_numcgm` se relaciona logicamente com CGM.
+- `propri.j42_tipoproprietario` se relaciona com tipo de proprietario conforme catalogo local.
 
-### 3. Buscar coproprietários com dados do CGM
+## Riscos de duplicidade
 
+- Uma matricula pode ter varios proprietarios.
+- `iptubase` tambem possui proprietario principal; unir sem cuidado pode duplicar envolvidos.
 
-### 4. Buscar coproprietários com dados da matrícula e lote
+## O que nao inferir
 
+- Nao considerar `propri` como unica fonte de titularidade.
+- Nao ignorar `iptubase.j01_numcgm` quando a pergunta pedir proprietario principal.
 
-### 5. Buscar matrículas em que um CGM aparece como coproprietário
+## Cuidados
 
-
-### 6. Buscar endereço de entrega por CGM proprietário
-
-
-### 7. Listar outros proprietários com tipo
-
-
-### 8. Conferir total de fração por matrícula
-
-
-### 9. Conferir área proporcional por proprietário contra área do lote
-
-
-## Relação com o cadastro imobiliário
-
-A tabela `propri` complementa `iptubase`.
-
-- `iptubase.j01_numcgm` indica o proprietário principal da matrícula.
-- `propri.j42_numcgm` indica outros proprietários/coparticipantes da matrícula.
-- `propri.j42_fracaoproprietario` permite representar a fração do proprietário.
-- `propri.j42_arealoteproprietario` permite representar a área proporcional do lote.
-- `propri.j42_tipoproprietario` classifica o tipo de vínculo proprietário.
-
-## Perguntas que esta referência ajuda a responder
-
-- Quais CGMs são coproprietários de uma matrícula?
-- Em quais matrículas um CGM aparece como coproprietário?
-- Qual a fração de propriedade de cada coproprietário?
-- Qual a área do lote atribuída a cada coproprietário?
-- Qual o tipo de proprietário vinculado a cada CGM?
-- Existe endereço de entrega para matrícula associada ao coproprietário?
-- A soma das frações dos coproprietários está coerente?
-
-## Cuidados e riscos
-
-- A classe possui `j42_tipoproprietario` como propriedade e campo persistido, mas o campo não aparece no texto de `$campos`. Para IA/SQL, considerar o campo como existente porque ele é usado no `INSERT`, `UPDATE`, auditoria e consultas.
-- O construtor está no padrão antigo `cl_propri()`, não em `__construct()`.
-- A exclusão por `dbwhere` aceita SQL livre; usar apenas filtros controlados.
-- `sql_query` une duas vezes a tabela `cgm`: uma para o coproprietário (`propri.j42_numcgm`) e outra para o proprietário principal da matrícula (`iptubase.j01_numcgm`).
-- `sql_outrosProprietarios` usa sintaxe antiga com tabelas separadas por vírgula; para consultas novas, prefira `JOIN` explícito.
+- Para titularidade completa, consolidar proprietario principal, coproprietarios e promitentes.

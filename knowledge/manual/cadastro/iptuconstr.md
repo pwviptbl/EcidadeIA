@@ -1,200 +1,88 @@
-# e-Cidade — Cadastro Imobiliário
+# Tabela de negocio: `cadastro.iptuconstr`
 
-## Resumo
+## Identidade
 
-Arquivo de referência extraído da classe PHP `cl_iptuconstr`, entidade `iptuconstr`, módulo `cadastro`.
+- Nome humano: construcoes cadastradas da matricula.
+- O que representa: cada linha representa uma construcao/edificacao vinculada a uma matricula imobiliaria.
+- Quando usar:
+  - contar construcoes cadastradas;
+  - somar area construida cadastral;
+  - filtrar construcoes ativas/demolidas;
+  - relacionar construcao com caracteristicas ou calculo por edificacao.
+- Quando evitar:
+  - para valor venal calculado da construcao por exercicio, usar `cadastro.iptucale`;
+  - para caracteristicas da construcao, usar `cadastro.carconstr`;
+  - para valor final de IPTU, usar `cadastro.iptucalv`.
 
-A tabela `iptuconstr` representa as construções/edificações vinculadas a uma matrícula imobiliária. Cada construção é identificada pela composição `j39_matric + j39_idcons` e guarda dados físicos, endereço da construção, datas de lançamento/demolição, origem, pavimento, observações e indicação de construção principal.
+## Grao e chaves
 
----
+- Grao: uma linha por matricula e identificador de construcao.
+- Entidade principal: construcao dentro de uma matricula.
+- Chave de negocio:
+  - `j39_matric`
+  - `j39_idcons`
+- Coluna temporal:
+  - `j39_dtlan`, data de lancamento cadastral;
+  - `j39_dtdemo`, data de demolicao/baixa da construcao.
 
-## 1. Tabela principal  `cl_iptuconstr`
+## Colunas principais
 
-### `iptuconstr`
+- `j39_matric`: matricula do imovel.
+- `j39_idcons`: identificador da construcao dentro da matricula.
+- `j39_area`: area da construcao conforme cadastro.
+- `j39_areap`: area principal, conforme regra local.
+- `j39_areajirau`: area de jirau.
+- `j39_areajiraudeposito`: area de jirau/deposito.
+- `j39_areamezanino`: area de mezanino.
+- `j39_dtlan`: data de lancamento.
+- `j39_dtdemo`: data de demolicao/baixa.
+- `j39_ano`: ano de edificacao, quando preenchido.
+- `j39_idprinc`: indicador de construcao principal, quando aplicavel.
 
-| Campo | Tipo | Descrição |
-|---|---:|---|
-| `j39_matric` | `int4` | Matrícula |
-| `j39_idcons` | `int4` | Código da construção |
-| `j39_ano` | `int4` | Ano da construção |
-| `j39_area` | `float8` | Área da construção em m² |
-| `j39_areap` | `float8` | Área privada da construção em m² |
-| `j39_dtlan` | `date` | Data de inclusão/lançamento |
-| `j39_codigo` | `int4` | Código do logradouro |
-| `j39_numero` | `int4` | Número do imóvel/construção |
-| `j39_compl` | `varchar(20)` | Complemento |
-| `j39_dtdemo` | `date` | Data de demolição |
-| `j39_codprotdemo` | `varchar(40)` | Processo de protocolo da demolição |
-| `j39_idaument` | `int4` | Origem da construção |
-| `j39_idprinc` | `bool` | Indica se é construção principal |
-| `j39_pavim` | `int4` | Pavimento |
-| `j39_obs` | `text` | Observações |
+## Metricas atomicas
 
-### Chave lógica
+- `area_construida`: `j39_area`, agregacao comum `sum`.
+- `area_principal`: `j39_areap`, agregacao depende da regra municipal.
+- `quantidade_construcoes`: contagem por `j39_matric, j39_idcons`.
 
+## Filtros de negocio
 
-A classe trata `j39_matric + j39_idcons` como identificador do registro nas operações de inclusão, alteração, exclusão e consulta direta.
+- Construcoes ativas: `j39_dtdemo IS NULL`.
+- Construcoes demolidas: `j39_dtdemo IS NOT NULL`.
+- Matricula: `j39_matric`.
+- Construcao especifica: `j39_matric` e `j39_idcons`.
+- Ano da edificacao: `j39_ano`.
 
----
+## Regra de contagem
 
-### Parâmetro de validação do ano
+- Para contar construcoes diretamente em `iptuconstr`, usar `COUNT(1)` quando o grao nao foi multiplicado.
+- Se houver join com caracteristicas (`carconstr`), usar `COUNT(DISTINCT (j39_matric, j39_idcons))` ou agregar antes, porque uma construcao pode ter varias caracteristicas.
+- Para contar imoveis com construcao, usar `COUNT(DISTINCT j39_matric)`.
 
-A classe carrega parâmetros de `cadastro.cfiptu` no construtor:
+## Regra de agregacao
 
+- Para area construida ativa, aplicar `j39_dtdemo IS NULL`.
+- Nao somar todas as colunas de area sem regra municipal; `j39_area`, `j39_areap`, jirau e mezanino podem ter usos diferentes.
 
-Quando `j18_validarano = 'f'`, a propriedade `validar_j39_ano` é ativada, exigindo que `j39_ano` seja informado com 4 caracteres.
+## Relacionamentos importantes
 
----
+- `iptuconstr.j39_matric = iptubase.j01_matric`
+- `iptuconstr.j39_matric = carconstr.j48_matric` e `iptuconstr.j39_idcons = carconstr.j48_idcons`
+- `iptuconstr.j39_matric = iptucale.j22_matric` e `iptuconstr.j39_idcons = iptucale.j22_idcons`
 
-## 3. Tabelas e objetos relacionados
+## Riscos de duplicidade
 
-### Relacionamentos diretos nas consultas
+- Uma matricula pode ter varias construcoes.
+- Uma construcao pode ter varias caracteristicas.
+- Uma construcao pode ter calculos por exercicio em `iptucale`.
 
-| Tabela/View | Ligação extraída | Uso |
-|---|---|---|
-| `iptubase` | `iptubase.j01_matric = iptuconstr.j39_matric` | Matrícula base do imóvel. |
-| `lote` | `lote.j34_idbql = iptubase.j01_idbql` | Dados territoriais do lote. |
-| `cgm` | `cgm.z01_numcgm = iptubase.j01_numcgm` | Proprietário principal da matrícula. |
-| `ruas` | `ruas.j14_codigo = iptuconstr.j39_codigo` | Logradouro da construção. |
-| `ruastipo` | `ruastipo.j88_codigo = ruas.j14_tipo` | Tipo do logradouro. |
-| `carconstr` | `carconstr.j48_matric = iptuconstr.j39_matric` e `carconstr.j48_idcons = iptuconstr.j39_idcons` | Características da construção. |
-| `proprietario_nome` | `proprietario_nome.j01_matric = carconstr.j48_matric` | Nome do proprietário associado à matrícula. |
-| `caracter` | `caracter.j31_codigo = carconstr.j48_caract` | Característica da construção. |
-| `cargrup` | `cargrup.j32_grupo = caracter.j31_grupo` | Grupo da característica. |
-| `cadastro.cfiptu` | `cfiptu.j18_anousu = DB_anousu` | Parâmetros de validação do cadastro/cálculo do IPTU. |
+## O que nao inferir
 
-### Relações usadas na exclusão geral
+- Nao inferir matricula ativa apenas porque a construcao esta ativa.
+- Nao assumir que area cadastral atual e igual a area usada no calculo de um exercicio.
+- Nao tratar construcao demolida como ativa em analises correntes.
 
-| Entidade | Filtro usado |
-|---|---|
-| `iptucaleold` | `j162_matric = :matricula and j162_idcons = :id_construcao` |
-| `carconstr` | `j48_matric = :matricula and j48_idcons = :id_construcao` |
-| `constrcar` | `j53_matric = :matricula and j53_idcons = :id_construcao` |
-| `iptucale` | `j22_matric = :matricula and j22_idcons = :id_construcao` |
-| `constrescr` | `j52_matric = :matricula and j52_idcons = :id_construcao` |
-| `issmatric` | `q05_matric = :matricula and q05_idcons = :id_construcao` |
-| `iptuconstrdemo` | `matricula + idcons` |
-| `iptuconstrpontos` | `j83_matric = :matricula and j83_idcons = :id_construcao` |
+## Cuidados
 
----
-
-## 4. Métodos relevantes
-
-| Método | Finalidade |
-|---|---|
-| `__construct()` | Inicializa rótulos da entidade `iptuconstr`, página de retorno e parâmetros de `cfiptu`. |
-| `getParametros()` | Consulta `cadastro.cfiptu` para configurar a validação do ano da construção. |
-| `erro($mostra, $retorna)` | Exibe mensagens de erro/sucesso em JavaScript. |
-| `atualizacampos($exclusao = false)` | Atualiza propriedades a partir de `HTTP_POST_VARS`; monta datas de lançamento e demolição. |
-| `incluir($j39_matric, $j39_idcons)` | Insere construção. |
-| `alterar($j39_matric = null, $j39_idcons = null)` | Atualiza construção. |
-| `excluir($j39_matric = null, $j39_idcons = null, $dbwhere = null)` | Remove construção por chave ou filtro customizado. |
-| `sql_record($sql)` | Executa query e atualiza `numrows`. |
-| `sql_query(...)` | Consulta construção com matrícula base, lote, CGM, ruas e tipo de rua. |
-| `sql_query_file(...)` | Consulta direta na tabela `iptuconstr`. |
-| `excluirGeral(...)` | Remove construção e registros dependentes em cascata lógica. |
-| `sql_query_proprietario_nome(...)` | Consulta construção com características e proprietário. |
-| `sql_query_update_area($iMatric, $iIdCons, $iArea)` | Retorna SQL para atualizar a área da construção. |
-
----
-
-## Regras operacionais recorrentes
-### 5.1 Buscar construção por matrícula e código da construção
-
-
-### 5.2 Buscar todas as construções de uma matrícula
-
-
-### 5.3 Buscar construções ativas de uma matrícula
-
-Construções ativas são as que não possuem data de demolição.
-
-
-### 5.4 Buscar construção com dados do imóvel, lote, proprietário e logradouro
-
-
-### 5.5 Somar área construída ativa por matrícula
-
-
-### 5.6 Somar área privada ativa por matrícula
-
-
-### 5.7 Buscar construção principal da matrícula
-
-
-### 5.8 Buscar construções demolidas
-
-
-### 5.9 Buscar construções por logradouro
-
-
-### 5.10 Buscar características da construção e proprietário
-
-Baseado em `sql_query_proprietario_nome`.
-
-
-### 5.11 Atualizar área da construção
-
-Baseado em `sql_query_update_area`.
-
-
-### 5.12 Verificar construções com ano inválido
-
-Útil quando a parametrização exige ano com 4 dígitos.
-
-
----
-
-## 6. Convenção de prefixos
-
-| Prefixo | Tabela provável | Observação |
-|---|---|---|
-| `j39_` | `iptuconstr` | Construções da matrícula. |
-| `j01_` | `iptubase` | Cadastro base do imóvel. |
-| `j34_` | `lote` | Dados do lote. |
-| `z01_` | `cgm` | Cadastro geral municipal. |
-| `j14_` | `ruas` | Logradouro. |
-| `j88_` | `ruastipo` | Tipo de logradouro. |
-| `j48_` | `carconstr` | Características da construção. |
-| `j31_` | `caracter` | Características cadastrais. |
-| `j32_` | `cargrup` | Grupos de características. |
-| `j18_` | `cfiptu` | Parâmetros do IPTU por exercício. |
-
----
-
-## 7. Perguntas que esta classe ajuda a responder
-
-- Quais construções existem para determinada matrícula?
-- Qual é a área construída ativa de um imóvel?
-- Qual construção é a principal?
-- Uma construção foi demolida? Quando?
-- Qual logradouro/número/complemento está vinculado à construção?
-- Qual o ano de construção, pavimento e origem da construção?
-- Quais características estão vinculadas à construção?
-- Quais registros dependem da construção antes de uma exclusão?
-
----
-
-## 8. Filtros seguros e recomendados
-
-| Cenário | Filtro recomendado |
-|---|---|
-| Construção específica | `j39_matric = :matricula and j39_idcons = :id_construcao` |
-| Todas as construções da matrícula | `j39_matric = :matricula` |
-| Construções ativas | `j39_dtdemo is null` |
-| Construções demolidas | `j39_dtdemo is not null` |
-| Construção principal | `j39_idprinc = 't'` |
-| Por logradouro | `j39_codigo = :codigo_logradouro` |
-| Por número | `j39_numero = :numero` |
-
----
-
-## 9. Cuidados e riscos
-
-- A classe concatena valores diretamente em SQL; ao reutilizar as consultas fora do padrão legado, usar parâmetros/bind variables.
-- `j39_idprinc` é tratado como texto booleano (`'t'`/`'f'`).
-- `j39_dtdemo is null` deve ser considerado o principal indicador de construção ativa.
-- A exclusão direta em `excluir()` remove apenas `iptuconstr`; para remoção com dependências, a classe disponibiliza `excluirGeral()`.
-- `excluirGeral()` executa uma cascata lógica em várias classes; qualquer falha interrompe o processo.
-- A validação do ano depende de `cadastro.cfiptu.j18_validarano` para o exercício da sessão.
-- O texto original apresenta caracteres acentuados corrompidos em alguns rótulos; este arquivo normaliza os nomes para facilitar uso por IA.
+- Construcoes demolidas podem permanecer para historico.
+- Para analise de calculo por ano, preferir `iptucale` ou `iptucalc` conforme a pergunta.

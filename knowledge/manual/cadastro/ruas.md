@@ -1,104 +1,65 @@
-# e-Cidade — Cadastro Imobiliário
+# Tabela de negocio: `cadastro.ruas`
 
-## Tabela principal: `ruas`
+## Identidade
 
-| Campo | Tipo inferido | Descrição |
-|---|---:|---|
-| `j14_codigo` | int | Código do logradouro/rua. Chave principal lógica da tabela. |
-| `j14_nome` | string/null | Nome do logradouro. |
-| `j14_tipo` | int/null | Tipo do logradouro, normalmente relacionado à tabela `ruastipo`. |
-| `j14_rural` | bool/null | Indicador se a rua/logradouro é rural. |
-| `j14_lei` | string/null | Lei vinculada ao logradouro. |
-| `j14_dtlei` | string/date/null | Data da lei vinculada ao logradouro. |
-| `j14_bairro` | string/null | Bairro informado no cadastro da rua. Atenção: pode não ser o mesmo vínculo normalizado usado em `ruasbairro`. |
-| `j14_obs` | string/null | Observações do logradouro. |
+- Nome humano: cadastro de ruas/logradouros.
+- O que representa: cada linha representa um logradouro cadastrado.
+- Quando usar:
+  - listar ruas/logradouros;
+  - buscar rua por nome ou codigo;
+  - listar ruas de um bairro via `ruasbairro`;
+  - enriquecer localizacao de lote/testada.
+- Quando evitar:
+  - para descobrir bairro sem usar tabela de vinculo ou caminho documentado;
+  - para contar imoveis por rua sem passar por testada/lote/matricula conforme a regra local.
 
-## Relacionamentos extraídos
+## Grao e chaves
 
-### `ruascep`
+- Grao: uma linha por logradouro.
+- Entidade principal: rua/logradouro.
+- Chave de negocio:
+  - `j14_codigo`
+- Coluna temporal:
+  - nao informada.
 
-Usado no scope `joinCep()`.
+## Colunas principais
 
-| Relação | Condição |
-|---|---|
-| `ruas` → `ruascep` | `ruascep.j29_codigo = ruas.j14_codigo` |
+- `j14_codigo`: codigo do logradouro.
+- `j14_nome`: nome do logradouro, quando disponivel no catalogo local.
+- `j14_tipo`: tipo do logradouro, quando usado.
 
-Campos relevantes inferidos pelo uso:
+## Filtros de negocio
 
-| Campo | Descrição |
-|---|---|
-| `j29_codigo` | Código do logradouro vinculado ao CEP. |
-| `j29_cep` | CEP do logradouro. |
+- Rua por codigo: `j14_codigo`.
+- Rua por nome: coluna de nome/descricao existente no catalogo local.
+- Tipo de logradouro: `j14_tipo`, quando precisar separar rua, avenida etc.
 
-## Scopes / métodos de consulta
+## Regra de contagem
 
-### `scopeNome(Builder $query, $nome)`
+- Contar linhas de `ruas` conta logradouros cadastrados.
+- Para contar ruas por bairro, usar `ruasbairro` e contar `COUNT(DISTINCT ruas.j14_codigo)`.
+- Para contar imoveis por rua, precisa de caminho via testada/lote/matricula documentado.
 
-Filtra a rua pelo nome normalizado, removendo acentos/caracteres especiais e comparando em caixa alta.
+## Regra de agregacao
 
-Regra SQL equivalente:
+- Agrupar por codigo e nome para evitar mistura de logradouros com nomes iguais.
 
+## Relacionamentos importantes
 
-Parâmetro:
+- `ruas.j14_codigo = ruasbairro.j16_lograd`
+- `ruasbairro.j16_bairro = bairro.j13_codi`
+- `ruas.j14_codigo` pode se relacionar com face/testada conforme caminho cadastral documentado.
 
-| Parâmetro | Uso |
-|---|---|
-| `:nome_normalizado` | Nome sem acentos/caracteres especiais e em maiúsculas. |
+## Riscos de duplicidade
 
-### `scopeJoinCep(Builder $query)`
+- Uma rua pode pertencer a mais de um bairro.
+- Nomes de ruas podem se repetir.
 
-Adiciona join com a tabela `ruascep`.
+## O que nao inferir
 
-SQL equivalente:
+- Nao usar `bairro` direto para chegar em `ruas`; usar `ruasbairro`.
+- Nao assumir que nome de rua e unico.
 
+## Cuidados
 
-### `scopeCep(Builder $query, $cep)`
-
-Filtra pelo CEP após o join com `ruascep`.
-
-SQL equivalente:
-
-
-## Queries SQL prontas
-
-### 1. Buscar rua pelo código
-
-
-### 2. Buscar rua pelo nome normalizado
-
-
-Uso recomendado: aplicar no parâmetro a mesma normalização usada pela aplicação (`DBString::removerCaracteresEspeciaisAcentos`) antes da consulta.
-
-### 3. Buscar rua por CEP
-
-
-### 4. Buscar rua por nome e CEP
-
-
-### 5. Listar CEPs de uma rua
-
-
-## Filtros seguros e recomendados
-
-| Necessidade | Filtro recomendado |
-|---|---|
-| Rua por código | `ruas.j14_codigo = :codigo_rua` |
-| Rua por nome exato normalizado | `upper(to_ascii(j14_nome)) = upper(to_ascii(:nome_rua))` |
-| Rua por CEP | `join ruascep` + `ruascep.j29_cep = :cep` |
-| Rua rural/urbana | `j14_rural = true/false` |
-
-## Cuidados de uso
-
-- O model não declara `$primaryKey`; no Eloquent, o padrão seria `id`. Para operações de escrita ou busca por chave, é recomendável configurar explicitamente `protected $primaryKey = 'j14_codigo';` caso esse model seja usado para persistência direta.
-- O model não declara `public $timestamps = false`; se a tabela `ruas` não possuir `created_at` e `updated_at`, isso deve ser configurado para evitar erro em operações de escrita.
-- O scope `cep()` depende do join com `ruascep`; usar `Ruas::cep($cep)` sem `joinCep()` pode gerar SQL inválido por ausência da tabela/alias `ruascep`.
-- A busca por nome usa comparação exata após normalização. Não é busca parcial. Para autocomplete ou pesquisa flexível, usar `like`/`ilike` com normalização adequada.
-- O campo `j14_bairro` aparece no PHPDoc como string, mas em outras classes do cadastro imobiliário o relacionamento normalizado de rua/bairro pode ocorrer por tabelas auxiliares, como `ruasbairro`. Validar antes de assumir vínculo direto.
-
-## Perguntas que esta referência ajuda a responder
-
-- Qual tabela armazena logradouros/ruas?
-- Como buscar uma rua pelo nome ignorando acentos?
-- Como relacionar rua com CEP?
-- Qual campo representa o código da rua?
-- Como listar CEPs vinculados a uma rua?
+- Para perguntas por bairro, a receita de negocio correta e `bairro_para_ruas`.

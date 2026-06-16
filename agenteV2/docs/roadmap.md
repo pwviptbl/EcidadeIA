@@ -11,8 +11,24 @@ Entregas:
 - contratos JSON;
 - estrategia de modelo;
 - regras sobre fontes de conhecimento.
+- guia de estrutura de conhecimento para enriquecimento.
+
+## Fase 0.5 - Curadoria facil de enriquecer
+
+Status: iniciado.
+
+Objetivo: deixar claro onde o consultor deve enriquecer conceitos, tabelas e
+relacionamentos.
+
+Entregas:
+
+- guia `docs/estrutura-conhecimento.md`;
+- modelos em `knowledge/manual/_modelos`;
+- regra explicita: regra de negocio sim, SQL pronto nao.
 
 ## Fase 1 - Esqueleto executavel
+
+Status: iniciado.
 
 Objetivo: rodar o pipeline inteiro sem executar SQL.
 
@@ -38,6 +54,8 @@ Resultado esperado:
 
 ## Fase 2 - Compilador generico
 
+Status: iniciado.
+
 Objetivo: compilar `QueryPlan` validado.
 
 Operacoes iniciais:
@@ -48,6 +66,13 @@ Operacoes iniciais:
 - `detail_listing`.
 
 Regra: sem SQL pronto hardcoded.
+
+Entregas:
+
+- `SqlCompiler`;
+- `run_phase2.py`;
+- artefato de SQL auditavel por operacao;
+- primeira operacao funcional: `compare_periods`.
 
 ## Fase 3 - Critic e RepairLoop
 

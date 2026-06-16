@@ -1,164 +1,69 @@
-# e-Cidade — Cadastro Imobiliário
+# Tabela de negocio: `cadastro.bairro`
 
-## Tabela principal: `bairro`
+## Identidade
 
-A tabela `bairro` representa o cadastro básico de bairros. É usada como dimensão territorial para lote, logradouro e consultas por CEP.
+- Nome humano: cadastro de bairros.
+- O que representa: cada linha representa um bairro cadastrado.
+- Quando usar:
+  - listar bairros;
+  - filtrar imoveis por bairro via lote;
+  - agrupar matriculas, lotes ou valores de IPTU por bairro;
+  - chegar nas ruas do bairro via tabela de vinculo.
+- Quando evitar:
+  - para achar matriculas diretamente sem passar por lote;
+  - para ruas do bairro sem usar `ruasbairro`;
+  - para valores de IPTU sem passar por matricula e tabela de valores.
 
-| Campo | Tipo | Descrição | Observações |
-|---|---:|---|---|
-| `j13_codi` | `int4` | Cód. do Bairro | Chave primária lógica. Gerada pela sequência `bairro_j13_codi_seq` quando não informada. |
-| `j13_descr` | `varchar(40)` | Bairro | Nome/descrição do bairro. Obrigatório na inclusão. |
-| `j13_codant` | `varchar(10)` | Código Anterior | Código legado/anterior. Opcional. |
-| `j13_rural` | `bool` | Rural | Indica se o bairro é rural. Obrigatório na inclusão. Valor padrão inicial da classe: `'f'`. |
+## Grao e chaves
 
-## Chave e sequência
+- Grao: uma linha por bairro.
+- Entidade principal: bairro.
+- Chave de negocio:
+  - `j13_codi`
+- Coluna temporal:
+  - nao informada.
 
-- **Chave principal:** `j13_codi`
-- **Sequência:** `bairro_j13_codi_seq`
-- Se `j13_codi` não for informado na inclusão, a classe usa `nextval('bairro_j13_codi_seq')`.
-- Se `j13_codi` for informado manualmente, a classe compara com `last_value` da sequência e bloqueia valores maiores que o último número da sequência.
+## Colunas principais
 
-## Tabelas relacionadas identificadas
+- `j13_codi`: codigo do bairro.
+- `j13_descr`: descricao/nome do bairro.
 
-### `ruasbairro`
+## Filtros de negocio
 
-Tabela de vínculo entre logradouro e bairro, usada em `sql_getBairroByCodRua()`.
+- Bairro por codigo: `j13_codi`.
+- Bairro por nome: `j13_descr`.
 
-Relacionamento identificado:
+## Regra de contagem
 
+- Contar linhas de `bairro` conta bairros cadastrados.
+- Para contar imoveis por bairro, cruzar com `lote` e `iptubase`, contando `COUNT(DISTINCT iptubase.j01_matric)`.
+- Para contar lotes por bairro, contar `COUNT(DISTINCT lote.j34_idbql)`.
+- Para contar ruas por bairro, usar `ruasbairro` e contar logradouros distintos.
 
-Uso principal: descobrir o bairro associado a um código de rua/logradouro.
+## Regra de agregacao
 
-### `ruas`
+- Para valores de IPTU por bairro, caminho recomendado:
+  - `bairro -> lote -> iptubase -> iptucalv -> iptucalh`.
+- Aplicar filtro de historico para IPTU antes de somar valores.
 
-Tabela de logradouros, usada na consulta por código de rua.
+## Relacionamentos importantes
 
-Relacionamento identificado:
+- `bairro.j13_codi = lote.j34_bairro`
+- `bairro.j13_codi = ruasbairro.j16_bairro`
+- `ruasbairro.j16_lograd = ruas.j14_codigo`
 
+## Riscos de duplicidade
 
-### `cepbairrosfaixa`
+- Um bairro possui varios lotes.
+- Um lote pode ter uma ou mais matriculas.
+- Uma rua pode aparecer em mais de um bairro conforme cadastro local.
 
-Tabela de faixas de CEP por bairro, usada em `sql_buscaBairroPorCep()`.
+## O que nao inferir
 
-Campos usados:
+- Nao inferir ruas do bairro direto de `bairro`; usar `ruasbairro`.
+- Nao inferir valores de IPTU por bairro sem passar pela matricula/lote.
 
-| Campo | Papel |
-|---|---|
-| `cp02_codbairro` | Código do bairro associado à faixa. |
-| `cp02_faixa` | Identificador da faixa. |
-| `cp02_cepinicial` | CEP inicial da faixa. |
-| `cp02_cepfinal` | CEP final da faixa. |
+## Cuidados
 
-A classe não faz `JOIN` explícito com `bairro` nessa query, mas o campo `cp02_codbairro` deve ser tratado como referência ao código do bairro.
-
-## Métodos relevantes
-
-| Método | Finalidade |
-|---|---|
-| `atualizacampos($exclusao=false)` | Atualiza propriedades da classe a partir de `HTTP_POST_VARS`. |
-| `incluir($j13_codi)` | Insere novo bairro, gerando código pela sequência quando necessário. |
-| `alterar($j13_codi=null)` | Atualiza bairro por `j13_codi`. |
-| `excluir($j13_codi=null, $dbwhere=null)` | Exclui bairro por código ou condição customizada. |
-| `sql_record($sql)` | Executa consulta e atualiza `numrows`/erros. |
-| `sql_query($j13_codi=null, $campos='*', $ordem=null, $dbwhere='')` | Consulta principal na tabela `bairro`. |
-| `sql_query_file($j13_codi=null, $campos='*', $ordem=null, $dbwhere='')` | Consulta direta na tabela `bairro`, usada para auditoria e leitura simples. |
-| `sql_getBairroByCodRua($iCodRua)` | Busca bairro vinculado a uma rua/logradouro. |
-| `sql_buscaBairroPorCep($cep)` | Busca faixa de CEP que contém o CEP informado. |
-
-## Regras operacionais recorrentes
-### 1. Buscar bairro por código
-
-
-Parâmetros:
-
-| Placeholder | Descrição |
-|---|---|
-| `:codigo_bairro` | Código `j13_codi` do bairro. |
-
-### 2. Listar bairros por nome
-
-
-Parâmetros:
-
-| Placeholder | Descrição |
-|---|---|
-| `:nome_bairro` | Parte do nome do bairro. |
-
-### 3. Listar bairros rurais ou urbanos
-
-
-Parâmetros:
-
-| Placeholder | Descrição |
-|---|---|
-| `:rural` | `true`/`false` ou representação booleana equivalente usada pelo banco. |
-
-### 4. Buscar bairro por código de logradouro
-
-
-Parâmetros:
-
-| Placeholder | Descrição |
-|---|---|
-| `:codigo_rua` | Código do logradouro em `ruas.j14_codigo`. |
-
-### 5. Buscar bairro por CEP dentro de faixa
-
-
-Parâmetros:
-
-| Placeholder | Descrição |
-|---|---|
-| `:cep` | CEP numérico, sem máscara. |
-
-### 6. Buscar dados completos do bairro por CEP com descrição
-
-
-Parâmetros:
-
-| Placeholder | Descrição |
-|---|---|
-| `:cep` | CEP numérico, sem pontos ou hífen. |
-
-### 7. Contar lotes por bairro
-
-
-Observação: a tabela `lote` não aparece diretamente nesta classe, mas é uma relação importante no cadastro imobiliário, pois `lote.j34_bairro` referencia `bairro.j13_codi` em outras classes extraídas.
-
-## Convenção de prefixos
-
-| Prefixo | Tabela provável | Observação |
-|---|---|---|
-| `j13_` | `bairro` | Campos do cadastro de bairros. |
-| `j14_` | `ruas` | Campos de logradouro. |
-| `j16_` | `ruasbairro` | Vínculo rua/bairro. |
-| `cp02_` | `cepbairrosfaixa` | Faixas de CEP por bairro. |
-| `j34_` | `lote` | Lotes vinculados ao bairro por `j34_bairro`. |
-
-## Perguntas que esta classe ajuda a responder
-
-- Qual é o nome de um bairro pelo código `j13_codi`?
-- Um bairro é rural ou urbano?
-- Qual bairro está associado a um logradouro?
-- Qual bairro atende um determinado CEP?
-- Quais bairros possuem código anterior/legado?
-- Quais bairros estão associados a lotes no cadastro imobiliário?
-
-## Filtros seguros recomendados
-
-| Caso | Filtro recomendado |
-|---|---|
-| Buscar por código | `bairro.j13_codi = :codigo_bairro` |
-| Buscar por nome | `bairro.j13_descr ilike '%' || :nome_bairro || '%'` |
-| Buscar por logradouro | `ruas.j14_codigo = :codigo_rua` |
-| Buscar por CEP | `cp02_cepinicial::int <= :cep::int and cp02_cepfinal::int >= :cep::int` |
-| Buscar rural/urbano | `bairro.j13_rural = :rural` |
-
-## Cuidados e riscos
-
-- A classe monta SQL por interpolação direta de variáveis. Em uso externo, substitua por parâmetros preparados.
-- `sql_buscaBairroPorCep()` faz cast de CEP para inteiro. Remova máscara antes de consultar.
-- `sql_getBairroByCodRua()` pode retornar mais de um bairro para o mesmo logradouro caso a tabela `ruasbairro` permita múltiplos vínculos.
-- `j13_rural` é booleano, mas a classe manipula valores textuais como `'f'`; validar compatibilidade conforme driver/PostgreSQL.
-- A exclusão por `dbwhere` permite condições arbitrárias; use com restrição.
-
+- Nome de bairro pode ter abreviacao, acento ou variacao local.
+- Para filtros textuais, o agente deve tratar como busca por descricao, nao como codigo.

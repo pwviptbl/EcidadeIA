@@ -1,113 +1,96 @@
-# e-Cidade — Cadastro Imobiliário
+# Tabela de negocio: `cadastro.iptucalc`
 
-## Tabela Principal: `iptucalc`
+## Identidade
 
-Tabela financeira principal do cálculo de IPTU por exercício e matrícula.
+- Nome humano: parametros principais do calculo de IPTU por matricula e exercicio.
+- O que representa: resultado principal do calculo cadastral/tributario de uma matricula em um exercicio.
+- Quando usar:
+  - explicar variacao de IPTU entre exercicios;
+  - analisar valor venal territorial, area considerada, area edificada, aliquota, isencao e tipo de imposto;
+  - comparar parametros do calculo por matricula/ano.
+- Quando evitar:
+  - para valor final detalhado por historico/receita, usar `cadastro.iptucalv`;
+  - para construcao individual, usar `cadastro.iptucale` ou `cadastro.iptuconstr`;
+  - para pagamento/arrecadacao, usar tabelas financeiras de arrecadacao.
 
-Cada registro representa o resultado principal do cálculo de IPTU de uma matrícula (`j23_matric`) em um exercício (`j23_anousu`).
+## Grao e chaves
 
-## Chave primária / chave de negócio
+- Grao: uma linha por exercicio e matricula calculada.
+- Entidade principal: calculo de IPTU da matricula.
+- Chave de negocio:
+  - `j23_anousu`
+  - `j23_matric`
+- Coluna temporal:
+  - `j23_anousu`
 
-| campo | papel |
-|---|---|
-| `j23_anousu` | Exercício do cálculo |
-| `j23_matric` | Matrícula do imóvel |
-| `j23_anousu, j23_matric` | Chave composta do cálculo |
+## Colunas principais
 
-## Colunas
+- `j23_anousu`: exercicio do calculo.
+- `j23_matric`: matricula.
+- `j23_testad`: testada usada no calculo.
+- `j23_arealo`: area territorial/area calculada usada no calculo.
+- `j23_areafr`: area fracionada usada no calculo.
+- `j23_areaed`: area total edificada considerada.
+- `j23_m2terr`: valor do metro quadrado do terreno usado no calculo.
+- `j23_vlrter`: valor venal territorial calculado.
+- `j23_aliq`: aliquota aplicada.
+- `j23_vlrisen`: valor de isencao considerado.
+- `j23_tipoim`: tipo de imposto/imovel no calculo.
+- `j23_manual`: log textual do calculo.
+- `j23_tipocalculo`: tipo/modalidade de calculo.
 
-| coluna | tipo | descrição |
-|---|---|---|
-| `j23_anousu` | int4 | Exercicio |
-| `j23_matric` | int4 | Matricula |
-| `j23_testad` | float8 | Testada do Calculo |
-| `j23_arealo` | float8 | Area Calculada |
-| `j23_areafr` | float8 | Area Fracionada |
-| `j23_areaed` | float8 | Area Total Edificada |
-| `j23_m2terr` | float8 | Valor M2 Terreno |
-| `j23_vlrter` | float8 | Valor Venal Terreno |
-| `j23_aliq` | float8 | Aliquita do Iptu |
-| `j23_vlrisen` | float8 | Valor da Isencao |
-| `j23_tipoim` | varchar(1) | Tipo de imposto |
-| `j23_manual` | text | Log do calculo |
-| `j23_tipocalculo` | int8 | Tipo de calculo |
+## Metricas atomicas
 
-## Regras operacionais
+- `valor_venal_territorial`: `j23_vlrter`, agregacao comum `sum`.
+- `valor_m2_terreno`: `j23_m2terr`, agregacao comum `avg` ou analise por faixa; nao somar sem regra.
+- `area_territorial_calculo`: `j23_arealo`, agregacao comum `sum`.
+- `area_fracionada_calculo`: `j23_areafr`, agregacao comum `sum`.
+- `area_total_edificada_calculo`: `j23_areaed`, agregacao comum `sum`.
+- `testada_calculo`: `j23_testad`, agregacao comum depende da pergunta.
+- `aliquota`: `j23_aliq`, agregacao comum `avg` ou distribuicao; soma nao tem significado.
+- `valor_isencao`: `j23_vlrisen`, agregacao comum `sum`.
 
-## Tabelas relacionadas extraídas dos JOINs
+## Filtros de negocio
 
-| tabela | relação | descrição |
-|---|---|---|
-| `iptubase` | `iptubase.j01_matric = iptucalc.j23_matric` | Cadastro principal da matrícula/imóvel |
-| `lote` | `lote.j34_idbql = iptubase.j01_idbql` | Lote/terreno vinculado ao imóvel |
-| `cgm` | `cgm.z01_numcgm = iptubase.j01_numcgm` | Contribuinte/proprietário principal |
+- Exercicio: `j23_anousu`.
+- Matricula: `j23_matric`.
+- Tipo de imposto/imovel: `j23_tipoim`.
+- Tipo de calculo: `j23_tipocalculo`.
 
-## Prefixos identificados
+## Regra de contagem
 
-| prefixo | tabela provável | significado |
-|---|---|---|
-| `j23` | `iptucalc` | Dados financeiros principais do cálculo de IPTU |
-| `j01` | `iptubase` | Matrícula/imóvel |
-| `j34` | `lote` | Lote/terreno |
-| `z01` | `cgm` | Cadastro Geral do Município |
+- Contar linhas de `iptucalc` conta calculos por matricula/exercicio.
+- Para contar imoveis calculados em um ano, usar `COUNT(DISTINCT j23_matric)` filtrando `j23_anousu`.
+- Nao contar `iptucalc` como quantidade de debitos ou quantidade de construcoes.
 
-## Operações SQL
+## Regra de agregacao
 
-### 2. Buscar cálculo por exercício e matrícula, com dados cadastrais
+- Para quadro geral por ano, agrupar por `j23_anousu`.
+- Para comparar fatores entre anos, comparar as mesmas metricas por exercicio.
+- Para explicar causa de aumento, `iptucalc` fornece fatores candidatos; o valor final deve vir de `iptucalv` classificado como IPTU.
 
+## Relacionamentos importantes
 
-### 3. Buscar cálculo somente na tabela `iptucalc`
+- `iptucalc.j23_matric = iptubase.j01_matric`
+- `iptucalc.j23_anousu = iptucalv.j21_anousu` e `iptucalc.j23_matric = iptucalv.j21_matric`
+- `iptucalc.j23_matric = iptuconstr.j39_matric`, quando precisar confrontar cadastro atual de construcoes.
+- `iptucalc.j23_anousu = iptucale.j22_anousu`, `iptucalc.j23_matric = iptucale.j22_matric`, quando detalhar calculo por edificacao.
 
+## Riscos de duplicidade
 
-### 4. Atualizar cálculo por chave composta
+- Join com `iptucalv` pode multiplicar linhas porque `iptucalv` tem varios historicos/receitas por matricula/exercicio.
+- Para comparar com valor de IPTU, agregue ou filtre `iptucalv` corretamente antes de juntar.
+- Join com construcoes pode multiplicar uma linha de calculo por varias edificacoes.
 
+## O que nao inferir
 
-### 5. Excluir cálculo por chave composta
+- `j23_vlrter` nao e o valor total do imovel quando ha construcao.
+- `j23_areaed` e area considerada no calculo, nao necessariamente a area fisica atual em `iptuconstr`.
+- `j23_m2terr` nao e valor de mercado; e parametro do calculo.
+- `j23_manual` nao deve ser usado como regra estruturada sem interpretacao.
 
+## Cuidados
 
-## Perguntas que esta tabela ajuda a responder
-
-- Qual foi o cálculo principal de IPTU de uma matrícula em determinado exercício?
-- Qual área de lote foi usada no cálculo?
-- Qual área fracionada foi usada?
-- Qual área total edificada entrou no cálculo?
-- Qual valor de metro quadrado de terreno foi aplicado?
-- Qual foi o valor venal territorial calculado?
-- Qual alíquota foi aplicada?
-- Qual valor de isenção foi considerado?
-- O cálculo foi predial ou territorial?
-- Qual log/manual do cálculo foi gravado?
-
-## Filtros seguros
-
-| filtro | uso recomendado |
-|---|---|
-| `j23_anousu = :anousu` | Filtrar exercício |
-| `j23_matric = :matricula` | Filtrar imóvel |
-| `j23_tipoim = :tipo_imposto` | Separar tipo de imposto |
-| `j23_tipocalculo = :tipo_calculo` | Separar modalidade de cálculo |
-
-## Cuidados / riscos
-
-- `iptucalc` representa o cálculo principal do IPTU, mas não detalha todos os valores por imposto/taxa. Para detalhamento por imposto ou taxa, usar tabelas como `iptucalv`.
-- `j23_vlrter` é valor venal do terreno; não deve ser confundido automaticamente com valor total do imóvel se houver edificações.
-- `j23_areaed` indica área total edificada usada no cálculo, mas detalhes por construção normalmente ficam em tabelas como `iptucale` ou `iptuconstr`.
-- `j23_manual` pode conter log textual grande; cuidado ao usar em agrupamentos ou comparações.
-- A classe usa SQL concatenado em PHP legado. Para reuso, sempre converter para placeholders parametrizados.
-- A chave do cálculo é composta por exercício e matrícula. Consultar só por matrícula pode retornar múltiplos exercícios.
-
-## Uso recomendado para IA
-
-Use `iptucalc` como tabela principal quando a pergunta envolver o resultado cadastral/financeiro principal do cálculo de IPTU por matrícula e exercício.
-
-Para enriquecer a resposta, juntar com:
-
-| objetivo | tabela |
-|---|---|
-| Dados do imóvel | `iptubase` |
-| Dados do lote | `lote` |
-| Proprietário principal | `cgm` |
-| Detalhamento de valores | `iptucalv` |
-| Cálculo por edificação | `iptucale` |
-| Construções cadastradas | `iptuconstr` |
-| Configuração anual do IPTU | `cfiptu` |
+- A chave correta sempre inclui exercicio e matricula.
+- Consultar apenas por matricula mistura anos.
+- Isencao em `j23_vlrisen` pode reduzir o IPTU final e deve ser considerada em explicacoes.

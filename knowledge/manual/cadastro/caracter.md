@@ -1,187 +1,80 @@
-# Referência da classe `cl_caracter`
+# Tabela de negocio: `cadastro.caracter`
 
-## 1. Identificação
+## Identidade
 
-A classe `cl_caracter` representa a entidade `caracter`, usada no cadastro imobiliário para manter características classificadas por grupo. Essas características aparecem principalmente em vínculos com construções e podem influenciar pontuação, composição de características da edificação e identificação de características irregulares.
+- Nome humano: cadastro mestre de caracteristicas.
+- O que representa: cada linha representa uma caracteristica cadastrada para uso em lote, construcao, face de quadra ou outro contexto parametrizado.
+- Quando usar:
+  - obter descricao textual da caracteristica;
+  - interpretar pontuacao e grupo;
+  - classificar caracteristicas por tipo usando `cargrup`;
+  - listar caracteristicas cadastradas.
+- Quando evitar:
+  - para contar uso real em construcoes, usar `carconstr`;
+  - para contar uso real em lotes, usar `carlote`;
+  - para contar uso real em faces, usar `carface`.
 
-Tabela principal:
+## Grao e chaves
 
+- Grao: uma linha por caracteristica cadastrada.
+- Entidade principal: caracteristica mestre.
+- Chave de negocio:
+  - `j31_codigo`
+- Coluna temporal:
+  - nao informada.
 
-Chave primária lógica:
+## Colunas principais
 
+- `j31_codigo`: codigo da caracteristica.
+- `j31_descr`: descricao textual da caracteristica.
+- `j31_grupo`: grupo da caracteristica.
+- `j31_pontos`: pontuacao atribuida, quando aplicavel.
 
-## 2. Colunas da tabela principal
+## Dimensoes relacionadas
 
-| Campo | Tipo | Descrição |
-|---|---:|---|
-| `j31_codigo` | `int8` | Código da característica |
-| `j31_descr` | `varchar(40)` | Descrição da característica |
-| `j31_grupo` | `int4` | Grupo da característica |
-| `j31_pontos` | `int4` | Pontuação associada |
-| `j31_data_limite` | `date` | Data limite da característica |
+- Grupo da caracteristica: `caracter.j31_grupo -> cargrup.j32_grupo`.
+- Tipo de aplicacao: `cargrup.j32_tipo`, quando documentado no municipio.
 
-## 3. Campos da classe
+## Filtros de negocio
 
-A classe declara propriedades equivalentes aos campos da tabela:
+- Caracteristica especifica: `j31_codigo`.
+- Busca por descricao: `j31_descr`.
+- Grupo: `j31_grupo`.
+- Caracteristicas de construcao: cruzar com `cargrup` e aplicar tipo de construcao.
+- Caracteristicas de lote: cruzar com `cargrup` e aplicar tipo de lote.
+- Caracteristicas de face: cruzar com `cargrup` e aplicar tipo de face.
 
-```php
-j31_codigo
-j31_descr
-j31_grupo
-j31_pontos
-j31_data_limite
-```
+## Regra de contagem
 
-Observação: o `INSERT` da classe grava `j31_codigo`, `j31_descr`, `j31_grupo` e `j31_pontos`. O campo `j31_data_limite` é tratado na alteração, mas não aparece no `INSERT` da classe analisada.
+- Contar linhas de `caracter` conta caracteristicas cadastradas, nao uso real.
+- Para contar uso em construcoes, usar `carconstr`.
+- Para contar uso em lotes, usar `carlote`.
+- Para contar uso por grupo, cruzar com `cargrup`.
 
-## 4. Regras de inclusão
+## Regra de agregacao
 
-Método:
+- Agrupar por codigo quando houver risco de descricoes repetidas.
+- Agrupar por descricao apenas quando a pergunta for explicitamente textual e a duplicidade nao comprometer o resultado.
 
-```php
-incluir($j31_codigo)
-```
+## Relacionamentos importantes
 
-Campos obrigatórios na inclusão:
+- `caracter.j31_grupo = cargrup.j32_grupo`
+- `caracter.j31_codigo = carconstr.j48_caract`
+- `caracter.j31_codigo = carlote.j35_caract`
+- `caracter.j31_codigo = carface.j47_caract`, quando `carface` estiver no contexto.
 
-| Campo | Regra |
-|---|---|
-| `j31_descr` | obrigatório |
-| `j31_grupo` | obrigatório |
-| `j31_pontos` | obrigatório |
-| `j31_codigo` | chave; gerada por sequência se não informada |
+## Riscos de duplicidade
 
-Sequência utilizada:
+- Descricoes podem ser abreviadas, genericas ou repetidas.
+- O mesmo conceito humano pode ser parametrizado de forma diferente por municipio.
 
+## O que nao inferir
 
-Se o código for informado manualmente, a classe compara com `last_value` da sequência e rejeita valores maiores que o último número da sequência.
+- Nao inferir uso real de caracteristica a partir do cadastro mestre.
+- Nao inferir tipo de aplicacao sem olhar `cargrup`.
+- Nao inferir regra de calculo completa apenas por pontuacao.
 
-SQL base da inclusão:
+## Cuidados
 
-
-## 5. Regras de alteração
-
-Método:
-
-```php
-alterar($j31_codigo = null)
-```
-
-A alteração monta dinamicamente o `UPDATE` apenas com campos recebidos. Campos numéricos vazios podem ser normalizados para `0`.
-
-Tratamento especial:
-
-| Campo | Regra |
-|---|---|
-| `j31_data_limite` | se informada, deve ser menor ou igual à data atual |
-| `j31_data_limite` | se vazia, é gravada como `null` |
-
-SQL base:
-
-
-## 6. Regras de exclusão
-
-Método:
-
-```php
-excluir($j31_codigo = null, $dbwhere = null)
-```
-
-A exclusão pode ocorrer por código ou por uma cláusula livre recebida em `$dbwhere`.
-
-SQL equivalente:
-
-
-## 7. Consulta principal
-
-Método:
-
-```php
-sql_query($j31_codigo = null, $campos = "*", $ordem = null, $dbwhere = "")
-```
-
-Consulta a tabela `caracter` com junção ao grupo da característica:
-
-
-## 8. Consulta direta da tabela
-
-Método:
-
-```php
-sql_query_file($j31_codigo = null, $campos = "*", $ordem = null, $dbwhere = "")
-```
-
-Consulta apenas a tabela principal:
-
-
-## 9. Consulta de característica por construção
-
-Método:
-
-```php
-sql_query_carconstr($iMatric, $iIdConstr, $sCaracter)
-```
-
-Esse método recebe uma matrícula, um identificador de construção e uma lista de características. Ele identifica o grupo das características informadas e verifica se a construção já possui característica daquele mesmo grupo vinculada em `carconstr`.
-
-Estrutura lógica:
-
-
-Uso provável:
-
-- verificar substituição ou conflito de características por grupo;
-- evitar múltiplas características do mesmo grupo em uma mesma construção;
-- apoiar telas de seleção de características da edificação.
-
-## 10. Relacionamentos identificados
-
-| Tabela | Relação | Uso |
-|---|---|---|
-| `cargrup` | `cargrup.j32_grupo = caracter.j31_grupo` | Grupo da característica |
-| `carconstr` | `carconstr.j48_caract = caracter.j31_codigo` | Características vinculadas a construções |
-
-Relacionamentos funcionais observados no conjunto de classes do cadastro imobiliário:
-
-| Origem | Relação | Destino |
-|---|---|---|
-| `caracter.j31_codigo` | característica selecionada | `carconstr.j48_caract` |
-| `caracter.j31_grupo` | grupo de classificação | `cargrup.j32_grupo` |
-| `cfiptu.j18_caracterirregular` | pode armazenar códigos relacionados a características irregulares | `caracter.j31_codigo` |
-| `lote.sql_query_construcoesLote()` | usa lista de características irregulares para verificar regularidade da construção | `carconstr` + `caracter` |
-
-## 11. Auditoria
-
-Diferente de várias classes legadas do e-Cidade, esta classe não executa inserts em `db_acount`, `db_acountkey` ou `db_acountacesso` nos métodos de inclusão, alteração e exclusão.
-
-## 12. Consultas úteis
-
-### Buscar característica com grupo
-
-
-### Listar características de um grupo
-
-
-### Verificar características vinculadas a uma construção
-
-
-## 13. Perguntas que esta referência ajuda a responder
-
-- Quais características existem cadastradas?
-- A qual grupo pertence uma característica?
-- Qual pontuação uma característica adiciona?
-- Uma construção já possui característica do mesmo grupo?
-- A característica possui data limite?
-- Quais características podem ser usadas para identificar área irregular?
-
-## 14. Cuidados e riscos
-
-- A classe concatena valores diretamente em SQL.
-- O método `excluir()` aceita `$dbwhere` livre.
-- `j31_data_limite` é validado apenas no método de alteração.
-- `j31_data_limite` está no `$campos`, mas não aparece no `INSERT`.
-- A validação da data limite usa `DateTime::createFromFormat('d/m/Y', ...)`, enquanto a propriedade é declarada como campo `date`; conferir o formato enviado pela interface.
-- A classe não registra auditoria via `db_acount`.
-
-## 15. Resumo para IA
-
-Use `caracter` para representar características cadastrais usadas principalmente em construções do cadastro imobiliário. A chave é `j31_codigo`. O campo `j31_grupo` classifica a característica em `cargrup`; `j31_pontos` indica pontuação; `j31_data_limite` controla limite temporal. Para saber se uma construção já possui característica de determinado grupo, use a lógica de `sql_query_carconstr`, combinando `caracter` e `carconstr`.
+- `j31_pontos` pode influenciar calculo, mas nao explica sozinho a formula.
+- Caracteristicas sao dinamicas e variam por municipio.

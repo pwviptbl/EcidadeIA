@@ -159,18 +159,6 @@ def render_type_classification(info: dict[str, Any]) -> list[str]:
 
 
 def render_table_section(table_name: str, info: dict[str, Any]) -> str:
-    rows = []
-    for column_name, column_info in sorted((info.get("colunas") or {}).items()):
-        rows.append(
-            [
-                column_name,
-                text(column_info.get("tipo")),
-                text(column_info.get("papel")),
-                text(column_info.get("metrica")),
-                text(column_info.get("descricao")),
-            ]
-        )
-
     fk_lines = []
     for fk in info.get("chaves_estrangeiras") or []:
         origem = ", ".join(ensure_list(fk.get("columns")))
@@ -179,92 +167,99 @@ def render_table_section(table_name: str, info: dict[str, Any]) -> str:
         constraint = text(fk.get("constraint"))
         fk_lines.append(f"- `{origem}` -> `{referencia}` ({destino})" + (f" [{constraint}]" if constraint else ""))
 
-    alias_lines = [f"- {item}" for item in ensure_list(info.get("apelidos")) if text(item)]
     filtro_items = info.get("semantica_filtros") or {}
-    filtro_lines = [f"- `{nome}`: `{expr}`" for nome, expr in filtro_items.items()]
+    filtro_lines = [f"- {nome}: `{expr}`" for nome, expr in filtro_items.items()]
     filtro_padrao_lines = [f"- `{item}`" for item in ensure_list(info.get("filtros_padrao")) if text(item)]
     business_logic_lines = [f"- {text(item)}" for item in ensure_list(info.get("logica_negocio")) if text(item)]
-    grouping_lines = [f"- {text(item)}" for item in ensure_list(info.get("agrupamentos_recomendados")) if text(item)]
-    validated_queries = []
-    for item in ensure_list(info.get("consultas_validadas")):
-        if not isinstance(item, dict):
-            continue
-        pergunta = text(item.get("pergunta"))
-        regra = text(item.get("regra"))
-        if pergunta:
-            validated_queries.append(f"- Pergunta: {pergunta}")
-        if regra:
-            validated_queries.append(f"  - Regra: {regra}")
-    classification_lines = render_type_classification(info)
     time_candidates = infer_time_candidates(info.get("colunas") or {})
     business_key_candidates = infer_business_key_candidates(info.get("colunas") or {})
-    suggested_questions = infer_question_suggestions(table_name, info)
+    primary_key = ensure_list(info.get("chave_primaria"))
+    entity_key = ensure_list(info.get("chave_negocio")) or primary_key
+    time_key = text(info.get("coluna_tempo")) or (time_candidates[0] if time_candidates else "")
+    metric_lines = []
+    dimension_lines = []
+    for column_name, column_info in sorted((info.get("colunas") or {}).items()):
+        role = text(column_info.get("papel")).lower()
+        metric = text(column_info.get("metrica"))
+        description = text(column_info.get("descricao"))
+        line = f"- `{column_name}`"
+        if description:
+            line += f": {description}"
+        if metric or any(token in f"{column_name} {role} {description}".lower() for token in ("valor", "area", "quant", "aliq", "perc", "total")):
+            metric_lines.append(line)
+        elif any(token in f"{column_name} {role} {description}".lower() for token in ("codigo", "matric", "bairro", "setor", "tipo", "grupo", "data", "ano")):
+            dimension_lines.append(line)
 
     section = [
-        f"## {table_name}",
+        f"## Tabela de negocio: `{table_name}`",
         "",
-        "### Resumo tecnico",
+        "### Identidade",
         "",
-        f"- Descricao: {text(info.get('descricao')) or 'Preencher.'}",
-        f"- Chave primaria: {', '.join(ensure_list(info.get('chave_primaria'))) or 'Nao informada.'}",
-        f"- Chave de negocio: {', '.join(ensure_list(info.get('chave_negocio'))) or 'Nao informada.'}",
-        f"- Coluna de tempo: {text(info.get('coluna_tempo')) or 'Nao informada.'}",
-        f"- Grao: {', '.join(ensure_list(info.get('grao'))) or 'Nao informado.'}",
-        f"- Recomendada: {'sim' if info.get('recomendada') else 'nao'}",
-        f"- Significado da contagem: {text(info.get('significado_contagem')) or 'Preencher se esta tabela for usada para contagem.'}",
+        f"- Nome humano: {text(info.get('descricao')) or table_name}.",
+        f"- O que representa: {text(info.get('descricao')) or 'Preencher em linguagem de negocio.'}",
+        "- Quando usar:",
+        "  - Preencher com perguntas/casos de negocio.",
+        "- Quando evitar:",
+        "  - Preencher com tabelas ou cenarios mais adequados.",
+        "",
+        "### Grao e chaves",
+        "",
+        f"- Grao: {', '.join(ensure_list(info.get('grao'))) or 'Preencher.'}",
+        "- Entidade principal: Preencher.",
+        "- Chave de negocio:",
+        *(f"  - `{item}`" for item in entity_key),
+        *(["  - Preencher."] if not entity_key else []),
+        f"- Coluna temporal: `{time_key}`" if time_key else "- Coluna temporal: Preencher.",
         f"- Candidatas a chave de negocio: {', '.join(business_key_candidates) or 'Nenhuma inferida automaticamente.'}",
-        f"- Candidatas a coluna de tempo: {', '.join(time_candidates) or 'Nenhuma inferida automaticamente.'}",
+        f"- Candidatas a coluna temporal: {', '.join(time_candidates) or 'Nenhuma inferida automaticamente.'}",
         "",
-        "### Colunas",
+        "### Colunas principais",
         "",
-        markdown_table(["coluna", "tipo", "papel", "metrica", "descricao"], rows or [["-", "-", "-", "-", "Nenhuma coluna encontrada."]]),
+        *(
+            f"- `{column_name}`: {text(column_info.get('descricao')) or 'Preencher significado.'}"
+            for column_name, column_info in sorted((info.get("colunas") or {}).items())
+        ),
         "",
-        "### Relacionamentos",
+        "### Metricas atomicas",
+        "",
+        *(metric_lines or ["- Preencher apenas se houver coluna numerica com significado de negocio."]),
+        "",
+        "### Dimensoes",
+        "",
+        *(dimension_lines or ["- Preencher dimensoes de agrupamento/filtro."]),
+        "",
+        "### Filtros de negocio",
+        "",
+        *(filtro_padrao_lines or filtro_lines or ["- Preencher filtros obrigatorios ou comuns."]),
+        "",
+        "### Regra de contagem",
+        "",
+        f"- {text(info.get('significado_contagem')) or 'Definir o que uma linha representa antes de contar.'}",
+        "- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.",
+        "",
+        "### Regra de agregacao",
+        "",
+        "- Preencher como somar, contar ou agrupar sem mudar o grao.",
+        "",
+        "### Relacionamentos importantes",
         "",
         *(fk_lines or ["- Nenhum relacionamento catalogado."]),
         "",
-        "### Perguntas que esta tabela ajuda a responder",
+        "### Regras de negocio existentes no catalogo",
         "",
-        *(alias_lines or [f"- {item}" for item in suggested_questions] or ["- Preencher com perguntas comuns do usuario."]),
+        *(business_logic_lines or ["- Preencher regras validadas por pessoa de negocio."]),
         "",
-        "### Filtros e regras reaproveitaveis",
+        "### Riscos de duplicidade",
         "",
-        "#### Filtros padrao",
+        "- Preencher onde joins podem multiplicar linhas ou valores.",
         "",
-        *(filtro_padrao_lines or ["- Nenhum filtro padrao catalogado."]),
+        "### O que nao inferir",
         "",
-        "#### Semantica de filtros",
+        "- Nao inferir regra de negocio apenas pelo nome tecnico.",
         "",
-        *(filtro_lines or ["- Nenhuma semantica de filtro catalogada."]),
+        "### Cuidados",
         "",
-        "#### Logica do assunto",
-        "",
-        *(business_logic_lines or ["- Nenhuma logica de negocio catalogada."]),
-        "",
-        "#### Classificacao por tipo",
-        "",
-        *(classification_lines or ["- Nenhuma classificacao por tipo catalogada."]),
-        "",
-        "#### Agrupamentos recomendados",
-        "",
-        *(grouping_lines or ["- Nenhum agrupamento recomendado catalogado."]),
-        "",
-        "#### Consultas validadas",
-        "",
-        *(validated_queries or ["- Nenhuma consulta validada catalogada."]),
-        "",
-        "### Regra de negocio para enriquecer",
-        "",
-        *(business_logic_lines or []),
-        "- O que esta tabela representa no negocio?",
-        "- Quando ela deve ser preferida sobre outras tabelas parecidas?",
-        "- Que perguntas ela responde bem?",
-        "- Que filtros de negocio sao seguros?",
-        "- O que nao pode ser inferido a partir dela?",
-        "",
-        "### Cuidados / riscos",
-        "",
-        *([f"- {text(item)}" for item in ensure_list(info.get("observacoes_negocio")) if text(item)] or ["- Preencher com ambiguidades, excecoes e limites conhecidos."]),
+        *([f"- {text(item)}" for item in ensure_list(info.get("observacoes_negocio")) if text(item)] or ["- Preencher ambiguidades, excecoes e limites conhecidos."]),
         "",
     ]
     return "\n".join(section)

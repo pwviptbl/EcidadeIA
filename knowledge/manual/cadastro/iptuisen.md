@@ -1,106 +1,80 @@
-# e-Cidade — Cadastro Imobiliário
+# Tabela de negocio: `cadastro.iptuisen`
 
-## Resumo
+## Identidade
 
-Esta referência foi extraída da classe PHP `cl_iptuisen`, entidade `iptuisen`, do módulo `cadastro`.
+- Nome humano: isencoes de IPTU da matricula.
+- O que representa: cada linha registra uma isencao vinculada a uma matricula, com tipo, vigencia, percentual e historico.
+- Quando usar:
+  - listar isencoes de uma matricula;
+  - analisar periodo de vigencia de isencao;
+  - identificar tipo e percentual de isencao;
+  - explicar reducoes no calculo quando houver vinculo com exercicio/isencao.
+- Quando evitar:
+  - para valor final calculado do IPTU, usar `iptucalv`;
+  - para valor de isencao aplicado no calculo principal, verificar tambem `iptucalc.j23_vlrisen`;
+  - para pagamento/arrecadacao, usar tabelas financeiras.
 
-A tabela `iptuisen` registra isenções de IPTU vinculadas a uma matrícula imobiliária. O registro identifica o tipo de isenção, período de vigência, percentual, usuário de inclusão, histórico textual e área de lote usada no contexto da isenção.
+## Grao e chaves
 
-## Tabela principal: `iptuisen`
+- Grao: uma linha por registro de isencao.
+- Entidade principal: isencao de matricula.
+- Chave de negocio:
+  - `j46_codigo`
+- Coluna temporal:
+  - `j46_dtini`
+  - `j46_dtfim`
+  - `j46_dtinc`
 
-Chave principal operacional: `j46_codigo`.
+## Colunas principais
 
-Sequência usada para geração automática: `iptuisen_j46_codigo_seq`.
+- `j46_codigo`: codigo da isencao.
+- `j46_matric`: matricula.
+- `j46_tipo`: tipo de isencao.
+- `j46_dtini`: data inicial de vigencia.
+- `j46_dtfim`: data final de vigencia.
+- `j46_perc`: percentual da isencao.
+- `j46_dtinc`: data de inclusao.
+- `j46_hist`: historico/justificativa.
+- `j46_arealo`: area de lote associada ao contexto da isencao.
 
-| Campo | Tipo | Descrição |
-|---|---:|---|
-| `j46_codigo` | `int4` | Codigo Isencao |
-| `j46_matric` | `int4` | Matrícula |
-| `j46_tipo` | `int4` | Tipo Isencao |
-| `j46_dtini` | `date` | Data Inicio |
-| `j46_dtfim` | `date` | Data Final |
-| `j46_perc` | `float8` | Percentual |
-| `j46_dtinc` | `date` | Data inclusao |
-| `j46_idusu` | `int4` | Codigo do Usuario |
-| `j46_hist` | `text` | Historico |
-| `j46_arealo` | `float8` | Área do lote M2 |
+## Filtros de negocio
 
-## Relacionamentos identificados
+- Matricula: `j46_matric`.
+- Tipo de isencao: `j46_tipo`.
+- Vigencia por data: usar `j46_dtini` e `j46_dtfim`.
+- Isencoes sem fim informado: `j46_dtfim IS NULL`.
 
-| Tabela | Relação extraída | Uso |
-|---|---|---|
-| `iptubase` | `iptubase.j01_matric = iptuisen.j46_matric` | Vincula a isenção à matrícula imobiliária. |
-| `tipoisen` | `tipoisen.j45_tipo = iptuisen.j46_tipo` | Descreve o tipo de isenção. |
-| `lote` | `lote.j34_idbql = iptubase.j01_idbql` | Permite acesso aos dados físicos do lote. |
-| `cgm` | `cgm.z01_numcgm = iptubase.j01_numcgm` | Recupera o CGM do proprietário principal da matrícula. |
-| `isentaxa` | `isentaxa.j56_codigo = iptuisen.j46_codigo` | Vincula taxas relacionadas à isenção. |
-| `isenexe` | `isenexe.j47_codigo = iptuisen.j46_codigo` | Relaciona isenção a exercício. |
-| `proprietario` | `proprietario.j01_matric = iptuisen.j46_matric` | Consulta ampliada do responsável/proprietário. |
-| `isenproc` | `isenproc.j61_codigo = iptuisen.j46_codigo` | Processo associado à isenção. |
-| `promitente` | `promitente.j41_matric = iptuisen.j46_matric` | Promitente relacionado à matrícula. |
-| `iptubasecondominio` | `iptubasecondominio.j108_matric = iptuisen.j46_matric` | Vínculo com condomínio. |
-| `condominio` | `condominio.j107_sequencial = iptubasecondominio.j108_condominio` | Dados do condomínio. |
+## Regra de contagem
 
-## Prefixos de campos
+- Contar linhas de `iptuisen` conta registros de isencao.
+- Para contar matriculas com isencao, usar `COUNT(DISTINCT j46_matric)`.
+- Para contar tipos de isencao, agrupar por `j46_tipo`.
 
-| Prefixo | Tabela provável | Observação |
-|---|---|---|
-| `j46` | `iptuisen` | Campos da isenção. |
-| `j01` | `iptubase` / visão `proprietario` | Matrícula e proprietário base. |
-| `j45` | `tipoisen` | Tipo/descrição da isenção. |
-| `j47` | `isenexe` | Exercício da isenção. |
-| `j56` | `isentaxa` | Taxas associadas à isenção. |
-| `j61` | `isenproc` | Processo da isenção. |
-| `j108` | `iptubasecondominio` | Vínculo matrícula-condomínio. |
-| `j107` | `condominio` | Cadastro de condomínio. |
+## Regra de agregacao
 
-## Métodos relevantes
+- Percentual de isencao nao deve ser somado sem regra especifica.
+- Para impacto financeiro, comparar com valores calculados em `iptucalc`/`iptucalv`.
 
-| Método | Finalidade |
-|---|---|
-| `__construct` | Inicializa rótulos da entidade `iptuisen`. |
-| `atualizacampos` | Preenche propriedades a partir de `HTTP_POST_VARS`, incluindo montagem das datas `j46_dtini`, `j46_dtfim` e `j46_dtinc`. |
-| `incluir($j46_codigo)` | Insere isenção; gera código pela sequência `iptuisen_j46_codigo_seq` quando não informado. |
-| `alterar($j46_codigo)` | Atualiza registro de isenção por `j46_codigo`, com auditoria prévia. |
-| `excluir($j46_codigo, $dbwhere)` | Remove isenção por código ou condição dinâmica, registrando auditoria. |
-| `sql_query` | Consulta isenção com joins de matrícula, tipo de isenção, lote, CGM e taxas isentas. |
-| `sql_query_file` | Consulta direta na tabela `iptuisen`. |
-| `sql_query_isen` | Consulta ampliada de isenção com proprietário, promitente, processo e condomínio. |
-| `sql_queryIsencao($iAnousu, $iMatricula)` | Lista tipos de isenção de uma matrícula em um exercício via `isenexe`. |
+## Relacionamentos importantes
 
-## SQLs de referência normalizados
+- `iptuisen.j46_matric = iptubase.j01_matric`
+- `iptuisen.j46_tipo = tipoisen.j45_tipo`
+- `iptuisen.j46_codigo = isenexe.j47_codigo`, quando analisar exercicio de isencao.
+- `iptuisen.j46_codigo = isentaxa.j56_codigo`, quando envolver taxas isentas.
 
-### Consultar isenção com dados cadastrais principais
+## Riscos de duplicidade
 
+- Uma matricula pode ter varias isencoes.
+- Uma isencao pode ter exercicios associados em outra tabela.
+- Join com taxas ou exercicios pode multiplicar registros.
 
-### Consultar isenções por exercício e matrícula
+## O que nao inferir
 
+- Nao inferir valor economico da isencao apenas pelo percentual.
+- Nao assumir isencao vigente sem avaliar datas e exercicio.
+- Nao confundir `j46_codigo` com tipo de isencao.
 
-### Consulta ampliada de isenção
+## Cuidados
 
-
-## Perguntas que esta referência ajuda a responder
-
-| Pergunta | Caminho principal |
-|---|---|
-| Quais isenções uma matrícula possui? | `iptuisen.j46_matric = :matricula`. |
-| Qual tipo de isenção está ativo no exercício? | `iptuisen` + `isenexe` + `tipoisen`. |
-| Qual percentual de isenção foi registrado? | Campo `j46_perc`. |
-| Qual período de vigência da isenção? | Campos `j46_dtini` e `j46_dtfim`. |
-| Quem cadastrou a isenção? | Campo `j46_idusu`. |
-| Qual histórico justificou a isenção? | Campo `j46_hist`. |
-| A isenção está ligada a taxas específicas? | Join com `isentaxa` por `j56_codigo = j46_codigo`. |
-| A matrícula isenta pertence a condomínio? | Joins `iptubasecondominio` e `condominio`. |
-
-## Filtros seguros sugeridos
-
-
-## Cuidados de uso
-
-Não confundir `j46_codigo`, que identifica o registro de isenção, com `j46_tipo`, que identifica o tipo da isenção.
-
-`j46_dtfim` pode ser nulo. Em consultas de vigência, considerar nulo como ausência de data final.
-
-A classe usa SQL montado por concatenação. Para uso em IA, integrações ou consultas novas, sempre substituir valores por parâmetros.
-
-`j46_perc` pode ser zero, mas isso não significa necessariamente ausência de isenção; pode depender de regras externas, tipo de isenção, `isenexe` ou taxas associadas.
+- `j46_dtfim` nulo pode representar ausencia de fim de vigencia.
+- `j46_perc` zero nao prova ausencia de beneficio sem olhar tipo e regra local.

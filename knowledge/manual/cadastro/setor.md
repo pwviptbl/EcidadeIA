@@ -1,146 +1,66 @@
-# e-Cidade — Referência de Schema: `setor`
+# Tabela de negocio: `cadastro.setor`
 
-## Resumo
+## Identidade
 
-Classe PHP: `cl_setor`  
-Módulo: `cadastro`  
-Entidade/tabela principal: `setor`  
-Finalidade: cadastro de setores do cadastro imobiliário, com descrição e alíquotas predial/territorial associadas ao setor.
+- Nome humano: setor cadastral/imobiliario.
+- O que representa: cada linha representa um setor usado como dimensao territorial/fiscal.
+- Quando usar:
+  - listar setores;
+  - agrupar lotes ou matriculas por setor;
+  - analisar aliquotas predial/territorial associadas ao setor;
+  - verificar vinculos territoriais.
+- Quando evitar:
+  - para valor calculado de IPTU por matricula, usar `iptucalc`/`iptucalv`;
+  - para bairro, usar `bairro`;
+  - para zona de valor, usar tabela de zona quando a pergunta pedir zona.
 
-A tabela `setor` é usada como dimensão territorial/localizacional do cadastro imobiliário. Ela aparece vinculada principalmente a lotes, faces e valores por zona/setor.
+## Grao e chaves
 
-## Tabela principal
+- Grao: uma linha por setor.
+- Entidade principal: setor territorial/fiscal.
+- Chave de negocio:
+  - `j30_codi`
+- Coluna temporal:
+  - nao informada.
 
-| Campo | Tipo | Descrição | Observações |
-|---|---:|---|---|
-| `j30_codi` | `char(4)` | Setor | Chave lógica/primária da tabela. Informado manualmente no `incluir`. |
-| `j30_descr` | `varchar(40)` | Descrição | Obrigatório na inclusão e alteração quando enviado. |
-| `j30_alipre` | `float8` | Alíquota Predial | Obrigatório. Usado como parâmetro fiscal do setor. |
-| `j30_aliter` | `float8` | Alíquota Territorial | Obrigatório. Usado como parâmetro fiscal do setor. |
+## Colunas principais
 
-## Chave
+- `j30_codi`: codigo do setor.
+- `j30_descr`: descricao do setor.
+- `j30_alipre`: aliquota predial associada ao setor.
+- `j30_aliter`: aliquota territorial associada ao setor.
 
-Chave principal/lógica:
+## Filtros de negocio
 
+- Setor por codigo: `j30_codi`.
+- Setor por descricao: `j30_descr`.
 
-Não há uso de sequence na inclusão. O código do setor é recebido como parâmetro em `incluir($j30_codi)`.
+## Regra de contagem
 
-## Métodos principais
+- Contar linhas de `setor` conta setores cadastrados.
+- Para contar lotes por setor, cruzar com `lote` e contar `COUNT(DISTINCT lote.j34_idbql)`.
+- Para contar matriculas por setor, cruzar `setor -> lote -> iptubase` e contar `COUNT(DISTINCT iptubase.j01_matric)`.
 
-| Método | Finalidade |
-|---|---|
-| `__construct()` | Inicializa rótulos da tabela `setor` e página de retorno. |
-| `erro($mostra, $retorna)` | Exibe mensagem de erro/sucesso em JavaScript. |
-| `atualizacampos($exclusao=false)` | Atualiza atributos da classe a partir de `HTTP_POST_VARS`. |
-| `incluir($j30_codi)` | Insere registro em `setor`. Exige descrição e alíquotas. |
-| `alterar($j30_codi=null)` | Atualiza dinamicamente campos enviados. |
-| `excluir($j30_codi=null, $dbwhere=null)` | Remove registros por setor ou condição customizada. |
-| `sql_record($sql)` | Executa SQL e armazena contagem em `numrows`. |
-| `sql_query($j30_codi=null, $campos="*", $ordem=null, $dbwhere="")` | Monta consulta da tabela `setor`. |
-| `sql_query_file($j30_codi=null, $campos="*", $ordem=null, $dbwhere="")` | Monta consulta simples da tabela `setor`. |
-| `vinculosSetor(array $aCampos, array $aWhere)` | Consulta vínculos do setor com faces, lotes e valores por zona/setor. |
+## Regra de agregacao
 
-## Regras de inclusão
+- Aliquotas do setor podem ser usadas como dimensao/parametro, mas nao explicam sozinhas o valor final do IPTU sem comparar calculos.
 
-Campos obrigatórios:
+## Relacionamentos importantes
 
-| Campo | Regra |
-|---|---|
-| `j30_codi` | Deve ser informado no parâmetro `incluir($j30_codi)`. |
-| `j30_descr` | Não pode ser nulo. |
-| `j30_alipre` | Não pode ser nulo. |
-| `j30_aliter` | Não pode ser nulo. |
+- `setor.j30_codi = lote.j34_setor`
+- `setor.j30_codi = face.j37_setor`, quando `face` estiver no contexto.
+- `setor.j30_codi` pode se relacionar com valores por zona/setor conforme catalogo local.
 
-SQL base de inclusão:
+## Riscos de duplicidade
 
+- Um setor possui varios lotes.
+- Um lote pode estar ligado a mais de uma matricula.
 
-## Regras de alteração
+## O que nao inferir
 
-A alteração monta o `UPDATE` dinamicamente conforme os campos informados. Quando enviados, estes campos são validados:
+- Nao atribuir aumento de IPTU apenas ao setor sem consultar calculo/valores.
+- Nao tratar setor como bairro.
 
-| Campo | Regra |
-|---|---|
-| `j30_codi` | Não pode ser nulo. |
-| `j30_descr` | Não pode ser nulo. |
-| `j30_alipre` | Não pode ser nulo. |
-| `j30_aliter` | Não pode ser nulo. |
+## Cuidados
 
-SQL lógico:
-
-
-## Exclusão
-
-A exclusão remove por `j30_codi` ou por `$dbwhere` customizado.
-
-
-## Auditoria
-
-A classe grava auditoria em `db_acount*`, exceto quando a sessão `DB_desativar_account` estiver ativa.
-
-| Campo | Código de auditoria |
-|---|---:|
-| `j30_codi` | `71` |
-| `j30_descr` | `72` |
-| `j30_alipre` | `651` |
-| `j30_aliter` | `652` |
-
-Código da tabela na auditoria: `16`.
-
-## SQLs extraídos e normalizados
-
-### Consulta principal da tabela
-
-
-### Consulta de vínculos do setor
-
-Método: `vinculosSetor(array $aCampos, array $aWhere)`
-
-
-Esse método é útil para verificar se determinado setor possui vínculos em cadastros dependentes antes de manutenção ou exclusão.
-
-## Relacionamentos identificados
-
-| Tabela relacionada | Relação | Origem |
-|---|---|---|
-| `face` | `face.j37_setor = setor.j30_codi` | `vinculosSetor` |
-| `lote` | `lote.j34_setor = setor.j30_codi` | `vinculosSetor` e uso recorrente no cadastro imobiliário |
-| `zonassetorvalor` | `zonassetorvalor.j141_setor = setor.j30_codi` | `vinculosSetor` |
-
-## Consultas úteis para IA
-
-### Buscar setor por código
-
-
-### Listar setores com quantidade de lotes
-
-
-### Verificar vínculos antes de excluir setor
-
-
-## Convenções de prefixo
-
-| Prefixo | Tabela provável |
-|---|---|
-| `j30_` | `setor` |
-| `j34_` | `lote` |
-| `j37_` | `face` |
-| `j141_` | `zonassetorvalor` |
-
-## Perguntas que esta tabela ajuda a responder
-
-- Qual é a descrição de um setor imobiliário?
-- Quais são as alíquotas predial e territorial configuradas para o setor?
-- Um setor possui lotes vinculados?
-- Um setor possui faces ou valores fiscais por zona/setor vinculados?
-- O setor pode ser removido sem afetar registros dependentes?
-
-## Cuidados e riscos
-
-- `j30_codi` é `char(4)`, então comparações podem exigir atenção a zeros à esquerda e espaços.
-- A classe permite alteração de `j30_codi`, o que pode ser perigoso se houver vínculos em `lote`, `face` ou `zonassetorvalor`.
-- A exclusão por `$dbwhere` permite remoção ampla; deve ser usada com filtros explícitos.
-- O método `vinculosSetor` aceita arrays de campos e condições já montadas; deve-se evitar interpolação insegura de entrada externa.
-
-## Nome de arquivo recomendado
-
-`ecidade-setor-schema-referencia.md`
+- `j30_codi` pode ter zeros a esquerda ou formato `char`; preservar codigo ao filtrar.

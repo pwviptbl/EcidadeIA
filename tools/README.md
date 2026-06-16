@@ -70,6 +70,9 @@ python3 tools/extract_catalog.py --schema all --output-dir catalog
 ### `export_catalog_markdown.py`
 
 Exporta `catalog/*.json` para Markdown de revisao humana/Obsidian.
+O formato exportado segue o padrao V2 de tabela de negocio, sem SQL pronto:
+identidade, grao, chaves, colunas principais, metricas, dimensoes, filtros,
+contagem, agregacao, relacionamentos, riscos e cuidados.
 
 ```bash
 python3 tools/export_catalog_markdown.py --domain cadastro
@@ -97,6 +100,12 @@ secao, promova o conteudo para:
 
 - `knowledge/manual/<schema>/conceitos.md`
 - `knowledge/manual/<schema>/relacionamentos_negocio.md`
+
+Os esqueletos seguem os modelos em:
+
+- `knowledge/manual/_modelos/conceito_negocio.md`
+- `knowledge/manual/_modelos/receita_relacionamento.md`
+- `knowledge/manual/_modelos/tabela_negocio.md`
 
 ### `build_knowledge_rag.py`
 
@@ -134,6 +143,21 @@ Saida:
 
 - `rag/catalog_documents.jsonl`
 
+### `validate_knowledge_manual.py`
+
+Valida o padrao humano de conhecimento e impede regressao para SQL pronto:
+
+```bash
+python3 tools/validate_knowledge_manual.py --schema cadastro
+```
+
+Checagens principais:
+
+- arquivos de tabela em `knowledge/manual/<schema>/` devem iniciar com
+  `# Tabela de negocio: schema.tabela`;
+- `knowledge/manual/` e `knowledge/rag/` nao podem conter SQL pronto, blocos
+  `sql`, secoes legadas de consultas prontas ou `sql_exemplo`.
+
 ### `run_knowledge_pipeline.py`
 
 Executa a sequencia padrao para reduzir erro operacional:
@@ -144,6 +168,9 @@ python3 tools/run_knowledge_pipeline.py --schema cadastro --from-db
 python3 tools/run_knowledge_pipeline.py --schema cadastro --export-obsidian --skip-knowledge-rag --skip-rag-documents
 python3 tools/run_knowledge_pipeline.py --schema cadastro --export-business-scaffold --skip-knowledge-rag --skip-rag-documents
 ```
+
+Por padrao, o pipeline tambem executa `validate_knowledge_manual.py`. Use
+`--skip-validate` apenas para diagnostico temporario.
 
 ## Saidas
 
