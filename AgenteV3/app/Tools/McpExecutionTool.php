@@ -11,6 +11,10 @@ class McpExecutionTool extends Tool
     protected ?string $sessionId = null;
     protected int $nextId = 1;
 
+    /**
+     * Inicializa a ferramenta 'mcp_execute_sql'.
+     * Define o nome, descrição e o parâmetro esperado (sql).
+     */
     public function __construct()
     {
         $this->as('mcp_execute_sql')
@@ -19,6 +23,13 @@ class McpExecutionTool extends Tool
             ->using(fn (string $sql) => $this->execute($sql));
     }
 
+    /**
+     * Empacota a query SQL gerada pelo LLM e dispara um JSON-RPC HTTP POST para o servidor MCP local.
+     * Captura o resultado da execução read-only do banco e devolve para o agente em texto.
+     *
+     * @param string $sql A consulta SQL a ser executada.
+     * @return string O resultado da consulta (ex: tabela convertida para texto/JSON) ou mensagem de erro.
+     */
     protected function execute(string $sql): string
     {
         Log::info("McpExecutionTool: Executando SQL...", ['sql' => $sql]);
@@ -85,6 +96,13 @@ class McpExecutionTool extends Tool
         }
     }
 
+    /**
+     * Garante o Handshake de Inicialização do Protocolo MCP.
+     * Se a sessão ainda não existir, envia a request de 'initialize' com capabilities, 
+     * guarda o 'Mcp-Session-Id' retornado no header e envia 'notifications/initialized' para selar a conexão.
+     *
+     * @param string $url URL do servidor MCP.
+     */
     protected function ensureSession(string $url): void
     {
         if ($this->sessionId) {

@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Log;
 
 class RagSearchTool extends Tool
 {
+    /**
+     * Inicializa a ferramenta 'rag_search'.
+     * Define o nome, descrição e o parâmetro esperado pela LLM (query).
+     */
     public function __construct()
     {
         $this->as('rag_search')
@@ -15,6 +19,14 @@ class RagSearchTool extends Tool
             ->using(fn (string $query) => $this->search($query));
     }
 
+    /**
+     * Varre o diretório de conhecimento do RAG buscando o termo informado.
+     * Se houver correspondência exata no nome do arquivo, retorna o conteúdo integral.
+     * Caso contrário, busca dentro do arquivo e retorna um "snippet" das linhas relacionadas.
+     *
+     * @param string $query Termo ou nome de tabela buscado.
+     * @return string JSON encodado contendo os resultados da busca (snippets ou conteúdo integral).
+     */
     protected function search(string $query): string
     {
         Log::info("RagSearchTool: Pesquisando por...", ['query' => $query]);

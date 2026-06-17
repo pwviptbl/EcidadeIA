@@ -17,7 +17,13 @@ use Illuminate\Support\Str;
 class Orchestrator
 {
     /**
-     * Executa a pergunta do usuário no loop agentivo do Prism com suporte a streaming de passos via WebSockets
+     * Executa a pergunta do usuário no loop agentivo do Prism com suporte a streaming de passos via WebSockets.
+     * Intercepta o loop do ReAct definindo maxSteps(1), permitindo capturar as chamadas de ferramenta
+     * e executá-las de forma síncrona pelo PHP, transmitindo o andamento via Laravel Reverb.
+     *
+     * @param string $question A pergunta fornecida pelo usuário.
+     * @param string|null $sessionId ID da sessão para o tracking do Reverb e MCP.
+     * @return array Array associativo contendo o session_id, response final e o histórico completo de steps.
      */
     public function ask(string $question, ?string $sessionId = null): array
     {
@@ -242,6 +248,13 @@ class Orchestrator
         ];
     }
 
+    /**
+     * Retorna o System Prompt injetado no LLM (Gemini) durante o Loop ReAct.
+     * Define as diretrizes operacionais do AgenteV3, como forçar a leitura do RAG
+     * antes de gerar SQL e instruções para evitar consultas cruzadas custosas.
+     *
+     * @return string O texto do prompt principal da IA.
+     */
     private function getSystemPrompt(): string
     {
         return <<<PROMPT

@@ -14,6 +14,13 @@ class AgentController extends Controller
         $this->orchestrator = $orchestrator;
     }
 
+    /**
+     * Ponto de entrada da API (/api/ask).
+     * Recebe a pergunta do usuário, valida a entrada e delega para o Orchestrator.
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse JSON contendo o histórico de passos e a resposta final.
+     */
     public function ask(Request $request)
     {
         $request->validate([
