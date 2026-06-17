@@ -49,7 +49,14 @@ class SchemaPlanner:
                 ],
                 "group_by": [],
                 "metrics": [{"metric_name": "nome", "table": "opcional", "column": "opcional", "aggregation": "opcional", "custom_expression": "opcional_formula_sql"}],
-                "filters": [],
+                "filters": [
+                    {
+                        "table": "schema.tabela",
+                        "column": "coluna",
+                        "operator": "EQUALS",
+                        "value": "valor"
+                    }
+                ],
                 "risks": [],
                 "open_questions": [],
             },
