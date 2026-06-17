@@ -9,7 +9,8 @@
 - **Débitos em Aberto (Não Pagos)** ficam na tabela `caixa.arrecad`. Se o débito está nesta tabela, significa que ele **ainda não foi pago**. O total inadimplente é a soma de `caixa.arrecad.k00_valor`.
 - **Débitos Pagos** ficam na tabela `caixa.arrepaga` (após o pagamento, o débito sai da `arrecad`).
 - **Valor Base Lançado/Calculado** deve ser obtido através da tabela `cadastro.iptucalv` (usando o campo `j21_valor`), que guarda o imposto total originalmente calculado.
-- **Cálculo da Taxa:** O percentual de inadimplência deve ser baseado na proporção do total em aberto (`caixa.arrecad`) contra o total calculado (`cadastro.iptucalv`).
+- **Cálculo da Taxa:** O percentual de inadimplência DEVE ser baseado na soma dos valores financeiros (R$), e NUNCA pela quantidade de carnês (`COUNT`). Exemplo: `(SUM(valor_aberto) / SUM(valor_lancado)) * 100`.
+- **Atenção ao Efeito Multiplicador (Fan-out das Parcelas):** A tabela `arrecad` contém múltiplas parcelas para um mesmo débito (ex: 10 parcelas). Se você usar `COUNT()` após um `LEFT JOIN`, um imóvel com 10 parcelas atrasadas pesará 10 vezes mais na estatística, e um pagamento parcial ignorará as parcelas pagas, arruinando o percentual. SEMPRE agregue os valores financeiros (`SUM`) usando CTEs separadas antes de juntar as tabelas.
 
 **Tabelas Envolvidas:** `cadastro.bairro`, `cadastro.iptubase`, `cadastro.iptucalv`, `cadastro.iptunump`, `caixa.arrecad`
 
@@ -19,4 +20,4 @@
 3. Junte com `cadastro.iptunump` (`j01_matric = j20_matric` e `j20_anousu = YYYY`).
 4. Para obter a dívida pendente, faça um LEFT JOIN de `cadastro.iptunump` com `caixa.arrecad` (`j20_numpre = k00_numpre`).
 5. A soma de `caixa.arrecad.k00_valor` representará o "Total Inadimplente/Em Aberto".
-6. Cuidado com multiplicações de JOIN: como o parcelamento gera múltiplos registros em `iptunump`/`arrecad`, prefira calcular o Total Lançado (`iptucalv`) e o Total Aberto (`arrecad`) de forma segura usando subqueries (CTEs separadas) para garantir que o `j21_valor` da matrícula não seja somado repetidas vezes.
+6. Cuidado com multiplicações de JOIN: calcule o Total Lançado (agregando `iptucalv`) e o Total Aberto (agregando `arrecad`) em CTEs independentes agrupadas por matrícula ou bairro ANTES de fazer o JOIN final. Nunca faça JOIN direto sem agregar antes, caso contrário o `j21_valor` será somado repetidas vezes.
