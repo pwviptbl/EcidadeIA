@@ -1,0 +1,12 @@
+[mcp] {"created_at": "2026-06-17T16:50:18", "event": "catalog.load_file", "payload": {"file": "cadastro_extraido.json", "domain": "cadastro", "tables": 180}}
+[mcp] {"created_at": "2026-06-17T16:50:18", "event": "catalog.load_file", "payload": {"file": "caixa_extraido.json", "domain": "caixa", "tables": 630}}
+[mcp] {"created_at": "2026-06-17T16:50:18", "event": "catalog.loaded", "payload": {"files": 2, "tables": 810, "intents": 2, "metrics": 0, "templates": 1}}
+[mcp] {"created_at": "2026-06-17T16:50:19", "event": "rag.loaded", "payload": {"path": "/home/dbseller/Modelos/MVP/rag/catalog_documents.jsonl", "documents": 29897, "kinds": {"table": 810, "column": 9062, "relationship": 998, "relationship_recipe": 17739, "intent": 4, "markdown_reference": 726, "markdown_rule": 549, "counting_rule": 1, "business_concept": 8}}}
+INFO:     Started server process [1050964]
+INFO:     Waiting for application startup.
+StreamableHTTP session manager started
+INFO:     Application startup complete.
+ERROR:    [Errno 98] error while attempting to bind on address ('0.0.0.0', 8010): address already in use
+INFO:     Waiting for application shutdown.
+StreamableHTTP session manager shutting down
+INFO:     Application shutdown complete.

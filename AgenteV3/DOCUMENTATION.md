@@ -22,19 +22,29 @@ A **V3** implementa um **Agentic Loop (ReAct - Reason + Act)** usando PHP e Lara
 ## Roadmap de Implementação
 
 ### Passo 1: Inicialização do Core
-- [ ] Rodar o comando de scaffolding do Laravel (ex: `composer create-project laravel/laravel .`)
-- [ ] Instalar o Laravel Sail para subir o ambiente no Docker.
-- [ ] Instalar o pacote `echolabsdev/prism` via composer.
+- [x] Rodar o comando de scaffolding do Laravel (ex: `composer create-project laravel/laravel .`)
+- [x] Instalar o Laravel Sail para subir o ambiente no Docker.
+- [x] Instalar o pacote `echolabsdev/prism` via composer.
 
 ### Passo 2: Integração de Ferramentas (Tools)
-- [ ] Mover/mapear os arquivos Markdown de RAG (`knowledge/rag/`) para serem acessíveis ao Laravel.
-- [ ] Criar a Tool `RagSearchTool`: Permite o agente Prism buscar regras de negócios em texto.
-- [ ] Criar a Tool `McpExecutionTool`: Dispara requisição HTTP POST para o nosso MCP de banco (`http://host.docker.internal:8010/`).
+- [x] Mover/mapear os arquivos Markdown de RAG (`knowledge/rag/`) para serem acessíveis ao Laravel.
+- [x] Criar a Tool `RagSearchTool`: Permite o agente Prism buscar regras de negócios em texto.
+- [x] Criar a Tool `McpExecutionTool`: Dispara requisição HTTP POST para o nosso MCP de banco (`http://host.docker.internal:8010/`).
 
 ### Passo 3: O Workflow Autônomo (Prism Loop)
-- [ ] Configurar o System Prompt orientando-o explicitamente sobre o dialeto do PostgreSQL e sua autonomia para falhar, refletir e reescrever as queries.
-- [ ] Criar a Controller Web ou Comando Artisan que inicie a sessão Prism.
+- [x] Configurar o System Prompt orientando-o explicitamente sobre o dialeto do PostgreSQL e sua autonomia para falhar, refletir e reescrever as queries.
+- [x] Criar a Controller Web ou Comando Artisan que inicie a sessão Prism.
 
 ### Passo 4: WebSockets & Human-in-the-Loop
 - [ ] Implementar Laravel Reverb (ou Websockets nativos) para fazer o streaming interativo do raciocínio do Prism de volta para o Dashboard.
 - [ ] Adicionar suporte a interrupções se o Agente concluir que não há tabelas com os dados exigidos pelo usuário.
+
+## Evoluções Futuras: Migração de RAG para ChromaDB
+Tendo em vista o crescimento do volume de dados, a busca em memória baseada em BM25 será substituída por uma arquitetura híbrida de busca vetorial:
+
+1. **Benefício da Persistência:** ChromaDB em container dedicado (`chromadb/chroma` na porta `8000`) para desonerar a memória RAM do Python/Laravel.
+2. **Arquitetura de Busca Híbrida (Dense + Sparse):**
+   - **Dense (ChromaDB + Gemini Embeddings):** Busca conceitual (ex: entender termos como "inadimplência", "não pago").
+   - **Sparse (Filtros de Metadados / Keyword):** Busca técnica exata de tabelas (ex: achar a tabela exata `iptuisen` ou coluna `j23_vlrisen`).
+3. **Pipeline de Ingestão:** Script em Python ou Laravel Artisan para ler os `.md` e os arquivos JSONL, fatiar em chunks semânticos, chamar o Gemini Embeddings API e persistir no ChromaDB.
+

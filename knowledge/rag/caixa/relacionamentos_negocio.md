@@ -30,3 +30,20 @@
 4. Para chegar aos pagamentos a partir da matrícula, junte `cadastro.iptubase` com `cadastro.iptunump` (`j01_matric = j20_matric`).
 5. Junte `cadastro.iptunump` com `caixa.arrepaga` (`j20_numpre = k00_numpre`).
 6. O valor efetivamente pago estará em `caixa.arrepaga.k00_valor`.
+
+### Receita: `calculo_taxa_inadimplencia_iptu`
+
+**Descrição:** Para calcular a inadimplência de IPTU, débitos em aberto ou comparar o que falta pagar.
+**Regra de Negócio Crucial:**
+- **Débitos em Aberto (Não Pagos)** ficam na tabela `caixa.arrecad`. Se o débito está nesta tabela, significa que ele **ainda não foi pago**. O total inadimplente é a soma de `caixa.arrecad.k00_valor`.
+- **Débitos Pagos** ficam na tabela `caixa.arrepaga` (após o pagamento, o débito sai da `arrecad`).
+- **Valor Base Lançado/Calculado** deve ser obtido através da tabela `cadastro.iptucalv` (usando o campo `j21_valor`), que guarda o imposto total originalmente calculado.
+- **Cálculo da Taxa:** O percentual de inadimplência deve ser baseado na proporção do total em aberto (`caixa.arrecad`) contra o total calculado (`cadastro.iptucalv`).
+**Tabelas Envolvidas:** `cadastro.bairro`, `cadastro.iptubase`, `cadastro.iptucalv`, `cadastro.iptunump`, `caixa.arrecad`
+**Passo a passo (Joins):**
+1. Junte os imóveis e bairros (`cadastro.bairro` -> `cadastro.lote` -> `cadastro.iptubase`).
+2. Junte com `cadastro.iptucalv` (`j01_matric = j21_matric`) e filtre pelo ano desejado (`j21_anousu = YYYY`). A soma de `j21_valor` será o "Total Calculado".
+3. Junte com `cadastro.iptunump` (`j01_matric = j20_matric` e `j20_anousu = YYYY`).
+4. Para obter a dívida pendente, faça um LEFT JOIN de `cadastro.iptunump` com `caixa.arrecad` (`j20_numpre = k00_numpre`).
+5. A soma de `caixa.arrecad.k00_valor` representará o "Total Inadimplente/Em Aberto".
+6. Cuidado com multiplicações de JOIN: como o parcelamento gera múltiplos registros em `iptunump`/`arrecad`, prefira calcular o Total Lançado (`iptucalv`) e o Total Aberto (`arrecad`) de forma segura usando subqueries ou garantindo que o `j21_valor` não seja somado repetidas vezes para a mesma matrícula.
