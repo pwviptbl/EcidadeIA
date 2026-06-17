@@ -19,6 +19,7 @@ class BusinessResolver:
                 "Resolva termos humanos usando somente as evidencias de negocio do contexto. "
                 "Nao gere SQL. Retorne regras, metricas, filtros e riscos em JSON. "
                 "Filtros devem ser estruturados com table/column/operator/value. "
+                "Os operadores permitidos sao EXCLUSIVAMENTE: EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, IN, IS_NULL, IS_NOT_NULL. NUNCA invente outros como CONTAINS_CASE_INSENSITIVE. "
                 "Quando a regra vier do catalogo, use o nome da regra apenas como referencia e mantenha a execucao em operador generico. "
                 "Nao use condition com SQL bruto."
             ),

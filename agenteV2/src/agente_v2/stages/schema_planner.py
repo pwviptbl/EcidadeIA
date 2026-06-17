@@ -26,6 +26,7 @@ class SchemaPlanner:
                 "Monte um plano de esquema para responder a pergunta. "
                 "Escolha tabelas, grao, eixo temporal, joins e agrupamentos. "
                 "Nao escreva SQL. Use colunas reais no grain e filtros estruturados. "
+                "Os operadores permitidos sao EXCLUSIVAMENTE: EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, IN, IS_NULL, IS_NOT_NULL. NUNCA invente outros como CONTAINS_CASE_INSENSITIVE. "
                 "Nao use condition com SQL bruto."
             ),
             "question": question,
@@ -37,7 +38,15 @@ class SchemaPlanner:
                 "grain": [],
                 "time_axis": {"table": "schema.tabela", "column": "coluna"},
                 "tables": [],
-                "joins": [],
+                "joins": [
+                    {
+                        "source_table": "schema.tabela_a",
+                        "source_columns": ["coluna_a"],
+                        "target_table": "schema.tabela_b",
+                        "target_columns": ["coluna_b"],
+                        "join_type": "INNER JOIN"
+                    }
+                ],
                 "group_by": [],
                 "metrics": [{"metric_name": "nome", "table": "opcional", "column": "opcional", "aggregation": "opcional", "custom_expression": "opcional_formula_sql"}],
                 "filters": [],

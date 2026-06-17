@@ -23,7 +23,7 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `cadastro.iptubase`
 - Grao esperado: uma linha por matricula em `iptubase`.
 - Filtros de negocio:
-  - Regra catalogada `matricula_ativa`: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`
+  - Regra catalogada `matricula_ativa`: `iptubase.j01_baixa IS NULL`
 - Regra de contagem:
   - Para contar matriculas ativas, usar `COUNT(DISTINCT j01_matric)` ou `COUNT(1)` quando a consulta partir diretamente de `iptubase` sem multiplicar por joins.
 - O que nao inferir:
@@ -45,7 +45,7 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `cadastro.iptuconstr`
 - Grao esperado: uma linha por `j39_matric, j39_idcons`.
 - Filtros de negocio:
-  - Obrigatório aplicar filtro na coluna `iptuconstr.j39_dtdemo` com operador `IS NULL`
+  - `iptuconstr.j39_dtdemo IS NULL`
 - Regra de contagem:
   - Para contar construcoes, usar a combinacao `j39_matric, j39_idcons`.
   - Se a consulta parte de `iptuconstr`, `COUNT(1)` conta construcoes cadastradas.
@@ -122,9 +122,10 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - `iptucalv.j21_codhis -> iptucalh.j17_codhis`
 - Filtros de negocio:
   - Exercicio em `iptucalv.j21_anousu`.
-  - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS_CI ou LIKE, pois absorvem descricoes como 'ISENÇÃO IPTU'.
+  - Regra catalogada `historico_iptu_local`: `iptucalh.j17_descr` com conteudo de IPTU, ou a regra local equivalente do municipio.
 - Regra de contagem/soma:
   - Para somar IPTU, nao somar `j21_valor` puro por ano sem classificar o historico.
+  - Usar operador `EQUALS` ou `eq` e valor exato `IPTU` na coluna `iptucalh.j17_descr` quando o catalogo nao trouxer codigo de receita validado. NUNCA use CONTAINS_CI.
 - O que nao inferir:
   - Nao confundir valor calculado com valor pago/arrecadado.
   - Nao misturar IPTU, taxa de lixo, isencao e desconto sem filtro de historico/classificacao.
@@ -207,34 +208,3 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
 - Regra de contagem:
   - Para contar lotes com caracteristica, usar `COUNT(DISTINCT j35_idbql)`.
   - Para contar matriculas/imoveis com caracteristica de lote, cruzar com `iptubase` e usar `COUNT(DISTINCT j01_matric)`.
-
-### Conceito de negocio: carga_tributaria_por_m2
-
-- Nome humano: carga tributária por metro quadrado.
-- Perguntas comuns:
-  - Qual bairro tem a maior carga tributária por m²?
-  - Calcule a razao de IPTU por area.
-- Significado: a razão entre o valor total do IPTU calculado e a área territorial considerada no momento do cálculo.
-- Entidade principal: valor derivado de calculo territorial.
-- Tabelas envolvidas:
-  - `cadastro.iptucalv`
-  - `cadastro.iptucalh`
-  - `cadastro.iptucalc`
-  - `cadastro.iptubase`
-  - `cadastro.lote`
-  - `cadastro.bairro`
-- Caminho de negocio:
-  - `iptucalv.j21_codhis -> iptucalh.j17_codhis`
-  - `iptucalv.j21_matric, iptucalv.j21_anousu -> iptucalc.j23_matric, iptucalc.j23_anousu`
-  - `iptucalv.j21_matric -> iptubase.j01_matric`
-  - `iptubase.j01_idbql -> lote.j34_idbql`
-  - `lote.j34_bairro -> bairro.j13_codi`
-- Filtros recomendados:
-  - Exercicio em `iptucalv.j21_anousu` e `iptucalc.j23_anousu`.
-  - Somente IPTU: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS ou LIKE, pois isso absorve indevidamente rubricas como 'ISENÇÃO IPTU' ou 'TAXA DE LIXO COM IPTU'.
-  - Matricula ativa: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`.
-- Regra de construcao de metrica:
-  - Se pedir a razao ou carga tributaria, você DEVE gerar um campo `custom_expression` no JSON da métrica em vez de `aggregation`.
-  - Exemplo de `custom_expression`: `SUM(cadastro.iptucalv.j21_valor) / NULLIF(SUM(cadastro.iptucalc.j23_arealo), 0)`
-- Cuidados:
-  - Como `iptucalv` pode ter varias receitas, o filtro `EQUALS` com valor exato `IPTU` no `j17_descr` é estritamente necessario.

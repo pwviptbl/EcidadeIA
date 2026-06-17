@@ -303,8 +303,18 @@ def _compile_filters(filters: list[Any], aliases: dict[str, str]) -> list[str]:
             where_parts.append(f"{expr} IS NULL")
         elif operator == "IS NOT NULL":
             where_parts.append(f"{expr} IS NOT NULL")
-        elif operator in {"=", "EQ", "EQUAL"}:
+        elif operator in {"=", "EQ", "EQUAL", "EQUALS"}:
             where_parts.append(f"{expr} = {_sql_literal(value)}")
+        elif operator in {"!=", "<>", "NOT_EQ", "NOT_EQUAL", "NOT_EQUALS"}:
+            where_parts.append(f"{expr} != {_sql_literal(value)}")
+        elif operator in {">", "GT", "GREATER_THAN"}:
+            where_parts.append(f"{expr} > {_sql_literal(value)}")
+        elif operator in {"<", "LT", "LESS_THAN"}:
+            where_parts.append(f"{expr} < {_sql_literal(value)}")
+        elif operator in {">=", "GTE", "GREATER_THAN_OR_EQUAL"}:
+            where_parts.append(f"{expr} >= {_sql_literal(value)}")
+        elif operator in {"<=", "LTE", "LESS_THAN_OR_EQUAL"}:
+            where_parts.append(f"{expr} <= {_sql_literal(value)}")
     return where_parts
 
 

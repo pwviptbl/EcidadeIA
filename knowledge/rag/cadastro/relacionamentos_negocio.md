@@ -48,7 +48,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `lote.j34_idbql = iptubase.j01_idbql`
 - Cardinalidade: um bairro possui varios lotes; um lote pode estar ligado a uma ou mais matriculas.
 - Filtros recomendados:
-  - Regra catalogada `matricula_ativa`: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`.
+  - Regra catalogada `matricula_ativa`: `iptubase.j01_baixa IS NULL`.
 - Cuidados:
   - Para contar imoveis por bairro, usar `COUNT(DISTINCT iptubase.j01_matric)` quando houver joins com tabelas de detalhe.
 
@@ -73,7 +73,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
 - Filtros recomendados:
   - Exercicio: `iptucalv.j21_anousu = :ano`.
   - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS_CI ou LIKE, pois absorvem descricoes como 'ISENÇÃO IPTU'.
-  - Regra catalogada `matricula_ativa`: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`, somente quando a pergunta pedir imoveis ativos.
+  - Regra catalogada `matricula_ativa`: `iptubase.j01_baixa IS NULL`, somente quando a pergunta pedir imoveis ativos.
 - Cuidados:
   - Nao somar `iptucalv.j21_valor` sem classificar o historico.
   - O historico pode variar entre municipios e incluir IPTU, taxa de lixo, isencao ou desconto.
@@ -100,7 +100,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
 - Filtros recomendados:
   - Exercicio: `iptucalv.j21_anousu = :ano`.
   - Regra catalogada `historico_iptu_local`: Obrigatório aplicar filtro na coluna `iptucalh.j17_descr` com operador `EQUALS` (ou `eq`) e valor exato `IPTU`. NUNCA use CONTAINS_CI ou LIKE, pois absorvem descricoes como 'ISENÇÃO IPTU'.
-  - Regra catalogada `matricula_ativa`: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`, se a pergunta pedir imoveis ativos.
+  - Regra catalogada `matricula_ativa`: `iptubase.j01_baixa IS NULL`, se a pergunta pedir imoveis ativos.
 - Regra de ranking:
   - Agrupar por `bairro.j13_codi` e `bairro.j13_descr`.
   - Ordenar por `SUM(iptucalv.j21_valor)` em ordem decrescente.
@@ -121,8 +121,8 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
 - Join logico:
   - `iptubase.j01_matric = iptuconstr.j39_matric`
 - Filtros recomendados:
-  - Construcoes ativas: Obrigatório aplicar filtro na coluna `iptuconstr.j39_dtdemo` com operador `IS NULL`.
-  - Matriculas ativas: Obrigatório aplicar filtro na coluna `iptubase.j01_baixa` com operador `IS NULL`.
+  - Construcoes ativas: `iptuconstr.j39_dtdemo IS NULL`.
+  - Matriculas ativas: `iptubase.j01_baixa IS NULL`.
 - Cuidados:
   - Uma matricula pode ter varias construcoes.
   - Para contar imoveis com construcao, usar `COUNT(DISTINCT iptubase.j01_matric)`.
@@ -147,7 +147,7 @@ Este arquivo documenta caminhos semanticos entre entidades. Use quando a FK isol
   - `carconstr.j48_idcons = iptuconstr.j39_idcons`, quando usar `iptuconstr`.
 - Filtros recomendados:
   - Caracteristicas de construcao: `cargrup.j32_tipo = 'C'`, quando for necessario separar de lote/face.
-  - Construcoes ativas: Obrigatório aplicar filtro na coluna `iptuconstr.j39_dtdemo` com operador `IS NULL`.
+  - Construcoes ativas: `iptuconstr.j39_dtdemo IS NULL`.
 - Cuidados:
   - Uma construcao pode ter varias caracteristicas.
   - `caracter` e cadastro mestre; uso real esta em `carconstr`.

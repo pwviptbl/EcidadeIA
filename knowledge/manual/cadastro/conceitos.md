@@ -117,7 +117,7 @@ Este arquivo descreve conceitos de negocio antes de falar em SQL. Use para ensin
   - Regra catalogada `historico_iptu_local`: `iptucalh.j17_descr` com conteudo de IPTU, ou a regra local equivalente do municipio.
 - Regra de contagem/soma:
   - Para somar IPTU, nao somar `j21_valor` puro por ano sem classificar o historico.
-  - Usar `position('iptu' in lower(iptucalh.j17_descr)) > 0` quando o catalogo nao trouxer codigo de receita validado, ou a regra local equivalente do municipio.
+  - Usar operador `EQUALS` ou `eq` e valor exato `IPTU` na coluna `iptucalh.j17_descr` quando o catalogo nao trouxer codigo de receita validado. NUNCA use CONTAINS_CI.
 - O que nao inferir:
   - Nao confundir valor calculado com valor pago/arrecadado.
   - Nao misturar IPTU, taxa de lixo, isencao e desconto sem filtro de historico/classificacao.
