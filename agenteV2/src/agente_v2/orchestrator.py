@@ -29,7 +29,7 @@ class AgentV2Phase1:
         self.schema_planner = SchemaPlanner(self.llm)
         self.plan_validator = PlanValidator()
 
-    def run(self, question: str) -> Phase1Result:
+    def run(self, question: str, ask_user_callback: callable = None) -> Phase1Result:
         question = question.strip()
         if not question:
             raise ValueError("Pergunta vazia.")
@@ -38,6 +38,18 @@ class AgentV2Phase1:
         context = build_context(question, self.mcp)
         intent = self.intent_extractor.run(question)
         business = self.business_resolver.run(question, intent, context)
+
+        if ask_user_callback and business.payload.get("open_questions"):
+            for q in business.payload["open_questions"]:
+                user_answer = ask_user_callback(q)
+                if user_answer:
+                    question = f"{question} [Clarificacao: {q} -> {user_answer}]"
+                    
+            if "[Clarificacao:" in question:
+                log_event("phase1.human_in_the_loop", {"new_question": question})
+                # Re-run business resolver with the new context
+                business = self.business_resolver.run(question, intent, context)
+
         schema = self.schema_planner.run(question, intent, business.payload, context)
         validation = self.plan_validator.run(schema.payload, business.payload, context)
         result = Phase1Result(

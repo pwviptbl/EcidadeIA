@@ -10,12 +10,15 @@
 4. Os pagamentos efetivados estão na `caixa.arrepaga` e se ligam pelo número da prestação e parcela: `caixa.arrecad.k00_numpre = caixa.arrepaga.k00_numpre` AND `caixa.arrecad.k00_numpar = caixa.arrepaga.k00_numpar`.
 
 ## Receita: `comparacao_iptu_pago_vs_calculado`
-**Descrição:** Para responder perguntas como "quanto arrecadamos vs quanto foi calculado".
+**Descrição:** Para responder perguntas como "quanto arrecadamos vs quanto foi calculado" ou "efetivamente arrecadado (pago)".
+**Perguntas comuns:** 
+- Qual o valor total efetivamente arrecadado (pago) de IPTU no bairro Icaraí no exercício de 2026?
+- Quanto efetivamente arrecadamos em Icaraí?
 **Tabelas Envolvidas:** `cadastro.bairro`, `cadastro.lote`, `cadastro.iptubase`, `cadastro.iptucalv`, `cadastro.iptunump`, `caixa.arrepaga`
 **Passo a passo (Joins):**
 1. Parta do `cadastro.bairro` e junte com `cadastro.lote` (`j13_codi = j34_bairro`).
 2. Junte com `cadastro.iptubase` (`j34_idbql = j01_idbql`).
-3. Junte com `cadastro.iptucalv` (`j01_matric = j21_matric`). Filtre `j21_anousu` e `j21_codhis` (histórico IPTU).
-4. Para chegar aos pagamentos, junte `cadastro.iptubase` com `cadastro.iptunump` (`j01_matric = j20_matric` e `j21_anousu = j20_anousu`).
+3. Para garantir que estamos tratando apenas de IPTU, junte a `cadastro.iptubase` com `cadastro.iptucalv` (`j01_matric = j21_matric`). E então junte `cadastro.iptucalv` com `cadastro.iptucalh` (`j21_codhis = j17_codhis`). NUNCA ligue `caixa.arrepaga` diretamente a `cadastro.iptucalh` (os históricos de caixa e cadastro são incompatíveis).
+4. Para chegar aos pagamentos a partir da matrícula, junte `cadastro.iptubase` com `cadastro.iptunump` (`j01_matric = j20_matric`).
 5. Junte `cadastro.iptunump` com `caixa.arrepaga` (`j20_numpre = k00_numpre`).
-6. O valor efetivamente pago estará em `caixa.arrepaga.k00_valor` (ou similar, dependendo da métrica exata de valor pago).
+6. O valor efetivamente pago estará em `caixa.arrepaga.k00_valor`.

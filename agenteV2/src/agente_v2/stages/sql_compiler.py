@@ -26,6 +26,8 @@ class SqlCompiler:
             artifact = self._compile_sum_by_dimension(business_spec, schema_plan)
         elif operation == "ranking":
             artifact = self._compile_ranking(question, intent_spec, business_spec, schema_plan)
+        elif operation == "inadimplencia_iptu":
+            artifact = self._compile_inadimplencia_iptu(intent_spec, business_spec, schema_plan, question)
         else:
             artifact = self._compile_detail_listing(business_spec, schema_plan)
         log_event("sql_compiler.done", artifact.to_dict())
@@ -33,6 +35,9 @@ class SqlCompiler:
 
     def _resolve_operation(self, intent_spec: dict[str, Any]) -> str:
         intent = str(intent_spec.get("intent") or "").strip()
+        req_metrics = str(intent_spec.get("requested_metrics") or []).lower()
+        if "inadimpl" in req_metrics or intent == "inadimplencia_iptu":
+            return "inadimplencia_iptu"
         if intent in {"compare_periods", "count_by_dimension", "sum_by_dimension", "detail_listing", "ranking"}:
             return intent
         return "detail_listing"
@@ -158,6 +163,176 @@ class SqlCompiler:
             notes=["Listagem compilada genericamente a partir do plano validado."],
         )
 
+    def _compile_inadimplencia_iptu(self, intent_spec: dict[str, Any], business_spec: dict[str, Any], schema_plan: dict[str, Any], question: str = "") -> SqlArtifact:
+        group_by = _normalize_group_by(schema_plan.get("group_by") or [], business_spec, schema_plan)
+        if not group_by:
+            raise ValueError("Inadimplencia exige group_by (dimensao)")
+            
+        # Initialize aliases with group_by tables
+        aliases = {item['table']: f"t1_{item['table'].replace('.','_')}" for item in group_by}
+        
+        group_cols_select = [f"{aliases[item['table']]}.{item['column']} AS {item['column']}" for item in group_by if item['table'] != 'caixa.arrepaga']
+        group_cols_group = [f"{aliases[item['table']]}.{item['column']}" for item in group_by if item['table'] != 'caixa.arrepaga']
+        
+        base_joins = _merge_joins(schema_plan.get("joins") or [])
+        aliases["cadastro.iptunump"] = "t1"
+        aliases["caixa.arrepaga"] = "t_paga"
+        
+        for join in base_joins:
+            target = join.get("target_table", "")
+            source = join.get("source_table", "")
+            if "arrepaga" in target or "arrepaga" in source:
+                continue
+            if target != "cadastro.iptunump":
+                aliases[target] = f"t1_{target.replace('.','_')}"
+            if source != "cadastro.iptunump":
+                aliases[source] = f"t1_{source.replace('.','_')}"
+                
+        # Also alias group_by tables if not already aliased
+        for item in group_by:
+            if item['table'] not in aliases:
+                aliases[item['table']] = "t1"
+        
+        # Extract filters
+        where_parts = _compile_filters(schema_plan.get("filters") or [], aliases)
+        where_sql = ("WHERE " + " AND ".join(where_parts)) if where_parts else ""
+
+        # Helper to safely build join strings for a CTE
+        def build_cte_joins(base_table: str, current_joins: list[dict], required_tables: set[str] = None) -> list[str]:
+            join_lines = []
+            added = {base_table}
+            
+            # Simple breadth-first search / iterative graph traversal
+            while True:
+                progress = False
+                for join in current_joins:
+                    target = join.get("target_table", "")
+                    source = join.get("source_table", "")
+                    
+                    if required_tables and target not in required_tables and target != base_table and source not in required_tables and source != base_table:
+                        continue
+                        
+                    # Already added both? Skip.
+                    if target in added and source in added:
+                        continue
+                        
+                    if target in added and source not in added:
+                        target_alias = aliases.get(target, f"t1_{target.replace('.','_')}")
+                        source_alias = aliases.get(source, f"t1_{source.replace('.','_')}")
+                        join_lines.append(f"  {join.get('join_type', 'INNER JOIN')} {source} {source_alias} ON {target_alias}.{join['target_columns'][0]} = {source_alias}.{join['source_columns'][0]}")
+                        added.add(source)
+                        progress = True
+                    elif source in added and target not in added:
+                        target_alias = aliases.get(target, f"t1_{target.replace('.','_')}")
+                        source_alias = aliases.get(source, f"t1_{source.replace('.','_')}")
+                        join_lines.append(f"  {join.get('join_type', 'INNER JOIN')} {target} {target_alias} ON {target_alias}.{join['target_columns'][0]} = {source_alias}.{join['source_columns'][0]}")
+                        added.add(target)
+                        progress = True
+                        
+                if not progress:
+                    break
+            return join_lines
+
+        # For cte_calc, the base table is the metric table (iptucalv) if it exists, or iptubase
+        calc_base = "cadastro.iptucalv" if any("iptucalv" in j.get("source_table", "") or "iptucalv" in j.get("target_table", "") for j in base_joins) else "cadastro.iptubase"
+        calc_base_alias = aliases.get(calc_base, f"t1_{calc_base.replace('.','_')}")
+        
+        # Build CTE Calculado
+        # Try to find the calculated value column from business metrics/resolved terms
+        calc_metric_expr = "t1_cadastro_iptucalv.j21_valor"
+        if "cadastro.iptucalv" not in aliases:
+            # Fallback if iptucalv is missing, maybe it's using another table
+            calc_metric_expr = "0"
+            
+        cte_calc = [
+            "cte_calc AS (",
+            "  SELECT",
+            "    " + ",\n    ".join(group_cols_group) + ",",
+            f"    SUM({calc_metric_expr}) AS valor_calculado",
+            f"  FROM {calc_base} {calc_base_alias}"
+        ]
+        
+        calc_tables = {item['table'] for item in group_by}.union({f['table'] for f in (schema_plan.get("filters") or []) if 'arrepaga' not in f['table']})
+        if "cadastro.iptunump" in calc_tables:
+            calc_tables.remove("cadastro.iptunump")
+            
+        cte_calc.extend(build_cte_joins(calc_base, [j for j in base_joins if "iptunump" not in j.get("source_table","") and "iptunump" not in j.get("target_table","")], calc_tables))
+
+        cte_calc.append(f"  {where_sql}")
+        if group_cols_group:
+            cte_calc.append(f"  GROUP BY {', '.join(group_cols_group)}")
+        cte_calc.append(")")
+
+        # Build CTE Pago
+        cte_pago = [
+            "cte_pago AS (",
+            "  SELECT",
+            "    " + ",\n    ".join([aliases[item['table']] + '.' + item['column'] for item in group_by if item['table'] != 'caixa.arrepaga']) + ",",
+            "    SUM(t_paga.k00_valor) AS valor_pago",
+            "  FROM cadastro.iptunump t1",
+            "  INNER JOIN caixa.arrepaga t_paga ON t_paga.k00_numpre = t1.j20_numpre"
+        ]
+        
+        # Ensure bridge join is present for pago
+        has_nump_join = any("iptunump" in j.get("source_table", "") or "iptunump" in j.get("target_table", "") for j in base_joins)
+        pago_joins = list(base_joins)
+        if not has_nump_join:
+            pago_joins.append({
+                "source_table": "cadastro.iptunump",
+                "source_columns": ["j20_matric"],
+                "target_table": "cadastro.iptubase",
+                "target_columns": ["j01_matric"],
+                "join_type": "INNER JOIN"
+            })
+            
+        cte_pago.extend(build_cte_joins("cadastro.iptunump", pago_joins, None))
+
+        cte_pago.append(f"  {where_sql}")
+        if group_cols_group:
+            cte_pago.append(f"  GROUP BY {', '.join([aliases[item['table']] + '.' + item['column'] for item in group_by if item['table'] != 'caixa.arrepaga'])}")
+        cte_pago.append(")")
+
+        # Final Select
+        final_select = [
+            "SELECT",
+            "  " + ", ".join(f"c.{item['column']}" for item in group_by if item['table'] != 'caixa.arrepaga') + ",",
+            "  c.valor_calculado,",
+            "  COALESCE(p.valor_pago, 0) AS valor_pago,",
+            "  ((c.valor_calculado - COALESCE(p.valor_pago, 0)) / NULLIF(c.valor_calculado, 0)) * 100 AS taxa_inadimplencia",
+            "FROM cte_calc c",
+            "LEFT JOIN cte_pago p"
+        ]
+        
+        on_parts = [f"c.{item['column']} = p.{item['column']}" for item in group_by if item['table'] != 'caixa.arrepaga']
+        if on_parts:
+            final_select.append(f"ON {' AND '.join(on_parts)}")
+        else:
+            final_select.append("ON 1=1")
+            
+        intent_type = str(intent_spec.get("intent") or "").strip()
+        limit = 1000
+        if intent_type == "ranking":
+            direction = _resolve_ranking_direction(question, intent_spec)
+            limit = _resolve_ranking_limit(question, intent_spec)
+            order_dir = "ASC" if direction.upper() == "ASC" else "DESC"
+            final_select.append(f"ORDER BY taxa_inadimplencia {order_dir}")
+            final_select.append(f"LIMIT {max(1, int(limit or 10))}")
+            
+        sql = f"WITH\n{chr(10).join(cte_calc)},\n{chr(10).join(cte_pago)}\n{chr(10).join(final_select)}"
+        
+        metric = {"metric_name": "Taxa de Inadimplencia", "aggregation": "CUSTOM"}
+        return SqlArtifact(
+            operation="inadimplencia_iptu",
+            sql=sql,
+            limit=limit,
+            tables=schema_plan.get("tables") or [],
+            joins=schema_plan.get("joins") or [],
+            filters=schema_plan.get("filters") or [],
+            metrics=[metric],
+            group_by=group_by,
+            time_axis=schema_plan.get("time_axis") if isinstance(schema_plan.get("time_axis"), dict) else {},
+            notes=["SQL de Inadimplencia compilado nativamente via CTEs cruzando iptunump e arrepaga."],
+        )
     def _compile_ranking(
         self,
         question: str,
@@ -299,12 +474,17 @@ def _compile_filters(filters: list[Any], aliases: dict[str, str]) -> list[str]:
         elif operator in {"CONTAINS", "CONTAINS_CI", "CONTAINS_CASE_INSENSITIVE"}:
             if value is not None:
                 where_parts.append(f"position(lower({_sql_literal(str(value))}) in lower({expr})) > 0")
+        elif operator == "CONTAINS_IGNORE_CASE_ACCENT":
+            if value is not None:
+                where_parts.append(f"position(unaccent(lower({_sql_literal(str(value))})) in unaccent(lower({expr}))) > 0")
         elif operator == "IS NULL":
             where_parts.append(f"{expr} IS NULL")
         elif operator == "IS NOT NULL":
             where_parts.append(f"{expr} IS NOT NULL")
         elif operator in {"=", "EQ", "EQUAL", "EQUALS"}:
             where_parts.append(f"{expr} = {_sql_literal(value)}")
+        elif operator == "EQUALS_IGNORE_CASE_ACCENT":
+            where_parts.append(f"unaccent(lower({expr})) = unaccent(lower({_sql_literal(str(value))}))")
         elif operator in {"!=", "<>", "NOT_EQ", "NOT_EQUAL", "NOT_EQUALS"}:
             where_parts.append(f"{expr} != {_sql_literal(value)}")
         elif operator in {">", "GT", "GREATER_THAN"}:

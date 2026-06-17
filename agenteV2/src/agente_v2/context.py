@@ -70,7 +70,7 @@ def _selected_tables(catalog_results: list[dict], rag_results: list[dict]) -> li
         if table and "." in table and table not in tables:
             tables.append(table)
         text = str(item.get("text") or "")
-        for referenced_table in re.findall(r"\bcadastro\.[a-zA-Z_][a-zA-Z0-9_]*\b", text):
+        for referenced_table in re.findall(r"\b(?:cadastro|caixa)\.[a-zA-Z_][a-zA-Z0-9_]*\b", text):
             if referenced_table not in tables:
                 tables.append(referenced_table)
     return tables

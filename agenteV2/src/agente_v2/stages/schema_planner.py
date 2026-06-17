@@ -26,7 +26,7 @@ class SchemaPlanner:
                 "Monte um plano de esquema para responder a pergunta. "
                 "Escolha tabelas, grao, eixo temporal, joins e agrupamentos. "
                 "Nao escreva SQL. Use colunas reais no grain e filtros estruturados. "
-                "Os operadores permitidos sao EXCLUSIVAMENTE: EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, IN, IS_NULL, IS_NOT_NULL. NUNCA invente outros como CONTAINS_CASE_INSENSITIVE. "
+                "Os operadores permitidos sao EXCLUSIVAMENTE: EQUALS, EQUALS_IGNORE_CASE_ACCENT, CONTAINS_IGNORE_CASE_ACCENT, NOT_EQUALS, GREATER_THAN, LESS_THAN, IN, IS_NULL, IS_NOT_NULL. NUNCA invente outros. Para strings/nomes como bairro, prefira EQUALS_IGNORE_CASE_ACCENT."
                 "Nao use condition com SQL bruto."
             ),
             "question": question,

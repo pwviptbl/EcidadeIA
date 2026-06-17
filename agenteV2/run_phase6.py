@@ -33,6 +33,11 @@ class LoadedPhase1:
         return self._data
 
 
+def cli_ask_user(question: str) -> str:
+    print(f"\n[AgenteV2 Interativo] Dúvida de Negócio:\n{question}")
+    return input("Sua resposta (ou ENTER para deixar o agente decidir): ").strip()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Executa a Fase 6 do AgenteV2: resposta humana com SQL recolhivel.")
     parser.add_argument("question", nargs="*", help="Pergunta do usuario")
@@ -45,7 +50,7 @@ def main() -> None:
         phase1 = LoadedPhase1(phase1_data)
     else:
         question = " ".join(args.question).strip()
-        phase1 = AgentV2Phase1().run(question)
+        phase1 = AgentV2Phase1().run(question, ask_user_callback=cli_ask_user)
 
     artifact = SqlCompiler().run(phase1.intent_spec, phase1.business_spec, phase1.schema_plan, question=phase1.question)
     critic = SqlCritic().run(artifact, phase1.business_spec, phase1.schema_plan)

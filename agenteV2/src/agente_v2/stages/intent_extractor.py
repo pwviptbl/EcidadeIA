@@ -25,6 +25,7 @@ class IntentExtractor:
                 "detail_listing",
                 "ranking",
                 "knowledge_review",
+                "inadimplencia_iptu",
             ],
             "response_schema": {
                 "intent": "string",
@@ -63,6 +64,8 @@ class IntentExtractor:
             intent = "count_by_dimension"
         elif _contains_keyword(text, tokens, ("soma", "valor", "total")):
             intent = "sum_by_dimension"
+        elif _contains_keyword(text, tokens, ("inadimplencia", "inadimplente", "devedor", "taxa de inadimplencia")):
+            intent = "inadimplencia_iptu"
         else:
             intent = "knowledge_review"
         return IntentSpec(

@@ -19,8 +19,9 @@ class BusinessResolver:
                 "Resolva termos humanos usando somente as evidencias de negocio do contexto. "
                 "Nao gere SQL. Retorne regras, metricas, filtros e riscos em JSON. "
                 "Filtros devem ser estruturados com table/column/operator/value. "
-                "Os operadores permitidos sao EXCLUSIVAMENTE: EQUALS, NOT_EQUALS, GREATER_THAN, LESS_THAN, IN, IS_NULL, IS_NOT_NULL. NUNCA invente outros como CONTAINS_CASE_INSENSITIVE. "
+                "Os operadores permitidos sao EXCLUSIVAMENTE: EQUALS, EQUALS_IGNORE_CASE_ACCENT, CONTAINS_IGNORE_CASE_ACCENT, NOT_EQUALS, GREATER_THAN, LESS_THAN, IN, IS_NULL, IS_NOT_NULL. NUNCA invente outros. Para strings/nomes como bairro, prefira EQUALS_IGNORE_CASE_ACCENT."
                 "Quando a regra vier do catalogo, use o nome da regra apenas como referencia e mantenha a execucao em operador generico. "
+                "Se um termo for ambiguo ou puder mapear para multiplos valores (ex: varios tipos de desconto ou isencao na base), adicione uma pergunta ao array 'open_questions' listando as opcoes disponiveis no contexto. "
                 "Nao use condition com SQL bruto."
             ),
             "question": question,
