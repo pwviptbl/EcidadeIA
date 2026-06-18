@@ -1,58 +1,62 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <h1 align="center">AgenteV3 - E-Cidade IA</h1>
 </p>
 
-## About Laravel
+Este é o repositório principal do AgenteV3, um assistente inteligente (LLM) baseado na arquitetura ReAct, capaz de raciocinar sobre regras de negócio e realizar consultas (Read-Only) em bancos de dados legados do e-Cidade.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Como Iniciar os Serviços
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Para que o AgenteV3 funcione corretamente (incluindo o chat em tempo real, as buscas RAG e as consultas SQL seguras), você precisa subir 4 serviços em terminais separados:
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+### 1. Servidor MCP (Python)
+Este é o servidor seguro (Model Context Protocol) que expõe o banco de dados PostgreSQL do e-Cidade para o Agente sem arriscar a integridade dos dados (apenas leitura).
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+cd /home/dbseller/Modelos/MVP/mcp
+source .venv/bin/activate
+MCP_TRANSPORT=streamable-http MCP_HOST=0.0.0.0 MCP_PORT=8010 python server.py
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Laravel Reverb (WebSockets)
+Responsável por fazer o *streaming* em tempo real dos pensamentos e ações do Agente para a tela do Dashboard (via AlpineJS/Echo).
+```bash
+cd /home/dbseller/Modelos/MVP/AgenteV3
+php artisan reverb:start --host=0.0.0.0 --port=8090
+```
+*(Dica: Se estiver usando o Laravel Sail, rode `./vendor/bin/sail php artisan reverb:start`)*
 
-## Contributing
+### 3. Fila de Trabalhadores (Queue Worker)
+Como o Laravel Reverb pode colocar eventos em fila (Queue) para broadcasting assíncrono, é recomendável manter o worker ativo:
+```bash
+cd /home/dbseller/Modelos/MVP/AgenteV3
+php artisan queue:work
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Servidor Web (Laravel/PHP)
+O backend principal da aplicação (Controller e API).
+```bash
+cd /home/dbseller/Modelos/MVP/AgenteV3
+php artisan serve
+```
+*(Se estiver usando Laravel Sail, o `sail up -d` já cobre este serviço)*
 
-## Code of Conduct
+### 5. Frontend Vite (Opcional, para Dev)
+Se for editar o Tailwind CSS, Javascript ou layout do `dashboard.blade.php`:
+```bash
+cd /home/dbseller/Modelos/MVP/AgenteV3
+npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 🧠 Como Funciona a Arquitetura?
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **RAG (Knowledge Base):** O conhecimento de regras de negócio (como calcular inadimplência, quais tabelas cruzar) fica armazenado em arquivos Markdown em `knowledge/rag/`.
+2. **Orchestrator:** Localizado em `app/Services/Agent/Orchestrator.php`, é o motor que roda o Loop ReAct em PHP.
+3. **Tools:**
+   - `RagSearchTool.php`: Ensina o Agente a ler os arquivos Markdown de regras.
+   - `McpExecutionTool.php`: Empacota as consultas SQL do Agente e envia via JSON-RPC para o Servidor MCP validar e executar no banco.
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+> **Precisa trocar de Modelo LLM?**
+> Abra o arquivo `.env`, altere a variável `GEMINI_MODEL=gemini-2.5-flash` para a versão desejada (ex: `flash-lite`) e rode `php artisan config:clear`.
