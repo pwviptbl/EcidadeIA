@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Cidade Agente V3 - Painel de Controle</title>
+    <title>E-Cidade Agente - Painel de Controle</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,7 +149,7 @@
             </div>
             <div>
                 <h1 class="text-xl font-extrabold font-outfit tracking-wide bg-gradient-to-r from-white via-slate-100 to-brand-500 bg-clip-text text-transparent">
-                    E-CIDADE AGENTE V3
+                    E-CIDADE AGENTE
                 </h1>
                 <p class="text-xs text-slate-400 font-medium tracking-wider">LOOP AUTÔNOMO DE RACIOCÍNIO & EXECUÇÃO</p>
             </div>
@@ -266,7 +266,7 @@
                             </svg>
                         </div>
                         <h2 class="text-2xl font-bold font-outfit text-white mb-2">Como posso ajudar no e-Cidade?</h2>
-                        <p class="text-slate-400 text-sm mb-8">Digite uma pergunta de negócio. O AgenteV3 irá raciocinar sobre as regras usando RAG e rodar queries SQL de forma autônoma.</p>
+                        <p class="text-slate-400 text-sm mb-8">Digite uma pergunta de negócio. O E-CidadeIA irá raciocinar sobre as regras usando RAG e rodar queries SQL de forma autônoma.</p>
                         
                         <div class="grid grid-cols-1 gap-3 w-full">
                             <button @click="setQuestion('Quais são as isenções de IPTU concedidas no bairro Icaraí em 2026?')" 
@@ -274,9 +274,9 @@
                                 <span class="text-slate-300 group-hover:text-white">Isenções de IPTU no Bairro Icaraí (2026)</span>
                                 <svg class="w-4 h-4 text-slate-500 group-hover:text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                             </button>
-                            <button @click="setQuestion('Qual o valor total isento de IPTU no município de São Borja?')" 
+                            <button @click="setQuestion('Qual o valor total isento de IPTU?')" 
                                     class="text-left text-xs bg-slate-900/50 hover:bg-slate-800/50 border border-white/5 hover:border-brand-500/30 p-3 rounded-xl transition duration-200 flex items-center justify-between group">
-                                <span class="text-slate-300 group-hover:text-white">Valor total isento de IPTU em São Borja</span>
+                                <span class="text-slate-300 group-hover:text-white">Valor total isento de IPTU</span>
                                 <svg class="w-4 h-4 text-slate-500 group-hover:text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                             </button>
                         </div>
@@ -388,7 +388,7 @@
             <!-- Caixa de Texto / Input -->
             <div class="p-4 bg-slate-950/40 border-t border-white/5">
                 <form @submit.prevent="submitQuestion" class="flex gap-3 items-center">
-                    <input type="text" x-model="inputQuestion" placeholder="Faça uma pergunta ao AgenteV3..." 
+                    <input type="text" x-model="inputQuestion" placeholder="Faça uma pergunta ao E-CidadeIA..." 
                            :disabled="isLoading"
                            class="flex-1 bg-slate-900/80 border border-white/10 hover:border-white/20 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 rounded-xl px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:outline-none transition duration-200 disabled:opacity-50">
                     <button type="submit" :disabled="isLoading || !inputQuestion.trim()"

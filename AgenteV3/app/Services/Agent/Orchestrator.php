@@ -287,7 +287,7 @@ class Orchestrator
 
     /**
      * Retorna o System Prompt injetado no LLM (Gemini) durante o Loop ReAct.
-     * Define as diretrizes operacionais do AgenteV3, como forçar a leitura do RAG
+     * Define as diretrizes operacionais do E-CidadeIA, como forçar a leitura do RAG
      * antes de gerar SQL e instruções para evitar consultas cruzadas custosas.
      *
      * @return string O texto do prompt principal da IA.
@@ -295,7 +295,7 @@ class Orchestrator
     private function getSystemPrompt(): string
     {
         return <<<PROMPT
-Você é o AgenteV3, um agente de IA especializado no sistema e-Cidade, focado em analisar e responder perguntas de negócio complexas consultando dados reais.
+Você é o E-CidadeIA, um agente de IA especializado no sistema e-Cidade, focado em analisar e responder perguntas de negócio complexas consultando dados reais.
 
 Você opera sob um loop ReAct (Reasoning and Acting). 
 
