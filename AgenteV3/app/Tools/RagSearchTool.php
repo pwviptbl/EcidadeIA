@@ -35,8 +35,10 @@ class RagSearchTool extends Tool
         $queryNormalized = strtolower(trim($query));
         
         // Remove pontuações comuns e divide em termos individuais
-        $terms = array_filter(preg_split('/[\s\-_,.]+/', $queryNormalized), function($term) {
-            return strlen($term) >= 2;
+        $stopwords = ["qual", "tabela", "guarda", "valores", "de", "do", "da", "em", "para", "com", "que", "um", "uma", "o", "a", "os", "as", "como", "onde", "por", "sobre", "quais", "quantos", "existir", "tabelas", "ter", "iptu"];
+        
+        $terms = array_filter(preg_split('/[\s\-_,.\?]+/u', $queryNormalized), function($term) use ($stopwords) {
+            return strlen($term) >= 2 && !in_array($term, $stopwords);
         });
 
         if (empty($terms)) {
@@ -121,20 +123,11 @@ class RagSearchTool extends Tool
         $formattedResults = [];
 
         foreach ($topResults as $res) {
-            // Se tiver um score mínimo de relevância, retorna conteúdo integral. Caso contrário, retorna snippets de linhas
-            if ($res['score'] >= 25) {
-                $formattedResults[] = [
-                    'file' => $res['file'],
-                    'title' => $res['title'],
-                    'content' => $res['content']
-                ];
-            } else {
-                $formattedResults[] = [
-                    'file' => $res['file'],
-                    'title' => $res['title'],
-                    'snippet' => implode("\n", array_slice(array_unique($res['matching_lines']), 0, 10))
-                ];
-            }
+            $formattedResults[] = [
+                'file' => $res['file'],
+                'title' => $res['title'],
+                'content' => $res['content']
+            ];
         }
 
         return json_encode($formattedResults, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
