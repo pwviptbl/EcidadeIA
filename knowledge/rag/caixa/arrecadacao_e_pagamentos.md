@@ -33,64 +33,36 @@ Mapeia as relações financeiras da arrecadação e caixa, incluindo os vínculo
 
 ---
 
+---
+
 ### Conceito: tipo_e_grupo_debito
-- **Descrição:** Classificação dos débitos por tipo específico (arretipo) e grupo geral (cadtipo). O grupo do tipo (`cadtipo`) é fixo e global para todos os clientes, enquanto os tipos derivados (`arretipo`) são customizados por cada município.
+- **Descrição:** Classificação dos débitos por tipo específico (arretipo) e grupo geral (cadtipo).
 - **Tabelas:** `caixa.arrecad`, `caixa.arrepaga`, `caixa.arretipo`, `caixa.cadtipo`
 - **Junções:**
-  - `arrecad.k00_tipo = arretipo.k00_tipo` (ou `arrepaga.k00_tipo = arretipo.k00_tipo`)
+  - `arrecad.k00_tipo = arretipo.k00_tipo`
   - `arretipo.k03_tipo = cadtipo.k03_tipo`
-- **Regra de Negócio:** `cadtipo` representa a categoria geral padronizada (ex: IPTU, ISSQN, Taxas, etc.), enquanto `arretipo` possui a descrição e regras locais parametrizadas pelo município. Para análises globais consistentes entre clientes, deve-se agrupar ou filtrar pelo grupo `cadtipo.k03_tipo`.
+- **Regras de Negócio e Raciocínio Logístico:**
+  1. **Autonomia de Cadastro e Padronização:** O `cadtipo` representa o agrupador fiscal macro (ex: 1 = IPTU, 2 = ISSQN, 3 = Taxas, etc.), sendo fixo e padrão em todas as instalações do e-Cidade. Contudo, cada prefeitura possui seu próprio Código Tributário Municipal (CTM). Por isso, cada cliente cria seus próprios tipos derivados em `arretipo` (ex: "IPTU Comercial", "IPTU Residencial Alíquota Progressiva", "ISS Variável Sociedade Uniprofissional") vinculando-os ao respectivo `cadtipo` pai.
+  2. **Agrupamentos Globais:** Para responder perguntas como *"Quanto arrecadamos de ISSQN?"*, a IA deve rastrear o grupo global `cadtipo.k03_tipo = 2` e somar os débitos dos tipos filhos vinculados, em vez de tentar adivinhar ou filtrar por nomes literais em `arretipo.k00_descr`, que mudam em cada município.
 
 ---
 
-### Conceito: ligacao_iptu_arrecadacao
-- **Descrição:** Vínculo base das matrículas de IPTU (cadastro) com os débitos e pagamentos na arrecadação (caixa).
-- **Tabelas:** `cadastro.iptubase`, `cadastro.iptunump`, `caixa.arrecad`, `caixa.arrepaga`
-- **Junções:**
-  - `iptubase.j01_matric = iptunump.j20_matric`
-  - `iptunump.j20_numpre = arrecad.k00_numpre`
-  - `arrecad.k00_numpre = arrepaga.k00_numpre` AND `arrecad.k00_numpar = arrepaga.k00_numpar` (Junção por prestação e parcela).
+### Regra de Negócio: Ciclo de Vida do Débito e Fluxo de Caixa
+Para raciocinar sobre adimplência, inadimplência e arrecadação geral, o Agente deve considerar as seguintes regras fundamentais de funcionamento do caixa:
+1. **O Estado de "A Vencer" e "Vencido" (Em Aberto):**
+   Todos os débitos gerados e não pagos residem na tabela `caixa.arrecad`. Um débito é identificado por um `k00_numpre` (número de arrecadação) e desmembrado em parcelas (`k00_numpar`). Se a data atual for maior que `k00_dtvenc` e o débito continuar em `arrecad`, ele é considerado inadimplente/vencido.
+2. **O Estado de "Pago" (Quitado):**
+   No exato momento em que um contribuinte paga um débito no banco ou tesouraria, o registro correspondente é **deletado** da tabela `caixa.arrecad` (sai do saldo devedor ativo) e uma cópia com os dados da quitação é **inserida** na tabela `caixa.arrepaga` (arrecadação realizada).
+3. **Cálculo de Inadimplência:**
+   Para saber o total calculado/lançado histórico, a soma deve considerar `calculado = (tudo que está em arrepaga) + (tudo que está em arrecad)`. A taxa de inadimplência atual é calculada dividindo `arrecad.k00_valor` (o que sobrou sem pagar) pelo `total_calculado`.
+4. **Pagamentos Parciais:**
+   Se um contribuinte paga apenas parte de uma parcela, o sistema liquida a parcela original em `arrecad`, joga o valor pago para `arrepaga`, e gera um novo desmembramento (normalmente uma parcela complementar ou resíduo) em `arrecad` com o saldo restante.
 
 ---
 
-### Receita: `arrecadacao_iptu_por_periodo`
-- **Descrição:** Calcula o valor de IPTU efetivamente arrecadado (pago) em determinado período ou exercício.
-- **Tabelas:** `cadastro.iptubase`, `cadastro.iptunump`, `caixa.arrepaga`, `cadastro.iptucalv`, `cadastro.iptucalh`
-- **Junções:**
-  - `iptubase.j01_matric = iptunump.j20_matric`
-  - `iptunump.j20_numpre = arrepaga.k00_numpre`
-  - `iptubase.j01_matric = iptucalv.j21_matric` AND `iptunump.j20_anousu = iptucalv.j21_anousu`
-  - `iptucalv.j21_codhis = iptucalh.j17_codhis`
-- **Filtro de Negócio (Rigor Tributário):**
-  - Isolar IPTU: `iptucalh.j17_descr = 'IPTU'`
-  - Ano de Operação/Exercício: `iptunump.j20_anousu = :ano` (ou usar data específica `arrepaga.k00_dtpaga BETWEEN :data_inicio AND :data_fim`).
-- **Regra de Agregação:** `SUM(arrepaga.k00_valor)`.
-
 ---
 
-### Receita: `comparacao_iptu_pago_vs_calculado`
-- **Descrição:** Permite analisar o valor lançado (calculado) contra o valor efetivamente pago de IPTU.
-- **Tabelas:** `cadastro.bairro`, `cadastro.lote`, `cadastro.iptubase`, `cadastro.iptucalv`, `cadastro.iptunump`, `caixa.arrepaga`
-- **Atenção:** Nunca junte `caixa.arrepaga` diretamente a `cadastro.iptucalh`.
-- **Passo a passo (Joins):**
-  1. `bairro.j13_codi = lote.j34_bairro`
-  2. `lote.j34_idbql = iptubase.j01_idbql`
-  3. `iptubase.j01_matric = iptucalv.j21_matric`
-  4. `iptubase.j01_matric = iptunump.j20_matric`
-  5. `iptunump.j20_numpre = arrepaga.k00_numpre`
-- **Regras:** O calculado vem de `iptucalv.j21_valor` e o pago de `arrepaga.k00_valor`.
+### Regras de Negócio e Receitas de IPTU
+As regras de negócio específicas para apurações de valores calculados, lançados, arrecadados e inadimplência de IPTU foram consolidadas no arquivo dedicado:
+- Para detalhes de IPTU, consulte: [iptu.md](file:///home/dbseller/Modelos/MVP/knowledge/rag/caixa/iptu.md)
 
----
-
-### Receita: `calculo_taxa_inadimplencia_iptu`
-- **Descrição:** Calcula o valor inadimplente e a taxa de inadimplência de IPTU por exercício ou bairro.
-- **Regra de Negócio Crucial (Efeito Multiplicador / Fan-out):**
-  - **Débitos em Aberto (Não Pagos):** Ficam na tabela `caixa.arrecad`. O valor em aberto é a soma de `caixa.arrecad.k00_valor`.
-  - **Débitos Pagos:** Ficam na tabela `caixa.arrepaga` e saem de `arrecad` após quitados.
-  - **Valor Lançado/Calculado:** Vem de `cadastro.iptucalv.j21_valor` (imposto total originalmente calculado).
-  - **Cálculo da Taxa:** O percentual de inadimplência é `(SUM(valor_aberto) / SUM(valor_lancado)) * 100`.
-  - **Prevenção do Efeito Multiplicador:** Como a divisão em parcelas de `arrecad` multiplica as linhas em relação à `iptucalv`, **SEMPRE** calcule as agregações (Total Lançado e Total Aberto) de forma independente em CTEs separadas antes de efetuar o JOIN final, para evitar a multiplicação errônea de valores.
-- **Junções:**
-  - `cadastro.bairro -> cadastro.lote -> cadastro.iptubase`
-  - `cadastro.iptubase -> cadastro.iptucalv` (Calculado)
-  - `cadastro.iptubase -> cadastro.iptunump -> caixa.arrecad` (Aberto)
