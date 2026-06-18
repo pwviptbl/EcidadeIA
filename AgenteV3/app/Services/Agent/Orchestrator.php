@@ -33,14 +33,34 @@ class Orchestrator
             'session_id' => $sessionId
         ]);
 
-        $messages = [
-            new UserMessage($question)
-        ];
+        $messages = [];
+
+        // Carrega o histórico da conversa baseado no limite do .env
+        $limit = env('AGENT_MEMORY_LIMIT', 3);
+        $history = \App\Models\AgentConversation::where('session_id', $sessionId)
+            ->latest('id')
+            ->take($limit)
+            ->get()
+            ->reverse();
+
+        foreach ($history as $interaction) {
+            $messages[] = new UserMessage($interaction->question);
+            
+            $responseContext = $interaction->response;
+            if (!empty($interaction->sql_used)) {
+                $responseContext .= "\n\n[Contexto - SQL Utilizado Anteriormente:\n" . $interaction->sql_used . "\n]";
+            }
+            $messages[] = new AssistantMessage($responseContext);
+        }
+
+        // Adiciona a pergunta atual
+        $messages[] = new UserMessage($question);
 
         $steps = [];
         $maxSteps = 15;
         $currentStep = 1;
         $finalResponseText = '';
+        $executedSqls = []; // Guarda os SQLs dessa rodada
 
         $tools = [
             new RagSearchTool(),
@@ -92,6 +112,14 @@ class Orchestrator
                         ]);
 
                         try {
+                            // Captura o SQL se for chamada do banco de dados
+                            if ($toolCall->name === 'mcp_execute_sql') {
+                                $args = $toolCall->arguments();
+                                if (isset($args['sql'])) {
+                                    $executedSqls[] = $args['sql'];
+                                }
+                            }
+
                             // Executa a lógica da ferramenta com os argumentos correspondentes
                             $output = call_user_func_array([$toolInstance, 'handle'], $toolCall->arguments());
                             
@@ -221,6 +249,15 @@ class Orchestrator
             } else {
                 // Se o finishReason é stop ou length, é a resposta final do loop
                 $finalResponseText = $lastStep->text;
+                
+                // Salvar no banco a nova interação
+                \App\Models\AgentConversation::create([
+                    'session_id' => $sessionId,
+                    'question' => $question,
+                    'response' => $finalResponseText,
+                    'sql_used' => empty($executedSqls) ? null : implode(";\n\n", $executedSqls)
+                ]);
+
                 $steps[] = $stepData;
 
                 Log::info("Orchestrator: Transmitindo passo ReAct final via Reverb", [
