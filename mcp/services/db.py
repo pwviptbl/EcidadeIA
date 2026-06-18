@@ -35,7 +35,10 @@ class Database:
             conn.execute("begin read only")
             conn.execute(f"set local statement_timeout = {timeout_ms}")
             with conn.cursor() as cursor:
-                cursor.execute(sql, params or ())
+                if params:
+                    cursor.execute(sql, params)
+                else:
+                    cursor.execute(sql)
                 rows = [self._normalize_row(row) for row in cursor.fetchall()]
         return {
             "rows": rows,
