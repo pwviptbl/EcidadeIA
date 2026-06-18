@@ -342,9 +342,27 @@
                                                     </svg>
                                                     <span>Visualizar Query SQL Utilizada</span>
                                                 </div>
-                                                <svg class="w-4 h-4 text-slate-500 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                                </svg>
+                                                <div class="flex items-center gap-3">
+                                                    <!-- Badge de performance da query -->
+                                                    <template x-if="msg.durationMs != null">
+                                                        <span
+                                                            :class="{
+                                                                'bg-emerald-500/15 text-emerald-400 border-emerald-500/30': msg.durationMs < 500,
+                                                                'bg-amber-500/15 text-amber-400 border-amber-500/30': msg.durationMs >= 500 && msg.durationMs < 2000,
+                                                                'bg-red-500/15 text-red-400 border-red-500/30': msg.durationMs >= 2000
+                                                            }"
+                                                            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold border tracking-wider"
+                                                        >
+                                                            <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                                            </svg>
+                                                            <span x-text="msg.durationMs < 1000 ? msg.durationMs + 'ms' : (msg.durationMs/1000).toFixed(1) + 's'"></span>
+                                                        </span>
+                                                    </template>
+                                                    <svg class="w-4 h-4 text-slate-500 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </div>
                                             </summary>
                                             <div class="p-4 border-t border-white/5 bg-slate-950/40 font-mono text-xs text-emerald-400 overflow-x-auto whitespace-pre-wrap leading-relaxed max-h-60 custom-scrollbar" x-text="msg.sql"></div>
                                         </details>
@@ -816,12 +834,16 @@
                     .then(data => {
                         console.log('Resposta final do agente:', data);
                         
-                        // Localiza o último passo de ferramenta de SQL executado na timeline para montar a tabela no painel do chat e extrair o SQL
+                        // Usa data.steps do HTTP (sempre completo) para extrair SQL e dados.
+                        // Antes usava this.steps (WebSocket) que pode não ter chegado ainda — race condition.
+                        const sourceSteps = (data.steps && data.steps.length > 0) ? data.steps : this.steps;
+
                         let tableData = null;
-                        let executedSql = null;
+                        let executedSql = data.sql_used || null;
+                        let queryDurationMs = null;
                         
-                        for (let i = this.steps.length - 1; i >= 0; i--) {
-                            const step = this.steps[i];
+                        for (let i = sourceSteps.length - 1; i >= 0; i--) {
+                            const step = sourceSteps[i];
                             if (step.toolCalls && step.toolCalls.length > 0) {
                                 const sqlCallIndex = step.toolCalls.findIndex(c => c.name === 'mcp_execute_sql');
                                 if (sqlCallIndex !== -1) {
@@ -841,11 +863,14 @@
                                             } else if (parsed && Array.isArray(parsed.rows)) {
                                                 rows = parsed.rows;
                                                 isSuccess = true;
+                                                if (parsed.duration_ms != null) {
+                                                    queryDurationMs = parsed.duration_ms;
+                                                }
                                             }
                                             
                                             if (isSuccess) {
                                                 tableData = rows && rows.length > 0 ? rows : null;
-                                                executedSql = currentSql;
+                                                executedSql = executedSql || currentSql;
                                                 break;
                                             }
                                         } catch (e) {
@@ -856,12 +881,18 @@
                             }
                         }
 
+                        // Garante que a timeline tem todos os passos mesmo se eventos WebSocket foram perdidos
+                        if (data.steps && data.steps.length > this.steps.length) {
+                            this.steps = data.steps;
+                        }
+
                         // Adiciona a resposta final da IA ao chat
                         this.messages.push({
                             type: 'agent',
                             content: data.response,
                             tableData: tableData,
-                            sql: executedSql
+                            sql: executedSql,
+                            durationMs: queryDurationMs
                         });
                         this.loadSessions();
                     })

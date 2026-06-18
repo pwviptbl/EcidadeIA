@@ -61,6 +61,106 @@ STOPWORDS = {
     "evolução",
 }
 
+# Sinônimos de domínio do e-Cidade: termos do dia a dia → termos técnicos do banco.
+# Quando o usuário usa linguagem natural, a query é expandida com os equivalentes técnicos
+# antes de rodar o BM25, melhorando drasticamente a recuperação semântica.
+DOMAIN_SYNONYMS: dict[str, list[str]] = {
+    # Financeiro / Despesa
+    "fornecedor":    ["credor", "cgm", "numcgm", "empresa"],
+    "fornecedores":  ["credor", "cgm", "numcgm", "empresa"],
+    "pagamento":     ["empenho", "liquidacao", "pago", "despesa", "empagemov"],
+    "pagamentos":    ["empenho", "liquidacao", "pago", "despesa", "empagemov"],
+    "compra":        ["empenho", "licitacao", "pcmater", "material", "empempitem"],
+    "compras":       ["empenho", "licitacao", "pcmater", "material", "empempitem"],
+    "despesa":       ["empenho", "empempenho", "liquidacao", "dotacao"],
+    "despesas":      ["empenho", "empempenho", "liquidacao", "dotacao"],
+    "gasto":         ["empenho", "empempenho", "empempitem", "vltot"],
+    "gastos":        ["empenho", "empempenho", "empempitem", "vltot"],
+    "dinheiro":      ["valor", "empenho", "vlremp", "vltot", "vlrpag"],
+    "verba":         ["dotacao", "credito", "orcamento", "orcdotacao"],
+    "orcamento":     ["dotacao", "orcdotacao", "credito", "orcamento"],
+    "contrato":      ["empenho", "licitacao", "empempenho"],
+    "nota":          ["empenho", "liquidacao", "empnota", "notafiscal"],
+    "liquidacao":    ["empnota", "empnotaitem", "vlrliq"],
+    "liquidado":     ["empnota", "empnotaitem", "vlrliq"],
+    # Pessoal / RH
+    "funcionario":   ["servidor", "pessoal", "matricula", "rh"],
+    "funcionarios":  ["servidor", "pessoal", "matricula", "rh"],
+    "servidor":      ["pessoal", "matricula", "rh", "folha"],
+    "servidores":    ["pessoal", "matricula", "rh", "folha"],
+    "salario":       ["vencimento", "folha", "remuneracao", "pessoal"],
+    "salarios":      ["vencimento", "folha", "remuneracao", "pessoal"],
+    "folha":         ["pessoal", "vencimento", "remuneracao", "folhapagamento"],
+    "aposentado":    ["aposentadoria", "pensionista", "inativo", "rpps"],
+    "aposentados":   ["aposentadoria", "pensionista", "inativo", "rpps"],
+    # Tributário / Fiscal
+    "empresa":       ["contribuinte", "issbase", "cgm", "cnpj"],
+    "empresas":      ["contribuinte", "issbase", "cgm", "cnpj"],
+    "contribuinte":  ["issbase", "cgm", "pessoa", "cnpj"],
+    "tributo":       ["issqn", "iptu", "arrecadacao", "imposto"],
+    "tributos":      ["issqn", "iptu", "arrecadacao", "imposto"],
+    "imposto":       ["issqn", "iptu", "arrecadacao", "tributo"],
+    "impostos":      ["issqn", "iptu", "arrecadacao", "tributo"],
+    "nota_fiscal":   ["nfse", "notafiscal", "issqn", "servico"],
+    "nfse":          ["notafiscal", "issqn", "servico", "rps"],
+    "alvara":        ["issalvara", "licenca", "funcionamento"],
+    "alvaras":       ["issalvara", "licenca", "funcionamento"],
+    "receita":       ["arrecadacao", "tributo", "issqn", "iptu", "credito"],
+    "arrecadacao":   ["issqn", "iptu", "tributo", "debito", "caixa"],
+    "divida":        ["debito", "inscricao", "divida_ativa", "daw"],
+    "inadimplente":  ["debito", "divida", "inadimplencia", "inscricao"],
+    "cnae":          ["atividade", "tabativ", "issqn", "issbase"],
+    # Pessoas / Cadastro
+    "pessoa":        ["cgm", "protocolo", "numcgm", "contribuinte"],
+    "pessoas":       ["cgm", "protocolo", "numcgm", "contribuinte"],
+    "cidadao":       ["cgm", "protocolo", "numcgm", "pessoa"],
+    "cidadaos":      ["cgm", "protocolo", "numcgm", "pessoa"],
+    "cpf":           ["cgm", "numcgm", "pessoa_fisica", "protocolo"],
+    "cnpj":          ["cgm", "numcgm", "pessoa_juridica", "issbase"],
+    "endereco":      ["logradouro", "bairro", "cep", "cgm"],
+    # Patrimônio / Material
+    "material":      ["matmater", "pcmater", "estoque", "almoxarifado"],
+    "materiais":     ["matmater", "pcmater", "estoque", "almoxarifado"],
+    "estoque":       ["matestoque", "almoxarifado", "matestoqueitem"],
+    "patrimonio":    ["bem", "inventario", "ativo", "imobilizado"],
+    # Tempo / Exercício
+    "ano":           ["anousu", "exercicio", "competencia"],
+    "exercicio":     ["anousu", "competencia", "ano"],
+    "periodo":       ["anousu", "data", "competencia", "mes"],
+    "mensal":        ["mes", "competencia", "mensal"],
+    # Órgão / Estrutura
+    "secretaria":    ["orgao", "orcorgao", "unidade", "setor"],
+    "secretarias":   ["orgao", "orcorgao", "unidade", "setor"],
+    "orgao":         ["orcorgao", "secretaria", "unidade", "setor"],
+    "setor":         ["departamento", "depto", "unidade", "orgao"],
+    "prefeitura":    ["orgao", "instit", "municipio"],
+    # Orçamento
+    "dotacao":       ["orcdotacao", "credito", "elemento", "orcamento"],
+    "suplementacao": ["credito", "adicional", "orcdotacao", "orcamento"],
+    "elemento":      ["elemento_despesa", "conplano", "conta", "rubrica"],
+    "rubrica":       ["elemento", "conta", "conplano", "classificacao"],
+}
+
+
+def expand_query_with_synonyms(query: str) -> str:
+    """Expande a query com sinônimos de domínio do e-Cidade antes do BM25.
+
+    Percorre cada token da query e, se houver sinônimos mapeados,
+    acrescenta os termos técnicos equivalentes ao final da string.
+    Isso garante que termos coloquiais (fornecedor, funcionário etc.)
+    encontrem os documentos técnicos do banco (credor, matricula etc.).
+    """
+    tokens = query.lower().split()
+    extra: list[str] = []
+    for token in tokens:
+        synonyms = DOMAIN_SYNONYMS.get(token)
+        if synonyms:
+            extra.extend(synonyms)
+    if not extra:
+        return query
+    return query + " " + " ".join(extra)
+
+
 KIND_WEIGHTS = {
     "table": 1.35,
     "column": 1.0,
@@ -154,7 +254,9 @@ class RagIndex:
         if not self.loaded:
             return []
 
-        query_terms = tokenize(query)
+        # Expande a query com sinônimos de domínio antes de tokenizar
+        expanded_query = expand_query_with_synonyms(query)
+        query_terms = tokenize(expanded_query)
         if not query_terms:
             return []
 

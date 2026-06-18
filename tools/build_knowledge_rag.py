@@ -64,6 +64,8 @@ def title_for(path: Path, text: str) -> str:
     first_heading = re.search(r"^#{1,3}\s+(.+?)\s*$", text, flags=re.M)
     if first_heading:
         heading = first_heading.group(1).strip().strip("`")
+        if heading.lower().startswith(("conceito de negocio:", "conceito de negócio:")):
+            return heading
         table = re.search(r"\b([a-z_]+)\.([a-z0-9_]+)\b", heading, flags=re.I)
         if table:
             return table.group(0).lower()

@@ -35,8 +35,10 @@ def validate_table_heading(path: Path, schema: str) -> list[str]:
     if path.name in TABLE_SKIP_NAMES or path.name.startswith("_"):
         return []
     text = path.read_text(encoding="utf-8")
-    expected = f"# Tabela de negocio: `{schema}.{path.stem}`"
     first_line = text.splitlines()[0].strip() if text.splitlines() else ""
+    if re.match(r"^#\s+Conceito de neg[oó]cio:\s+\S+", first_line, flags=re.I):
+        return []
+    expected = f"# Tabela de negocio: `{schema}.{path.stem}`"
     if first_line != expected:
         return [f"{path}: cabecalho esperado {expected!r}, encontrado {first_line!r}"]
     return []

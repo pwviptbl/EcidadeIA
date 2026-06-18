@@ -18,8 +18,10 @@ class Orchestrator
 {
     /**
      * Executa a pergunta do usuário no loop agentivo do Prism com suporte a streaming de passos via WebSockets.
-     * Intercepta o loop do ReAct definindo maxSteps(1), permitindo capturar as chamadas de ferramenta
-     * e executá-las de forma síncrona pelo PHP, transmitindo o andamento via Laravel Reverb.
+     *
+     * O loop é implementado manualmente com maxSteps(1) porque o Prism v0.100.1 não expõe hooks
+     * de passo (callbacks por iteração). Usar withMaxSteps(N>1) nativo executaria as ferramentas
+     * internamente sem permitir interceptação para transmissão via Reverb.
      *
      * @param string $question A pergunta fornecida pelo usuário.
      * @param string|null $sessionId ID da sessão para o tracking do Reverb e MCP.
@@ -28,51 +30,22 @@ class Orchestrator
     public function ask(string $question, ?string $sessionId = null): array
     {
         $sessionId = $sessionId ?? Str::uuid()->toString();
-        Log::info("Orchestrator: Nova execução iniciada (Loop ReAct Manual)...", [
-            'question' => $question,
-            'session_id' => $sessionId
+        Log::info('Orchestrator: Nova execução iniciada.', [
+            'question'   => $question,
+            'session_id' => $sessionId,
         ]);
 
-        $messages = [];
-
-        // Carrega o histórico da conversa baseado no limite do .env
-        $limit = env('AGENT_MEMORY_LIMIT', 3);
-        $history = \App\Models\AgentConversation::where('session_id', $sessionId)
-            ->latest('id')
-            ->take($limit)
-            ->get()
-            ->reverse();
-
-        foreach ($history as $interaction) {
-            $messages[] = new UserMessage($interaction->question);
-            
-            $responseContext = $interaction->response;
-            if (!empty($interaction->sql_used)) {
-                $responseContext .= "\n\n[Contexto - SQL Utilizado Anteriormente:\n" . $interaction->sql_used . "\n]";
-            }
-            $messages[] = new AssistantMessage($responseContext);
-        }
-
-        // Adiciona a pergunta atual
-        $messages[] = new UserMessage($question);
-
-        $steps = [];
-        $maxSteps = 15;
-        $currentStep = 1;
-        $finalResponseText = '';
-        $executedSqls = []; // Guarda os SQLs dessa rodada
-
-        $tools = [
-            new RagSearchTool(),
-            new McpExecutionTool()
-        ];
+        $messages     = $this->buildMessageHistory($sessionId, $question);
+        $tools        = [new RagSearchTool(), new McpExecutionTool()];
+        $steps        = [];
+        $executedSqls = [];
+        $maxSteps     = 15;
+        $currentStep  = 1;
+        $finalText    = '';
 
         while ($currentStep <= $maxSteps) {
-            Log::info("Orchestrator: Executando passo {$currentStep} no loop...", [
-                'session_id' => $sessionId
-            ]);
+            Log::info("Orchestrator: Passo {$currentStep}.", ['session_id' => $sessionId]);
 
-            // Chamamos o Gemini com limite de 1 passo de execução para interceptar o fluxo
             $response = Prism::text()
                 ->using(Provider::Gemini, env('GEMINI_MODEL', 'gemini-2.5-flash'))
                 ->withSystemPrompt($this->getSystemPrompt())
@@ -82,194 +55,41 @@ class Orchestrator
                 ->generate();
 
             $lastStep = $response->steps->last();
-            if (!$lastStep) {
-                Log::warning("Orchestrator: Nenhum passo retornado pela LLM.", [
-                    'session_id' => $sessionId
-                ]);
+            if (! $lastStep) {
+                Log::warning('Orchestrator: Nenhum passo retornado.', ['session_id' => $sessionId]);
                 break;
             }
 
-            // Preparação dos dados iniciais do passo
             $stepData = [
-                'text' => $lastStep->text,
+                'text'         => $lastStep->text,
                 'finishReason' => $lastStep->finishReason->value,
-                'toolCalls' => collect($lastStep->toolCalls)->map(fn ($tc) => $tc->toArray())->toArray(),
-                'toolResults' => [],
-                'stepCount' => $currentStep
+                'toolCalls'    => collect($lastStep->toolCalls)->map(fn ($tc) => $tc->toArray())->toArray(),
+                'toolResults'  => [],
+                'stepCount'    => $currentStep,
             ];
 
-            // Se terminou com Tool Calls, precisamos executar as ferramentas
             if ($lastStep->finishReason->value === 'tool-calls') {
-                $toolResults = [];
+                [$toolResults, $stepData] = $this->executeToolCalls(
+                    $lastStep, $tools, $stepData, $executedSqls, $sessionId
+                );
 
-                foreach ($lastStep->toolCalls as $toolCall) {
-                    $toolInstance = collect($tools)->first(fn ($t) => $t->name() === $toolCall->name);
-
-                    if ($toolInstance) {
-                        Log::info("Orchestrator: Executando tool '{$toolCall->name}' manualmente...", [
-                            'session_id' => $sessionId,
-                            'arguments' => $toolCall->arguments()
-                        ]);
-
-                        try {
-                            // Executa a lógica da ferramenta com os argumentos correspondentes
-                            $output = call_user_func_array([$toolInstance, 'handle'], $toolCall->arguments());
-                            
-                            // Trata o retorno da ferramenta
-                            if (is_string($output)) {
-                                $resultText = $output;
-                            } else {
-                                $resultText = $output->result ?? (string)$output;
-                            }
-
-                            // Captura o SQL se for chamada do banco de dados e obteve sucesso
-                            if ($toolCall->name === 'mcp_execute_sql') {
-                                $args = $toolCall->arguments();
-                                if (isset($args['sql'])) {
-                                    if (!str_contains($resultText, 'Error executing tool') && 
-                                        !str_contains($resultText, 'Erro na execução') && 
-                                        !str_contains($resultText, '"error":true')) {
-                                        $executedSqls[] = $args['sql'];
-                                    }
-                                }
-                            }
-                        } catch (\Throwable $e) {
-                            Log::error("Orchestrator: Erro na execução da tool '{$toolCall->name}'", [
-                                'error' => $e->getMessage()
-                            ]);
-                            $resultText = "Erro na execução da ferramenta: " . $e->getMessage();
-                        }
-
-                        $toolResults[] = new ToolResult(
-                            toolCallId: $toolCall->id,
-                            toolName: $toolCall->name,
-                            args: $toolCall->arguments(),
-                            result: $resultText,
-                            toolCallResultId: $toolCall->resultId
-                        );
-                    } else {
-                        Log::warning("Orchestrator: Ferramenta '{$toolCall->name}' não encontrada no escopo.");
-                    }
-                }
-
-                // Vincula os resultados no payload de transmissão truncando payloads muito grandes para evitar erros de rede/WebSocket
-                $truncatedResults = collect($toolResults)->map(function ($tr) {
-                    $arr = $tr->toArray();
-                    
-                    if (is_string($arr['result'])) {
-                        try {
-                            $decoded = json_decode($arr['result'], true);
-                            if (is_array($decoded)) {
-                                // Limita strings longas dentro de chaves de objetos (ex: o campo 'content' do RAG)
-                                foreach ($decoded as $key => $item) {
-                                    if (is_array($item)) {
-                                        foreach ($item as $subKey => $subVal) {
-                                            if (is_string($subVal) && strlen($subVal) > 300) {
-                                                $decoded[$key][$subKey] = substr($subVal, 0, 300) . "... [Corte do dashboard]";
-                                            }
-                                        }
-                                    } elseif (is_string($item) && strlen($item) > 300) {
-                                        $decoded[$key] = substr($item, 0, 300) . "... [Corte do dashboard]";
-                                    }
-                                }
-                                
-                                // Limita a quantidade total de registros no array a 5
-                                $originalCount = count($decoded);
-                                if ($originalCount > 5) {
-                                    $decoded = array_slice($decoded, 0, 5);
-                                    $decoded[] = ['info' => "... [Mais " . ($originalCount - 5) . " registros truncados para exibição]"];
-                                }
-                                
-                                $arr['result'] = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-                            } else {
-                                if (strlen($arr['result']) > 1000) {
-                                    $arr['result'] = substr($arr['result'], 0, 1000) . "... [Resultado truncado no Dashboard]";
-                                }
-                            }
-                        } catch (\Throwable $e) {
-                            if (strlen($arr['result']) > 1000) {
-                                $arr['result'] = substr($arr['result'], 0, 1000) . "... [Resultado truncado no Dashboard]";
-                            }
-                        }
-                    } elseif (is_array($arr['result'])) {
-                        $originalCount = count($arr['result']);
-                        if ($originalCount > 5) {
-                            $arr['result'] = array_slice($arr['result'], 0, 5);
-                            $arr['result'][] = [
-                                'info' => "... [Mais " . ($originalCount - 5) . " registros truncados para exibição]"
-                            ];
-                        }
-                    }
-                    
-                    return $arr;
-                })->toArray();
-
-                $stepData['toolResults'] = $truncatedResults;
-                
-                // Salva o passo no histórico de steps (antes do truncamento agressivo pro websocket)
                 $steps[] = $stepData;
+                event(new AgentStepStreamed($sessionId, $this->buildBroadcastStep($stepData)));
 
-                // Truncamento agressivo específico para evitar 'Payload too large' no Reverb (10KB limit)
-                $broadcastData = $stepData;
-                if (strlen($broadcastData['text'] ?? '') > 2000) {
-                    $broadcastData['text'] = substr($broadcastData['text'], 0, 2000) . "... [Raciocínio truncado devido ao tamanho]";
-                }
-                
-                // Se ainda for grande, limpa totalmente os arrays mantendo a estrutura esperada pelo frontend
-                // Se ainda for grande, limpa apenas os campos pesados, MAS MANTÉM OS NOMES para a UI reconhecer o SQL
-                if (strlen(json_encode($broadcastData)) > 5000) {
-                    if (isset($broadcastData['toolCalls'])) {
-                        foreach ($broadcastData['toolCalls'] as &$tc) {
-                            // Se não for SQL, oculta argumentos para poupar espaço
-                            if (isset($tc['name']) && $tc['name'] !== 'mcp_execute_sql') {
-                                $tc['arguments'] = ['aviso' => '[Argumentos longos ocultos]'];
-                            }
-                        }
-                    }
-                    if (isset($broadcastData['toolResults'])) {
-                        foreach ($broadcastData['toolResults'] as &$tr) {
-                            // Preserva o começo do resultado pra debug, mas corta se for grande
-                            if (isset($tr['result']) && is_string($tr['result'])) {
-                                if (strlen($tr['result']) > 300) {
-                                    $tr['result'] = substr($tr['result'], 0, 300) . "\n\n... [Resultado massivo truncado pelo backend (Limite de WebSocket)]";
-                                }
-                            } else {
-                                $tr['result'] = '[Resultado truncado no backend]';
-                            }
-                        }
-                    }
-                }
-
-                Log::info("Orchestrator: Transmitindo passo ReAct intermediário via Reverb", [
-                    'session_id' => $sessionId,
-                    'step' => $currentStep
-                ]);
-                event(new AgentStepStreamed($sessionId, $broadcastData));
-
-                // Atualiza o histórico de mensagens para a próxima iteração
                 $messages[] = new AssistantMessage($lastStep->text, $lastStep->toolCalls);
                 $messages[] = new ToolResultMessage($toolResults);
-
             } else {
-                // Se o finishReason é stop ou length, é a resposta final do loop
-                $finalResponseText = $lastStep->text;
-                
-                // Salvar no banco a nova interação
+                $finalText = $lastStep->text;
+
                 \App\Models\AgentConversation::create([
                     'session_id' => $sessionId,
-                    'question' => $question,
-                    'response' => $finalResponseText,
-                    'sql_used' => empty($executedSqls) ? null : implode(";\n\n", $executedSqls)
+                    'question'   => $question,
+                    'response'   => $finalText,
+                    'sql_used'   => empty($executedSqls) ? null : implode(";\n\n", $executedSqls),
                 ]);
 
                 $steps[] = $stepData;
-
-                Log::info("Orchestrator: Transmitindo passo ReAct final via Reverb", [
-                    'session_id' => $sessionId,
-                    'step' => $currentStep
-                ]);
                 event(new AgentStepStreamed($sessionId, $stepData));
-
                 $messages[] = new AssistantMessage($lastStep->text);
                 break;
             }
@@ -277,40 +97,275 @@ class Orchestrator
             $currentStep++;
         }
 
-        Log::info("Orchestrator: Loop concluído com sucesso.", [
+        Log::info('Orchestrator: Loop concluído.', [
             'total_steps' => count($steps),
-            'session_id' => $sessionId
+            'session_id'  => $sessionId,
         ]);
 
         return [
             'session_id' => $sessionId,
-            'response' => $finalResponseText ?: "Não foi possível obter resposta final do modelo após atingir o limite máximo de passos.",
-            'steps' => $steps
+            'response'   => $finalText ?: 'Não foi possível obter resposta final do modelo após atingir o limite máximo de passos.',
+            'sql_used'   => empty($executedSqls) ? null : implode(";\n\n", $executedSqls),
+            'steps'      => $steps,
         ];
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Métodos privados auxiliares
+    // ─────────────────────────────────────────────────────────────────────────
+
+    /**
+     * Monta o histórico de mensagens da sessão + a pergunta atual.
+     *
+     * @return array<int, UserMessage|AssistantMessage>
+     */
+    private function buildMessageHistory(string $sessionId, string $question): array
+    {
+        $limit   = (int) env('AGENT_MEMORY_LIMIT', 3);
+        $history = \App\Models\AgentConversation::where('session_id', $sessionId)
+            ->latest('id')
+            ->take($limit)
+            ->get()
+            ->reverse();
+
+        $messages = [];
+        foreach ($history as $interaction) {
+            $messages[] = new UserMessage($interaction->question);
+            $ctx = $interaction->response;
+            if (! empty($interaction->sql_used)) {
+                $ctx .= "\n\n[Contexto - SQL Utilizado Anteriormente:\n{$interaction->sql_used}\n]";
+            }
+            $messages[] = new AssistantMessage($ctx);
+        }
+
+        $messages[] = new UserMessage($question);
+        return $messages;
+    }
+
+    /**
+     * Executa as tool calls do passo atual e captura SQLs válidos.
+     *
+     * @param  array<int, object>  $tools
+     * @param  array<string, mixed>  $stepData
+     * @param  array<int, string>  $executedSqls
+     * @return array{0: ToolResult[], 1: array<string,mixed>}
+     */
+    private function executeToolCalls(
+        object $lastStep,
+        array $tools,
+        array $stepData,
+        array &$executedSqls,
+        string $sessionId
+    ): array {
+        $toolResults = [];
+
+        foreach ($lastStep->toolCalls as $toolCall) {
+            $toolInstance = collect($tools)->first(fn ($t) => $t->name() === $toolCall->name);
+
+            if (! $toolInstance) {
+                Log::warning("Orchestrator: Ferramenta '{$toolCall->name}' não encontrada.", ['session_id' => $sessionId]);
+                continue;
+            }
+
+            Log::info("Orchestrator: Executando tool '{$toolCall->name}'.", [
+                'session_id' => $sessionId,
+                'arguments'  => $toolCall->arguments(),
+            ]);
+
+            try {
+                $output = call_user_func_array([$toolInstance, 'handle'], $toolCall->arguments());
+                $resultText = is_string($output) ? $output : ($output->result ?? (string) $output);
+
+                if ($toolCall->name === 'mcp_execute_sql') {
+                    $this->captureSqlFromResult($toolCall, $resultText, $executedSqls);
+                }
+            } catch (\Throwable $e) {
+                Log::error("Orchestrator: Erro na tool '{$toolCall->name}'.", ['error' => $e->getMessage()]);
+                $resultText = 'Erro na execução da ferramenta: ' . $e->getMessage();
+            }
+
+            $toolResults[] = new ToolResult(
+                toolCallId:       $toolCall->id,
+                toolName:         $toolCall->name,
+                args:             $toolCall->arguments(),
+                result:           $resultText,
+                toolCallResultId: $toolCall->resultId
+            );
+        }
+
+        $stepData['toolResults'] = $this->truncateToolResultsForDashboard($toolResults);
+
+        return [$toolResults, $stepData];
+    }
+
+    /**
+     * Captura o SQL da tool call apenas se a execução foi bem-sucedida.
+     *
+     * @param  array<int, string>  $executedSqls
+     */
+    private function captureSqlFromResult(object $toolCall, string $resultText, array &$executedSqls): void
+    {
+        $args = $toolCall->arguments();
+        if (! isset($args['sql'])) {
+            return;
+        }
+        $isError = str_contains($resultText, 'Error executing tool')
+            || str_contains($resultText, 'Erro na execução')
+            || str_contains($resultText, '"error":true');
+
+        if (! $isError) {
+            $executedSqls[] = $args['sql'];
+        }
+    }
+
+    /**
+     * Trunca os resultados das ferramentas para exibição no Dashboard.
+     * Evita payloads >5KB no WebSocket sem perder dados nos $steps internos.
+     *
+     * @param  ToolResult[]  $toolResults
+     * @return array<int, array<string, mixed>>
+     */
+    private function truncateToolResultsForDashboard(array $toolResults): array
+    {
+        return collect($toolResults)->map(function ($tr) {
+            $arr = $tr->toArray();
+
+            if (! is_string($arr['result'])) {
+                if (is_array($arr['result']) && count($arr['result']) > 5) {
+                    $extra = count($arr['result']) - 5;
+                    $arr['result'] = array_slice($arr['result'], 0, 5);
+                    $arr['result'][] = ['info' => "... [Mais {$extra} registros truncados para exibição]"];
+                }
+                return $arr;
+            }
+
+            try {
+                $decoded = json_decode($arr['result'], true, 512, JSON_THROW_ON_ERROR);
+
+                if (is_array($decoded)) {
+                    foreach ($decoded as $key => $item) {
+                        if (is_array($item)) {
+                            foreach ($item as $subKey => $subVal) {
+                                if (is_string($subVal) && strlen($subVal) > 300) {
+                                    $decoded[$key][$subKey] = substr($subVal, 0, 300) . '... [Corte do dashboard]';
+                                }
+                            }
+                        } elseif (is_string($item) && strlen($item) > 300) {
+                            $decoded[$key] = substr($item, 0, 300) . '... [Corte do dashboard]';
+                        }
+                    }
+                    if (count($decoded) > 5) {
+                        $extra = count($decoded) - 5;
+                        $decoded = array_slice($decoded, 0, 5);
+                        $decoded[] = ['info' => "... [Mais {$extra} registros truncados para exibição]"];
+                    }
+                    $arr['result'] = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+                } else {
+                    $arr['result'] = $this->truncateString($arr['result'], 1000);
+                }
+            } catch (\Throwable) {
+                $arr['result'] = $this->truncateString($arr['result'], 1000);
+            }
+
+            return $arr;
+        })->toArray();
+    }
+
+    /**
+     * Prepara o stepData para broadcast via Reverb com truncamento agressivo de rede.
+     * Não afeta o array $steps que é retornado ao cliente HTTP.
+     *
+     * @param  array<string, mixed>  $stepData
+     * @return array<string, mixed>
+     */
+    private function buildBroadcastStep(array $stepData): array
+    {
+        $broadcast = $stepData;
+
+        if (strlen($broadcast['text'] ?? '') > 2000) {
+            $broadcast['text'] = substr($broadcast['text'], 0, 2000) . '... [Raciocínio truncado devido ao tamanho]';
+        }
+
+        if (strlen(json_encode($broadcast)) > 5000) {
+            foreach ($broadcast['toolCalls'] ?? [] as &$tc) {
+                if (isset($tc['name']) && $tc['name'] !== 'mcp_execute_sql') {
+                    $tc['arguments'] = ['aviso' => '[Argumentos longos ocultos]'];
+                }
+            }
+            unset($tc);
+
+            foreach ($broadcast['toolResults'] ?? [] as &$tr) {
+                if (isset($tr['result']) && is_string($tr['result'])) {
+                    $tr['result'] = $this->truncateString($tr['result'], 300)
+                        . "\n\n... [Resultado massivo truncado pelo backend (Limite de WebSocket)]";
+                } else {
+                    $tr['result'] = '[Resultado truncado no backend]';
+                }
+            }
+            unset($tr);
+        }
+
+        return $broadcast;
+    }
+
+    /**
+     * Trunca uma string para um tamanho máximo, adicionando reticências.
+     */
+    private function truncateString(string $value, int $max): string
+    {
+        return strlen($value) > $max ? substr($value, 0, $max) . '...' : $value;
     }
 
     /**
      * Retorna o System Prompt injetado no LLM (Gemini) durante o Loop ReAct.
-     * Define as diretrizes operacionais do E-CidadeIA, como forçar a leitura do RAG
-     * antes de gerar SQL e instruções para evitar consultas cruzadas custosas.
+     * Define as diretrizes operacionais do E-CidadeIA e as convenções invariantes
+     * do banco do e-Cidade. Os schemas disponíveis são descobertos dinamicamente via RAG.
      *
      * @return string O texto do prompt principal da IA.
      */
     private function getSystemPrompt(): string
     {
         return <<<PROMPT
-Você é o E-CidadeIA, um agente de IA especializado no sistema e-Cidade, focado em analisar e responder perguntas de negócio complexas consultando dados reais.
+Você é o E-CidadeIA, um agente de IA especializado no sistema e-Cidade, focado em analisar e responder perguntas de negócio complexas consultando dados reais do banco de dados municipal.
 
-Você opera sob um loop ReAct (Reasoning and Acting). 
+Você opera sob um loop ReAct (Reasoning and Acting). Raciocine antes de agir e valide sua lógica antes de montar qualquer SQL.
 
-Suas diretrizes de operação são:
-1. Sempre verifique as regras de negócio e os esquemas das tabelas associadas à pergunta usando a ferramenta `rag_search` antes de escrever qualquer query SQL.
-2. IMPORTANTE PARA RAG: A ferramenta `rag_search` faz buscas por palavras chave (ex: lote, bairro, arrecad, etc). Se a busca por termos combinados falhar, tente usar termos individuais ou mais genéricos para encontrar seus esquemas e ligações.
-3. Identifique os esquemas, chaves primárias, chaves estrangeiras e regras específicas de negócio ou regras de município no RAG.
-4. Nunca faça suposições sobre a estrutura das tabelas ou sobre a lógica de junção. Consulte e siga estritamente as regras de negócio e relacionamentos documentados no RAG.
-5. Para realizar a consulta real no banco de dados, use a ferramenta `mcp_execute_sql`. O SQL deve ser estritamente de leitura (SELECT).
-6. Se a resposta requerer cálculos matemáticos ou agregação, faça a agregação diretamente no SQL sempre que possível, seguindo as diretrizes estruturais obtidas no RAG.
-7. Responda ao usuário final em Português de forma técnica, clara, direta e objetiva, detalhando os dados encontrados e, se aplicável, as regras de negócio utilizadas.
+---
+
+## CONVENÇÕES CRÍTICAS DO BANCO (invariantes do e-Cidade)
+
+1. **Schemas dinâmicos:** Os módulos e schemas disponíveis variam por instalação e são expandidos continuamente. Sempre use `rag_search` ou `ecidade_list_schemas` para descobrir os schemas ativos — nunca assuma quais schemas existem.
+
+2. **Campo de Ano/Exercício:** O ano fiscal é sempre armazenado em um campo dedicado (não calculado a partir de datas). Use o campo indicado pelo RAG. Nunca use `YEAR(data)`.
+
+3. **Chave Universal de Pessoas (CGM):** Existe uma tabela central de cadastro de pessoas com uma chave numérica que funciona como ID universal para pessoas físicas e jurídicas em todos os módulos. Consulte o RAG para obter o nome exato da tabela e da coluna de chave estrangeira no módulo em questão.
+
+4. **Formato do CNAE:** No banco, o CNAE é armazenado com o prefixo da seção econômica e SEM separadores (ex: `L6810202`, e não `6810-2/02`). Use `LIKE '%6810202'` para buscas resilientes.
+
+5. **Status Ativo/Inativo:** Registros cancelados ou encerrados geralmente têm um campo de data de baixa não nulo. Verifique no RAG qual campo indica o status ativo para cada entidade.
+
+6. **Prefixo de Colunas:** As colunas seguem o padrão `[sigla_tabela]_[nome]`. O RAG e o `ecidade_describe_table` fornecem os nomes exatos.
+
+---
+
+## SUAS DIRETRIZES DE OPERAÇÃO
+
+1. **Sempre consulte o RAG primeiro:** Use `rag_search` com termos de negócio da pergunta antes de escrever qualquer SQL. Se a busca retornar vazio, tente termos mais simples ou sinônimos técnicos.
+
+2. **Nunca suponha estrutura:** Não invente nomes de colunas ou schemas. Se não tiver certeza, use `ecidade_describe_table` ou `ecidade_catalog_search` para verificar.
+
+3. **PROIBIDO consultar `information_schema` diretamente via SQL:** O SQL Guard bloqueará qualquer query que referencie `information_schema`. Para inspecionar colunas de uma tabela, use a ferramenta `ecidade_describe_table` do MCP.
+
+4. **Ao receber erro de permissão/allowlist:**
+   - Não tente o mesmo SQL novamente.
+   - Use `rag_search` para encontrar uma tabela alternativa dentro dos schemas disponíveis.
+   - Se não houver alternativa, informe o usuário claramente: "O domínio solicitado não está disponível no momento. Solicite ao administrador a liberação do schema necessário."
+
+5. **Agregações no SQL:** Se a resposta requerer totais, médias ou rankings, sempre agregue diretamente no SQL com `SUM`, `COUNT`, `GROUP BY` etc. Não traga dados brutos para calcular no texto.
+
+6. **Responda em Português:** De forma técnica, clara e objetiva. Apresente os dados em tabela quando houver múltiplos registros. Informe a fonte dos dados (tabelas e critérios utilizados) nas notas técnicas.
+
+7. **SQL exibido na resposta = SQL que gerou os dados:** Nunca exiba ou mencione uma query que falhou ou foi usada apenas para inspeção de estrutura.
 PROMPT;
     }
 }
