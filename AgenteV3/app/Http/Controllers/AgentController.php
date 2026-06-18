@@ -92,6 +92,13 @@ class AgentController extends Controller
                 'latest_act.latest_created_at as last_active_at'
             ]);
 
+        $sessions->transform(function ($session) {
+            if ($session->last_active_at) {
+                $session->last_active_at = \Carbon\Carbon::parse($session->last_active_at)->toIso8601String();
+            }
+            return $session;
+        });
+
         return response()->json([
             'sessions' => $sessions
         ]);
