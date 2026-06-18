@@ -8,9 +8,13 @@ payload = {
     "params": {
         "name": "ecidade_readonly_query",
         "arguments": {
-            "sql": "SELECT unaccent('Icaraí')"
+            "sql": "SELECT q02_inscr, q02_numcgm FROM issqn.issbase LIMIT 3;"
         }
     }
 }
-response = requests.post(url, json=payload)
+headers = {
+    "Accept": "application/json, text/event-stream",
+    "Content-Type": "application/json"
+}
+response = requests.post(url, json=payload, headers=headers)
 print(response.json())
