@@ -112,14 +112,6 @@ class Orchestrator
                         ]);
 
                         try {
-                            // Captura o SQL se for chamada do banco de dados
-                            if ($toolCall->name === 'mcp_execute_sql') {
-                                $args = $toolCall->arguments();
-                                if (isset($args['sql'])) {
-                                    $executedSqls[] = $args['sql'];
-                                }
-                            }
-
                             // Executa a lógica da ferramenta com os argumentos correspondentes
                             $output = call_user_func_array([$toolInstance, 'handle'], $toolCall->arguments());
                             
@@ -128,6 +120,18 @@ class Orchestrator
                                 $resultText = $output;
                             } else {
                                 $resultText = $output->result ?? (string)$output;
+                            }
+
+                            // Captura o SQL se for chamada do banco de dados e obteve sucesso
+                            if ($toolCall->name === 'mcp_execute_sql') {
+                                $args = $toolCall->arguments();
+                                if (isset($args['sql'])) {
+                                    if (!str_contains($resultText, 'Error executing tool') && 
+                                        !str_contains($resultText, 'Erro na execução') && 
+                                        !str_contains($resultText, '"error":true')) {
+                                        $executedSqls[] = $args['sql'];
+                                    }
+                                }
                             }
                         } catch (\Throwable $e) {
                             Log::error("Orchestrator: Erro na execução da tool '{$toolCall->name}'", [

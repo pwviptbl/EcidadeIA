@@ -826,18 +826,30 @@
                                 const sqlCallIndex = step.toolCalls.findIndex(c => c.name === 'mcp_execute_sql');
                                 if (sqlCallIndex !== -1) {
                                     const args = step.toolCalls[sqlCallIndex].arguments;
-                                    executedSql = typeof args === 'string' ? args : (args.sql || JSON.stringify(args));
+                                    const currentSql = typeof args === 'string' ? args : (args.sql || JSON.stringify(args));
                                     
                                     if (step.toolResults && step.toolResults[sqlCallIndex]) {
                                         const rawRes = step.toolResults[sqlCallIndex].result;
                                         try {
                                             const parsed = typeof rawRes === 'string' ? JSON.parse(rawRes) : rawRes;
-                                            if (Array.isArray(parsed) && parsed.length > 0) {
-                                                tableData = parsed;
+                                            let isSuccess = false;
+                                            let rows = null;
+                                            
+                                            if (Array.isArray(parsed)) {
+                                                rows = parsed;
+                                                isSuccess = true;
+                                            } else if (parsed && Array.isArray(parsed.rows)) {
+                                                rows = parsed.rows;
+                                                isSuccess = true;
+                                            }
+                                            
+                                            if (isSuccess) {
+                                                tableData = rows && rows.length > 0 ? rows : null;
+                                                executedSql = currentSql;
                                                 break;
                                             }
                                         } catch (e) {
-                                            // Não era JSON de array
+                                            // Não era JSON de sucesso
                                         }
                                     }
                                 }
