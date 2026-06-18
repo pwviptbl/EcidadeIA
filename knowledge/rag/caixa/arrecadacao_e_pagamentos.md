@@ -2,7 +2,44 @@
 
 > Fonte manual: `knowledge/manual/caixa/arrecadacao_e_pagamentos.md`
 
-Mapeia as relações financeiras do IPTU, vinculando o cadastro imobiliário com a arrecadação em caixa, pagamentos e taxas de inadimplência.
+Mapeia as relações financeiras da arrecadação e caixa, incluindo os vínculos com contribuintes (CGM), imóveis (matrículas), empresas (inscrições), e as classificações de tipos e grupos de débitos.
+
+---
+
+### Conceito: vinculo_cgm
+- **Descrição:** Vínculo base de débitos com o Cadastro Geral de Contribuintes (CGM) do contribuinte correspondente.
+- **Tabelas:** `caixa.arrecad`, `caixa.arrepaga`, `caixa.arrenumcgm`, `protocolo.cgm`
+- **Junções:**
+  - `arrecad.k00_numpre = arrenumcgm.k00_numpre` (para débitos em aberto) ou `arrepaga.k00_numpre = arrenumcgm.k00_numpre` (para pagamentos)
+  - `arrenumcgm.k00_numcgm = cgm.z01_numcgm`
+
+---
+
+### Conceito: vinculo_matricula
+- **Descrição:** Vínculo base de débitos (como IPTU e taxas imobiliárias) com a matrícula do imóvel no Cadastro Imobiliário Municipal.
+- **Tabelas:** `caixa.arrecad`, `caixa.arrepaga`, `caixa.arrematric`, `cadastro.iptubase`
+- **Junções:**
+  - `arrecad.k00_numpre = arrematric.k00_numpre` (para débitos em aberto) ou `arrepaga.k00_numpre = arrematric.k00_numpre` (para pagamentos)
+  - `arrematric.k00_matric = iptubase.j01_matric`
+
+---
+
+### Conceito: vinculo_inscricao
+- **Descrição:** Vínculo de débitos (como ISSQN, taxas de alvará e tributos mobiliários) com a inscrição da empresa/atividade econômica no Cadastro Mobiliário Municipal.
+- **Tabelas:** `caixa.arrecad`, `caixa.arrepaga`, `caixa.arreinscr`, `issqn.issbase`
+- **Junções:**
+  - `arrecad.k00_numpre = arreinscr.k00_numpre` (para débitos em aberto) ou `arrepaga.k00_numpre = arreinscr.k00_numpre` (para pagamentos)
+  - `arreinscr.k00_inscr = issbase.q02_inscr`
+
+---
+
+### Conceito: tipo_e_grupo_debito
+- **Descrição:** Classificação dos débitos por tipo específico (arretipo) e grupo geral (cadtipo). O grupo do tipo (`cadtipo`) é fixo e global para todos os clientes, enquanto os tipos derivados (`arretipo`) são customizados por cada município.
+- **Tabelas:** `caixa.arrecad`, `caixa.arrepaga`, `caixa.arretipo`, `caixa.cadtipo`
+- **Junções:**
+  - `arrecad.k00_tipo = arretipo.k00_tipo` (ou `arrepaga.k00_tipo = arretipo.k00_tipo`)
+  - `arretipo.k03_tipo = cadtipo.k03_tipo`
+- **Regra de Negócio:** `cadtipo` representa a categoria geral padronizada (ex: IPTU, ISSQN, Taxas, etc.), enquanto `arretipo` possui a descrição e regras locais parametrizadas pelo município. Para análises globais consistentes entre clientes, deve-se agrupar ou filtrar pelo grupo `cadtipo.k03_tipo`.
 
 ---
 
