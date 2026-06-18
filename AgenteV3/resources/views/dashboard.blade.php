@@ -89,11 +89,55 @@
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
 </head>
-<body class="h-full font-sans antialiased overflow-hidden flex flex-col relative">
+<body class="h-full font-sans antialiased overflow-hidden flex flex-col relative" x-data="agentDashboard()">
 
     <!-- Efeitos de Brilho de Fundo -->
     <div class="glow-bg top-[-100px] left-[-100px]" style="animation-delay: 0s;"></div>
     <div class="glow-bg bottom-[-100px] right-[-100px]" style="animation-delay: 4s;"></div>
+
+    <!-- Modal de Confirmação de Exclusão -->
+    <div x-show="showDeleteConfirm" 
+         class="fixed inset-0 z-50 flex items-center justify-center p-4"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         style="display: none;">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-slate-950/65 backdrop-blur-sm" @click="showDeleteConfirm = false"></div>
+        
+        <!-- Card -->
+        <div class="glass max-w-sm w-full rounded-2xl p-6 relative z-10 flex flex-col gap-4 shadow-2xl border border-white/10">
+            <!-- Icon -->
+            <div class="mx-auto w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+            </div>
+            
+            <!-- Title & Description -->
+            <div class="text-center">
+                <h3 class="text-base font-extrabold font-outfit text-white">Excluir Conversa?</h3>
+                <p class="text-slate-400 text-xs mt-2 leading-relaxed">
+                    Tem certeza que deseja apagar a memória desta conversa? A IA esquecerá todo o contexto das perguntas anteriores de forma definitiva.
+                </p>
+            </div>
+            
+            <!-- Actions -->
+            <div class="flex gap-3 mt-2">
+                <button @click="showDeleteConfirm = false" 
+                        class="flex-1 bg-slate-900 hover:bg-slate-800 text-slate-300 font-bold py-2.5 px-4 rounded-xl border border-white/5 transition duration-150 text-xs">
+                    Cancelar
+                </button>
+                <button @click="confirmDeleteSession()" 
+                        class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 px-4 rounded-xl transition duration-150 text-xs shadow-lg shadow-rose-600/10">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header class="glass z-10 py-4 px-6 flex justify-between items-center border-b border-white/10 shrink-0">
@@ -111,7 +155,7 @@
             </div>
         </div>
         
-        <!-- Status de Conexões -->
+        <!-- Status de Conexões e Ações -->
         <div class="flex items-center gap-4 text-xs font-semibold" x-data="{ wsStatus: 'desconectado', mcpStatus: 'conectando' }" x-init="
             // Verificar WebSocket após inicialização
             setTimeout(() => {
@@ -126,6 +170,12 @@
             // Simular/verificar MCP
             fetch('/api/user').catch(() => {}).finally(() => { mcpStatus = 'online'; });
         ">
+            <!-- Botão Limpar Conversa -->
+            <button @click="clearSession()" x-show="sessionId" class="flex items-center gap-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 px-3 py-1.5 rounded-full border border-rose-500/20 transition duration-200" title="Apagar a memória da sessão atual">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                <span>Limpar Conversa</span>
+            </button>
+
             <!-- WebSocket Status -->
             <div class="flex items-center gap-2 bg-slate-900/60 px-3 py-1.5 rounded-full border border-white/5">
                 <span class="relative flex h-2 w-2">
@@ -151,10 +201,60 @@
     </header>
 
     <!-- Main Workspace -->
-    <main class="flex-1 flex overflow-hidden z-10" x-data="agentDashboard()">
-        
+    <main class="flex-1 flex overflow-hidden z-10">
+
+        <!-- Barra Lateral: Histórico de Conversas -->
+        <aside class="w-64 glass border-r border-white/5 h-full flex flex-col shrink-0">
+            <!-- Botão Nova Conversa -->
+            <div class="p-4 border-b border-white/5 flex flex-col gap-2 shrink-0">
+                <button @click="startNewChat()" 
+                        class="w-full flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl px-4 py-3 text-sm font-semibold transition duration-200 shadow-lg shadow-brand-500/10">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    <span>Nova Conversa</span>
+                </button>
+            </div>
+
+            <!-- Lista de Conversas -->
+            <div class="flex-1 overflow-y-auto p-3 custom-scrollbar flex flex-col gap-2">
+                <template x-for="sess in sessions" :key="sess.session_id">
+                    <div class="group flex items-center justify-between rounded-xl p-3 text-xs font-medium cursor-pointer transition duration-200"
+                         :class="sessionId === sess.session_id ? 'glass-highlight text-white' : 'hover:bg-white/5 text-slate-400 hover:text-slate-200'"
+                         @click="selectSession(sess.session_id)">
+                        
+                        <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                            <svg class="w-4 h-4 text-slate-500 group-hover:text-brand-400 shrink-0" 
+                                 :class="sessionId === sess.session_id ? 'text-brand-400' : ''" 
+                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                            </svg>
+                            <div class="flex flex-col min-w-0">
+                                <span class="truncate font-semibold text-slate-200" x-text="sess.question"></span>
+                                <span class="text-[9px] text-slate-500 mt-0.5" x-text="formatDate(sess.last_active_at)"></span>
+                            </div>
+                        </div>
+
+                        <!-- Botão Deletar Conversa -->
+                        <button @click.stop="clearSession(sess.session_id)" 
+                                class="opacity-0 group-hover:opacity-100 hover:bg-rose-500/10 hover:text-rose-400 p-1.5 rounded-lg text-slate-500 transition duration-150"
+                                title="Excluir conversa">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </template>
+                <template x-if="sessions.length === 0">
+                    <div class="text-center py-8 text-slate-500 text-[11px]">
+                        Nenhuma conversa anterior
+                    </div>
+                </template>
+            </div>
+        </aside>
+
         <!-- Painel Esquerdo: Input de Pergunta & Resposta Final -->
-        <section class="w-1/2 flex flex-col border-r border-white/5 h-full relative">
+        <section class="flex-1 flex flex-col border-r border-white/5 h-full relative">
             <!-- Conversa Principal -->
             <div class="flex-1 overflow-y-auto p-6 custom-scrollbar flex flex-col gap-6" id="chat-messages">
                 <!-- Se estiver vazio, exibe tela de boas-vindas / sugestões -->
@@ -303,7 +403,7 @@
         </section>
 
         <!-- Painel Direito: Orquestração ReAct em Tempo Real -->
-        <section class="w-1/2 flex flex-col bg-slate-950/35 h-full overflow-hidden">
+        <section class="flex-1 flex flex-col bg-slate-950/35 h-full overflow-hidden">
             <!-- Header do painel -->
             <div class="px-6 py-4 border-b border-white/5 flex justify-between items-center shrink-0">
                 <div class="flex items-center gap-2">
@@ -452,12 +552,21 @@
             return {
                 inputQuestion: '',
                 isLoading: false,
-                sessionId: '',
+                sessionId: localStorage.getItem('agent_session_id') || '',
                 messages: [],
                 steps: [],
+                sessions: [],
+                showDeleteConfirm: false,
+                sessionToDelete: null,
 
                 init() {
                     window.Pusher = Pusher;
+                    
+                    this.loadSessions();
+                    
+                    if (this.sessionId) {
+                        this.loadHistory();
+                    }
                     
                     try {
                         // O CDN do Laravel Echo pode expor LaravelEcho ou Echo
@@ -478,6 +587,99 @@
                         }
                     } catch (e) {
                         console.error('Falha ao inicializar o Laravel Echo:', e);
+                    }
+                },
+
+                loadSessions() {
+                    fetch('/api/sessions')
+                        .then(res => res.json())
+                        .then(data => {
+                            this.sessions = data.sessions || [];
+                        })
+                        .catch(err => console.error('Erro ao carregar sessões:', err));
+                },
+
+                loadHistory() {
+                    this.messages = [];
+                    this.steps = [];
+                    if (!this.sessionId) return;
+                    fetch('/api/history/' + this.sessionId)
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.messages && data.messages.length > 0) {
+                                data.messages.forEach(msg => {
+                                    this.messages.push({
+                                        type: 'user',
+                                        content: msg.question
+                                    });
+                                    this.messages.push({
+                                        type: 'agent',
+                                        content: msg.response,
+                                        sql: msg.sql_used
+                                    });
+                                });
+                                this.$nextTick(() => {
+                                    this.scrollToBottom('chat-messages');
+                                });
+                            }
+                        })
+                        .catch(err => console.error('Erro ao carregar histórico:', err));
+                },
+
+                selectSession(sessionId) {
+                    if (this.sessionId === sessionId) return;
+                    this.sessionId = sessionId;
+                    localStorage.setItem('agent_session_id', sessionId);
+                    this.loadHistory();
+                },
+
+                startNewChat() {
+                    this.sessionId = 'session_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                    localStorage.setItem('agent_session_id', this.sessionId);
+                    this.messages = [];
+                    this.steps = [];
+                },
+
+                clearSession(targetSessionId = null) {
+                    const sid = targetSessionId || this.sessionId;
+                    if (!sid) return;
+                    this.sessionToDelete = sid;
+                    this.showDeleteConfirm = true;
+                },
+
+                confirmDeleteSession() {
+                    const sid = this.sessionToDelete;
+                    if (!sid) return;
+                    this.showDeleteConfirm = false;
+
+                    fetch('/api/history/' + sid, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }).then(() => {
+                        if (sid === this.sessionId) {
+                            this.sessionId = '';
+                            this.messages = [];
+                            this.steps = [];
+                            localStorage.removeItem('agent_session_id');
+                        }
+                        this.sessionToDelete = null;
+                        this.loadSessions();
+                    });
+                },
+
+                formatDate(dateStr) {
+                    if (!dateStr) return '';
+                    try {
+                        const date = new Date(dateStr);
+                        const day = String(date.getDate()).padStart(2, '0');
+                        const month = String(date.getMonth() + 1).padStart(2, '0');
+                        const hours = String(date.getHours()).padStart(2, '0');
+                        const minutes = String(date.getMinutes()).padStart(2, '0');
+                        return `${day}/${month} ${hours}:${minutes}`;
+                    } catch (e) {
+                        return dateStr;
                     }
                 },
 
@@ -554,8 +756,11 @@
 
                     // Reinicia estado de sessão e passos
                     this.isLoading = true;
-                    // Gera um UUID único para a sessão
-                    this.sessionId = 'session_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                    // Gera um UUID único para a sessão se nao existir
+                    if (!this.sessionId) {
+                        this.sessionId = 'session_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                        localStorage.setItem('agent_session_id', this.sessionId);
+                    }
                     this.steps = [];
                     
                     // Adiciona pergunta do usuário ao chat
@@ -646,6 +851,7 @@
                             tableData: tableData,
                             sql: executedSql
                         });
+                        this.loadSessions();
                     })
                     .catch(error => {
                         console.error('Erro ao chamar o agente:', error);
