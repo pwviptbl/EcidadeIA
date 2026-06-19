@@ -9,7 +9,7 @@ cd "/home/dbseller/Modelos/MVP/mcp"
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -r requirements.txt
-python server.py
+python3 server.py
 ```
 
 Por padrao o transporte e `stdio`, ideal para Claude Desktop, Gemini CLI, Codex e outros agentes locais.
@@ -17,7 +17,7 @@ Por padrao o transporte e `stdio`, ideal para Claude Desktop, Gemini CLI, Codex 
 Para teste HTTP interno:
 
 ```bash
-MCP_TRANSPORT=streamable-http MCP_HOST=127.0.0.1 MCP_PORT=8010 python server.py
+MCP_TRANSPORT=streamable-http MCP_HOST=127.0.0.1 MCP_PORT=8010 python3 server.py
 ```
 
 Endpoint:
