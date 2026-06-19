@@ -4,13 +4,15 @@ Mapeia as regras de negócio para cálculo, lançamento, arrecadação e inadimp
 
 ---
 
-### Conceitos & Relacionamentos Base
+### Conceitos & Relacionamentos Base (REGRAS DE NEGÓCIO)
 - **Cálculo de IPTU:** `cadastro.iptubase -> cadastro.iptunump -> cadastro.iptucalv -> cadastro.iptucalh`
 - **Valores Lançados (Calculado):** `cadastro.iptucalv.j21_valor` (imposto total originalmente calculado).
 - **Valores Efetivamente Pagos:** `caixa.arrepaga.k00_valor` (juntando via `iptunump.j20_numpre = arrepaga.k00_numpre`).
-- **Valores em Aberto (Inadimplente):** `caixa.arrecad.k00_valor`.
+- **Valores em Aberto (Inadimplência / Débitos / Não Pagos):** `caixa.arrecad.k00_valor`. Para achar inadimplentes, você **deve cruzar** o IPTU com a tabela `caixa.arrecad` usando `iptunump.j20_numpre = arrecad.k00_numpre`. A tabela `arrecad` só guarda as parcelas que **não foram pagas** (em aberto).
 
 > [!IMPORTANT]
+> **Regra de Ouro para Inadimplência:** Sempre que a pergunta envolver "inadimplência", "não pagos", ou "débitos", NÃO USE a tabela de cálculo (`iptucalv`) para somar valores. Você OBRIGATORIAMENTE deve usar a tabela `caixa.arrecad` cruzando com `cadastro.iptunump`.
+>
 > **Prevenção do Efeito Multiplicador:** Nunca faça JOIN direto entre tabelas agregadas de parcelas (`caixa.arrecad`/`caixa.arrepaga`) e tabelas de cálculo (`cadastro.iptucalv`) sem usar subconsultas ou CTEs separadas. Caso contrário, os valores se multiplicarão devido ao número de parcelas.
 
 ---
