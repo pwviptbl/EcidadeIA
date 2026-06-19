@@ -39,6 +39,11 @@ if [ ! -d "node_modules" ]; then
     ./vendor/bin/sail npm install
 fi
 
+echo -e "\n${BLUE}=== 2.1 Iniciando Laravel Reverb (Websockets) ===${NC}"
+nohup ./vendor/bin/sail artisan reverb:start --host=0.0.0.0 --port=8090 > reverb.log 2>&1 &
+REVERB_PID=$!
+echo -e "${GREEN}✔ Laravel Reverb iniciado em background. Logs em AgenteV3/reverb.log${NC}"
+
 echo -e "\n${BLUE}=== 3. Iniciando Queue Worker ===${NC}"
 nohup ./vendor/bin/sail artisan queue:work > queue_worker.log 2>&1 &
 QUEUE_PID=$!
