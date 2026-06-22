@@ -97,3 +97,93 @@
 - Em bases migradas, bairros antigos podem ter sido consolidados, renomeados ou mantidos por compatibilidade.
 - Antes de comparar bairros entre municípios ou bases diferentes, validar se os códigos são locais e não padronizados nacionalmente.
 - Para consultas assistidas por IA, não assumir relacionamento com uma tabela apenas porque existe campo com nome parecido; validar FK, documentação ou regra do módulo.
+
+---
+
+## Consultas extraídas de `db_bairro_classe.php`
+
+- **Fonte:** `/var/www/html/e-cidade-php74/classes/db_bairro_classe.php`
+- **Classe:** `cl_bairro`
+- **Tabela principal:** `cadastro.bairro`
+- **Campos físicos:** `j13_codi`, `j13_descr`, `j13_codant`, `j13_rural`
+
+### Leitura direta: `sql_query` e `sql_query_file`
+
+- **Objetivo:** Consultar o cadastro físico de bairros.
+- **Filtro padrão:** `bairro.j13_codi = :codigo_bairro`, quando o código é informado e não há `$dbwhere`.
+- **Campos e ordenação:** São recebidos dinamicamente e separados por `#`.
+- **Diferença entre métodos:** Nesta versão da classe, `sql_query` e `sql_query_file` montam a mesma estrutura.
+- **Grão:** Uma linha por bairro cadastrado.
+
+```sql
+SELECT /* campos dinâmicos */
+FROM bairro
+WHERE bairro.j13_codi = :codigo_bairro
+ORDER BY /* ordenação dinâmica */;
+```
+
+### Bairro vinculado ao logradouro: `sql_getBairroByCodRua`
+
+- **Objetivo:** Retornar os bairros associados a um código de rua/logradouro.
+- **Tabelas:** `ruasbairro`, `ruas`, `bairro`.
+- **Junções:**
+  - `ruas.j14_codigo = ruasbairro.j16_lograd`
+  - `bairro.j13_codi = ruasbairro.j16_bairro`
+- **Filtro:** `ruas.j14_codigo = :codigo_rua`.
+- **Campos retornados:** Todos os campos de `bairro`.
+- **Grão:** Uma linha por vínculo entre a rua e um bairro.
+- **Regra comprovada:** O bairro do logradouro é obtido pela tabela associativa `ruasbairro`; não existe vínculo direto entre `ruas` e `bairro` nesta consulta.
+- **Cuidados:**
+  - Uma rua pode estar vinculada a mais de um bairro e gerar várias linhas.
+  - Não usar o primeiro resultado como bairro único sem validar a quantidade retornada.
+  - Para contar bairros de uma rua, usar `COUNT(DISTINCT bairro.j13_codi)`.
+
+```sql
+SELECT bairro.*
+FROM ruasbairro
+JOIN ruas
+  ON ruas.j14_codigo = ruasbairro.j16_lograd
+JOIN bairro
+  ON bairro.j13_codi = ruasbairro.j16_bairro
+WHERE ruas.j14_codigo = :codigo_rua;
+```
+
+### Código de bairro por faixa de CEP: `sql_buscaBairroPorCep`
+
+- **Objetivo:** Localizar faixas de CEP que contenham o CEP informado.
+- **Tabela:** `cepbairrosfaixa`.
+- **Campos retornados:** `cp02_codbairro`, `cp02_faixa`, `cp02_cepinicial`, `cp02_cepfinal`.
+- **Filtro de faixa:**
+  - `cp02_cepinicial::int <= :cep::int`
+  - `cp02_cepfinal::int >= :cep::int`
+- **Grão:** Uma linha por faixa de CEP compatível.
+- **Regra comprovada:** O CEP pertence à faixa quando está numericamente entre o CEP inicial e o CEP final, inclusive.
+- **Uso observado:** O importador MEI tenta usar esta consulta antes de procurar o bairro por código informado ou por nome.
+- **Cuidados:**
+  - A consulta não faz `JOIN` com `bairro` e não retorna `j13_codi` ou `j13_descr`.
+  - `cp02_codbairro` é o código indicado pela faixa, mas o vínculo com `bairro.j13_codi` não é validado neste método.
+  - O consumidor em `model/meiArquivo.model.php` verifica posteriormente `j13_codi`, embora esta SQL retorne `cp02_codbairro`. Não depender desse campo sem alias ou conversão explícita.
+  - Faixas sobrepostas podem retornar mais de uma linha para o mesmo CEP.
+  - A consulta não possui `ORDER BY`; não há prioridade definida entre faixas coincidentes.
+  - Os CEPs são convertidos de texto para inteiro. Formatação, caracteres não numéricos ou valores fora do intervalo aceito pelo tipo podem causar erro.
+  - A conversão numérica elimina zeros à esquerda. Para comparações textuais ou preservação do formato, esta consulta não é adequada.
+
+```sql
+SELECT
+  cp02_codbairro,
+  cp02_faixa,
+  cp02_cepinicial,
+  cp02_cepfinal
+FROM cepbairrosfaixa
+WHERE cp02_cepinicial::int <= :cep::int
+  AND cp02_cepfinal::int >= :cep::int;
+```
+
+### Estratégia segura para identificar bairro
+
+1. Quando existir código de rua confiável, consultar `ruasbairro` por `sql_getBairroByCodRua`.
+2. Se o resultado possuir exatamente um bairro, usar `bairro.j13_codi`.
+3. Se houver múltiplos bairros para a rua, exigir outro critério de desambiguação.
+4. Para CEP, tratar `cepbairrosfaixa.cp02_codbairro` como candidato e validar sua existência em `bairro`.
+5. Se a faixa de CEP não for única, não escolher arbitrariamente a primeira linha.
+6. Como fallback por nome, comparar `TRIM(j13_descr)` ou busca tolerante, mas validar duplicidades.
