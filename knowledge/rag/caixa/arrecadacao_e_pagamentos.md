@@ -572,6 +572,179 @@ Interpretacao segura:
 
 ---
 
+### Conceito: debito_aberto_arrecad
+
+- **Descricao:** Estado corrente do debito em aberto no caixa, por numero de arrecadacao, parcela, receita e tipo.
+- **Fonte:** `/var/www/html/e-cidade-php74/classes/db_arrecad_classe.php`
+- **Tabelas:** `caixa.arrecad`, `caixa.arreinstit`, `protocolo.cgm`, `arrecadacao.histcalc`, `configuracao.tabrec`, `caixa.arretipo`, `configuracao.tabrecjm`, `caixa.cadtipo`
+- **Chave pratica observada:** `k00_numpre`, `k00_numpar`, `k00_receit`
+- **Grao base:** Uma linha por componente financeiro em aberto de um `numpre`, normalmente separado por parcela e receita.
+
+`arrecad` e a tabela principal do saldo devedor corrente. Cada linha representa um componente financeiro ainda aberto, com valor em `k00_valor`, vencimento em `k00_dtvenc`, historico de calculo em `k00_hist`, receita em `k00_receit` e classificacao do debito em `k00_tipo`.
+
+- um mesmo `numpre` pode ter varias parcelas em `k00_numpar`;
+- uma mesma parcela pode ter varias receitas;
+- o campo `k00_numcgm` guarda um CGM principal da linha, mas outros CGMs relacionados podem existir em `arrenumcgm`.
+
+#### Consulta: `sql_query`
+
+- **Objetivo:** Montar a visao mais completa do debito em aberto com instituicao, contribuinte principal, historico, receita, tipo e grupo.
+- **Tabelas:** `arrecad`, `arreinstit`, `cgm`, `histcalc`, `tabrec`, `arretipo`, `tabrecjm`, `cadtipo`
+- **Grau do resultado:** Uma linha por linha existente em `arrecad`, desde que o `numpre` esteja vinculado em `arreinstit`.
+- **Parametros dinamicos:** `:campos`, `:ordem`, `:dbwhere`, `:oid`
+- **Juncoes:**
+  - `arreinstit.k00_numpre = arrecad.k00_numpre`
+  - `cgm.z01_numcgm = arrecad.k00_numcgm`
+  - `histcalc.k01_codigo = arrecad.k00_hist`
+  - `tabrec.k02_codigo = arrecad.k00_receit`
+  - `arretipo.k00_tipo = arrecad.k00_tipo`
+  - `tabrecjm.k02_codjm = tabrec.k02_codjm`
+  - `cadtipo.k03_tipo = arretipo.k03_tipo`
+- **Filtros e regras:**
+  - Quando `dbwhere` nao e informado, o metodo so filtra por `arrecad.oid` se `oid` vier preenchido.
+  - O join com `arreinstit` mostra que o debito pertence ao caixa de uma instituicao, mas o filtro da instituicao precisa ser passado em `dbwhere`.
+- **Cuidados:**
+  - O metodo nao aplica `distinct`; qualquer duplicidade em joins auxiliares impacta a contagem final.
+  - Como o join com `arreinstit` usa apenas `k00_numpre`, trate o `numpre` como cabecalho institucional e a linha de `arrecad` como detalhe financeiro.
+
+#### Consulta: `sql_query_div`
+
+- **Objetivo:** Relacionar debitos em aberto com registros ja presentes em `divida`.
+- **Tabelas:** `arrecad`, `arreinstit`, `divida`, `arretipo`, `cadtipo`
+- **Juncoes:**
+  - `arreinstit.k00_numpre = arrecad.k00_numpre`
+  - `arrecad.k00_numpre = divida.v01_numpre`
+  - `arrecad.k00_numpar = divida.v01_numpar`
+  - `arretipo.k00_tipo = arrecad.k00_tipo`
+  - `cadtipo.k03_tipo = arretipo.k03_tipo`
+- **Regra:** A linha so aparece quando a mesma parcela continua aberta em `arrecad` e tambem existe em `divida`.
+- **Cuidados:** O metodo nao usa `k00_receit` na ligacao com `divida`; se uma parcela tiver mais de uma receita em `arrecad`, o join continua no grao do detalhe financeiro da arrecadacao.
+
+#### Consulta: `sql_query_info`
+
+- **Objetivo:** Expor o debito em aberto junto com possiveis vinculos de CGM adicional, inscricao mobiliaria e matricula.
+- **Tabelas:** `arrecad`, `arreinstit`, `arretipo`, `cadtipo`, `arrenumcgm`, `arreinscr`, `arrematric`
+- **Juncoes:**
+  - `arreinstit.k00_numpre = arrecad.k00_numpre`
+  - `arretipo.k00_tipo = arrecad.k00_tipo`
+  - `cadtipo.k03_tipo = arretipo.k03_tipo`
+  - `arrenumcgm.k00_numpre = arrecad.k00_numpre`
+  - `arreinscr.k00_numpre = arrecad.k00_numpre`
+  - `arrematric.k00_numpre = arrecad.k00_numpre`
+- **Regra:** Os vinculos complementares entram por `left join`, portanto podem nao existir.
+- **Cuidados:**
+  - Esse metodo e propenso a multiplicacao de linhas quando o mesmo `numpre` tiver mais de um CGM, mais de uma inscricao ou mais de uma matricula.
+  - Nao some `k00_valor` diretamente apos esse join sem normalizar a entidade contada.
+
+#### Consulta: `sql_query_arrecad`
+
+- **Objetivo:** Retornar o debito aberto com classificacao fiscal, sem trazer historico, receita ou contribuinte.
+- **Tabelas:** `arrecad`, `arreinstit`, `arretipo`, `cadtipo`
+- **Uso pratico:** Base enxuta para listar debitos em aberto por tipo ou grupo, quando nao for necessario detalhar `tabrec`, `histcalc` ou `cgm`.
+
+#### Consulta: `sql_query_file` e `sql_query_file_instit`
+
+- **Objetivo:** Recuperar linhas de `arrecad` com pouca ou nenhuma expansao de joins.
+- **Regra:**
+  - `sql_query_file` consulta somente `arrecad`.
+  - `sql_query_file_instit` acrescenta `arreinstit`.
+- **Cuidados:** Sao consultas mais seguras para auditoria de chaves e confronto de totais, porque reduzem o risco de multiplicacao por joins auxiliares.
+
+#### Consulta: `sql_query_buscaDesconto`
+
+- **Objetivo:** Listar descontos do `numpre` atual, tanto os ainda abertos quanto os ja movidos para historico anterior.
+- **Tabelas:** `arrecad`, `arrecant`, `arrepaga`, `tabrec`, `arreinstit`
+- **Filtros e regras:**
+  - Considera somente linhas com `k00_hist = 918`.
+  - Restringe o resultado a `arreinstit.k00_instit = db_getsession("DB_instit")`.
+  - Une dois estados:
+    - `tipo = 'a'`: desconto ainda em `arrecad`, com `k00_dtpaga = null`;
+    - `tipo = 'r'`: desconto ja saiu de `arrecad`, esta em `arrecant`, e continua sem pagamento em `arrepaga`.
+- **Campos relevantes:**
+  - `abs(k00_valor)` normaliza o valor do desconto para exibicao positiva.
+  - `k00_numpar` preserva a parcela.
+- **Cuidados:** O `left join` em `arrepaga` amarra por `numpre + numpar`, nao por `receita`; se houver mais de uma linha de pagamento para a mesma parcela, trate a cardinalidade com cautela.
+
+#### Consulta: `sql_query_getReceitasTipo`
+
+- **Objetivo:** Listar receitas em aberto associadas a um tipo especifico de debito ou grupo fiscal.
+- **Tabelas:** `arrecad`, `tabrec`, `arretipo`, `cadtipo`, `arreinstit`, `arrepaga`, `arrecant`, `arreold`, `arresusp`
+- **Parametros:** `:codigoTipo`, `:cadtipo`
+- **Filtros e regras:**
+  - Quando `cadtipo = true`, o filtro usa `cadtipo.k03_tipo`.
+  - Quando `cadtipo = false`, o filtro usa `arrecad.k00_tipo`.
+  - Sempre restringe `arreinstit.k00_instit` para a instituicao logada.
+  - No modo `cadtipo = true`, a receita so entra se nao existir para o mesmo `numpre + receita` em `arrepaga`, `arrecant`, `arreold` ou `arresusp`.
+- **Regra de negocio:** No uso por grupo fiscal, o metodo tenta devolver apenas receitas ainda efetivamente em aberto e nao deslocadas para pago, historico anterior, historico de origem ou suspensao.
+- **Cuidados:** O `not exists` ignora parcela; o bloqueio acontece por `numpre + receita`.
+
+#### Consulta: `sql_query_getReceitasTipoVinculo`
+
+- **Objetivo:** Listar receitas em aberto de um tipo e informar o procedimento de `diversos/procdiver` associado ao `numpre`.
+- **Tabelas:** `arrecad`, `diversos`, `procdiver`, `proced`, `tabrec`, `arretipo`, `cadtipo`, `arreinstit`, `arrepaga`, `arrecant`, `arreold`, `arresusp`
+- **Juncoes adicionais:**
+  - `diversos.dv05_numpre = arrecad.k00_numpre`
+  - `procdiver.dv09_procdiver = diversos.dv05_procdiver`
+  - `proced.v03_codigo = procdiver.dv09_proced`
+- **Regra:** Repete a mesma logica de exclusao de estados de `sql_query_getReceitasTipo`, mas acrescenta o contexto do procedimento administrativo.
+
+#### Consulta: `sqlDebitosPorTipoContribuinte`
+
+- **Objetivo:** Listar debitos em aberto por origem do contribuinte pesquisado.
+- **Tipos aceitos:** `1 = CGM`, `2 = matricula`, `3 = inscricao`, `4 = auto de infracao`, `5 = notificacao de lancamento`
+- **Juncoes fixas:**
+  - `arreinstit.k00_numpre = arrecad.k00_numpre`
+  - `arretipo.k00_tipo = arrecad.k00_tipo`
+  - `cadtipo.k03_tipo = arretipo.k03_tipo`
+  - `issvar.q05_numpre = arrecad.k00_numpre`
+  - `issvar.q05_numpar = arrecad.k00_numpar`
+- **Juncoes variaveis por tipo:**
+  - CGM: `arrenumcgm.k00_numpre = arrecad.k00_numpre`
+  - Matricula: `arrematric.k00_numpre = arrecad.k00_numpre`
+  - Inscricao: `arreinscr.k00_numpre = arrecad.k00_numpre`
+  - Auto: `arreauto.k00_numpre = arrecad.k00_numpre`
+  - Notificacao: `arrelanc.k00_numpre = arrecad.k00_numpre`
+- **Regra de valor:**
+  - Para `cadtipo.k03_tipo = 3`, a linha tambem pode ser aceita quando `issvar.q05_vlrinf > 0` ou `issvar.q05_valor > 0`, mesmo que a regra de valor nao dependa apenas de `arrecad.k00_valor`.
+  - Nos demais casos, a linha precisa ter `arrecad.k00_valor > 0`.
+- **Cuidados:** O metodo sempre injeta o filtro da instituicao logada em `arreinstit`; consultas interinstitucionais precisam de outra base.
+
+#### Consulta: `sqlTiposDebitosGeral`
+
+- **Objetivo:** Retornar tipos de debito do exercicio no contexto da instituicao logada.
+- **Tabelas:** `arrecad`, `arretipo`, `cadtipo`, `issvar`
+- **Regra:** Reaplica a mesma validacao de valor de `sqlDebitosPorTipoContribuinte`, mas sem exigir um contribuinte especifico.
+- **Cuidado importante:** O metodo filtra `k00_instit = db_getsession("DB_instit")` no `where`, mas o SQL montado nao faz join com `arreinstit`. Como `k00_instit` nao pertence a `arrecad`, a consulta depende de contexto externo ou esta inconsistente na forma atual da classe.
+
+#### Regras operacionais observadas na classe
+
+- `excluir_arrecad($numpre, $numpar, $excluir_arrecad, $receit)` copia linhas de `arrecad` para `arreold` antes da exclusao, preservando o historico do debito que saiu do saldo aberto.
+- `excluir_arrecad_inc_arrecant($numpre, $numpar, $excluir_arrecad)` copia linhas de `arrecad` para `arrecant` antes da exclusao, preservando um estado anterior do debito.
+- O loop dessas rotinas le o primeiro registro encontrado e repete o `insert` pelo numero de linhas retornadas; isso indica intencao de copiar varias linhas, mas a implementacao observada reutiliza sempre os valores da primeira linha do `select`.
+- `alterar_tipo($tipo, $where)` permite reclassificar o tipo do debito sem alterar os demais campos da linha.
+
+#### Consulta: `sql_busca_custas`
+
+- **Objetivo:** Somar custas e honorarios de termo em qualquer estado do debito.
+- **Tabelas:** `arrecad`, `arrecant`, `arreold`, `taxa`
+- **Filtros e regras:**
+  - Busca somente `k00_hist in (11303, 11304)`.
+  - Usa `k00_receit = taxa.ar36_receita`.
+  - Quando `lAgrupaPorParcela = true`, retorna `parcela` e `valor`.
+  - Quando `lAgrupaPorParcela = false`, retorna `custa_honorario`, `descricao` e `valor`.
+- **Regra de negocio:** Custas de termo podem estar no debito aberto, no historico anterior ou no historico de origem; por isso a apuracao precisa unir os tres estados.
+
+#### Cuidados para consultas do agente
+
+- Para saldo atual em aberto, a referencia primaria e `arrecad`; `arreold` e `arrecant` sao historicos e `arrepaga` e quitacao.
+- Ao juntar `arrecad` com tabelas de vinculo por `k00_numpre`, confirme se a pergunta exige contar `numpre`, parcela ou componente financeiro.
+- Filtros por instituicao geralmente entram por `arreinstit`, nao por coluna interna de `arrecad`.
+- Receitas em aberto por tipo usam exclusao por existencia em outros estados; isso e mais forte do que apenas verificar se a linha ainda existe em `arrecad`.
+
+---
+
+---
+
 ### Conceito: tipo_e_grupo_debito
 - **Descrição:** Classificação dos débitos por tipo específico (arretipo) e grupo geral (cadtipo).
 - **Tabelas:** `caixa.arrecad`, `caixa.arrepaga`, `caixa.arretipo`, `caixa.cadtipo`
