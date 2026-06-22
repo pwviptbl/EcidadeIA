@@ -1,0 +1,4 @@
+interface:
+  display_name: "Extrair e-Cidade"
+  short_description: "Extrai SQL e regras de negocio do e-Cidade"
+  default_prompt: "Use $extrair-ecidade para analisar uma classe PHP do e-Cidade e documentar as consultas e regras relevantes em knowledge/rag."
