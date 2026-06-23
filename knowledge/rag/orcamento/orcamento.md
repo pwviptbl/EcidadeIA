@@ -14,8 +14,26 @@ A dotação orçamentária (`orcdotacao`) é a autorização de despesa pública
 - **Órgão e Unidade:** `orcamento.orcorgao` e `orcamento.orcunidade`
   - `orcdotacao.o58_orgao = orcorgao.o40_orgao` E `orcdotacao.o58_anousu = orcorgao.o40_anousu`
   - `orcdotacao.o58_unidade = orcunidade.o41_unidade` E `orcdotacao.o58_orgao = orcunidade.o41_orgao` E `orcdotacao.o58_anousu = orcunidade.o41_anousu`
+- **Órgão orçamentário:** `orcamento.orcorgao`
+  - `o40_anousu`: exercício do órgão.
+  - `o40_orgao`: código do órgão no exercício.
+  - `o40_codtri`: código tribunal.
+  - `o40_descr`: descrição do órgão.
+  - `o40_instit`: instituição.
+  - `o40_finali`: finalidade do órgão.
+  - `o40_datacriacao`: data de criação.
 - **Elemento de Despesa:** `orcamento.orcelemento`
   - `orcdotacao.o58_codele = orcelemento.o56_codele` E `orcdotacao.o58_anousu = orcelemento.o56_anousu`
+- **Unidade orçamentária:** `orcamento.orcunidade`
+  - `o41_anousu`: exercício da unidade.
+  - `o41_orgao`: órgão ao qual a unidade pertence.
+  - `o41_unidade`: código da unidade no órgão/exercício.
+  - `o41_codtri`: código tribunal.
+  - `o41_descr`: descrição da unidade.
+  - `o41_instit`: instituição.
+  - `o41_nometribunal`: nome da unidade no tribunal.
+  - `o41_codigotribunalxml`: código XML para arquivos do tribunal.
+  - `o41_datacriacao`: data de criação.
 
 ---
 
@@ -158,3 +176,130 @@ ORDER BY valor_total_orcado DESC;
 - Para total de despesa fixada, a base mais segura continua sendo `orcdotacao` puro ou `sql_query_file`.
 - Quando a pergunta exigir fonte de recurso válida no exercício, prefira receitas baseadas em `sql_query2` ou `sql_recurso`, não apenas `sql_query`.
 - Consultas com autorização (`sql_query_autoriza`) e plano de despesa (`sql_dotacao_planodespesa`) alteram bastante a cardinalidade; não some `o58_valor` sem deduplicar a dotação.
+
+---
+
+### Consultas extraídas de `db_orcorgao_classe.php`
+
+#### Consulta: `sql_query`
+
+- **Fonte:** `/var/www/html/e-cidade-php74/classes/db_orcorgao_classe.php`
+- **Objetivo:** Ler o órgão orçamentário com filtro por exercício e código do órgão, mantendo o vínculo com a instituição da sessão/registro.
+- **Tabelas:** `orcorgao`, `db_config`
+- **Grau do resultado:** Uma linha por órgão cadastrado no exercício.
+- **Parâmetros:** `:o40_anousu`, `:o40_orgao`, `:campos`, `:ordem`, `:dbwhere`
+- **Junções:**
+  - `db_config.codigo = orcorgao.o40_instit`
+- **Filtros e regras:**
+  - Sem `dbwhere`, o método filtra por `o40_anousu` e/ou `o40_orgao`.
+  - A instituição não entra como filtro obrigatório no método; ela é apenas validada pelo join com `db_config`.
+- **Cuidados:**
+  - Este método é o mais neutro para lookup do órgão.
+  - Não use como base de relacionamento com departamento ou dotação, porque ele não expande esses vínculos.
+
+#### Consulta: `sql_query_file`
+
+- **Objetivo:** Ler somente `orcorgao`.
+- **Uso prático:** Auditoria de chaves e base mais segura para pesquisas simples.
+
+#### Consulta: `sql_query_razao`
+
+- **Objetivo:** Listar órgão com suas dotações e os lançamentos contábeis associados à dotação.
+- **Tabelas:** `orcorgao`, `db_config`, `orcdotacao`, `conlancamdot`
+- **Grau do resultado:** Uma linha por combinação de órgão, dotação e lançamento contábil relacionado.
+- **Junções:**
+  - `db_config.codigo = orcorgao.o40_instit`
+  - `orcdotacao.(o58_orgao, o58_anousu) = (orcorgao.o40_orgao, orcorgao.o40_anousu)`
+  - `conlancamdot.(c73_coddot, c73_anousu) = (orcdotacao.o58_coddot, orcdotacao.o58_anousu)`
+- **Regra de negócio:** o órgão só aparece se existir dotação vinculada e, para essa dotação, ao menos um lançamento em `conlancamdot`.
+- **Evidência adicional:** o consumidor `func_orcorgao_razao.php` usa essa consulta para pesquisa por código e descrição do órgão.
+- **Cuidados:**
+  - `conlancamdot` pode multiplicar linhas para uma mesma dotação.
+  - Os consumidores normalmente filtram `o40_anousu` e `o40_instit` em `dbwhere`; sem isso, o método não limita a instituição por conta própria.
+
+#### Consulta: `sql_query_orgao`
+
+- **Objetivo:** Listar departamentos vinculados a um órgão orçamentário.
+- **Tabelas:** `orcorgao`, `db_departorg`, `db_depart`
+- **Grau do resultado:** Uma linha por combinação de órgão e departamento associado.
+- **Junções:**
+  - `db_departorg.db01_orgao = orcorgao.o40_orgao`
+  - `db_departorg.db01_coddepto = db_depart.coddepto`
+- **Regra observada:** a classe não junta `db_departorg.db01_anousu` com `orcorgao.o40_anousu`, então o vínculo por exercício fica dependente do `dbwhere` do consumidor.
+- **Evidência adicional:** a tela de seleção de órgãos e o fluxo de departamentos usam essa consulta para escolher o órgão do departamento.
+- **Cuidados:**
+  - Este método pode retornar mais de uma linha por órgão se houver vários departamentos associados.
+  - Compare com a rotina `get_orgao` de `configuracao/departamentos.md`, que filtra exercício de forma mais explícita.
+
+#### Consulta: `sql_query_dotacao`
+
+- **Objetivo:** Listar dotações de um órgão no exercício.
+- **Tabelas:** `orcorgao`, `db_config`, `orcdotacao`
+- **Grau do resultado:** Uma linha por dotação vinculada ao órgão.
+- **Junções:**
+  - `db_config.codigo = orcorgao.o40_instit`
+  - `orcdotacao.(o58_anousu, o58_orgao) = (orcorgao.o40_anousu, orcorgao.o40_orgao)`
+- **Regra de negócio:** esta é a consulta inversa do vínculo que aparece em `db_orcdotacao_classe.php`; ela parte do órgão para alcançar as dotações.
+- **Cuidados:**
+  - Como o join é apenas por órgão e exercício, várias dotações retornam múltiplas linhas para o mesmo órgão.
+  - Use `distinct` ou agregação por `o40_orgao/o40_anousu` se a pergunta for sobre órgão, não sobre dotação.
+
+---
+
+### Consultas extraídas de `db_orcunidade_classe.php`
+
+#### Consulta: `sql_query`
+
+- **Fonte:** `/var/www/html/e-cidade-php74/classes/db_orcunidade_classe.php`
+- **Objetivo:** Ler a unidade orçamentária com seu órgão e instituição.
+- **Tabelas:** `orcunidade`, `db_config`, `orcorgao`, `cgm`
+- **Grau do resultado:** Uma linha por unidade orçamentária cadastrada no exercício.
+- **Parâmetros:** `:o41_anousu`, `:o41_orgao`, `:o41_unidade`, `:campos`, `:ordem`, `:dbwhere`
+- **Junções:**
+  - `db_config.codigo = orcunidade.o41_instit`
+  - `orcorgao.(o40_anousu, o40_orgao) = (orcunidade.o41_anousu, orcunidade.o41_orgao)`
+  - `cgm.z01_numcgm = db_config.numcgm`
+- **Filtros e regras:**
+  - Sem `dbwhere`, o método filtra por exercício, órgão e/ou unidade.
+  - A instituição é validada por `db_config`, mas não é filtrada automaticamente.
+- **Cuidados:** este é o lookup mais neutro da unidade; não traz dotação, lançamento ou autorização.
+
+#### Consulta: `sql_query_file`
+
+- **Objetivo:** Ler somente `orcunidade`.
+- **Uso prático:** Auditoria de chaves e base segura para reconstruir os joins manualmente.
+
+#### Consulta: `sql_query_razao`
+
+- **Objetivo pretendido:** Listar unidade, dotação e empenho vinculados à unidade no exercício.
+- **Tabelas:** `orcunidade`, `orcorgao`, `db_config`, `orcdotacao`, `empempenho`
+- **Junções pretendidas observadas:**
+  - `orcorgao.(o40_anousu, o40_orgao) = (orcunidade.o41_anousu, orcunidade.o41_orgao)`
+  - `db_config.codigo = orcorgao.o40_instit`
+  - `orcdotacao.o58_unidade = orcunidade.o41_unidade`
+  - `orcdotacao.o58_anousu = orcunidade.o41_anousu`
+  - `empempenho.(e60_anousu, e60_coddot) = (orcdotacao.o58_anousu, orcdotacao.o58_coddot)`
+- **Evidência adicional:** `func_orcunidade_razao.php` usa essa consulta para pesquisa de unidade por código e descrição.
+- **Cuidado importante:** a SQL da classe está truncada no join com `orcorgao` e termina em `orcorgao.o40_orgao = orcunidad`, o que indica consulta quebrada ou arquivo corrompido nessa versão. Não trate esta receita como confiável sem corrigir ou revalidar a classe usada em runtime.
+- **Cuidado adicional:** mesmo se corrigida, o join com `orcdotacao` não amarra `o58_orgao = o41_orgao`, então unidades com código repetido entre órgãos podem gerar associação indevida se o consumidor não filtrar corretamente.
+
+#### Consulta: `sql_query_unidades`
+
+- **Objetivo:** Relacionar unidades orçamentárias ao cadastro de pré-autorização por unidade.
+- **Tabelas:** `orcunidade`, `orcorgao`, `emppreautorizacaounidade`
+- **Grau do resultado:** Uma linha por unidade, com possível complemento do cadastro de pré-autorização.
+- **Junções:**
+  - `orcorgao.(o40_anousu, o40_orgao) = (orcunidade.o41_anousu, orcunidade.o41_orgao)`
+  - `emppreautorizacaounidade.exercicio = orcunidade.o41_anousu`
+  - `emppreautorizacaounidade.orgao_id = orcorgao.o40_orgao`
+  - `emppreautorizacaounidade.unidade_id = orcunidade.o41_unidade`
+- **Tipo de junção crítica:** `LEFT JOIN` em `emppreautorizacaounidade`.
+- **Regra de negócio:** a unidade continua aparecendo mesmo sem cadastro em `emppreautorizacaounidade`; o vínculo de pré-autorização é opcional.
+- **Evidência adicional:** `LiberacaoAutorizacaoUnidadeRepository.php` consome essa consulta para montar a liberação por unidade.
+
+#### Cuidados para consultas do agente
+
+- Quando a pergunta for sobre a unidade em si, conte por `(o41_anousu, o41_orgao, o41_unidade)`.
+- Para chegar à dotação da unidade, use também `o58_orgao = o41_orgao`, não apenas `o58_unidade` e `o58_anousu`.
+- Não assuma que toda unidade possui pré-autorização; `sql_query_unidades` preserva unidades sem esse cadastro.
+- Para reconstruir a pesquisa “razão” da unidade, revise a SQL real da instância antes de reutilizar a lógica, porque a versão lida da classe contém um join truncado.

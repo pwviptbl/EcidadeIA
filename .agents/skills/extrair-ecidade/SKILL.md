@@ -1,6 +1,9 @@
 ---
 name: extrair-ecidade
-description: Extrair consultas SQL e regras de negocio relevantes de arquivos PHP legados do e-Cidade e documenta-las em Markdown para o RAG do projeto. Usar quando o usuario informar uma classe, arquivo ou metodo do e-Cidade, como `classes/db_iptuconstr_classe.php` ou `sql_query_proprietario_nome`, e pedir para entender, registrar ou alimentar `knowledge/rag/*` com SQL, joins, filtros, parametros, cardinalidade, significado e cuidados de uso.
+description: Extrair consultas SQL e regras de negocio relevantes de arquivos PHP legados do e-Cidade e documenta-las em Markdown para o RAG do projeto. Usar quando o usuario informar uma classe, arquivo ou metodo do e-Cidade, como `classes/db_iptuConstr_classe.php` ou `sql_query_proprietario_nome`, e pedir para entender, registrar ou alimentar `knowledge/rag/*` com SQL, joins, filtros, parametros, cardinalidade, significado e cuidados de uso.
+
+O objetivo é ter informações suficientes para o agente poder usar o conhecimento para responder perguntas e tomar decisões. Para isso, as informações devem ser ricas para o agente entender a logica de negócio do sistema e como ele funciona com RAG.
+
 ---
 
 # Extrair e-Cidade
@@ -60,7 +63,7 @@ Analisar codigo PHP do e-Cidade manualmente e transformar consultas relevantes e
 
 Adaptar ao documento existente. Para uma nova receita, preferir:
 
-```markdown
+````markdown
 ### Consulta: `sql_query_exemplo`
 
 - **Fonte:** `/caminho/classes/db_exemplo_classe.php`
@@ -79,11 +82,13 @@ Adaptar ao documento existente. Para uma nova receita, preferir:
   ```sql
   SELECT ...
   ```
+````
 
 - **Cuidados:**
   - Fragmentos dinamicos, cardinalidade, nulos, historico ou risco de duplicacao.
 - **Evidencia adicional:** Chamada ou tela consumidora, quando consultada.
-```
+
+````
 
 Omitir secoes vazias. Se a SQL depender de fragmento arbitrario, representar explicitamente, por exemplo `/* campos dinamicos */`, e explicar o limite em **Cuidados**.
 
@@ -105,6 +110,6 @@ Pedido:
 ```text
 Use $extrair-ecidade em classes/db_iptuconstr_classe.php,
 metodo sql_query_proprietario_nome.
-```
+````
 
 Resultado esperado: localizar a classe correta, reconstruir a consulta do metodo, explicar o relacionamento entre construcao, matricula e proprietario, e atualizar `knowledge/rag/cadastro/iptuconstr.md` ou outro documento mais intuitivo caso a semantica encontrada seja mais ampla.

@@ -381,6 +381,106 @@ JOIN classificacaocredores
 WHERE /* filtros definidos pelo relatório */;
 ```
 
+### Ordem de pagamento: `db_pagordem_classe.php`
+
+- **Fonte:** `/var/www/html/e-cidade-php74/classes/db_pagordem_classe.php`
+- **Tabela central:** `pagordem`
+- **Chave primaria:** `e50_codord`
+- **Grão base:** Uma linha por ordem de pagamento; os joins com empenho, notas, movimento bancário e contabilidade podem multiplicar o resultado.
+
+`pagordem` é o cabeçalho da ordem de pagamento associada ao empenho. A classe mostra que ela conecta o empenho a usuários, itens de pagamento, movimento de caixa, documento contábil, forma de pagamento, cheques e, em algumas consultas, à receita/fonte e à reserva.
+
+#### Consulta: `sql_query`
+
+- **Objetivo:** Ler a ordem de pagamento com o empenho, o usuário criador, o credor e a dotação do empenho.
+- **Tabelas:** `pagordem`, `db_usuarios`, `empempenho`, `cgm`, `db_config`, `orcdotacao`, `pctipocompra`, `emptipo`, `concarpeculiar`
+- **Junções:**
+  - `db_usuarios.id_usuario = pagordem.e50_id_usuario`
+  - `empempenho.e60_numemp = pagordem.e50_numemp`
+  - `cgm.z01_numcgm = empempenho.e60_numcgm`
+  - `db_config.codigo = empempenho.e60_instit`
+  - `orcdotacao.(o58_anousu, o58_coddot) = (empempenho.e60_anousu, empempenho.e60_coddot)`
+  - `pctipocompra.pc50_codcom = empempenho.e60_codcom`
+  - `emptipo.e41_codtipo = empempenho.e60_codtipo`
+  - `concarpeculiar.c58_sequencial = empempenho.e60_concarpeculiar`
+- **Cuidados:** a ordem de pagamento não é independente do empenho; a maior parte do significado vem do cabeçalho do empenho vinculado.
+
+#### Consulta: `sql_query_file`
+
+- **Objetivo:** Ler somente `pagordem`.
+- **Uso prático:** base neutra para auditoria de chaves e filtro direto por ordem.
+
+#### Consulta: `sql_query_cheques`
+
+- **Objetivo:** Expor a ordem com itens, movimento bancário, configuração de pagamento e vínculos de cheque.
+- **Tabelas principais:** `pagordem`, `pagordemele`, `empempenho`, `cgm`, `db_config`, `orcdotacao`, `orctiporec`, `emptipo`, `empord`, `empagemov`, `empagemovforma`, `empage`, `corempagemov`, `empageconf`, `empageconfche`, `pagordemconta`, `empageconfgera`
+- **Regra de negócio:** a consulta trabalha no nível da ordem e de seus movimentos, permitindo rastrear o caminho até a forma de pagamento e a conta vinculada.
+- **Cuidados:** o parâmetro `$sJoin` permite extensões arbitrárias do SQL; não usar essa consulta como base “fixa” sem revisar o join extra.
+
+#### Consulta: `sql_query_emp`
+
+- **Objetivo:** Retornar a ordem com o empenho e o credor, com expansão opcional para `pagordemele`.
+- **Tabelas:** `pagordem`, `empempenho`, `cgm`, `pagordemele`
+- **Uso prático:** visão enxuta da ordem associada ao empenho, útil para telas e relatórios simples.
+
+#### Consulta: `sql_query_empagemovforma`
+
+- **Objetivo:** Relacionar ordem, movimento bancário, forma de pagamento, fonte de recurso e registros auxiliares de caixa.
+- **Tabelas principais:** `empage`, `empagemov`, `empord`, `pagordem`, `pagordemele`, `empempenho`, `cgm`, `db_config`, `orcdotacao`, `orctiporec`, `fonterecurso`, `emptipo`, `empresto`, `empageconcarpeculiar`, `corempagemov`, `empagemovconta`, `empageconf`, `empageconfche`, `pagordemconta`, `empagemovforma`, `empagepag`, `empagetipo`, `pagordemnota`, `empnota`, `corgrupocorrente`
+- **Regra comprovada:** a ordem é resolvida a partir do movimento bancário (`empord -> pagordem`), não apenas do cabeçalho da ordem.
+- **Cuidados:** essa é uma das consultas com maior cardinalidade, porque junta ordem, movimento, forma, nota, conta e corrente.
+
+#### Consulta: `sql_query_impconsulta`
+
+- **Objetivo:** Consultar a ordem com empenho, itens do empenho, material, credor, dotação e tipo de compra.
+- **Tabelas:** `pagordem`, `empempenho`, `empempitem`, `pcmater`, `cgm`, `orcdotacao`, `pctipocompra`
+- **Regra:** o item do empenho entra por `empempitem.e62_numemp = empempenho.e60_numemp`.
+
+#### Consulta: `sql_query_notaliquidacao`
+
+- **Objetivo:** Retornar a ordem e sua nota de liquidação com parâmetros posicionais.
+- **Tabelas:** `pagordem`, `db_usuarios`, `empempenho`, `cgm`, `db_config`, `orcdotacao`, `pctipocompra`, `emptipo`, `concarpeculiar`, `pagordemnota`, `empnota`
+- **Diferencial:** esta é a única consulta da classe que retorna também a lista de parâmetros, usando placeholders numerados.
+- **Cuidados:** o método monta `WHERE pagordem.e50_codord = $N` conforme a quantidade de parâmetros informados; o consumidor precisa repassar os binds na mesma ordem.
+
+#### Consulta: `sql_query_pag`
+
+- **Objetivo:** Retornar a ordem com o caminho contábil do pagamento.
+- **Tabelas:** `pagordem`, `empempenho`, `cgm`, `db_config`, `orcdotacao`, `pctipocompra`, `emptipo`, `conlancamord`, `conlancampag`, `conlancam`, `conlancamdoc`, `conhistdoc`, `conplanoreduz`, `conplano`, `pagordemconta`
+- **Regra de negócio:** a ordem pode ser rastreada até o lançamento contábil e a conta reduzida usada no pagamento.
+- **Cuidados:** o join com `conlancamord` e `conlancampag` aumenta fortemente a multiplicação por movimento e por plano.
+
+#### Consulta: `sql_query_pagordemagenda`
+
+- **Objetivo:** Ligar a ordem ao movimento de agenda/caixa.
+- **Tabelas:** `pagordem`, `pagordemele`, `empempenho`, `cgm`, `db_config`, `orcdotacao`, `pctipocompra`, `emptipo`, `empord`, `empagemov`, `empage`
+- **Uso prático:** caminho útil quando a pergunta é sobre a agenda do pagamento e não apenas o cabeçalho da ordem.
+
+#### Consulta: `sql_query_pagordemele`, `sql_query_pagordemele2` e `sql_query_pagordemeleempage`
+
+- **Objetivo:** Expandir a ordem pelo detalhe `pagordemele` e pelo movimento bancário relacionado.
+- **Tabelas recorrentes:** `pagordem`, `pagordemele`, `empempenho`, `cgm`, `db_config`, `orcdotacao`, `orctiporec`, `emptipo`, `empord`, `empagemov`, `empageconf`, `empageconfgera`, `pagordemconta`
+- **Regra observada:** a versão `sql_query_pagordemeleempage` amarra `empord` e `empagemov` diretamente, deixando explícito o movimento que originou a ordem.
+- **Cuidados:** essas variantes diferem mais pela estratégia de join do que pelo negócio; o grão final pode mudar bastante.
+
+#### Consulta: `sql_query_pagDiversos`
+
+- **Objetivo:** Trazer o caminho financeiro/contábil da ordem para pagamentos de diversos.
+- **Tabelas:** `pagordem`, `empempenho`, `cgm`, `db_config`, `orcdotacao`, `pctipocompra`, `emptipo`, `conlancamord`, `conlancampag`, `conlancam`, `conlancamdoc`, `conhistdoc`, `conplanoreduz`, `conplano`, `pagordemele`, `pagordemconta`
+- **Regra de negócio:** a consulta cruza a ordem com o lançamento contábil e o plano reduzido, além de detalhes da ordem.
+
+#### Consulta: `sql_query_movimento`
+
+- **Objetivo:** Retornar o movimento bancário associado à ordem.
+- **Tabelas:** `pagordem`, `empord`, `empagemov`
+- **Uso prático:** consulta curta para localizar o movimento que fecha a ordem.
+
+#### Consulta: `sql_query_empenho_rp`
+
+- **Objetivo:** Verificar o vínculo da ordem com `empresto`, sugerindo rotina de restos a pagar/registro de comprometimento.
+- **Tabelas:** `pagordem`, `empresto`
+- **Cuidados:** o nome sugere um recorte funcional específico; a classe aqui só expõe o vínculo direto por número do empenho.
+
 ### Cuidados gerais das consultas extraídas
 
 - `e60_numemp` é a chave interna; `e60_codemp` é o número textual exibido do empenho.
