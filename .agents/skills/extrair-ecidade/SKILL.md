@@ -4,6 +4,7 @@ description: Extrair consultas SQL e regras de negocio relevantes de arquivos PH
 
 O objetivo é ter informações suficientes para o agente poder usar o conhecimento para responder perguntas e tomar decisões. Para isso, as informações devem ser ricas para o agente entender a logica de negócio do sistema e como ele funciona com RAG.
 
+O foco é na regra de negocio para que a o agetnte seja capaz de criar seus proprios queries, o SQL é apenas um caminho rapido.
 ---
 
 # Extrair e-Cidade
@@ -34,6 +35,8 @@ Analisar codigo PHP do e-Cidade manualmente e transformar consultas relevantes e
    - Mapear tabelas reais, aliases, joins, filtros, agrupamentos, ordenacao e parametros.
    - Determinar o grao do resultado e o que uma linha representa.
    - Ler chamadas do metodo e telas consumidoras quando isso for necessario para entender o uso.
+   - Crie perguntas que essa consulta responde e liste na documentação.
+   - Crie pergutas relacionadas a tabela.
    - Diferenciar regra comprovada pelo codigo de interpretacao provavel.
    - Nao transformar nome de metodo, comentario ou semelhanca de colunas em regra confirmada.
 

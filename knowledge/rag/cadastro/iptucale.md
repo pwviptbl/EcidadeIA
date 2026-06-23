@@ -1,90 +1,107 @@
 ## cadastro.iptucale
 
+> Fonte de codigo: `/var/www/html/e-cidade-php74/classes/db_iptucale_classe.php`
 
+Registro do valor venal calculado para cada construcao de uma matricula em determinado exercicio. A classe guarda a area edificada considerada no calculo, o valor do metro quadrado, a pontuacao processada e o valor venal resultante por edificacao.
 
-> Fonte manual: `knowledge/manual/cadastro.md#cadastro.iptucale`
+### Estrutura e interpretacao
 
+- **Classe:** `cl_iptucale`
+- **Tabela principal:** `iptucale`
+- **Chave primaria:** `j22_anousu`, `j22_matric`, `j22_idcons`
+- **Grau basico:** uma linha por exercicio, matricula e construcao calculada
 
+Campos de negocio confirmados:
 
-### Resumo tecnico
+- `j22_anousu`: exercicio do calculo
+- `j22_matric`: matricula do imovel
+- `j22_idcons`: identificador da construcao dentro da matricula
+- `j22_areaed`: area construida usada no calculo
+- `j22_vm2`: valor do metro quadrado adotado no calculo da construcao
+- `j22_pontos`: pontuacao processada da construcao
+- `j22_valor`: valor venal calculado para a edificacao
 
-- Descricao: Registra os valores venais calculados para as construções vinculadas a uma matrícula em determinado exercício. Guarda a área edificada processada, pontos, valor do metro quadrado da construção e valor venal calculado por edificação.
-- Chave primaria: j22_anousu, j22_matric, j22_idcons
-- Chave de negocio: j22_anousu, j22_matric, j22_idcons
-- Coluna de tempo: j22_anousu
-- Grao: Uma linha por exercício, matrícula e construção calculada.
-- Recomendada: sim
-- Significado da contagem: Conta construções calculadas por exercício. Não conta imóveis diretamente. Para contar imóveis com construção calculada, usar `COUNT(DISTINCT j22_matric)` filtrando por exercício.
-- Candidatas a chave de negocio: j22_anousu, j22_matric, j22_idcons
-- Candidatas a coluna de tempo: j22_anousu
+Interpretacao segura:
 
-### Relacionamentos
+- A tabela detalha o calculo da parte edificada; nao representa o calculo consolidado do imovel inteiro.
+- Uma mesma matricula pode gerar varias linhas no mesmo exercicio, uma para cada construcao.
+- Para valor venal edificado total do imovel, some `j22_valor` por `j22_anousu` e `j22_matric`.
 
-- `j22_matric, j22_matric, j22_idcons, j22_idcons` -> `cadastro.iptuconstr` (j39_matric, j39_idcons, j39_matric, j39_idcons) [iptucale_matric_idcons_fk]
+### Consulta: `sql_query`
 
-### Filtros padrao
+- **Objetivo:** recuperar o calculo da construcao com enriquecimento do cadastro fisico da construcao, logradouro e base do imovel.
+- **Tabelas:** `iptucale`, `iptuconstr`, `ruas`, `iptubase`
 
-- Exercício específico `j22_anousu = :exercicio`
-- Matrícula específica `j22_matric = :matricula`
-- Construção específica `j22_matric = :matricula AND j22_idcons = :idcons`
-- Comparação entre exercícios `j22_anousu IN (:exercicio_anterior, :exercicio_atual)`
-- Valor venal positivo `COALESCE(j22_valor, 0) > 0`
-- Valor venal zerado `COALESCE(j22_valor, 0) = 0`
-- Área edificada positiva `COALESCE(j22_areaed, 0) > 0`
-- Sem área edificada calculada `COALESCE(j22_areaed, 0) = 0`
-- Valor de m² positivo `COALESCE(j22_vm2, 0) > 0`
-- Pontuação positiva `COALESCE(j22_pontos, 0) > 0`
+```sql
+select /* campos dinamicos */
+  from iptucale
+       inner join iptuconstr
+          on iptuconstr.j39_matric = iptucale.j22_matric
+         and iptuconstr.j39_idcons = iptucale.j22_idcons
+       inner join ruas
+          on ruas.j14_codigo = iptuconstr.j39_codigo
+       inner join iptubase
+          on iptubase.j01_matric = iptuconstr.j39_matric
+       inner join ruas as a
+          on a.j14_codigo = iptuconstr.j39_codigo
+       inner join iptubase as b
+          on b.j01_matric = iptuconstr.j39_matric
+ where iptucale.j22_anousu = :anousu
+   and iptucale.j22_matric = :matric
+   and iptucale.j22_idcons = :idcons
+ order by /* ordenacao dinamica */
+```
 
-### Semantica de filtros
+Interpretacao segura:
 
-- `j22_anousu` representa o exercício do cálculo e deve ser usado em qualquer análise temporal.
-- `j22_matric, j22_idcons` identificam a construção calculada dentro de uma matrícula.
-- `j22_anousu, j22_matric, j22_idcons` identificam de forma segura o cálculo de uma construção em um exercício.
-- `j22_areaed` é a área edificada processada no cálculo, não necessariamente a área atual cadastrada em `iptuconstr`.
-- `j22_valor` é o valor venal calculado da edificação, não o valor final do IPTU.
-- `j22_vm2` é o valor do metro quadrado da construção usado no cálculo, não valor de mercado.
-- `j22_pontos` representa a pontuação processada para a construção, normalmente relacionada às características e padrão construtivo.
-- Para totalizar valor venal de edificações por matrícula, somar `j22_valor` agrupando por `j22_anousu, j22_matric`.
-- Para totalizar área edificada calculada por matrícula, somar `j22_areaed` agrupando por `j22_anousu, j22_matric`.
-- Para comparar exercícios, comparar a mesma combinação `j22_matric, j22_idcons` em anos diferentes.
-- Para validar existência física ou situação da construção, cruzar com `iptuconstr`.
-- Para explicar pontuação, padrão ou características da construção, cruzar com tabelas de características, como `carconstr` e `caracter`.
+- O join funcional e o primeiro com `iptuconstr` por matricula e construcao; ele amarra o calculo ao cadastro da edificacao.
+- Os joins repetidos com `ruas as a` e `iptubase as b` nao mudam o grao do resultado, mas ampliam o risco de confusao quando se usa `*`.
+- Esta consulta continua no grao da construcao calculada, desde que os filtros respeitem a chave completa.
 
-### Regra de negocio para enriquecer
+### Consulta: `sql_query_file`
 
-- O que esta tabela representa no negocio?
+- **Objetivo:** ler apenas a tabela fisica `iptucale`.
 
-  - Representa o resultado do cálculo venal das edificações de uma matrícula em cada exercício. Ela mostra quanto cada construção contribuiu, em valor venal, para a composição cadastral/tributária do imóvel.
+```sql
+select /* campos dinamicos */
+  from iptucale
+ where iptucale.j22_anousu = :anousu
+   and iptucale.j22_matric = :matric
+   and iptucale.j22_idcons = :idcons
+ order by /* ordenacao dinamica */
+```
 
-- Quando ela deve ser preferida sobre outras tabelas parecidas?
+Uso seguro:
 
-  - Deve ser preferida quando a pergunta envolver valor venal da construção, área edificada usada no cálculo, valor do metro quadrado da construção, pontuação calculada ou comparação do valor das edificações entre exercícios.
-  - Deve ser usada quando for necessário explicar o impacto das construções no cálculo do IPTU.
-  - Deve ser preferida sobre `iptuconstr` quando a pergunta for sobre valores calculados da edificação.
-  - Deve ser combinada com `iptuconstr` quando for necessário comparar cadastro físico atual com cálculo processado.
-  - Deve ser combinada com `iptucalc` quando for necessário entender o cálculo consolidado da matrícula.
-  - Deve ser combinada com `iptucalv` quando for necessário relacionar valor venal da edificação com valor monetário de IPTU ou taxas.
-  - Não deve substituir `iptucalv` para apurar valor final calculado por receita.
-  - Não deve substituir `iptunump` para analisar débito gerado, parcelas ou integração com arrecadação.
+- validar existencia do calculo da construcao;
+- inspecionar somente os campos gravados na tabela;
+- evitar efeitos colaterais dos joins duplicados de `sql_query`.
 
-- Que perguntas ela responde bem?
+### Regras de manutencao observadas
 
-  - Qual foi o valor venal calculado de cada construção?
-  - Qual foi o valor venal total das construções de uma matrícula?
+1. `incluir()` exige `j22_areaed`, `j22_vm2`, `j22_pontos` e `j22_valor`.
+2. A chave primaria e informada externamente; a classe nao usa sequence.
+3. `j22_anousu`, `j22_matric` e `j22_idcons` sao obrigatorios para inclusao e exclusao.
+4. Inclusao, alteracao e exclusao registram auditoria em `db_acount*`.
+5. `alterar()` e `excluir()` operam pela chave completa ou por `dbwhere` informado externamente.
 
-### Cuidados / riscos
+### Relacionamentos de negocio confirmados no catalogo
 
-- A chave correta para análise é `j22_anousu, j22_matric, j22_idcons`. Usar apenas `j22_matric` mistura construções e exercícios.
-- Uma matrícula pode possuir várias construções calculadas no mesmo exercício.
-- Contar linhas da `iptucale` conta construções calculadas, não imóveis.
-- Para contar imóveis com edificação calculada, usar `COUNT(DISTINCT j22_matric)`.
-- Para obter valor venal edificado total da matrícula, somar `j22_valor` por `j22_anousu, j22_matric`.
-- Para obter área edificada calculada total da matrícula, somar `j22_areaed` por `j22_anousu, j22_matric`.
-- `j22_areaed` pode divergir de `iptuconstr.j39_area`, pois representa a área usada no cálculo do exercício.
-- `j22_valor` é valor venal da edificação, não valor do IPTU lançado.
-- `j22_vm2` é parâmetro de cálculo, não valor comercial de mercado.
-- `j22_pontos` deve ser interpretado junto com características e regras de cálculo.
-- Construções demolidas, alteradas ou incluídas entre exercícios podem afetar comparações 2026 x 2027.
-- Construções cadastradas em `iptuconstr` podem não existir em `iptucale` para determinado exercício se não foram calculadas.
-- Para explicar aumento do IPTU, cruzar com `iptucalc`, `iptucalv`, `iptuconstr`, `carconstr` e `caracter`.
-- Para análise cadastral atual, não usar apenas `iptucale`; validar com `iptuconstr`.
+- A intencao do catalogo e ligar `iptucale` a `iptuconstr` pela combinacao de matricula e construcao.
+- Pela propria classe, o join confiavel e `iptucale.j22_matric = iptuconstr.j39_matric` e `iptucale.j22_idcons = iptuconstr.j39_idcons`.
+- Pela cadeia de `iptuconstr`, o calculo alcanca `ruas` e `iptubase`.
+- A partir desses caminhos, a construcao calculada pode ser enriquecida com contexto territorial e cadastral do imovel.
+
+Ambiguidade relevante:
+
+- O bloco de relacionamento em `catalog/cadastro_extraido.json` para `cadastro.iptucale` esta inconsistente, repetindo colunas e montando joins compostos incorretos.
+- Para esta entidade, prefira os joins observados na classe PHP e trate o catalogo apenas como indicativo de vizinhanca semantica.
+
+### Cuidados para consultas do agente
+
+- Nao conte linhas de `iptucale` como quantidade de imoveis; linhas aqui contam construcoes calculadas.
+- Para contar imoveis com edificacao calculada em um exercicio, use `COUNT(DISTINCT j22_matric)`.
+- `j22_valor` e valor venal da edificacao, nao o valor final do IPTU lancado.
+- `j22_areaed` pode divergir da area atual do cadastro fisico, porque representa a area usada no calculo daquele exercicio.
+- Para explicar variacao entre anos, compare a mesma chave `j22_matric + j22_idcons` em exercicios diferentes.
+- Para consolidado do imovel, combine com `iptucalc`; para valor final por receita ou imposto, combine com `iptucalv` ou tabelas equivalentes.
