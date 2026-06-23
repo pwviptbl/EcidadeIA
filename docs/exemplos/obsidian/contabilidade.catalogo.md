@@ -1,20 +1,20 @@
 ---
-titulo: Catalogo Cadastro
-dominio: cadastro
-schema_principal: cadastro
-fonte_json: cadastro_extraido.json
+titulo: Catalogo Contabilidade
+dominio: contabilidade
+schema_principal: contabilidade
+fonte_json: contabilidade.json
 tags:
   - catalogo
   - ecidade
-  - cadastro
+  - contabilidade
 ---
 
-# Catalogo Cadastro
+# Catalogo Contabilidade
 
-- Dominio: `cadastro`
-- Schema principal: `cadastro`
-- Arquivo origem: `cadastro_extraido.json`
-- Descricao: Catalogo extraido automaticamente para o schema cadastro.
+- Dominio: `contabilidade`
+- Schema principal: `contabilidade`
+- Arquivo origem: `contabilidade.json`
+- Descricao: Catalogo extraido automaticamente para o schema contabilidade.
 
 ## Como usar esta nota
 
@@ -24,193 +24,191 @@ tags:
 
 ## Tabelas deste dominio
 
-- `cadastro.arquivocdniptubase`
-- `cadastro.atualizacaoiptuschema`
-- `cadastro.atualizacaoiptuschemaarquivo`
-- `cadastro.atualizacaoiptuschemamatricula`
-- `cadastro.atualizacaoiptuschemamotivorejeicao`
-- `cadastro.averba`
-- `cadastro.averbacao`
-- `cadastro.averbacgm`
-- `cadastro.averbacgmold`
-- `cadastro.averbadecisaojudicial`
-- `cadastro.averbaescritura`
-- `cadastro.averbaformalpartilha`
-- `cadastro.averbaformalpartilhacgm`
-- `cadastro.averbagrupo`
-- `cadastro.averbaguia`
-- `cadastro.averbaguiaitbi`
-- `cadastro.averbaprocesso`
-- `cadastro.averbaregimovel`
-- `cadastro.averbatipo`
-- `cadastro.bairro`
-- `cadastro.bairrofator`
-- `cadastro.cadimobil`
-- `cadastro.caracter`
-- `cadastro.caractercaracter`
-- `cadastro.caractercaracteristica`
-- `cadastro.caraliq`
-- `cadastro.carbairro`
-- `cadastro.carcaractervalor`
-- `cadastro.carconstr`
-- `cadastro.carconstrvalorm2`
-- `cadastro.carface`
-- `cadastro.carfator`
-- `cadastro.cargrup`
-- `cadastro.carlote`
-- `cadastro.carpadrao`
-- `cadastro.carvalor`
-- `cadastro.carzonafator`
-- `cadastro.carzonavalor`
-- `cadastro.cdd_rj`
-- `cadastro.cdd_rj_final`
-- `cadastro.cdd_rj_v2`
-- `cadastro.certidaoexistencia`
-- `cadastro.certidaoexistenciaprotprocesso`
-- `cadastro.certidoesdiversas`
-- `cadastro.certidoesdiversasprotprocesso`
-- `cadastro.cfiptu`
-- `cadastro.civitasinfoscomplementar`
-- `cadastro.cliente`
-- `cadastro.clientedebito`
-- `cadastro.condominio`
-- `cadastro.condominiocgm`
-- `cadastro.condominioprocesso`
-- `cadastro.configuracaogrupocaracteristicas`
-- `cadastro.constrcar`
-- `cadastro.constrescr`
-- `cadastro.db_imgsitbi`
-- `cadastro.dne`
-- `cadastro.doi`
-- `cadastro.doi_importacao`
-- `cadastro.doi_inconsistencias`
-- `cadastro.face`
-- `cadastro.facevalor`
-- `cadastro.histocorrenciaprocesso`
-- `cadastro.imobil`
-- `cadastro.iptuant`
-- `cadastro.iptubaixa`
-- `cadastro.iptubaixaproc`
-- `cadastro.iptubase`
-- `cadastro.iptubasecep`
-- `cadastro.iptubasecondominio`
-- `cadastro.iptubasepredio`
-- `cadastro.iptubaseregimovel`
-- `cadastro.iptucadlogcalc`
-- `cadastro.iptucadtaxa`
-- `cadastro.iptucadtaxaexe`
-- `cadastro.iptucadzonaentrega`
-- `cadastro.iptucadzonaentregaend`
-- `cadastro.iptucalc`
-- `cadastro.iptucalc_caracteristica_lote`
-- `cadastro.iptucalcareaconstr`
-- `cadastro.iptucalcarealote`
-- `cadastro.iptucalcconfrec`
-- `cadastro.iptucalcconfrec_backup`
-- `cadastro.iptucalclog`
-- `cadastro.iptucalclogmat`
-- `cadastro.iptucalcpadrao`
-- `cadastro.iptucalcpadraoconstr`
-- `cadastro.iptucalcpadraolog`
-- `cadastro.iptucalcpadraoorigem`
-- `cadastro.iptucale`
-- `cadastro.iptucale_caracteristica_construcao`
-- `cadastro.iptucalh`
-- `cadastro.iptucalhconf`
-- `cadastro.iptucalv`
-- `cadastro.iptuconstr`
-- `cadastro.iptuconstrdemo`
-- `cadastro.iptuconstrhabite`
-- `cadastro.iptuconstrobrasconstr`
-- `cadastro.iptuconstrpontos`
-- `cadastro.iptudiversos`
-- `cadastro.iptuender`
-- `cadastro.iptuerro`
-- `cadastro.iptufrac`
-- `cadastro.iptuisen`
-- `cadastro.iptumatzonaentrega`
-- `cadastro.iptunaogeracarne`
-- `cadastro.iptunaogeracarnecgm`
-- `cadastro.iptunaogeracarnematric`
-- `cadastro.iptunaogeracarnesetqua`
-- `cadastro.iptunump`
-- `cadastro.iptunumpold`
-- `cadastro.iptupadraoconstr`
-- `cadastro.iptupadraoconstrarea`
-- `cadastro.iptupadraoconstrfator`
-- `cadastro.iptupadraoconstrpontos`
-- `cadastro.iptupercentualexercicio`
-- `cadastro.iptusocial`
-- `cadastro.iptutabelas`
-- `cadastro.iptutabelasconfig`
-- `cadastro.iptutabelasconfigcampochave`
-- `cadastro.iptutabelasconfigcampocorrecao`
-- `cadastro.iptutabelasconfigvirada`
-- `cadastro.iptutabelasdepend`
-- `cadastro.iptutaxa`
-- `cadastro.iptutaxamatric`
-- `cadastro.iptutaxamatricexe`
-- `cadastro.isenexe`
-- `cadastro.isenproc`
-- `cadastro.isentaxa`
-- `cadastro.localidaderural`
-- `cadastro.logradcep`
-- `cadastro.lote`
-- `cadastro.loteam`
-- `cadastro.loteamcgm`
-- `cadastro.lotecentroide`
-- `cadastro.lotedist`
-- `cadastro.loteloc`
-- `cadastro.loteloteam`
-- `cadastro.lotenumero`
-- `cadastro.lotenumero_proc`
-- `cadastro.lotesetorfiscal`
-- `cadastro.massafalida`
-- `cadastro.massamat`
-- `cadastro.matricobs`
-- `cadastro.mobimportacao`
-- `cadastro.moblevantamentoedi`
-- `cadastro.moblevantamentolog`
-- `cadastro.moblevatamento`
-- `cadastro.orientacao`
-- `cadastro.predio`
-- `cadastro.processadne`
-- `cadastro.promitente`
-- `cadastro.propri`
-- `cadastro.ruas`
-- `cadastro.ruasbairro`
-- `cadastro.ruascep`
-- `cadastro.ruashistorico`
-- `cadastro.ruastipo`
-- `cadastro.setor`
-- `cadastro.setorfiscal`
-- `cadastro.setorfiscalvalor`
-- `cadastro.setorloc`
-- `cadastro.setorlocvalor`
-- `cadastro.setorregimovel`
-- `cadastro.tesinter`
-- `cadastro.tesinterlote`
-- `cadastro.tesinteroutros`
-- `cadastro.tesintertipo`
-- `cadastro.testada`
-- `cadastro.testadanumero`
-- `cadastro.testpri`
-- `cadastro.tipocontribuinte`
-- `cadastro.tipoisen`
-- `cadastro.zonafator`
-- `cadastro.zonafatorarea`
-- `cadastro.zonas`
-- `cadastro.zonasaliq`
-- `cadastro.zonassetorvalor`
-- `cadastro.zonastaxa`
-- `cadastro.zonasvalor`
+- `contabilidade.aberturaexercicio`
+- `contabilidade.aberturaexerciciodocumento`
+- `contabilidade.aberturaexercicioorcamento`
+- `contabilidade.apropriacaodecimoferias`
+- `contabilidade.apropriacaodecimoferias_lancamentos`
+- `contabilidade.atributos_padrao_msc2019`
+- `contabilidade.avaliacaogruporespostaconta`
+- `contabilidade.clabensconplano`
+- `contabilidade.complanoexe_despesa_ajuste_saldo_msc`
+- `contabilidade.complanoexe_receita_ajuste_saldo_msc`
+- `contabilidade.conaberturaexe`
+- `contabilidade.conarquivospad`
+- `contabilidade.concadtce`
+- `contabilidade.concarpeculiar`
+- `contabilidade.conclass`
+- `contabilidade.condataconf`
+- `contabilidade.conencerramento`
+- `contabilidade.conencerramentolancam`
+- `contabilidade.conencerramentotipo`
+- `contabilidade.configuracaoinstituicaosiconfi`
+- `contabilidade.congrupo`
+- `contabilidade.conhist`
+- `contabilidade.conhistdoc`
+- `contabilidade.conhistdocdocumentovariavel`
+- `contabilidade.conhistdocregra`
+- `contabilidade.conhistdoctipo`
+- `contabilidade.conlancam`
+- `contabilidade.conlancamaberturaexercicio`
+- `contabilidade.conlancamaberturaexercicioorcamento`
+- `contabilidade.conlancamacordo`
+- `contabilidade.conlancamajustesaldoconta`
+- `contabilidade.conlancambem`
+- `contabilidade.conlancambol`
+- `contabilidade.conlancamcgm`
+- `contabilidade.conlancamcompl`
+- `contabilidade.conlancamcomplementorecurso`
+- `contabilidade.conlancamconcarpeculiar`
+- `contabilidade.conlancamcorgrupocorrente`
+- `contabilidade.conlancamcorrente`
+- `contabilidade.conlancamdepartamento`
+- `contabilidade.conlancamdepreciacao`
+- `contabilidade.conlancamdig`
+- `contabilidade.conlancamdoc`
+- `contabilidade.conlancamdot`
+- `contabilidade.conlancamele`
+- `contabilidade.conlancamemp`
+- `contabilidade.conlancamimp`
+- `contabilidade.conlancaminfocomplementarvalor`
+- `contabilidade.conlancaminscrestosapagar`
+- `contabilidade.conlancaminscricaopassivo`
+- `contabilidade.conlancaminstit`
+- `contabilidade.conlancaminventario`
+- `contabilidade.conlancamlogatributos`
+- `contabilidade.conlancamlr`
+- `contabilidade.conlancammatestoqueinimei`
+- `contabilidade.conlancamnota`
+- `contabilidade.conlancamord`
+- `contabilidade.conlancamordem`
+- `contabilidade.conlancampag`
+- `contabilidade.conlancamprogramacaofinanceiraparcela`
+- `contabilidade.conlancamprovisaodecimoterceiro`
+- `contabilidade.conlancamprovisaoferias`
+- `contabilidade.conlancamrec`
+- `contabilidade.conlancamreconhecimentocontabil`
+- `contabilidade.conlancamrecurso`
+- `contabilidade.conlancamretencao`
+- `contabilidade.conlancamretif`
+- `contabilidade.conlancamretificacao`
+- `contabilidade.conlancamslip`
+- `contabilidade.conlancamsup`
+- `contabilidade.conlancamtef`
+- `contabilidade.conlancamval`
+- `contabilidade.conparametro`
+- `contabilidade.conplano`
+- `contabilidade.conplanoatributolancamentos`
+- `contabilidade.conplanoatributos`
+- `contabilidade.conplanoatributosaldo`
+- `contabilidade.conplanoconplanoorcamento`
+- `contabilidade.conplanoconsaldo`
+- `contabilidade.conplanoconta`
+- `contabilidade.conplanocontabancaria`
+- `contabilidade.conplanocontacorrente`
+- `contabilidade.conplanoexe`
+- `contabilidade.conplanoexeconciliarp`
+- `contabilidade.conplanoexecontacorrente`
+- `contabilidade.conplanoexecontacorrenteatributo`
+- `contabilidade.conplanoexeempenho`
+- `contabilidade.conplanoexerecurso`
+- `contabilidade.conplanoexesaldo`
+- `contabilidade.conplanoextra`
+- `contabilidade.conplanogrupo`
+- `contabilidade.conplanoinfocomplementar`
+- `contabilidade.conplanoorcamento`
+- `contabilidade.conplanoorcamentoanalitica`
+- `contabilidade.conplanoorcamentoconta`
+- `contabilidade.conplanoorcamentocontabancaria`
+- `contabilidade.conplanoorcamentogrupo`
+- `contabilidade.conplanoreduz`
+- `contabilidade.conplanoreduzcgm`
+- `contabilidade.conplanoref`
+- `contabilidade.conplanosis`
+- `contabilidade.conplanosistema`
+- `contabilidade.conplanosistemaatributos`
+- `contabilidade.conrelinfo`
+- `contabilidade.conrelparametro`
+- `contabilidade.conreltitulos`
+- `contabilidade.conrelvalor`
+- `contabilidade.consistema`
+- `contabilidade.consistemaconta`
+- `contabilidade.contacorrente`
+- `contabilidade.contacorrentedetalhe`
+- `contabilidade.contacorrentedetalheconlancamval`
+- `contabilidade.contacorrenteregravinculo`
+- `contabilidade.contacorrentesaldo`
+- `contabilidade.contcearquivo`
+- `contabilidade.contcearquivolayoutgeracao`
+- `contabilidade.contcearquivooid`
+- `contabilidade.contcearquivoresp`
+- `contabilidade.contcearquivorespcgm`
+- `contabilidade.contrans`
+- `contabilidade.contranslan`
+- `contabilidade.contranslr`
+- `contabilidade.contranslrelemento`
+- `contabilidade.contranslrvinculo`
+- `contabilidade.cornumpdesconto`
+- `contabilidade.emissoeslrf`
+- `contabilidade.escriturainventario`
+- `contabilidade.escrituraprovisao`
+- `contabilidade.importacaoplanoconta`
+- `contabilidade.infocomplementarvalor`
+- `contabilidade.inscricaopassivaanulada`
+- `contabilidade.inscricaopassivo`
+- `contabilidade.inscricaopassivoitem`
+- `contabilidade.inscricaopassivoslip`
+- `contabilidade.inscricaorestosapagar`
+- `contabilidade.lancamentolote`
+- `contabilidade.lancamentoscontabeislog`
+- `contabilidade.linhaspacto`
+- `contabilidade.lotelancamentoconlancam`
+- `contabilidade.lotelancamentos`
+- `contabilidade.lrfvalormanual`
+- `contabilidade.matriz_saldo_contabil`
+- `contabilidade.matriz_saldo_contabil_lancamentos`
+- `contabilidade.meiocomunicacaosigap`
+- `contabilidade.modeloplanoconta`
+- `contabilidade.movimentacoesauditoria`
+- `contabilidade.orcamentoreceita`
+- `contabilidade.padsigapsubsidiosvereadores`
+- `contabilidade.parametrointegracaopatrimonial`
+- `contabilidade.pcasp`
+- `contabilidade.pcaspconplano`
+- `contabilidade.planocontadetalhe`
+- `contabilidade.planocontadetalheconplanoorcamento`
+- `contabilidade.planodespesa`
+- `contabilidade.planodespesaconplanoorcamento`
+- `contabilidade.planoreceita`
+- `contabilidade.planoreceitaconplanoorcamento`
+- `contabilidade.previsaodespesa`
+- `contabilidade.previsaodespesalinhaspacto`
+- `contabilidade.previsaodespesaplano`
+- `contabilidade.publicidadesigap`
+- `contabilidade.publicidadesigapfiscal`
+- `contabilidade.reconhecimentocontabil`
+- `contabilidade.reconhecimentocontabiltipo`
+- `contabilidade.recurso_exercicio`
+- `contabilidade.regraencerramentonaturezaorcamentaria`
+- `contabilidade.resumo_consulta_lancamento_manual`
+- `contabilidade.sagresarquivogerado`
+- `contabilidade.sagresordenadordespesa`
+- `contabilidade.sagresresponsavelunidadeorcamentaria`
+- `contabilidade.siconfidotacaofinalidade`
+- `contabilidade.sigfiscgmprocesso`
+- `contabilidade.sigfisunidadegestora`
+- `contabilidade.taborcvinculodeducao`
+- `contabilidade.teto_orcamentario`
+- `contabilidade.v_resumo_saldo_empenho`
+- `contabilidade.vinculoeventoscontabeis`
+- `contabilidade.visaocontacorrente`
 
-## Tabela de negocio: `cadastro.arquivocdniptubase`
+## Tabela de negocio: `contabilidade.aberturaexercicio`
 
 ### Identidade
 
-- Nome humano: cadastro.arquivocdniptubase.
-- O que representa: Preencher em linguagem de negocio.
+- Nome humano: Abertura de registro.
+- O que representa: Abertura de registro
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -221,17 +219,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j151_iptubase`
-  - `j151_arquivocdn`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+  - `c81_sequencial`
+- Coluna temporal: `c81_anousu`
+- Candidatas a chave de negocio: c81_sequencial
+- Candidatas a coluna temporal: c81_anousu
 
 ### Colunas principais
 
-- `j151_arquivocdn`: Preencher significado.
-- `j151_descricao`: Preencher significado.
-- `j151_iptubase`: Preencher significado.
+- `c81_anousu`: Ano da abertura
+- `c81_estornado`: Se está estornado, sim / nao
+- `c81_sequencial`: Sequencial da abertura do registro
 
 ### Metricas atomicas
 
@@ -239,76 +236,7 @@ tags:
 
 ### Dimensoes
 
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j151_arquivocdn` -> `configuracoes.arquivocdn` (db59_sequencial) [arquivocdniptubase_j151_arquivocdn_fkey]
-- `j151_iptubase` -> `cadastro.iptubase` (j01_matric) [arquivocdniptubase_j151_iptubase_fkey]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.atualizacaoiptuschema`
-
-### Identidade
-
-- Nome humano: Guarda a informação da importação dos dados dos imóveis e em qual schema estão as informações..
-- O que representa: Guarda a informação da importação dos dados dos imóveis e em qual schema estão as informações.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j142_sequencial`
-- Coluna temporal: `j142_dataarquivo`
-- Candidatas a chave de negocio: j142_sequencial
-- Candidatas a coluna temporal: j142_dataarquivo
-
-### Colunas principais
-
-- `j142_dataarquivo`: Data dos dados do arquivo de importação de quando eles foram gerados.
-- `j142_schema`: Nome do local onde os dados importados estão.
-- `j142_sequencial`: Sequencial da tabela.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j142_dataarquivo`: Data dos dados do arquivo de importação de quando eles foram gerados.
+- `c81_anousu`: Ano da abertura
 
 ### Filtros de negocio
 
@@ -343,12 +271,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.atualizacaoiptuschemaarquivo`
+## Tabela de negocio: `contabilidade.aberturaexerciciodocumento`
 
 ### Identidade
 
-- Nome humano: Arquivos importados para atualização de cadastros imobiliários..
-- O que representa: Arquivos importados para atualização de cadastros imobiliários.
+- Nome humano: Abertura de Exercício por documento.
+- O que representa: Abertura de Exercício por documento
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -359,17 +287,20 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j143_sequencial`
-- Coluna temporal: `j143_dataimportacao`
-- Candidatas a chave de negocio: j143_sequencial
-- Candidatas a coluna temporal: j143_dataimportacao
+  - `c149_id`
+- Coluna temporal: `c149_anousu`
+- Candidatas a chave de negocio: c149_id
+- Candidatas a coluna temporal: c149_anousu
 
 ### Colunas principais
 
-- `j143_arquivo`: Nome do arquivo importado.
-- `j143_atualizacaoiptuschema`: Vínculo com o nome do schema com os dados de IPTU atualizados.
-- `j143_dataimportacao`: Data da importação.
-- `j143_sequencial`: Código da tabela.
+- `c149_anousu`: Exercício
+- `c149_documento`: Documento
+- `c149_id`: Código
+- `c149_instit`: Instituição
+- `c149_usuario`: Usuário
+- `created_at`: Criado em
+- `updated_at`: Alterado em
 
 ### Metricas atomicas
 
@@ -377,7 +308,7 @@ tags:
 
 ### Dimensoes
 
-- `j143_dataimportacao`: Data da importação.
+- `c149_anousu`: Exercício
 
 ### Filtros de negocio
 
@@ -394,7 +325,9 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j143_atualizacaoiptuschema` -> `cadastro.atualizacaoiptuschema` (j142_sequencial) [atualizacaoiptuschemaarquivo_ed143_atualizacaoiptuschema_fk]
+- `c149_documento` -> `contabilidade.conhistdoc` (c53_coddoc) [aberturaexerciciodocumento_c149_documento_fkey]
+- `c149_instit` -> `configuracoes.db_config` (codigo) [aberturaexerciciodocumento_c149_instit_fkey]
+- `c149_usuario` -> `configuracoes.db_usuarios` (id_usuario) [aberturaexerciciodocumento_c149_usuario_fkey]
 
 ### Regras de negocio existentes no catalogo
 
@@ -412,12 +345,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.atualizacaoiptuschemamatricula`
+## Tabela de negocio: `contabilidade.aberturaexercicioorcamento`
 
 ### Identidade
 
-- Nome humano: Guarda as matrículas que foram atualizadas o cadastro imobiliário..
-- O que representa: Guarda as matrículas que foram atualizadas o cadastro imobiliário.
+- Nome humano: Abertura de exercício de orçamento.
+- O que representa: Abertura de exercício de orçamento
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -428,19 +361,19 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j144_sequencial`
-- Coluna temporal: `j144_matriculanova`
-- Candidatas a chave de negocio: j144_matricula, j144_matriculanova, j144_sequencial
-- Candidatas a coluna temporal: j144_matriculanova
+  - `c104_sequencial`
+- Coluna temporal: `c104_ano`
+- Candidatas a chave de negocio: c104_sequencial, c104_usuario
+- Candidatas a coluna temporal: c104_ano, c104_data
 
 ### Colunas principais
 
-- `j144_atualizacaoiptuschema`: Vínculo com o schema.
-- `j144_matricula`: Matrícula
-- `j144_matriculanova`: Matricula Nova
-- `j144_processado`: Define se a matrícula foi processada.
-- `j144_sequencial`: Código sequencial.
-- `j144_situacao`: Situação que a matrícula se encontra (Nova/Atualizada/Rejeitada).
+- `c104_ano`: Ano da abertura do exercício
+- `c104_data`: Data da abertura do exercício
+- `c104_instit`: Código da Instituição
+- `c104_processado`: Se foi processado ou não
+- `c104_sequencial`: Chave primária sequencial da tabela de Abertura de exercício de orçamento
+- `c104_usuario`: codigo do usuario
 
 ### Metricas atomicas
 
@@ -448,8 +381,9 @@ tags:
 
 ### Dimensoes
 
-- `j144_matricula`: Matrícula
-- `j144_matriculanova`: Matricula Nova
+- `c104_ano`: Ano da abertura do exercício
+- `c104_data`: Data da abertura do exercício
+- `c104_usuario`: codigo do usuario
 
 ### Filtros de negocio
 
@@ -466,7 +400,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j144_atualizacaoiptuschema` -> `cadastro.atualizacaoiptuschema` (j142_sequencial) [atualizacaoiptuschemamatricula_ed144_atualizacaoiptuschema_fk]
+- `c104_instit` -> `configuracoes.db_config` (codigo) [aberturaexercicioorcamento_instit_fk]
+- `c104_usuario` -> `configuracoes.db_usuarios` (id_usuario) [aberturaexercicioorcamento_usuario_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -484,12 +419,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.atualizacaoiptuschemamotivorejeicao`
+## Tabela de negocio: `contabilidade.apropriacaodecimoferias`
 
 ### Identidade
 
-- Nome humano: Tabela que guarda o motivo de rejeição..
-- O que representa: Tabela que guarda o motivo de rejeição.
+- Nome humano: Competência da Apropriação.
+- O que representa: Competência da Apropriação
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -500,597 +435,20 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j146_atualizacaoiptuschemamatricula`
-- Coluna temporal: `j146_data`
-- Candidatas a chave de negocio: j146_atualizacaoiptuschemamatricula
-- Candidatas a coluna temporal: j146_data
+  - `id`
+- Coluna temporal: `c145_exercicio`
+- Candidatas a chave de negocio: id
+- Candidatas a coluna temporal: c145_exercicio
 
 ### Colunas principais
 
-- `j146_atualizacaoiptuschemamatricula`: Código sequencial da atualização de matrículas
-- `j146_data`: Data da rejeição
-- `j146_motivo_rejeicao`: Motivo da Rejeição
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j146_atualizacaoiptuschemamatricula`: Código sequencial da atualização de matrículas
-- `j146_data`: Data da rejeição
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j146_atualizacaoiptuschemamatricula` -> `cadastro.atualizacaoiptuschemamatricula` (j144_sequencial) [atualizacaoiptuschemamotivorejeicao_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averba`
-
-### Identidade
-
-- Nome humano: Cadastro das averbacoes das matriculas.
-- O que representa: Cadastro das averbacoes das matriculas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j55_codave`
-- Coluna temporal: `j55_data`
-- Candidatas a chave de negocio: j55_cidade, j55_codave, j55_matric, j55_numcgm, j55_regimo
-- Candidatas a coluna temporal: j55_data
-
-### Colunas principais
-
-- `j55_cidade`: Cidade do registro de Imoveis
-- `j55_codave`: Codigo da averbacao da matricula
-- `j55_data`: data da averbacao
-- `j55_matric`: Matricula do Imovel
-- `j55_numcgm`: Número do CGM do vendedor do imóvel
-- `j55_regimo`: Codigo do registro de imovel
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j55_codave`: Codigo da averbacao da matricula
-- `j55_data`: data da averbacao
-- `j55_matric`: Matricula do Imovel
-- `j55_regimo`: Codigo do registro de imovel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j55_matric` -> `cadastro.iptubase` (j01_matric) [averba_matric_fk]
-- `j55_numcgm` -> `protocolo.cgm` (z01_numcgm) [averba_numcgm_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbacao`
-
-### Identidade
-
-- Nome humano: Averbação.
-- O que representa: Averbação
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j75_codigo`
-- Coluna temporal: `j75_data`
-- Candidatas a chave de negocio: j75_codigo, j75_matric
-- Candidatas a coluna temporal: j75_data, j75_dttipo
-
-### Colunas principais
-
-- `j75_codigo`: Codigo sequencial do registro.
-- `j75_data`: Data da Averbação do imovel
-- `j75_dttipo`: Data do Tipo de Averbação
-- `j75_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j75_obs`: Observação referente a averbação
-- `j75_regra`: Regra usada para averbar conforme tipo
-- `j75_situacao`: Situação da Averbação
-- `j75_tipo`: Tipo de averbação
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j75_codigo`: Codigo sequencial do registro.
-- `j75_data`: Data da Averbação do imovel
-- `j75_dttipo`: Data do Tipo de Averbação
-- `j75_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j75_regra`: Regra usada para averbar conforme tipo
-- `j75_tipo`: Tipo de averbação
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j75_matric` -> `cadastro.iptubase` (j01_matric) [averbacao_matric_fk]
-- `j75_tipo` -> `cadastro.averbatipo` (j93_codigo) [averbacao_tipo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbacgm`
-
-### Identidade
-
-- Nome humano: novos promitentes ou proprietarios.
-- O que representa: novos promitentes ou proprietarios
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j76_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j76_averbacao, j76_codigo, j76_numcgm
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j76_averbacao`: Codigo sequencial do registro.
-- `j76_codigo`: Código sequencial do registro
-- `j76_numcgm`: Numero de Identificação do Contribuinte ou Empresa no Cadastro geral do Município
-- `j76_principal`: Principal
-- `j76_tipo`: Tipo
-- `j76_tipo_contribuinte`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j76_averbacao`: Codigo sequencial do registro.
-- `j76_codigo`: Código sequencial do registro
-- `j76_tipo`: Tipo
-- `j76_tipo_contribuinte`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j76_averbacao` -> `cadastro.averbacao` (j75_codigo) [averbacgm_averbacao_fk]
-- `j76_numcgm` -> `protocolo.cgm` (z01_numcgm) [averbacgm_numcgm_fk]
-- `j76_tipo_contribuinte, j76_tipo_contribuinte, j76_tipo_contribuinte` -> `cadastro.tipocontribuinte` (j147_sequencial, j147_sequencial, j147_sequencial) [tipocontribuinte_sequencial_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbacgmold`
-
-### Identidade
-
-- Nome humano: guarda cgms de antigo proprietarios e promitentes.
-- O que representa: guarda cgms de antigo proprietarios e promitentes
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j79_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j79_averbacao, j79_codigo, j79_numcgm
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j79_averbacao`: Codigo sequencial do registro.
-- `j79_codigo`: Código Sequencial do Registro
-- `j79_numcgm`: Numero de Identificação do Contribuinte ou Empresa no Cadastro geral do Município
-- `j79_principal`: Proprietario ou Promitente principal
-- `j79_tipo`: Tipo
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j79_averbacao`: Codigo sequencial do registro.
-- `j79_codigo`: Código Sequencial do Registro
-- `j79_tipo`: Tipo
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j79_averbacao` -> `cadastro.averbacao` (j75_codigo) [averbacgmold_averbacao_fk]
-- `j79_numcgm` -> `protocolo.cgm` (z01_numcgm) [averbacgmold_numcgm_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbadecisaojudicial`
-
-### Identidade
-
-- Nome humano: Averba Decisão Judicial.
-- O que representa: Averba Decisão Judicial
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j101_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j101_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j101_averbacao`: Averbação
-- `j101_processojudicial`: Processo Judicial
-- `j101_sequencial`: Codigo sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j101_sequencial`: Codigo sequencial
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j101_averbacao` -> `cadastro.averbacao` (j75_codigo) [averbadecisaojudicial_averbacao_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbaescritura`
-
-### Identidade
-
-- Nome humano: averbaescritura.
-- O que representa: averbaescritura
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j94_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j94_averbacao, j94_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j94_averbacao`: Codigo sequencial da averbação.
-- `j94_codigo`: Código sequencial do registro
-- `j94_folha`: Folha
-- `j94_livro`: Livro
-- `j94_numero`: Número
-- `j94_tabelionato`: Tabelionato
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j94_averbacao`: Codigo sequencial da averbação.
-- `j94_codigo`: Código sequencial do registro
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j94_averbacao` -> `cadastro.averbacao` (j75_codigo) [averbaescritura_averbacao_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbaformalpartilha`
-
-### Identidade
-
-- Nome humano: Averbação formal.
-- O que representa: Averbação formal
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j100_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j100_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j100_averbacao`: Averbação
-- `j100_nomeespolio`: Espólio
-- `j100_processojudicial`: Processo Judicial
-- `j100_sequencial`: Codigo sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j100_sequencial`: Codigo sequencial
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j100_averbacao` -> `cadastro.averbacao` (j75_codigo) [averbaformalpartilha_averbacao_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbaformalpartilhacgm`
-
-### Identidade
-
-- Nome humano: Averba formal partilha.
-- O que representa: Averba formal partilha
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j102_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j102_numcgm, j102_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j102_averbaformalpartilha`: Averba sentença Judicial
-- `j102_numcgm`: CGM
-- `j102_sequencial`: Código sequencial
+- `c145_exercicio`: Exercício da competência
+- `c145_instituicao`: Vínculo com a Instituição
+- `c145_mes`: Mês da competência
+- `c145_processado`: Se competência foi processada.
+- `created_at`: Criado em
+- `id`: id
+- `updated_at`: Alterado em
 
 ### Metricas atomicas
 
@@ -1115,8 +473,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j102_averbaformalpartilha` -> `cadastro.averbaformalpartilha` (j100_sequencial) [averbaformalpartilhacgm_averbaformalpartilha_fk]
-- `j102_numcgm` -> `protocolo.cgm` (z01_numcgm) [averbaformalpartilhacgm_numcgm_fk]
+- `c145_instituicao` -> `configuracoes.db_config` (codigo) [apropriacaodecimoferias_c145_instituicao_fkey]
 
 ### Regras de negocio existentes no catalogo
 
@@ -1134,12 +491,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.averbagrupo`
+## Tabela de negocio: `contabilidade.apropriacaodecimoferias_lancamentos`
 
 ### Identidade
 
-- Nome humano: Grupo.
-- O que representa: Grupo
+- Nome humano: Lançamentos da apropriação.
+- O que representa: Lançamentos da apropriação
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -1150,83 +507,20 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j105_sequencial`
+  - `id`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j105_sequencial
+- Candidatas a chave de negocio: c146_apropriacaodecimoferias_id, c146_estornar, c146_regimeprevidencia, id
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j105_descr`: Descrição
-- `j105_sequencial`: Codigo Grupo
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j105_sequencial`: Codigo Grupo
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbaguia`
-
-### Identidade
-
-- Nome humano: Averba Guia.
-- O que representa: Averba Guia
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j104_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j104_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j104_averbacao`: Averbação
-- `j104_guia`: Guia
-- `j104_sequencial`: Código
+- `c146_apropriacaodecimoferias_id`: Vínculo com a apropriacao
+- `c146_conlancam`: Vínculo com o lançamento
+- `c146_estornar`: identificador para saber quais lançamentos estornar
+- `c146_regimeprevidencia`: Vínculo com Regime de Previdência
+- `created_at`: Criado em
+- `id`: id
+- `updated_at`: Alterado em
 
 ### Metricas atomicas
 
@@ -1251,7 +545,9 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j104_averbacao` -> `cadastro.averbacao` (j75_codigo) [averbaguia_averbacao_fk]
+- `c146_apropriacaodecimoferias_id` -> `contabilidade.apropriacaodecimoferias` (id) [apropriacaodecimoferias_lanca_c146_apropriacaodecimoferias_fkey]
+- `c146_conlancam` -> `contabilidade.conlancam` (c70_codlan) [apropriacaodecimoferias_lancamentos_c146_conlancam_fkey]
+- `c146_regimeprevidencia` -> `pessoal.regimeprevidencia` (rh127_sequencial) [apropriacaodecimoferias_lancamentos_c146_regimeprevidencia_fkey]
 
 ### Regras de negocio existentes no catalogo
 
@@ -1269,994 +565,11 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.averbaguiaitbi`
+## Tabela de negocio: `contabilidade.atributos_padrao_msc2019`
 
 ### Identidade
 
-- Nome humano: Averba Guia Itbi.
-- O que representa: Averba Guia Itbi
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j103_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j103_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j103_averbaguia`: Averba guia
-- `j103_itbi`: código itbi
-- `j103_sequencial`: Código
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j103_averbaguia` -> `cadastro.averbaguia` (j104_sequencial) [averbaguiaitbi_averbaguia_fk]
-- `j103_itbi` -> `itbi.itbi` (it01_guia) [averbaguiaitbi_itbi_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbaprocesso`
-
-### Identidade
-
-- Nome humano: averbaprocesso.
-- O que representa: averbaprocesso
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j77_averbacao`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j77_averbacao
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j77_averbacao`: Codigo sequencial do registro.
-- `j77_codproc`: Código do processo
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j77_averbacao`: Codigo sequencial do registro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j77_averbacao` -> `cadastro.averbacao` (j75_codigo) [averbaprocesso_averbacao_fk]
-- `j77_codproc` -> `protocolo.protprocesso` (p58_codproc) [averbaprocesso_codproc_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbaregimovel`
-
-### Identidade
-
-- Nome humano: averbaregimovel.
-- O que representa: averbaregimovel
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j78_averbacao`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j78_averbacao, j78_matric
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j78_averbacao`: Codigo sequencial do registro.
-- `j78_matric`: Matrícula
-- `j78_protocolo`: Protocolo
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j78_averbacao`: Codigo sequencial do registro.
-- `j78_matric`: Matrícula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j78_averbacao` -> `cadastro.averbacao` (j75_codigo) [averbaregimovel_averbacao_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.averbatipo`
-
-### Identidade
-
-- Nome humano: tipos de averbação.
-- O que representa: tipos de averbação
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j93_codigo`
-- Coluna temporal: `j93_datalimite`
-- Candidatas a chave de negocio: j93_codigo
-- Candidatas a coluna temporal: j93_datalimite
-
-### Colunas principais
-
-- `j93_averbagrupo`: Grupo
-- `j93_codigo`: Código sequencial do registro
-- `j93_datalimite`: Data limite
-- `j93_descr`: Descrição do tipo de averbação
-- `j93_regra`: Regra do tipo de averbação 1- Proprietarios 2-Promitentes
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j93_averbagrupo`: Grupo
-- `j93_codigo`: Código sequencial do registro
-- `j93_datalimite`: Data limite
-- `j93_descr`: Descrição do tipo de averbação
-- `j93_regra`: Regra do tipo de averbação 1- Proprietarios 2-Promitentes
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j93_averbagrupo` -> `cadastro.averbagrupo` (j105_sequencial) [avertbatipo_averbagrupo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.bairro`
-
-### Identidade
-
-- Nome humano: Cadastro para identificar o nome dos bairros no município..
-- O que representa: Cadastro para identificar o nome dos bairros no município.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j13_codi`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j13_codant`: Código anterior do bairro ( Utilizado para conversão de sistemas )
-- `j13_codi`: Código do bairro
-- `j13_descr`: Descrição do bairro
-- `j13_rural`: indica se o bairro é do meio Rural
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j13_codant`: Código anterior do bairro ( Utilizado para conversão de sistemas )
-- `j13_codi`: Código do bairro
-- `j13_descr`: Descrição do bairro
-- `j13_rural`: indica se o bairro é do meio Rural
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.bairrofator`
-
-### Identidade
-
-- Nome humano: Bairro Fator.
-- O que representa: Bairro Fator
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j112_sequencial`
-- Coluna temporal: `j112_anousu`
-- Candidatas a chave de negocio: j112_sequencial
-- Candidatas a coluna temporal: j112_anousu
-
-### Colunas principais
-
-- `j112_anousu`: Ano Uso
-- `j112_bairro`: Campo Bairro
-- `j112_fator`: Campo Fator
-- `j112_sequencial`: Campo Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j112_anousu`: Ano Uso
-- `j112_bairro`: Campo Bairro
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j112_bairro` -> `cadastro.bairro` (j13_codi) [bairrofator_bairro_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.cadimobil`
-
-### Identidade
-
-- Nome humano: cadastro de imobiliárias.
-- O que representa: cadastro de imobiliárias
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j63_numcgm`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j63_numcgm
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j63_numcgm`: código da imobiliária no cadastro geral do município
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j63_numcgm` -> `protocolo.cgm` (z01_numcgm) [cadimobil_numcgm_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.caracter`
-
-### Identidade
-
-- Nome humano: Cadastro das caracteristicas para lote, face de quadra e construcoes..
-- O que representa: Cadastro das caracteristicas para lote, face de quadra e construcoes.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j31_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j31_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j31_codigo`: Codigo da caracteristica
-- `j31_descr`: Descrição da característica
-- `j31_grupo`: Código do grupo da característica
-- `j31_pontos`: Número de pontos a serem somados para esta característica
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j31_codigo`: Codigo da caracteristica
-- `j31_grupo`: Código do grupo da característica
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j31_grupo` -> `cadastro.cargrup` (j32_grupo) [caracter_grupo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.caractercaracter`
-
-### Identidade
-
-- Nome humano: Vinculação das caracteristicas com as caracteristicas.
-- O que representa: Vinculação das caracteristicas com as caracteristicas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j138_sequencial`
-- Coluna temporal: `j138_anousu`
-- Candidatas a chave de negocio: j138_sequencial
-- Candidatas a coluna temporal: j138_anousu
-
-### Colunas principais
-
-- `j138_aliquota`: Alíquota
-- `j138_anousu`: Ano da característica
-- `j138_caracterdestino`: Caracteristica de Destino
-- `j138_caracterorigem`: Caracter de origem
-- `j138_pontuacao`: Pontuação
-- `j138_sequencial`: Sequencial
-- `j138_valor`: Valor da Característica
-
-### Metricas atomicas
-
-- `j138_aliquota`: Alíquota
-- `j138_valor`: Valor da Característica
-
-### Dimensoes
-
-- `j138_anousu`: Ano da característica
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j138_caracterdestino` -> `cadastro.caracter` (j31_codigo) [caracterponto_caracterdestino_fk]
-- `j138_caracterorigem` -> `cadastro.caracter` (j31_codigo) [caracterponto_caracterorigem_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.caractercaracteristica`
-
-### Identidade
-
-- Nome humano: Vinculo entra caracteristica iptu e catacteristica.
-- O que representa: Vinculo entra caracteristica iptu e catacteristica
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `db143_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: db143_caracter, db143_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `db143_caracter`: Codigo da caracteristica
-- `db143_caracteristica`: Característica do PIT-Sefaz
-- `db143_sequencial`: Código Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `db143_caracter`: Codigo da caracteristica
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `db143_caracter` -> `cadastro.caracter` (j31_codigo) [caractercaracteristica_caracter_fk]
-- `db143_caracteristica` -> `configuracoes.caracteristica` (db140_sequencial) [caractercaracteristica_caracteristica_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.caraliq`
-
-### Identidade
-
-- Nome humano: Aliquotas por caracteristica e ano.
-- O que representa: Aliquotas por caracteristica e ano
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j73_anousu`
-  - `j73_caract`
-- Coluna temporal: `j73_anousu`
-- Candidatas a chave de negocio: j73_caract
-- Candidatas a coluna temporal: j73_anousu
-
-### Colunas principais
-
-- `j73_aliq`: Aliquota
-- `j73_anousu`: Ano
-- `j73_caract`: Codigo da caracteristica
-
-### Metricas atomicas
-
-- `j73_aliq`: Aliquota
-
-### Dimensoes
-
-- `j73_anousu`: Ano
-- `j73_caract`: Codigo da caracteristica
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j73_caract` -> `cadastro.caracter` (j31_codigo) [caraliq_caract_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carbairro`
-
-### Identidade
-
-- Nome humano: carbairro.
-- O que representa: carbairro
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j114_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j114_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j114_bairro`: Bairro
-- `j114_caracter`: Caracter
-- `j114_sequencial`: Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j114_bairro`: Bairro
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j114_bairro` -> `cadastro.bairro` (j13_codi) [carbairro_bairro_fk]
-- `j114_caracter` -> `cadastro.caracter` (j31_codigo) [carbairro_caracter_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carcaractervalor`
-
-### Identidade
-
-- Nome humano: Caracteristica Caracter Valor.
-- O que representa: Caracteristica Caracter Valor
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j119_sequencial`
-- Coluna temporal: `j119_anousu`
-- Candidatas a chave de negocio: j119_sequencial
-- Candidatas a coluna temporal: j119_anousu
-
-### Colunas principais
-
-- `j119_anousu`: Ano
-- `j119_caracteristica1`: Característica 1
-- `j119_caracteristica2`: Caracteristica 2
-- `j119_sequencial`: Código
-- `j119_valor`: Valor
-
-### Metricas atomicas
-
-- `j119_valor`: Valor
-
-### Dimensoes
-
-- `j119_anousu`: Ano
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j119_caracteristica1` -> `cadastro.caracter` (j31_codigo) [carcaractervalor_caracteristica1_fk]
-- `j119_caracteristica2` -> `cadastro.caracter` (j31_codigo) [carcaractervalor_caracteristica2_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carconstr`
-
-### Identidade
-
-- Nome humano: cadastro das caracteristicas de uma construcao.
-- O que representa: cadastro das caracteristicas de uma construcao
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j48_matric`
-  - `j48_idcons`
-  - `j48_caract`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j48_caract, j48_idcons, j48_matric
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j48_caract`: Codigo da caracteristica
-- `j48_idcons`: Codigo da construcao
-- `j48_matric`: Codigo da matricula do imovel
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j48_caract`: Codigo da caracteristica
-- `j48_idcons`: Codigo da construcao
-- `j48_matric`: Codigo da matricula do imovel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j48_caract` -> `cadastro.caracter` (j31_codigo) [carconstr_caract_idcons_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carconstrvalorm2`
-
-### Identidade
-
-- Nome humano: cadastro.carconstrvalorm2.
+- Nome humano: contabilidade.atributos_padrao_msc2019.
 - O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
@@ -2269,25 +582,43 @@ tags:
 - Entidade principal: Preencher.
 - Chave de negocio:
   - Preencher.
-- Coluna temporal: `ano`
+- Coluna temporal: Preencher.
 - Candidatas a chave de negocio: Nenhuma inferida automaticamente.
-- Candidatas a coluna temporal: ano
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `ano`: Preencher significado.
-- `caracter`: Preencher significado.
-- `carelevador`: Preencher significado.
-- `categoria`: Preencher significado.
+- `conta`: Preencher significado.
+- `ic1`: Preencher significado.
+- `ic2`: Preencher significado.
+- `ic3`: Preencher significado.
+- `ic4`: Preencher significado.
+- `ic5`: Preencher significado.
+- `ic6`: Preencher significado.
+- `natureza_valor`: Preencher significado.
+- `tipo1`: Preencher significado.
+- `tipo2`: Preencher significado.
+- `tipo3`: Preencher significado.
+- `tipo4`: Preencher significado.
+- `tipo5`: Preencher significado.
+- `tipo6`: Preencher significado.
+- `tipo_valor`: Preencher significado.
 - `valor`: Preencher significado.
 
 ### Metricas atomicas
 
+- `natureza_valor`
+- `tipo_valor`
 - `valor`
 
 ### Dimensoes
 
-- `ano`
+- `tipo1`
+- `tipo2`
+- `tipo3`
+- `tipo4`
+- `tipo5`
+- `tipo6`
 
 ### Filtros de negocio
 
@@ -2322,12 +653,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.carface`
+## Tabela de negocio: `contabilidade.avaliacaogruporespostaconta`
 
 ### Identidade
 
-- Nome humano: Cadastro das caracteristicas que identificam uma face de quadra..
-- O que representa: Cadastro das caracteristicas que identificam uma face de quadra.
+- Nome humano: Tabela de vínculo da avaliação com a conta.
+- O que representa: Tabela de vínculo da avaliação com a conta
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -2338,17 +669,17 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j38_face`
-  - `j38_caract`
-- Coluna temporal: `j38_datalancamento`
-- Candidatas a chave de negocio: j38_caract, j38_face
-- Candidatas a coluna temporal: j38_datalancamento
+  - `c06_sequencial`
+- Coluna temporal: `c06_ano`
+- Candidatas a chave de negocio: c06_sequencial
+- Candidatas a coluna temporal: c06_ano
 
 ### Colunas principais
 
-- `j38_caract`: Codigo da caracteristica
-- `j38_datalancamento`: Date de Lançamento
-- `j38_face`: Codigo da Face de Quadra
+- `c06_ano`: Ano
+- `c06_avaliacaogruporesposta`: Código da Avaliação Grupo Resposta
+- `c06_conta`: Código da Conta
+- `c06_sequencial`: Sequencial da Tabela
 
 ### Metricas atomicas
 
@@ -2356,9 +687,8 @@ tags:
 
 ### Dimensoes
 
-- `j38_caract`: Codigo da caracteristica
-- `j38_datalancamento`: Date de Lançamento
-- `j38_face`: Codigo da Face de Quadra
+- `c06_ano`: Ano
+- `c06_avaliacaogruporesposta`: Código da Avaliação Grupo Resposta
 
 ### Filtros de negocio
 
@@ -2375,8 +705,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j38_caract` -> `cadastro.caracter` (j31_codigo) [carface_caract_fk]
-- `j38_face` -> `cadastro.face` (j37_face) [carface_face_fk]
+- `c06_avaliacaogruporesposta` -> `habitacao.avaliacaogruporesposta` (db107_sequencial) [avaliacaogruporespostaconta_avaliacaogruporesposta_fk]
+- `c06_conta, c06_conta, c06_ano, c06_ano` -> `contabilidade.conplanoorcamento` (c60_codcon, c60_anousu, c60_codcon, c60_anousu) [avaliacaogruporespostaconta_conta_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -2394,12 +724,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.carfator`
+## Tabela de negocio: `contabilidade.clabensconplano`
 
 ### Identidade
 
-- Nome humano: Fator por caracteristica.
-- O que representa: Fator por caracteristica
+- Nome humano: Tabela de vínculo entra a clabens e a conplano.
+- O que representa: Tabela de vínculo entra a clabens e a conplano
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -2410,18 +740,19 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j74_anousu`
-  - `j74_caract`
-- Coluna temporal: `j74_anousu`
-- Candidatas a chave de negocio: j74_caract
-- Candidatas a coluna temporal: j74_anousu
+  - `t86_sequencial`
+- Coluna temporal: `t86_anousu`
+- Candidatas a chave de negocio: t86_clabens, t86_sequencial
+- Candidatas a coluna temporal: t86_anousu, t86_anousudepreciacao, t86_conplano, t86_conplanodepreciacao, t86_sequencial
 
 ### Colunas principais
 
-- `j74_anousu`: Ano
-- `j74_caract`: Codigo da caracteristica
-- `j74_corrig`: Corrigir
-- `j74_fator`: Fator
+- `t86_anousu`: Exercício
+- `t86_anousudepreciacao`: Exercício
+- `t86_clabens`: Sequencial da classificação do bem
+- `t86_conplano`: Código da Conta
+- `t86_conplanodepreciacao`: Código da Conta
+- `t86_sequencial`: Código sequencial da tabela clabensconplano
 
 ### Metricas atomicas
 
@@ -2429,8 +760,11 @@ tags:
 
 ### Dimensoes
 
-- `j74_anousu`: Ano
-- `j74_caract`: Codigo da caracteristica
+- `t86_anousu`: Exercício
+- `t86_anousudepreciacao`: Exercício
+- `t86_conplano`: Código da Conta
+- `t86_conplanodepreciacao`: Código da Conta
+- `t86_sequencial`: Código sequencial da tabela clabensconplano
 
 ### Filtros de negocio
 
@@ -2447,7 +781,9 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j74_caract` -> `cadastro.caracter` (j31_codigo) [carfator_caract_fk]
+- `t86_clabens` -> `patrimonio.clabens` (t64_codcla) [clabensconplano_clabens_fk]
+- `t86_conplano, t86_conplano, t86_anousu, t86_anousu` -> `contabilidade.conplano` (c60_codcon, c60_anousu, c60_anousu, c60_codcon) [clabensconplano_conplano_ae_fk]
+- `t86_conplanodepreciacao, t86_conplanodepreciacao, t86_anousudepreciacao, t86_anousudepreciacao` -> `contabilidade.conplano` (c60_codcon, c60_anousu, c60_codcon, c60_anousu) [clabensconplano_conplanodepreciacao_ae_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -2465,457 +801,11 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.cargrup`
+## Tabela de negocio: `contabilidade.complanoexe_despesa_ajuste_saldo_msc`
 
 ### Identidade
 
-- Nome humano: Cadastro dos grupos para identificar as caracteristicas que identificao uma mesma propriedade..
-- O que representa: Cadastro dos grupos para identificar as caracteristicas que identificao uma mesma propriedade.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j32_grupo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j32_grupo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j32_descr`: Descrição do grupo das características
-- `j32_grupo`: Código do grupo para identificar os conjuntos de características
-- `j32_tipo`: Tipo de caracteristica L-Lote F-Face de Quadra C-Construcoes I - itbi O - obras A - Água
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j32_descr`: Descrição do grupo das características
-- `j32_grupo`: Código do grupo para identificar os conjuntos de características
-- `j32_tipo`: Tipo de caracteristica L-Lote F-Face de Quadra C-Construcoes I - itbi O - obras A - Água
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carlote`
-
-### Identidade
-
-- Nome humano: Cadastro das caracteristicas dos lotes.
-- O que representa: Cadastro das caracteristicas dos lotes
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j35_idbql`
-  - `j35_caract`
-- Coluna temporal: `j35_dtlanc`
-- Candidatas a chave de negocio: j35_caract, j35_idbql
-- Candidatas a coluna temporal: j35_dtlanc
-
-### Colunas principais
-
-- `j35_caract`: Codigo da caracteristica
-- `j35_dtlanc`: Data de lancamento
-- `j35_idbql`: Codigo de Identificacao do Lote
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j35_caract`: Codigo da caracteristica
-- `j35_dtlanc`: Data de lancamento
-- `j35_idbql`: Codigo de Identificacao do Lote
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j35_caract` -> `cadastro.caracter` (j31_codigo) [carlote_caract_fk]
-- `j35_idbql` -> `cadastro.lote` (j34_idbql) [carlote_idbql_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carpadrao`
-
-### Identidade
-
-- Nome humano: Tabela que contém as caracteristicas padrões dos grupos.
-- O que representa: Tabela que contém as caracteristicas padrões dos grupos
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j33_codgrupo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j33_codcaracter, j33_codgrupo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j33_codcaracter`: Codigo da caracteristica
-- `j33_codgrupo`: Codigo do grupo para identificar os conjuntos de caracteristicas
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j33_codcaracter`: Codigo da caracteristica
-- `j33_codgrupo`: Codigo do grupo para identificar os conjuntos de caracteristicas
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j33_codcaracter` -> `cadastro.caracter` (j31_codigo) [carpadrao_codcaracter_fk]
-- `j33_codgrupo` -> `cadastro.cargrup` (j32_grupo) [carpadrao_codgrupo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carvalor`
-
-### Identidade
-
-- Nome humano: Valores das caracteristicas.
-- O que representa: Valores das caracteristicas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j71_codigo`
-- Coluna temporal: `j71_anousu`
-- Candidatas a chave de negocio: j71_caract, j71_codigo, j71_quantfim, j71_quantini
-- Candidatas a coluna temporal: j71_anousu
-
-### Colunas principais
-
-- `j71_anousu`: Ano
-- `j71_caract`: Codigo da caracteristica
-- `j71_codigo`: Código sequencial
-- `j71_descr`: Descrição
-- `j71_fim`: Valor final
-- `j71_ini`: Valor inicial
-- `j71_quantfim`: Quantidade final
-- `j71_quantini`: Quantidade inicial
-- `j71_valor`: Valor aplicado a caracteristica
-
-### Metricas atomicas
-
-- `j71_fim`: Valor final
-- `j71_ini`: Valor inicial
-- `j71_quantfim`: Quantidade final
-- `j71_quantini`: Quantidade inicial
-- `j71_valor`: Valor aplicado a caracteristica
-
-### Dimensoes
-
-- `j71_anousu`: Ano
-- `j71_caract`: Codigo da caracteristica
-- `j71_codigo`: Código sequencial
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j71_caract` -> `cadastro.caracter` (j31_codigo) [carvalor_caract_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carzonafator`
-
-### Identidade
-
-- Nome humano: Cargo Zona Fator.
-- O que representa: Cargo Zona Fator
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j96_sequencial`
-- Coluna temporal: `j96_anousu`
-- Candidatas a chave de negocio: j96_sequencial
-- Candidatas a coluna temporal: j96_anousu
-
-### Colunas principais
-
-- `j96_anousu`: Ano Uso
-- `j96_caracter`: Campo Caracter
-- `j96_fator`: Campo Fator
-- `j96_sequencial`: Campo Sequencial
-- `j96_zona`: Campo Zona
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j96_anousu`: Ano Uso
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j96_caracter` -> `cadastro.caracter` (j31_codigo) [carzonafator_caracter_fk]
-- `j96_zona` -> `cadastro.zonas` (j50_zona) [carzonafator_zona_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.carzonavalor`
-
-### Identidade
-
-- Nome humano: Valores das caracteristicas por zona.
-- O que representa: Valores das caracteristicas por zona
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: `j72_anousu`
-- Candidatas a chave de negocio: j72_caract, j72_quant, j72_quantfim, j72_quantini, j72_sequencial
-- Candidatas a coluna temporal: j72_anousu
-
-### Colunas principais
-
-- `j72_anousu`: Ano
-- `j72_caract`: Codigo da caracteristica
-- `j72_fim`: Valor final
-- `j72_ini`: Valor inicial
-- `j72_quant`: Quantidade
-- `j72_quantfim`: Quantidade final
-- `j72_quantini`: Quantidade inicial
-- `j72_sequencial`: Código Sequencial
-- `j72_tipo`: Tipo: "P" predial ou "T" territorial
-- `j72_valor`: Valor da caracteristica para esta zona e tipo
-- `j72_zona`: Código da zona fiscal
-
-### Metricas atomicas
-
-- `j72_fim`: Valor final
-- `j72_ini`: Valor inicial
-- `j72_quant`: Quantidade
-- `j72_quantfim`: Quantidade final
-- `j72_quantini`: Quantidade inicial
-- `j72_valor`: Valor da caracteristica para esta zona e tipo
-
-### Dimensoes
-
-- `j72_anousu`: Ano
-- `j72_caract`: Codigo da caracteristica
-- `j72_tipo`: Tipo: "P" predial ou "T" territorial
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j72_caract` -> `cadastro.caracter` (j31_codigo) [carzonavalor_caract_fk]
-- `j72_zona` -> `cadastro.zonas` (j50_zona) [carzonavalor_zona_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.cdd_rj`
-
-### Identidade
-
-- Nome humano: cadastro.cdd_rj.
+- Nome humano: contabilidade.complanoexe_despesa_ajuste_saldo_msc.
 - O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
@@ -2927,25 +817,458 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - Preencher.
+  - `c156_codigo`
+- Coluna temporal: `c156_exercicio`
+- Candidatas a chave de negocio: c156_codigo, c156_reduzido
+- Candidatas a coluna temporal: c156_exercicio
+
+### Colunas principais
+
+- `c156_codigo`: Preencher significado.
+- `c156_elemento`: Preencher significado.
+- `c156_exercicio`: Preencher significado.
+- `c156_funcao`: Preencher significado.
+- `c156_natureza`: Preencher significado.
+- `c156_recurso`: Preencher significado.
+- `c156_reduzido`: Preencher significado.
+- `c156_subfuncao`: Preencher significado.
+- `c156_valor`: Preencher significado.
+
+### Metricas atomicas
+
+- `c156_valor`
+
+### Dimensoes
+
+- `c156_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c156_elemento, c156_elemento, c156_exercicio, c156_exercicio` -> `orcamento.orcelemento` (o56_codele, o56_anousu, o56_anousu, o56_codele) [complanoexe_despesa_ajuste_saldo_msc_c156_elemento_fkey]
+- `c156_funcao` -> `orcamento.orcfuncao` (o52_funcao) [complanoexe_despesa_ajuste_saldo_msc_c156_funcao_fkey]
+- `c156_recurso` -> `orcamento.orctiporec` (o15_codigo) [complanoexe_despesa_ajuste_saldo_msc_c156_recurso_fkey]
+- `c156_reduzido, c156_reduzido, c156_exercicio, c156_exercicio` -> `contabilidade.conplanoreduz` (c61_anousu, c61_reduz, c61_reduz, c61_anousu) [complanoexe_despesa_ajuste_saldo_msc_c156_reduzido_fkey]
+- `c156_subfuncao` -> `orcamento.orcsubfuncao` (o53_subfuncao) [complanoexe_despesa_ajuste_saldo_msc_c156_subfuncao_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.complanoexe_receita_ajuste_saldo_msc`
+
+### Identidade
+
+- Nome humano: contabilidade.complanoexe_receita_ajuste_saldo_msc.
+- O que representa: Preencher em linguagem de negocio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c157_codigo`
+- Coluna temporal: `c157_exercicio`
+- Candidatas a chave de negocio: c157_codigo, c157_reduzido
+- Candidatas a coluna temporal: c157_exercicio
+
+### Colunas principais
+
+- `c157_codigo`: Preencher significado.
+- `c157_exercicio`: Preencher significado.
+- `c157_natureza`: Preencher significado.
+- `c157_receita`: Preencher significado.
+- `c157_recurso`: Preencher significado.
+- `c157_reduzido`: Preencher significado.
+- `c157_valor`: Preencher significado.
+
+### Metricas atomicas
+
+- `c157_valor`
+
+### Dimensoes
+
+- `c157_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c157_receita, c157_receita, c157_exercicio, c157_exercicio` -> `orcamento.orcfontes` (o57_codfon, o57_anousu, o57_anousu, o57_codfon) [complanoexe_receita_ajuste_saldo_msc_c157_receita_fkey]
+- `c157_recurso` -> `orcamento.orctiporec` (o15_codigo) [complanoexe_receita_ajuste_saldo_msc_c157_recurso_fkey]
+- `c157_reduzido, c157_reduzido, c157_exercicio, c157_exercicio` -> `contabilidade.conplanoreduz` (c61_anousu, c61_reduz, c61_anousu, c61_reduz) [complanoexe_receita_ajuste_saldo_msc_c157_reduzido_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conaberturaexe`
+
+### Identidade
+
+- Nome humano: Abertura do exercício.
+- O que representa: Abertura do exercício
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c91_sequencial`
+- Coluna temporal: `c91_anousudestino`
+- Candidatas a chave de negocio: c91_id_usuario, c91_sequencial
+- Candidatas a coluna temporal: c91_anousudestino, c91_anousuorigem, c91_data
+
+### Colunas principais
+
+- `c91_anousudestino`: Ano de Destino da duplicação
+- `c91_anousuorigem`: Ano de Origem da duplicação
+- `c91_data`: Data de criação
+- `c91_hora`: Hora da Importação
+- `c91_id_usuario`: Código Usuário
+- `c91_instit`: Código da Insitituição
+- `c91_origem`: Origem
+- `c91_ppa`: Se tem ppa
+- `c91_sequencial`: Sequencial
+- `c91_situacao`: Situação
+- `c91_tipo`: TIpo da Importação
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c91_anousudestino`: Ano de Destino da duplicação
+- `c91_anousuorigem`: Ano de Origem da duplicação
+- `c91_data`: Data de criação
+- `c91_tipo`: TIpo da Importação
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c91_id_usuario` -> `configuracoes.db_usuarios` (id_usuario) [conaberturaexe_id_fk]
+- `c91_instit` -> `configuracoes.db_config` (codigo) [conaberturaexe_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conarquivospad`
+
+### Identidade
+
+- Nome humano: Arquivos do PAD dos exercícios anteriores..
+- O que representa: Arquivos do PAD dos exercícios anteriores.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c54_codarq`
+- Coluna temporal: `c54_anousu`
+- Candidatas a chave de negocio: c54_codtrib
+- Candidatas a coluna temporal: c54_anousu, c54_arquivo, c54_codtrib
+
+### Colunas principais
+
+- `c54_anousu`: exercício
+- `c54_arquivo`: Arquivo completo do ano anterior.
+- `c54_codarq`: Código do Arquivo do PAD
+- `c54_codtrib`: identificador de agrupamento
+- `c54_nomearq`: Nome do Arquivo
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c54_anousu`: exercício
+- `c54_arquivo`: Arquivo completo do ano anterior.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.concadtce`
+
+### Identidade
+
+- Nome humano: cadastro de tribunal de contas.
+- O que representa: cadastro de tribunal de contas
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c10_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c10_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c10_db_uf`: código do estado
+- `c10_nome`: Nome do tribunal
+- `c10_sequencial`: Codigo sequencial
+- `c10_sigla`: Sigla
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c10_sequencial`: Codigo sequencial
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c10_db_uf` -> `protocolo.db_uf` (db12_codigo) [concadtce_uf_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.concarpeculiar`
+
+### Identidade
+
+- Nome humano: Caracteristicas Pecualiares.
+- O que representa: Caracteristicas Pecualiares
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c58_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c58_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c58_db_estruturavalor`: Código da Estrutura
+- `c58_descr`: Descrição.
+- `c58_estrutural`: Código
+- `c58_sequencial`: Código sequencial.
+- `c58_tipo`: Tipo de Conta
+
+### Metricas atomicas
+
+- `c58_db_estruturavalor`: Código da Estrutura
+
+### Dimensoes
+
+- `c58_tipo`: Tipo de Conta
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c58_db_estruturavalor` -> `configuracoes.db_estruturavalor` (db121_sequencial) [concarpeculiar_db_estruturavalor_fk]
+- `c58_tipo` -> `orcamento.concarpeculiarclassificacao` (c09_sequencial) [concarpeculiar_tipo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conclass`
+
+### Identidade
+
+- Nome humano: Classificação da conta, se executivo, rpps....
+- O que representa: Classificação da conta, se executivo, rpps...
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c51_codcla`
 - Coluna temporal: Preencher.
 - Candidatas a chave de negocio: Nenhuma inferida automaticamente.
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `cdd`: Preencher significado.
-- `cdd_desc`: Preencher significado.
-- `cep_f1f`: Preencher significado.
-- `cep_f1i`: Preencher significado.
-- `cep_f2f`: Preencher significado.
-- `cep_f2i`: Preencher significado.
-- `cep_f3f`: Preencher significado.
-- `cep_f3i`: Preencher significado.
-- `ctc`: Preencher significado.
-- `ctc_desc`: Preencher significado.
-- `seq`: Preencher significado.
-- `uf`: Preencher significado.
+- `c51_codcla`: classificação da conta conforme o poder Executivo Legislativo
+- `c51_descr`: Descrição da classificação
 
 ### Metricas atomicas
 
@@ -2988,12 +1311,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.cdd_rj_final`
+## Tabela de negocio: `contabilidade.condataconf`
 
 ### Identidade
 
-- Nome humano: cadastro.cdd_rj_final.
-- O que representa: Preencher em linguagem de negocio.
+- Nome humano: Configuracao da data para não liberar os lancamentos contábeis.
+- O que representa: Configuracao da data para não liberar os lancamentos contábeis
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3004,19 +1327,438 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - Preencher.
+  - `c99_anousu`
+  - `c99_instit`
+- Coluna temporal: `c99_anousu`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c99_anousu, c99_data, c99_usuario
+
+### Colunas principais
+
+- `c99_anousu`: Exercício
+- `c99_data`: Data Limite
+- `c99_instit`: Instittuição
+- `c99_usuario`: Usuario que alterou ou inclui data limite.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c99_anousu`: Exercício
+- `c99_data`: Data Limite
+- `c99_usuario`: Usuario que alterou ou inclui data limite.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c99_instit` -> `configuracoes.db_config` (codigo) [condataconf_instit_fk]
+- `c99_usuario` -> `configuracoes.db_usuarios` (id_usuario) [condataconf_usuario_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conencerramento`
+
+### Identidade
+
+- Nome humano: Encerramento do Ano contabil.
+- O que representa: Encerramento do Ano contabil
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c42_sequencial`
+- Coluna temporal: `c42_anousu`
+- Candidatas a chave de negocio: c42_sequencial
+- Candidatas a coluna temporal: c42_anousu, c42_data
+
+### Colunas principais
+
+- `c42_anousu`: Ano
+- `c42_coddoc`: Evento Contábil
+- `c42_data`: Data
+- `c42_encerramentotipo`: Código do Encerramento
+- `c42_hora`: Hora
+- `c42_instit`: Código Integer
+- `c42_sequencial`: Código Sequencial
+- `c42_usuario`: Código do Usuário
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c42_anousu`: Ano
+- `c42_data`: Data
+- `c42_encerramentotipo`: Código do Encerramento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c42_encerramentotipo` -> `contabilidade.conencerramentotipo` (c43_sequencial) [conencerramento_encerramentotipo_fk]
+- `c42_instit` -> `configuracoes.db_config` (codigo) [conencerramento_instit_fk]
+- `c42_usuario` -> `configuracoes.db_usuarios` (id_usuario) [conencerramento_usuario_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conencerramentolancam`
+
+### Identidade
+
+- Nome humano: Lancamentos do Encerramento lançamentos contabeis realizados para o fechamento do ano contabil..
+- O que representa: Lancamentos do Encerramento lançamentos contabeis realizados para o fechamento do ano contabil.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c44_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c44_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c44_conlancam`: Código do Lançamento
+- `c44_encerramento`: Código do Encerramento
+- `c44_sequencial`: Código Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c44_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conencerramentolancam_conlancam_fk]
+- `c44_encerramento` -> `contabilidade.conencerramento` (c42_sequencial) [conencerramentolancam_encerramento_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conencerramentotipo`
+
+### Identidade
+
+- Nome humano: Tipos de Encerramento anual.
+- O que representa: Tipos de Encerramento anual
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c43_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c43_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c43_descr`: Descrição
+- `c43_sequencial`: Código Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.configuracaoinstituicaosiconfi`
+
+### Identidade
+
+- Nome humano: Configuração de Instituições que devem prestar contas para o Siconfi..
+- O que representa: Configuração de Instituições que devem prestar contas para o Siconfi.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c125_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c125_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c125_db_config`: Vínculo com a instituição.
+- `c125_sequencial`: Código sequencial da tabela.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c125_db_config` -> `configuracoes.db_config` (codigo) [configuracaoinstituicaosiconfi_config_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.congrupo`
+
+### Identidade
+
+- Nome humano: Grupo de Contas.
+- O que representa: Grupo de Contas
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c20_sequencial`
+- Coluna temporal: `c20_tipo`
+- Candidatas a chave de negocio: c20_sequencial
+- Candidatas a coluna temporal: c20_tipo
+
+### Colunas principais
+
+- `c20_descr`: Descrição do grupo.
+- `c20_sequencial`: Cód. Sequencial.
+- `c20_tipo`: Tipo de grupo do plano de contas.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c20_descr`: Descrição do grupo.
+- `c20_tipo`: Tipo de grupo do plano de contas.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conhist`
+
+### Identidade
+
+- Nome humano: Cadastro dos hitóricos dos lançamentos.
+- O que representa: Cadastro dos hitóricos dos lançamentos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c50_codhist`
 - Coluna temporal: Preencher.
 - Candidatas a chave de negocio: Nenhuma inferida automaticamente.
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `cdd_desc`: Preencher significado.
-- `cepfim`: Preencher significado.
-- `cepini`: Preencher significado.
-- `ctc_desc`: Preencher significado.
-- `seq`: Preencher significado.
-- `uf`: Preencher significado.
+- `c50_codhist`: Código do histórico do lançamento contábil
+- `c50_compl`: Aceita complemento no lançamento contábil
+- `c50_descr`: Descrição do hitórico
 
 ### Metricas atomicas
 
@@ -3059,12 +1801,356 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.cdd_rj_v2`
+## Tabela de negocio: `contabilidade.conhistdoc`
 
 ### Identidade
 
-- Nome humano: cadastro.cdd_rj_v2.
-- O que representa: Preencher em linguagem de negocio.
+- Nome humano: Históricos de Lançamentos.
+- O que representa: Históricos de Lançamentos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c53_coddoc`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c53_coddoc
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c53_coddoc`: Código do Documento que identifica o lançamento automático
+- `c53_descr`: Descrição do lançamento
+- `c53_tipo`: Tipo de Lançamento
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c53_tipo`: Tipo de Lançamento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c53_tipo` -> `contabilidade.conhistdoctipo` (c57_sequencial) [conhistdoc_tipo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conhistdocdocumentovariavel`
+
+### Identidade
+
+- Nome humano: Conjuto de váriaves a ser utilizada pela conhistdocregra.
+- O que representa: Conjuto de váriaves a ser utilizada pela conhistdocregra
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c93_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c93_sequencial, c93_variavel
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c93_conhistdoctipo`: Código do tipo de documento
+- `c93_descricao`: Descrição da váriável
+- `c93_sequencial`: Código Sequencial
+- `c93_variavel`: Váriavel utilizada na regra. Ex.: [numcgm]
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c93_conhistdoctipo`: Código do tipo de documento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c93_conhistdoctipo` -> `contabilidade.conhistdoctipo` (c57_sequencial) [conhistdocdocumentovariavel_conhistdoctipo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conhistdocregra`
+
+### Identidade
+
+- Nome humano: Tabela com regras para cada tipo de Documento. Através da execução da regra podemos localizar o Documento corréto..
+- O que representa: Tabela com regras para cada tipo de Documento. Através da execução da regra podemos localizar o Documento corréto.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c92_sequencial`
+- Coluna temporal: `c92_anousu`
+- Candidatas a chave de negocio: c92_sequencial
+- Candidatas a coluna temporal: c92_anousu
+
+### Colunas principais
+
+- `c92_anousu`: Ano do Exercício
+- `c92_conhistdoc`: Documento contábil
+- `c92_descricao`: Descrição da régra
+- `c92_regra`: Regra
+- `c92_sequencial`: Código da Regra
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c92_anousu`: Ano do Exercício
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c92_conhistdoc` -> `contabilidade.conhistdoc` (c53_coddoc) [conhistdocregra_conhistdoc_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conhistdoctipo`
+
+### Identidade
+
+- Nome humano: Tipo de Documento.
+- O que representa: Tipo de Documento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c57_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c57_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c57_descricao`: Descrição
+- `c57_sequencial`: Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancam`
+
+### Identidade
+
+- Nome humano: Lançamentos Contábeis.
+- O que representa: Lançamentos Contábeis
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c70_codlan`
+- Coluna temporal: `c70_anousu`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c70_anousu, c70_data
+
+### Colunas principais
+
+- `c70_anousu`: Exercício do lançamento
+- `c70_codlan`: Código Lançamento
+- `c70_data`: Data do lançamento
+- `c70_valor`: Valor do Lançamento
+
+### Metricas atomicas
+
+- `c70_valor`: Valor do Lançamento
+
+### Dimensoes
+
+- `c70_anousu`: Exercício do lançamento
+- `c70_data`: Data do lançamento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamaberturaexercicio`
+
+### Identidade
+
+- Nome humano: Lançamento de abertura de registro.
+- O que representa: Lançamento de abertura de registro
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3076,18 +2162,511 @@ tags:
 - Entidade principal: Preencher.
 - Chave de negocio:
   - Preencher.
+- Coluna temporal: `c80_aberturaexercicio`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c80_aberturaexercicio
+
+### Colunas principais
+
+- `c80_aberturaexercicio`: Abertura do registro
+- `c80_conlancam`: Lançamento
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c80_aberturaexercicio` -> `contabilidade.aberturaexercicio` (c81_sequencial) [conlancamaberturaexercicio_aberturaexercicio_fk]
+- `c80_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancamaberturaexercicio_conlancam_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamaberturaexercicioorcamento`
+
+### Identidade
+
+- Nome humano: Tabela de vínculo entre a abertura de exercicios de orçamento com os lançamentos da contabilidade.
+- O que representa: Tabela de vínculo entre a abertura de exercicios de orçamento com os lançamentos da contabilidade
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c105_sequencial`
+- Coluna temporal: `c105_aberturaexercicioorcamento`
+- Candidatas a chave de negocio: c105_aberturaexercicioorcamento, c105_sequencial
+- Candidatas a coluna temporal: c105_aberturaexercicioorcamento, c105_sequencial
+
+### Colunas principais
+
+- `c105_aberturaexercicioorcamento`: Chave primária sequencial da tabela de Abertura de exercício de orçamento
+- `c105_codlan`: Código Lançamento
+- `c105_sequencial`: Chave primária sequencial da tabela de vínculo entre os lançamentos da contabilidade com a abertura de exercício (aberturaexercicioorcamento)
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c105_aberturaexercicioorcamento` -> `contabilidade.aberturaexercicioorcamento` (c104_sequencial) [conlancamaberturaexercicioorcamento_aberturaexercicioorcamento_]
+- `c105_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamaberturaexercicioorcamento_codlan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamacordo`
+
+### Identidade
+
+- Nome humano: Tabela de ligação entre o lançamento contábil e o acordo.
+- O que representa: Tabela de ligação entre o lançamento contábil e o acordo
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c87_codlan`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c87_acordo, c87_codlan, c87_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c87_acordo`: Sequencial do Acordo - FK com a tabela acordo
+- `c87_codlan`: Sequencial do Lançamento. FK com a tabela conlancam
+- `c87_sequencial`: Sequencial de controle
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c87_acordo` -> `acordos.acordo` (ac16_sequencial) [conlancamacordo_acordo_fk]
+- `c87_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamacordo_codlan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamajustesaldoconta`
+
+### Identidade
+
+- Nome humano: contabilidade.conlancamajustesaldoconta.
+- O que representa: Preencher em linguagem de negocio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c155_codigo`
+- Coluna temporal: `c155_exercicio`
+- Candidatas a chave de negocio: c155_codigo
+- Candidatas a coluna temporal: c155_exercicio
+
+### Colunas principais
+
+- `c155_ai`: Preencher significado.
+- `c155_codigo`: Preencher significado.
+- `c155_conlancam`: Preencher significado.
+- `c155_elemento`: Preencher significado.
+- `c155_exercicio`: Preencher significado.
+- `c155_funcao`: Preencher significado.
+- `c155_receita`: Preencher significado.
+- `c155_subfuncao`: Preencher significado.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c155_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c155_elemento, c155_elemento, c155_exercicio, c155_exercicio` -> `orcamento.orcelemento` (o56_anousu, o56_codele, o56_anousu, o56_codele) [conlancamajustesaldoconta_c155_elemento_fkey]
+- `c155_funcao` -> `orcamento.orcfuncao` (o52_funcao) [conlancamajustesaldoconta_c155_funcao_fkey]
+- `c155_receita, c155_receita, c155_exercicio, c155_exercicio` -> `orcamento.orcfontes` (o57_codfon, o57_anousu, o57_codfon, o57_anousu) [conlancamajustesaldoconta_c155_receita_fkey]
+- `c155_subfuncao` -> `orcamento.orcsubfuncao` (o53_subfuncao) [conlancamajustesaldoconta_c155_subfuncao_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancambem`
+
+### Identidade
+
+- Nome humano: Associação do Bem com Lançamento.
+- O que representa: Associação do Bem com Lançamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c110_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c110_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c110_bem`: Código do Bem associado ao lançamento
+- `c110_codlan`: Código do lançamento contábil
+- `c110_sequencial`: Sequencial da tabela
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c110_bem` -> `patrimonio.bens` (t52_bem) [conlancambem_bem_fk]
+- `c110_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancambem_codlan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancambol`
+
+### Identidade
+
+- Nome humano: tabale que contem os lançamentos contábeis gerados pelo processamento do boletim..
+- O que representa: tabale que contem os lançamentos contábeis gerados pelo processamento do boletim.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c77_codlan`
+- Coluna temporal: `c77_anousu`
+- Candidatas a chave de negocio: c77_id
+- Candidatas a coluna temporal: c77_anousu, c77_databol, c77_dataproc
+
+### Colunas principais
+
+- `c77_anousu`: .
+- `c77_autent`: Código da Autenticação gerado pelo caixa. Este numero começa em um para cada caixa e cada dia que possuir autenticação
+- `c77_boletim`: .
+- `c77_codlan`: .
+- `c77_databol`: .
+- `c77_dataproc`: data do processamento
+- `c77_id`: Código gerado para autenticação
+- `c77_instit`: instituição do boletim
+- `c77_valor`: .
+
+### Metricas atomicas
+
+- `c77_valor`: .
+
+### Dimensoes
+
+- `c77_anousu`: .
+- `c77_databol`: .
+- `c77_dataproc`: data do processamento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c77_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancambol_codlan_fk]
+- `c77_databol, c77_databol, c77_instit, c77_instit` -> `caixa.boletim` (k11_data, k11_instit, k11_data, k11_instit) [conlancambol_databol_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamcgm`
+
+### Identidade
+
+- Nome humano: Numcgm do Lançamento.
+- O que representa: Numcgm do Lançamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c76_codlan`
+- Coluna temporal: `c76_data`
+- Candidatas a chave de negocio: c76_numcgm
+- Candidatas a coluna temporal: c76_data
+
+### Colunas principais
+
+- `c76_codlan`: Código Lançamento
+- `c76_data`: Data
+- `c76_numcgm`: Numero de Identificação do Contribuinte ou Empresa no Cadastro geral do Município
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c76_data`: Data
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c76_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamcgm_codlan_fk]
+- `c76_numcgm` -> `protocolo.cgm` (z01_numcgm) [conlancamcgm_numcgm_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamcompl`
+
+### Identidade
+
+- Nome humano: Complemento do Lançamento.
+- O que representa: Complemento do Lançamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c72_codlan`
 - Coluna temporal: Preencher.
 - Candidatas a chave de negocio: Nenhuma inferida automaticamente.
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `cdd_desc`: Preencher significado.
-- `cepfim`: Preencher significado.
-- `cepini`: Preencher significado.
-- `ctc_desc`: Preencher significado.
-- `seq`: Preencher significado.
-- `uf`: Preencher significado.
+- `c72_codlan`: Código Lançamento
+- `c72_complem`: Texto Complementar
 
 ### Metricas atomicas
 
@@ -3112,7 +2691,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- Nenhum relacionamento catalogado.
+- `c72_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamcompl_codlan_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -3130,12 +2709,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.certidaoexistencia`
+## Tabela de negocio: `contabilidade.conlancamcomplementorecurso`
 
 ### Identidade
 
-- Nome humano: certidão de existência de construção.
-- O que representa: certidão de existência de construção
+- Nome humano: conlancamcomplementorecurso.
+- O que representa: conlancamcomplementorecurso
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3146,44 +2725,25 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j133_sequencial`
-- Coluna temporal: `j133_data`
-- Candidatas a chave de negocio: j133_areaconstruida, j133_arearealconstruida, j133_arquivo, j133_matric, j133_sequencial
-- Candidatas a coluna temporal: j133_data, j133_dathabite, j133_dtprocesso
+  - `o201_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: o201_orctiporec, o201_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j133_areaconstruida`: Informação referente a Área Construída do Lote.
-- `j133_arealote`: Informação referente a Área do Lote.
-- `j133_arearealconstruida`: Informação referente a Área Real Construída do Lote.
-- `j133_areareallote`: Informação referente a Área Real do Lote.
-- `j133_arquivo`: Este campo armazena o oid do arquivo da certidão de existência, exportado para a base
-- `j133_data`: Data
-- `j133_dathabite`: Informação referente a Data do Habite-se.
-- `j133_db_usuarios`: Usuário que emitiu
-- `j133_dtprocesso`: Data do Processo
-- `j133_hora`: Hora
-- `j133_iptuconstr`: onstrução
-- `j133_matric`: Matrícula
-- `j133_numhabite`: Informação referente ao Número do Habite-se.
-- `j133_observacao`: Observação
-- `j133_processo`: Número do processo
-- `j133_sequencial`: Sequencial
-- `j133_titulaprocesso`: Titular do Processo
+- `o201_codlan`: Código do Lançamento
+- `o201_complemento`: Complemento da Fonte de Recurso
+- `o201_orctiporec`: Id do Recurso
+- `o201_sequencial`: Sequencial
 
 ### Metricas atomicas
 
-- `j133_areaconstruida`: Informação referente a Área Construída do Lote.
-- `j133_arealote`: Informação referente a Área do Lote.
-- `j133_arearealconstruida`: Informação referente a Área Real Construída do Lote.
-- `j133_areareallote`: Informação referente a Área Real do Lote.
+- Preencher apenas se houver coluna numerica com significado de negocio.
 
 ### Dimensoes
 
-- `j133_data`: Data
-- `j133_dathabite`: Informação referente a Data do Habite-se.
-- `j133_dtprocesso`: Data do Processo
-- `j133_matric`: Matrícula
+- `o201_orctiporec`: Id do Recurso
 
 ### Filtros de negocio
 
@@ -3200,8 +2760,9 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j133_matric, j133_matric, j133_iptuconstr, j133_iptuconstr` -> `cadastro.iptuconstr` (j39_matric, j39_idcons, j39_matric, j39_idcons) [certidaoexistencia_matric_iptuconstr_fk]
-- `j133_db_usuarios` -> `configuracoes.db_usuarios` (id_usuario) [certidaoexistencia_usuarios_fk]
+- `o201_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamcomplementorecurso_codlan_fk]
+- `o201_complemento` -> `orcamento.complementofonterecurso` (o200_sequencial) [conlancamcomplementorecurso_complemento_fk]
+- `o201_orctiporec` -> `orcamento.orctiporec` (o15_codigo) [conlancamcomplementorecurso_recurso_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -3219,12 +2780,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.certidaoexistenciaprotprocesso`
+## Tabela de negocio: `contabilidade.conlancamconcarpeculiar`
 
 ### Identidade
 
-- Nome humano: Processo certidão existência.
-- O que representa: Processo certidão existência
+- Nome humano: conlancamconcarpeculiar.
+- O que representa: conlancamconcarpeculiar
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3235,16 +2796,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j134_sequencial`
+  - `c08_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j134_certidaoexistencia, j134_protprocesso, j134_sequencial
+- Candidatas a chave de negocio: c08_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j134_certidaoexistencia`: Certidão de existência
-- `j134_protprocesso`: Processo certidão existência
-- `j134_sequencial`: Sequencial
+- `c08_codlan`: Código do Lançamento
+- `c08_concarpeculiar`: C.Peculiar/C.Aplicação
+- `c08_sequencial`: Código Sequencial
 
 ### Metricas atomicas
 
@@ -3269,8 +2830,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j134_certidaoexistencia` -> `cadastro.certidaoexistencia` (j133_sequencial) [certidaoexistenciaprotprocesso_certidaoexistencia_fk]
-- `j134_protprocesso` -> `protocolo.protprocesso` (p58_codproc) [certidaoexistenciaprotprocesso_protprocesso_fk]
+- `c08_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamconcarpeculiar_codlan_fk]
+- `c08_concarpeculiar` -> `contabilidade.concarpeculiar` (c58_sequencial) [conlancamconcarpeculiar_concarpeculiar_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -3288,12 +2849,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.certidoesdiversas`
+## Tabela de negocio: `contabilidade.conlancamcorgrupocorrente`
 
 ### Identidade
 
-- Nome humano: cadastro.certidoesdiversas.
-- O que representa: Preencher em linguagem de negocio.
+- Nome humano: Tabela de ligação entra os grupo da corrente e o lançamento contábil (conlancam).
+- O que representa: Tabela de ligação entra os grupo da corrente e o lançamento contábil (conlancam)
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3304,25 +2865,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j183_id`
-- Coluna temporal: `j183_data`
-- Candidatas a chave de negocio: j183_id, j183_id_usuario, j183_inscr_iss, j183_matric_iptu, j183_numcgm
-- Candidatas a coluna temporal: j183_data, j183_dtprocesso
+  - `c23_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c23_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j183_data`: Preencher significado.
-- `j183_dtprocesso`: Preencher significado.
-- `j183_id`: Preencher significado.
-- `j183_id_usuario`: Preencher significado.
-- `j183_inscr_iss`: Preencher significado.
-- `j183_matric_iptu`: Preencher significado.
-- `j183_numcgm`: Preencher significado.
-- `j183_observacao`: Preencher significado.
-- `j183_processo`: Preencher significado.
-- `j183_responsavel`: Preencher significado.
-- `j183_titulaprocesso`: Preencher significado.
-- `j183_titulo`: Preencher significado.
+- `c23_conlancam`: Código do Lançamento
+- `c23_corgrupocorrente`: Código do grupo
+- `c23_sequencial`: Código Sequencial
 
 ### Metricas atomicas
 
@@ -3330,8 +2882,7 @@ tags:
 
 ### Dimensoes
 
-- `j183_data`
-- `j183_matric_iptu`
+- `c23_corgrupocorrente`: Código do grupo
 
 ### Filtros de negocio
 
@@ -3348,10 +2899,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j183_id_usuario` -> `configuracoes.db_usuarios` (id_usuario) [certidoesdiversas_j183_id_usuario_fk]
-- `j183_inscr_iss` -> `issqn.issbase` (q02_inscr) [certidoesdiversas_j183_inscr_iss_fk]
-- `j183_matric_iptu` -> `cadastro.iptubase` (j01_matric) [certidoesdiversas_j183_matric_iptu_fk]
-- `j183_numcgm` -> `protocolo.cgm` (z01_numcgm) [certidoesdiversas_j183_numcgm_fk]
+- `c23_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancamcorgrupocorrente_conlancam_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -3369,12 +2917,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.certidoesdiversasprotprocesso`
+## Tabela de negocio: `contabilidade.conlancamcorrente`
 
 ### Identidade
 
-- Nome humano: cadastro.certidoesdiversasprotprocesso.
-- O que representa: Preencher em linguagem de negocio.
+- Nome humano: Tabela de vinculo entre lancamentos e corrente id, data, autent, lancamento.
+- O que representa: Tabela de vinculo entre lancamentos e corrente id, data, autent, lancamento
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3385,16 +2933,87 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j184_id`
+  - `c86_sequencial`
+- Coluna temporal: `c86_data`
+- Candidatas a chave de negocio: c86_id, c86_sequencial
+- Candidatas a coluna temporal: c86_data
+
+### Colunas principais
+
+- `c86_autent`: autent
+- `c86_conlancam`: conlancam
+- `c86_data`: Data
+- `c86_id`: Sequencial ID
+- `c86_sequencial`: conlancamcorrente
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c86_data`: Data
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c86_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancamcorrente_conlancam_fk]
+- `c86_id, c86_id, c86_id, c86_data, c86_data, c86_data, c86_autent, c86_autent, c86_autent` -> `caixa.corrente` (k12_id, k12_data, k12_autent, k12_autent, k12_id, k12_data, k12_id, k12_autent, k12_data) [conlancamcorrente_id_data_autent_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamdepartamento`
+
+### Identidade
+
+- Nome humano: Departamento de origem do lancamento.
+- O que representa: Departamento de origem do lancamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c128_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j184_id, j184_id_certidoesdiversas
+- Candidatas a chave de negocio: c128_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j184_id`: Preencher significado.
-- `j184_id_certidoesdiversas`: Preencher significado.
-- `j184_protprocesso`: Preencher significado.
+- `c128_conlancam`: Código do Lancamento
+- `c128_departamento`: Código do departamento
+- `c128_sequencial`: Código Sequencial
 
 ### Metricas atomicas
 
@@ -3419,8 +3038,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j184_id_certidoesdiversas` -> `cadastro.certidoesdiversas` (j183_id) [certidoesdiversasprotprocesso_j184_id_certidao_fk]
-- `j184_protprocesso` -> `protocolo.protprocesso` (p58_codproc) [certidoesdiversasprotprocesso_j184_protprocesso_fk]
+- `c128_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancamdepartamento_conlancam_fk]
+- `c128_departamento` -> `configuracoes.db_depart` (coddepto) [conlancamdepartamento_departamento_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -3438,12 +3057,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.cfiptu`
+## Tabela de negocio: `contabilidade.conlancamdepreciacao`
 
 ### Identidade
 
-- Nome humano: Controle dos dados para calculo do iptu.
-- O que representa: Controle dos dados para calculo do iptu
+- Nome humano: Tabela de vínculo entre o lançamento das depreciações de bens (bensdepreciacaolancamento ) com os lançamentos da contabilidade (conlancam).
+- O que representa: Tabela de vínculo entre o lançamento das depreciações de bens (bensdepreciacaolancamento ) com os lançamentos da contabilidade (conlancam)
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3454,406 +3073,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j18_anousu`
-- Coluna temporal: `j18_anousu`
-- Candidatas a chave de negocio: j18_dadoscertisen, j18_db_sysfuncoes, j18_formatlote, j18_formatquadra, j18_formatsetor
-- Candidatas a coluna temporal: j18_anousu, j18_dtoper, j18_permvenc
-
-### Colunas principais
-
-- `j18_anousu`: Exercício dos dados para calulo do iptu
-- `j18_calcvenc`: Campo Desabilitado
-- `j18_dadoscertisen`: Dados da Certidão de Isenção
-- `j18_db_sysfuncoes`: Codigo de controle para identificar a função
-- `j18_dtoper`: Data base para correção do calculo do iptu
-- `j18_excconscalc`: Excluir construção do Cálculo
-- `j18_formatlote`: Validação feita quando vai incluir uma quadra se aceita apenas números ou números e letras.
-- `j18_formatquadra`: Validação feita quando vai incluir uma quadra se aceita apenas números ou números e letras.
-- `j18_formatsetor`: Tipo de validação que vai ser feita para incluir setor aceitar somente numeros ou números e letras
-- `j18_infla`: Código do Inflator
-- `j18_iptuhistisen`: Código do histórico de cálculo do IPTU
-- `j18_logradauto`: Código do Logradouro Automático
-- `j18_ordendent`: Ordem no endereco de entrega
-- `j18_perccorrepadrao`: Percentual de correção
-- `j18_permvenc`: Altera cadastro para Calculo Parcial.rn0 = pemite calculo para o ano; rn1 = permite selecionar dia vencimento, parcela e % desconto da parcela unica para o calculo; rn2 = permite selecionar parcela inicial e final, % desconto da parcela unica para o calculo
-- `j18_receitacreditorecalculo`: Receita de Crédito utilizada no recálculo
-- `j18_rpredi`: Codigo da receita do arquivo tabrec para o iptu dos imóveis prediais
-- `j18_rterri`: Codigo da receita dos imoveis territoriais
-- `j18_segundavia`: Segunda Via rnCarne
-- `j18_templatecertidaoexitencia`: Documento Template
-- `j18_templatecertidaoisencao`: Template da Certidão de Isenção
-- `j18_testadanumero`: Utiliza numero na testada
-- `j18_textoprom`: Texto que aparecerá antes do nome do Promitente, caso houver, nas views PROPRIETARIO e PROPRIETARIO_NOME.
-- `j18_tipodebitorecalculo`: Tipo de Débito utilizado no Recálculo
-- `j18_tipoisen`: Codigo do tipo de isencao, para isencao automatica
-- `j18_utidadosdiver`: Utiliza dados diversos no calculo de iptu(iptudiversos)
-- `j18_utilizaloc`: Utilizar informações de localização
-- `j18_utilizasetfisc`: Utiliza Setor FIscal
-- `j18_utilpontos`: Utilizar pontuação por construção
-- `j18_vencim`: Código da tabela de vencimento a ser utilizada no cálculo do iptu.
-- `j18_vlrref`: Valor de referencia do calculo do iptu
-
-### Metricas atomicas
-
-- `j18_perccorrepadrao`: Percentual de correção
-- `j18_vlrref`: Valor de referencia do calculo do iptu
-
-### Dimensoes
-
-- `j18_anousu`: Exercício dos dados para calulo do iptu
-- `j18_db_sysfuncoes`: Codigo de controle para identificar a função
-- `j18_dtoper`: Data base para correção do calculo do iptu
-- `j18_formatsetor`: Tipo de validação que vai ser feita para incluir setor aceitar somente numeros ou números e letras
-- `j18_permvenc`: Altera cadastro para Calculo Parcial.rn0 = pemite calculo para o ano; rn1 = permite selecionar dia vencimento, parcela e % desconto da parcela unica para o calculo; rn2 = permite selecionar parcela inicial e final, % desconto da parcela unica para o calculo
-- `j18_rpredi`: Codigo da receita do arquivo tabrec para o iptu dos imóveis prediais
-- `j18_rterri`: Codigo da receita dos imoveis territoriais
-- `j18_tipodebitorecalculo`: Tipo de Débito utilizado no Recálculo
-- `j18_tipoisen`: Codigo do tipo de isencao, para isencao automatica
-- `j18_utilizasetfisc`: Utiliza Setor FIscal
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j18_infla` -> `inflatores.inflan` (i01_codigo) [cfiptu_infla_fk]
-- `j18_iptuhistisen` -> `cadastro.iptucalh` (j17_codhis) [cfiptu_j18_iptuhistisen_fk]
-- `j18_templatecertidaoexitencia` -> `configuracoes.db_documentotemplate` (db82_sequencial) [cfiptu_j18_templatecertidaoexitencia_fk]
-- `j18_receitacreditorecalculo` -> `caixa.tabrec` (k02_codigo) [cfiptu_receitacreditorecalculo_fk]
-- `j18_tipodebitorecalculo` -> `caixa.arretipo` (k00_tipo) [cfiptu_tipodebitorecalculo_fk]
-- `j18_tipoisen` -> `cadastro.tipoisen` (j45_tipo) [cfiptu_tipoisen_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.civitasinfoscomplementar`
-
-### Identidade
-
-- Nome humano: Tabela que quarda informacoes complementares..
-- O que representa: Tabela que quarda informacoes complementares.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `matricula`
+  - `c106_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: codigo_api, matricula, nova_matricula
+- Candidatas a chave de negocio: c106_bensdepreciacaolancamento, c106_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `codigo_api`: Codigo unico recebido pela webservice do civitas na carga de dados
-- `matricula`: Log da matrícula
-- `nova_matricula`: Campo para guardar o vinculo da matriucla temporaria com matricula oficial gerada
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `codigo_api`: Codigo unico recebido pela webservice do civitas na carga de dados
-- `matricula`: Log da matrícula
-- `nova_matricula`: Campo para guardar o vinculo da matriucla temporaria com matricula oficial gerada
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.cliente`
-
-### Identidade
-
-- Nome humano: Cadastro de clientes.
-- O que representa: Cadastro de clientes
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j99_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j99_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j99_codigo`: Código do cliente
-- `j99_nome`: Nome do cliente
-- `j99_obs`: Observação
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j99_codigo`: Código do cliente
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.clientedebito`
-
-### Identidade
-
-- Nome humano: Cliente Debito.
-- O que representa: Cliente Debito
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j98_sequencia`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j98_codigo_cliente
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j98_codigo_cliente`: Código do Cliente
-- `j98_sequencia`: sequencia
-- `j98_valor`: valor
-
-### Metricas atomicas
-
-- `j98_valor`: valor
-
-### Dimensoes
-
-- `j98_codigo_cliente`: Código do Cliente
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j98_codigo_cliente` -> `cadastro.cliente` (j99_codigo) [clientedebito_codigo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.condominio`
-
-### Identidade
-
-- Nome humano: Condomínio.
-- O que representa: Condomínio
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j107_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j107_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j107_areacomumedificada`: recarregarDados = true;
-- `j107_areacomumlote`: Área Comun do Lote
-- `j107_areagaragem`: Área de Garagem
-- `j107_nome`: Nome do condomínio
-- `j107_sequencial`: Código Sequencial
-- `j107_tipo`: Tipo do condomínio
-
-### Metricas atomicas
-
-- `j107_areacomumedificada`: recarregarDados = true;
-- `j107_areacomumlote`: Área Comun do Lote
-- `j107_areagaragem`: Área de Garagem
-
-### Dimensoes
-
-- `j107_tipo`: Tipo do condomínio
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.condominiocgm`
-
-### Identidade
-
-- Nome humano: CGM do Condomínio.
-- O que representa: CGM do Condomínio
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j106_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j106_numcgm, j106_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j106_condominio`: Cód. Condomínio
-- `j106_numcgm`: Cód. CGM
-- `j106_sequencial`: Código Sequencial
+- `c106_bensdepreciacaolancamento`: Chave primária sequencial dos lançamentos de depreciação de bens
+- `c106_codlan`: Código Lançamento
+- `c106_sequencial`: Chave primária sequencial da tabela de vinculo entre Lançamentos de depreciação de bens com os lançamentos da contabilidade
 
 ### Metricas atomicas
 
@@ -3878,8 +3107,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j106_condominio` -> `cadastro.condominio` (j107_sequencial) [condominiocgm_condominio_fk]
-- `j106_numcgm` -> `protocolo.cgm` (z01_numcgm) [condominiocgm_j106_numcgm_fkey]
+- `c106_bensdepreciacaolancamento` -> `patrimonio.bensdepreciacaolancamento` (t78_sequencial) [conlancamdepreciacao_bensdepreciacaolancamento_fk]
+- `c106_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamdepreciacao_codlan_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -3897,12 +3126,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.condominioprocesso`
+## Tabela de negocio: `contabilidade.conlancamdig`
 
 ### Identidade
 
-- Nome humano: condominio condominio > condominiosgm condominio > condominioprocesso.
-- O que representa: condominio condominio > condominiosgm condominio > condominioprocesso
+- Nome humano: Identificação do grupo de lançamentos.
+- O que representa: Identificação do grupo de lançamentos
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3913,16 +3142,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j179_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j179_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+  - `c78_codlan`
+- Coluna temporal: `c78_data`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c78_data
 
 ### Colunas principais
 
-- `j179_condominio`: j179_condominio
-- `j179_processo`: j179_processo
-- `j179_sequencial`: j179_sequencial
+- `c78_chave`: Lote de agrupamento dos lançamentos contábeis
+- `c78_codlan`: Código Lançamento
+- `c78_data`: Data
 
 ### Metricas atomicas
 
@@ -3930,7 +3159,7 @@ tags:
 
 ### Dimensoes
 
-- Preencher dimensoes de agrupamento/filtro.
+- `c78_data`: Data
 
 ### Filtros de negocio
 
@@ -3947,8 +3176,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j179_condominio` -> `cadastro.condominio` (j107_sequencial) [condominioprocesso_j179_condominio_fk]
-- `j179_processo` -> `protocolo.protprocesso` (p58_codproc) [condominioprocesso_j179_processo_fk]
+- `c78_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamdig_codlan_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -3966,12 +3194,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.configuracaogrupocaracteristicas`
+## Tabela de negocio: `contabilidade.conlancamdoc`
 
 ### Identidade
 
-- Nome humano: Configuração Grupo de Características.
-- O que representa: Configuração Grupo de Características
+- Nome humano: Código do Documento Automático Lançamento.
+- O que representa: Código do Documento Automático Lançamento
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -3982,15 +3210,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `db144_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: db144_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+  - `c71_codlan`
+- Coluna temporal: `c71_data`
+- Candidatas a chave de negocio: c71_coddoc
+- Candidatas a coluna temporal: c71_data
 
 ### Colunas principais
 
-- `db144_sequencial`: Código Sequencial
-- `db144_tipoutilizacaoiptu`: Tipo de Utilização IPTU
+- `c71_coddoc`: Código do Documento que identifica o lançamento automático
+- `c71_codlan`: Código Lançamento
+- `c71_data`: Data
 
 ### Metricas atomicas
 
@@ -3998,7 +3227,7 @@ tags:
 
 ### Dimensoes
 
-- `db144_tipoutilizacaoiptu`: Tipo de Utilização IPTU
+- `c71_data`: Data
 
 ### Filtros de negocio
 
@@ -4015,7 +3244,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `db144_tipoutilizacaoiptu` -> `cadastro.cargrup` (j32_grupo) [configuracaogrupocaracteristicas_tipoutilizacaoiptu_fk]
+- `c71_coddoc` -> `contabilidade.conhistdoc` (c53_coddoc) [conlancamdoc_coddoc_fk]
+- `c71_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamdoc_codlan_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -4033,12 +3263,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.constrcar`
+## Tabela de negocio: `contabilidade.conlancamdot`
 
 ### Identidade
 
-- Nome humano: Cadastro das caracteristicas das construcoes escrituradas.
-- O que representa: Cadastro das caracteristicas das construcoes escrituradas
+- Nome humano: Dotação do Lançamento.
+- O que representa: Dotação do Lançamento
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -4049,18 +3279,17 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j53_matric`
-  - `j53_idcons`
-  - `j53_caract`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j53_caract, j53_idcons, j53_matric
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+  - `c73_codlan`
+- Coluna temporal: `c73_anousu`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c73_anousu, c73_data
 
 ### Colunas principais
 
-- `j53_caract`: Codigo da caracteristica
-- `j53_idcons`: Numero da construcao escriturada
-- `j53_matric`: Codigo da matricula do imovel
+- `c73_anousu`: Exercício da dotação
+- `c73_coddot`: Código da Dotação
+- `c73_codlan`: Código Lançamento
+- `c73_data`: Data
 
 ### Metricas atomicas
 
@@ -4068,8 +3297,8 @@ tags:
 
 ### Dimensoes
 
-- `j53_caract`: Codigo da caracteristica
-- `j53_matric`: Codigo da matricula do imovel
+- `c73_anousu`: Exercício da dotação
+- `c73_data`: Data
 
 ### Filtros de negocio
 
@@ -4086,7 +3315,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j53_matric, j53_matric, j53_idcons, j53_idcons` -> `cadastro.constrescr` (j52_matric, j52_idcons, j52_matric, j52_idcons) [constrcar_matric_idcons_fk]
+- `c73_anousu, c73_anousu, c73_coddot, c73_coddot` -> `orcamento.orcdotacao` (o58_coddot, o58_anousu, o58_anousu, o58_coddot) [conlancamdot_ae_coddot_fk]
+- `c73_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamdot_codlan_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -4104,12 +3334,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.constrescr`
+## Tabela de negocio: `contabilidade.conlancamele`
 
 ### Identidade
 
-- Nome humano: cadastro das Construcoes escrituradas.
-- O que representa: cadastro das Construcoes escrituradas
+- Nome humano: Elementos dos lançamentos.
+- O que representa: Elementos dos lançamentos
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -4120,2756 +3350,15 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j52_matric`
-  - `j52_idcons`
-- Coluna temporal: `j52_ano`
-- Candidatas a chave de negocio: j52_area, j52_codigo, j52_idaument, j52_idcons, j52_matric
-- Candidatas a coluna temporal: j52_ano, j52_dtdemo, j52_dtlan
-
-### Colunas principais
-
-- `j52_ano`: Ano da Construcao
-- `j52_area`: Area em m2 construida
-- `j52_areap`: Area privada da construcao
-- `j52_codigo`: Codigo da Rua no cadastro de ruas
-- `j52_compl`: Complemento da Numeracao do Imovel
-- `j52_dtdemo`: Data da demolição da construção
-- `j52_dtlan`: Data da inclusao da construcao
-- `j52_idaument`: Código da construção principal
-- `j52_idcons`: Codigo da Construcao
-- `j52_matric`: matricula do Imovel
-- `j52_numero`: Numero da construcao (casa)
-
-### Metricas atomicas
-
-- `j52_area`: Area em m2 construida
-- `j52_areap`: Area privada da construcao
-
-### Dimensoes
-
-- `j52_ano`: Ano da Construcao
-- `j52_codigo`: Codigo da Rua no cadastro de ruas
-- `j52_dtdemo`: Data da demolição da construção
-- `j52_dtlan`: Data da inclusao da construcao
-- `j52_idcons`: Codigo da Construcao
-- `j52_matric`: matricula do Imovel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j52_codigo` -> `cadastro.ruas` (j14_codigo) [constrescr_codigo_fk]
-- `j52_matric` -> `cadastro.iptubase` (j01_matric) [constrescr_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.db_imgsitbi`
-
-### Identidade
-
-- Nome humano: tabela de imagens do ITBI.
-- O que representa: tabela de imagens do ITBI
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: `data`
-- Candidatas a chave de negocio: matricula
-- Candidatas a coluna temporal: data
-
-### Colunas principais
-
-- `arq`: arquivo das imagens do itbi
-- `data`: data
-- `matricula`: Log da matrícula
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `data`: data
-- `matricula`: Log da matrícula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.dne`
-
-### Identidade
-
-- Nome humano: cadastro.dne.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: d01_cidade, j14_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `d01_bairro`: Preencher significado.
-- `d01_cep`: Preencher significado.
-- `d01_cidade`: Preencher significado.
-- `d01_coddne`: Preencher significado.
-- `d01_compl`: Preencher significado.
-- `d01_final`: Preencher significado.
-- `d01_inicial`: Preencher significado.
-- `d01_logradouro`: Preencher significado.
-- `d01_loteamento`: Preencher significado.
-- `d01_parimpar`: Preencher significado.
-- `d01_tipo`: Preencher significado.
-- `d01_uf`: Preencher significado.
-- `j13_codi`: Preencher significado.
-- `j14_codigo`: Preencher significado.
-- `j34_loteam`: Preencher significado.
-- `j88_tipo`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `d01_bairro`
-- `d01_tipo`
-- `j14_codigo`
-- `j88_tipo`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.doi`
-
-### Identidade
-
-- Nome humano: cadastro.doi.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j180_id`
-- Coluna temporal: `j180_ano_registro`
-- Candidatas a chave de negocio: j180_id, j180_id_registro_imoveis, j180_id_usuario
-- Candidatas a coluna temporal: j180_ano_registro, j180_data_importacao
-
-### Colunas principais
-
-- `j180_ano_registro`: Preencher significado.
-- `j180_data_importacao`: Preencher significado.
-- `j180_hash`: Preencher significado.
-- `j180_id`: Preencher significado.
-- `j180_id_registro_imoveis`: Preencher significado.
-- `j180_id_usuario`: Preencher significado.
-- `j180_mes_registro`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j180_ano_registro`
-- `j180_data_importacao`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j180_id_registro_imoveis` -> `cadastro.setorregimovel` (j69_sequencial) [doi_j180_id_registro_imoveis_fk]
-- `j180_id_usuario` -> `configuracoes.db_usuarios` (id_usuario) [doi_j180_id_usuario_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.doi_importacao`
-
-### Identidade
-
-- Nome humano: cadastro.doi_importacao.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j181_id`
-- Coluna temporal: `j181_data`
-- Candidatas a chave de negocio: j181_id, j181_id_doi, j181_matricula, j181_numcgm
-- Candidatas a coluna temporal: j181_data, j181_data_processamento
-
-### Colunas principais
-
-- `j181_cpfcnpj_adquirente`: Preencher significado.
-- `j181_cpfcnpj_transmitente`: Preencher significado.
-- `j181_data`: Preencher significado.
-- `j181_data_processamento`: Preencher significado.
-- `j181_id`: Preencher significado.
-- `j181_id_doi`: Preencher significado.
-- `j181_matricula`: Preencher significado.
-- `j181_numcgm`: Preencher significado.
-- `j181_rgi`: Preencher significado.
-- `j181_tipo_transacao`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j181_data`
-- `j181_data_processamento`
-- `j181_matricula`
-- `j181_tipo_transacao`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j181_id_doi` -> `cadastro.doi` (j180_id) [doi_importacao_j181_id_doi_fk]
-- `j181_numcgm` -> `protocolo.cgm` (z01_numcgm) [doi_importacao_j181_numcgm_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.doi_inconsistencias`
-
-### Identidade
-
-- Nome humano: cadastro.doi_inconsistencias.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j182_id`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j182_id, j182_id_doi
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j182_cpfcnpj_adquirente`: Preencher significado.
-- `j182_id`: Preencher significado.
-- `j182_id_doi`: Preencher significado.
-- `j182_mensagem`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j182_id_doi` -> `cadastro.doi` (j180_id) [doi_inconsistencias_j182_id_doi_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.face`
-
-### Identidade
-
-- Nome humano: Cadastro das faces de quadras do municipio.
-- O que representa: Cadastro das faces de quadras do municipio
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j37_face`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j37_codigo, j37_face, j37_lado, j37_outros, j37_profr
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j37_cep`: Preencher significado.
-- `j37_codigo`: Código do logradouro onde a face está localizada.
-- `j37_exten`: É a distância entre as duas esquinas onde a face está localizada.
-- `j37_face`: Código da face de quadra que identifica um setor, quadra e rua
-- `j37_lado`: Identificacao do lado da face em relacao a numeracao I - Impar P - Par
-- `j37_outros`: Identificar dados nao constantes nos arquivos. Utilizado normalmente em conversao de sistemas
-- `j37_profr`: Valor em metros lineares da profundidade da quadra
-- `j37_quadra`: Codigo da Quadra
-- `j37_setor`: Codigo do setor
-- `j37_valor`: Valor do m2 da face de quadra para calculo do iptu
-- `j37_vlcons`: Valor do m2 a ser calculado no iptu para as construcoes de uma determinada face de quadra
-- `j37_zona`: Zona fiscal
-
-### Metricas atomicas
-
-- `j37_profr`: Valor em metros lineares da profundidade da quadra
-- `j37_valor`: Valor do m2 da face de quadra para calculo do iptu
-- `j37_vlcons`: Valor do m2 a ser calculado no iptu para as construcoes de uma determinada face de quadra
-
-### Dimensoes
-
-- `j37_codigo`: Código do logradouro onde a face está localizada.
-- `j37_face`: Código da face de quadra que identifica um setor, quadra e rua
-- `j37_quadra`: Codigo da Quadra
-- `j37_setor`: Codigo do setor
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j37_codigo` -> `cadastro.ruas` (j14_codigo) [face_codigo_fk]
-- `j37_setor` -> `cadastro.setor` (j30_codi) [face_setor_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.facevalor`
-
-### Identidade
-
-- Nome humano: Valores da face por ano.
-- O que representa: Valores da face por ano
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j81_codigo`
-- Coluna temporal: `j81_anousu`
-- Candidatas a chave de negocio: j81_codigo, j81_face
-- Candidatas a coluna temporal: j81_anousu
-
-### Colunas principais
-
-- `j81_anousu`: Ano relativo ao valor informado
-- `j81_codigo`: Codigo sequencial
-- `j81_face`: Código da face de quadra que identifica um setor, quadra e rua
-- `j81_valorconstr`: Valor m2 construção
-- `j81_valorterreno`: Valor m2 terreno
-
-### Metricas atomicas
-
-- `j81_anousu`: Ano relativo ao valor informado
-- `j81_valorconstr`: Valor m2 construção
-- `j81_valorterreno`: Valor m2 terreno
-
-### Dimensoes
-
-- `j81_codigo`: Codigo sequencial
-- `j81_face`: Código da face de quadra que identifica um setor, quadra e rua
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j81_face` -> `cadastro.face` (j37_face) [facevalor_face_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.histocorrenciaprocesso`
-
-### Identidade
-
-- Nome humano: Guarda os processos vinculados a ocorrencia.
-- O que representa: Guarda os processos vinculados a ocorrencia
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `ar26_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: ar26_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `ar26_histocorrencia`: Preencher significado.
-- `ar26_processo`: Preencher significado.
-- `ar26_sequencial`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `ar26_histocorrencia` -> `arrecadacao.histocorrencia` (ar23_sequencial) [histocorrenciaprocesso_histocorrencia_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.imobil`
-
-### Identidade
-
-- Nome humano: Cadastro para identificar a imobiliaria que responde pelo imovel..
-- O que representa: Cadastro para identificar a imobiliaria que responde pelo imovel.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j44_matric`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j44_matric, j44_numcgm
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j44_matric`: Matricula do Imovel
-- `j44_numcgm`: Codigo do contribuinte no CGM
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j44_matric`: Matricula do Imovel
-- `j44_numcgm`: Codigo do contribuinte no CGM
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j44_matric` -> `cadastro.iptubase` (j01_matric) [imobil_matric_fk]
-- `j44_numcgm` -> `protocolo.cgm` (z01_numcgm) [imobil_numcgm_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuant`
-
-### Identidade
-
-- Nome humano: cadastro para identificar as matricula quando troca oo nunmero nas conversoes de sistemas.
-- O que representa: cadastro para identificar as matricula quando troca oo nunmero nas conversoes de sistemas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j40_matric`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j40_matric, j40_refant
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j40_matric`: Matricula do imovel
-- `j40_refant`: Codigo da matricula no sistema anterior
-- `j40_registrocartografico`: Armazenar código para localizar imóveis.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j40_matric`: Matricula do imovel
-- `j40_refant`: Codigo da matricula no sistema anterior
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j40_matric` -> `cadastro.iptubase` (j01_matric) [iptuant_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptubaixa`
-
-### Identidade
-
-- Nome humano: Tabela das baixas de matricula.
-- O que representa: Tabela das baixas de matricula
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j02_matric`
-- Coluna temporal: `j02_data`
-- Candidatas a chave de negocio: j02_matric, j02_usuario
-- Candidatas a coluna temporal: j02_data, j02_dtbaixa
-
-### Colunas principais
-
-- `j02_data`: Data que foi efetuado o procedimento no sistema
-- `j02_dtbaixa`: Data da baixa
-- `j02_hora`: Hora
-- `j02_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j02_motivo`: Motivo da baixa
-- `j02_usuario`: codigo do usuario
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j02_data`: Data que foi efetuado o procedimento no sistema
-- `j02_dtbaixa`: Data da baixa
-- `j02_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j02_usuario`: codigo do usuario
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j02_matric` -> `cadastro.iptubase` (j01_matric) [iptubaixa_matric_fk]
-- `j02_usuario` -> `configuracoes.db_usuarios` (id_usuario) [iptubaixa_usuario_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptubaixaproc`
-
-### Identidade
-
-- Nome humano: Processo de protocolo da baixa de matricula.
-- O que representa: Processo de protocolo da baixa de matricula
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j03_matric`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j03_matric
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j03_codproc`: Código do processo
-- `j03_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j03_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j03_codproc` -> `protocolo.protprocesso` (p58_codproc) [iptubaixaproc_codproc_fk]
-- `j03_matric` -> `cadastro.iptubaixa` (j02_matric) [iptubaixaproc_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptubase`
-
-### Identidade
-
-- Nome humano: Cadastro das matricula que identificam proprietarios de um determinado lote..
-- O que representa: Cadastro das matricula que identificam proprietarios de um determinado lote.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j01_matric`
-- Coluna temporal: `j01_baixa`
-- Candidatas a chave de negocio: j01_baixa, j01_codave, j01_fracao, j01_idbql, j01_matric
-- Candidatas a coluna temporal: j01_baixa
-
-### Colunas principais
-
-- `j01_baixa`: Data da baixa da matricula
-- `j01_codave`: Codigo da averbacao da matricula
-- `j01_fracao`: Fracao ideal da matricula em relacao ao total da area contruida e da area do terreno
-- `j01_idbql`: Codigo do lote que pertence a matricula
-- `j01_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j01_numcgm`: Codigo do numero do cadastro geral do municipio.
-- `j01_tipo_contribuinte`: Preencher significado.
-- `j01_vagas`: Vagas
-
-### Metricas atomicas
-
-- `j01_fracao`: Fracao ideal da matricula em relacao ao total da area contruida e da area do terreno
-
-### Dimensoes
-
-- `j01_baixa`: Data da baixa da matricula
-- `j01_codave`: Codigo da averbacao da matricula
-- `j01_idbql`: Codigo do lote que pertence a matricula
-- `j01_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j01_numcgm`: Codigo do numero do cadastro geral do municipio.
-- `j01_tipo_contribuinte`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j01_idbql` -> `cadastro.lote` (j34_idbql) [iptubase_idbql_fk]
-- `j01_numcgm` -> `protocolo.cgm` (z01_numcgm) [iptubase_numcgm_fk]
-- `j01_tipo_contribuinte, j01_tipo_contribuinte, j01_tipo_contribuinte` -> `cadastro.tipocontribuinte` (j147_sequencial, j147_sequencial, j147_sequencial) [tipocontribuinte_sequencial_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptubasecep`
-
-### Identidade
-
-- Nome humano: cadastro.iptubasecep.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j01_matric
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `cep`: Preencher significado.
-- `j01_matric`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j01_matric`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptubasecondominio`
-
-### Identidade
-
-- Nome humano: IPTU Base do Condomínio.
-- O que representa: IPTU Base do Condomínio
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j108_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j108_matric, j108_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j108_condominio`: Código do Condomínio
-- `j108_matric`: Código da Matrícula
-- `j108_sequencial`: Código sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j108_matric`: Código da Matrícula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j108_condominio` -> `cadastro.condominio` (j107_sequencial) [iptubasecondominio_condominio_fk]
-- `j108_matric` -> `cadastro.iptubase` (j01_matric) [iptubasecondominio_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptubasepredio`
-
-### Identidade
-
-- Nome humano: IPTU Base Prédio.
-- O que representa: IPTU Base Prédio
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j109_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j109_matric, j109_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j109_matric`: Código do IPTU BASE
-- `j109_predio`: Código do Prédio
-- `j109_sequencial`: Código Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j109_matric`: Código do IPTU BASE
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j109_matric` -> `cadastro.iptubase` (j01_matric) [iptubasepredio_matric_fk]
-- `j109_predio` -> `cadastro.predio` (j111_sequencial) [iptubasepredio_predio_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptubaseregimovel`
-
-### Identidade
-
-- Nome humano: dados do registro de imóveis.
-- O que representa: dados do registro de imóveis
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j04_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j04_matric, j04_matricregimo, j04_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j04_loteregimo`: Lote do registro de imóveis
-- `j04_matric`: Matrícula
-- `j04_matricregimo`: Matrícula do registro de imóveis
-- `j04_quadraregimo`: Quadra do registro de imóveis
-- `j04_sequencial`: Código sequencial
-- `j04_setorregimovel`: Setor do registro de imóveis
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j04_matric`: Matrícula
-- `j04_matricregimo`: Matrícula do registro de imóveis
-- `j04_setorregimovel`: Setor do registro de imóveis
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j04_matric` -> `cadastro.iptubase` (j01_matric) [iptubaseregimovel_matric_fk]
-- `j04_setorregimovel` -> `cadastro.setorregimovel` (j69_sequencial) [iptubaseregimovel_setorregimovel_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucadlogcalc`
-
-### Identidade
-
-- Nome humano: Cadastro dos tipos de log do calculo de IPTU.
-- O que representa: Cadastro dos tipos de log do calculo de IPTU
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j62_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j62_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j62_codigo`: Codigo
-- `j62_descr`: Descricao
-- `j62_erro`: Se é erro ou nao
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j62_codigo`: Codigo
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucadtaxa`
-
-### Identidade
-
-- Nome humano: Cadastro de taxas para calculo de Iptu.
-- O que representa: Cadastro de taxas para calculo de Iptu
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j07_iptucadtaxa`
-- Coluna temporal: `j07_iptucadtaxa`
-- Candidatas a chave de negocio: j07_iptucadtaxa
-- Candidatas a coluna temporal: j07_iptucadtaxa
-
-### Colunas principais
-
-- `j07_descr`: Descrição da taxa
-- `j07_iptucadtaxa`: Codigo da taxa
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j07_iptucadtaxa`: Codigo da taxa
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucadtaxaexe`
-
-### Identidade
-
-- Nome humano: Cadastro de dados da taxa por ano.
-- O que representa: Cadastro de dados da taxa por ano
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j08_iptucadtaxaexe`
-- Coluna temporal: `j08_anousu`
-- Candidatas a chave de negocio: j08_db_sysfuncoes, j08_iptucadtaxa, j08_iptucadtaxaexe
-- Candidatas a coluna temporal: j08_anousu, j08_iptucadtaxa, j08_iptucadtaxaexe
-
-### Colunas principais
-
-- `j08_aliq`: Aliquota por taxa
-- `j08_anousu`: Ano da taxa que está sendo cadastrada
-- `j08_arretipo`: Tipo de débito
-- `j08_cadvencdesc`: Vínculo com o cadastro de vencimento
-- `j08_db_sysfuncoes`: Codigo de controle para identificar a função
-- `j08_histisen`: Código do histórico de cálculo do IPTU
-- `j08_iptucadtaxa`: Codigo da taxa
-- `j08_iptucadtaxaexe`: Codigo taxa/exerc
-- `j08_iptucalh`: historico do iptucalh
-- `j08_procdiver`: Procedência da taxa
-- `j08_tabrec`: Código da Receita
-- `j08_valor`: Valor da taxa
-
-### Metricas atomicas
-
-- `j08_aliq`: Aliquota por taxa
-- `j08_valor`: Valor da taxa
-
-### Dimensoes
-
-- `j08_anousu`: Ano da taxa que está sendo cadastrada
-- `j08_arretipo`: Tipo de débito
-- `j08_db_sysfuncoes`: Codigo de controle para identificar a função
-- `j08_iptucadtaxa`: Codigo da taxa
-- `j08_iptucadtaxaexe`: Codigo taxa/exerc
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j08_iptucadtaxa` -> `cadastro.iptucadtaxa` (j07_iptucadtaxa) [iptucadtaxaexe_iptucadtaxa_fk]
-- `j08_iptucalh` -> `cadastro.iptucalh` (j17_codhis) [iptucadtaxaexe_iptucalh_fk]
-- `j08_tabrec` -> `caixa.tabrec` (k02_codigo) [iptucadtaxaexe_tabrec_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucadzonaentrega`
-
-### Identidade
-
-- Nome humano: Cadastro das zonas de entrega.
-- O que representa: Cadastro das zonas de entrega
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j85_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j85_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j85_codigo`: Codigo da zona de entrega
-- `j85_descr`: Descricao da zona de entrega
-- `j85_ender`: Endereco da zona de entrega
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j85_codigo`: Codigo da zona de entrega
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucadzonaentregaend`
-
-### Identidade
-
-- Nome humano: Codigo do logradouro, numero do imovel e complemento do cadastro de zona de entrega.
-- O que representa: Codigo do logradouro, numero do imovel e complemento do cadastro de zona de entrega
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j87_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j87_iptucadzonaentrega, j87_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j87_compl`: Complemento
-- `j87_iptucadzonaentrega`: Codigo da zona de entrega
-- `j87_lograd`: código do logradouro cadastrado no sistema
-- `j87_numero`: Numero do imovel
-- `j87_sequencial`: Sequencial do iptucadzonaentregaend
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j87_iptucadzonaentrega`: Codigo da zona de entrega
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j87_iptucadzonaentrega` -> `cadastro.iptucadzonaentrega` (j85_codigo) [iptucadzonaentregaend_iptucadzonaentrega_fk]
-- `j87_lograd` -> `cadastro.ruas` (j14_codigo) [iptucadzonaentregaend_lograd_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalc`
-
-### Identidade
-
-- Nome humano: Dados dos calculos de iptu, onde consta o valor venal do terreno e outros dados..
-- O que representa: Dados dos calculos de iptu, onde consta o valor venal do terreno e outros dados.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j23_anousu`
-  - `j23_matric`
-- Coluna temporal: `j23_anousu`
-- Candidatas a chave de negocio: j23_matric
-- Candidatas a coluna temporal: j23_anousu
-
-### Colunas principais
-
-- `j23_aliq`: Aliquota gerada para o iptu
-- `j23_anousu`: Exercicio do calculo
-- `j23_areaed`: Area total edificada gerada no momento do calculo
-- `j23_areafr`: Area fracionada gerada no momento do calculo
-- `j23_arealo`: Area gerada no momento do calculo
-- `j23_m2terr`: Valor do m2 lancado para o calculo do valor venal do terreno
-- `j23_manual`: Log do calculo
-- `j23_matric`: Matricula do imovel do arquivo iptubase
-- `j23_testad`: Testada gerada para o calculo do iptu
-- `j23_tipocalculo`: Tipo de calculo
-- `j23_tipoim`: Tipo de imposto - P predial e T territorial
-- `j23_vlrisen`: Valor gerado de isencao no calculo do iptu
-- `j23_vlrter`: valor venal do terreno gerado no calculo
-
-### Metricas atomicas
-
-- `j23_aliq`: Aliquota gerada para o iptu
-- `j23_areaed`: Area total edificada gerada no momento do calculo
-- `j23_areafr`: Area fracionada gerada no momento do calculo
-- `j23_arealo`: Area gerada no momento do calculo
-- `j23_m2terr`: Valor do m2 lancado para o calculo do valor venal do terreno
-- `j23_vlrisen`: Valor gerado de isencao no calculo do iptu
-- `j23_vlrter`: valor venal do terreno gerado no calculo
-
-### Dimensoes
-
-- `j23_anousu`: Exercicio do calculo
-- `j23_matric`: Matricula do imovel do arquivo iptubase
-- `j23_tipocalculo`: Tipo de calculo
-- `j23_tipoim`: Tipo de imposto - P predial e T territorial
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j23_matric` -> `cadastro.iptubase` (j01_matric) [iptucalc_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalc_caracteristica_lote`
-
-### Identidade
-
-- Nome humano: cadastro.iptucalc_caracteristica_lote.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j234_sequencial`
-- Coluna temporal: `j234_anousu`
-- Candidatas a chave de negocio: j234_idbql, j234_matric, j234_sequencial
-- Candidatas a coluna temporal: j234_anousu
-
-### Colunas principais
-
-- `j234_anousu`: Preencher significado.
-- `j234_caract`: Preencher significado.
-- `j234_idbql`: Preencher significado.
-- `j234_matric`: Preencher significado.
-- `j234_sequencial`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j234_anousu`
-- `j234_matric`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalcareaconstr`
-
-### Identidade
-
-- Nome humano: cadastro.iptucalcareaconstr.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j237_idconstr`
-  - `j237_matric`
-  - `j237_anousu`
-- Coluna temporal: `j237_anousu`
-- Candidatas a chave de negocio: j237_areaedificadaunidade, j237_areaedificadaunidadetotal, j237_idconstr, j237_matric
-- Candidatas a coluna temporal: j237_anousu
-
-### Colunas principais
-
-- `j237_anousu`: Preencher significado.
-- `j237_areaedificadaunidade`: Preencher significado.
-- `j237_areaedificadaunidadetotal`: Preencher significado.
-- `j237_areajirau_deposito`: Preencher significado.
-- `j237_areajirau_outros`: Preencher significado.
-- `j237_areamezanino`: Preencher significado.
-- `j237_areaprivativa`: Preencher significado.
-- `j237_fracaoareaedificadacomum`: Preencher significado.
-- `j237_fracaoareagaragem`: Preencher significado.
-- `j237_idconstr`: Preencher significado.
-- `j237_matric`: Preencher significado.
-
-### Metricas atomicas
-
-- `j237_areaedificadaunidade`
-- `j237_areaedificadaunidadetotal`
-- `j237_areajirau_deposito`
-- `j237_areajirau_outros`
-- `j237_areamezanino`
-- `j237_areaprivativa`
-- `j237_fracaoareaedificadacomum`
-- `j237_fracaoareagaragem`
-
-### Dimensoes
-
-- `j237_anousu`
-- `j237_matric`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalcarealote`
-
-### Identidade
-
-- Nome humano: cadastro.iptucalcarealote.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j236_idbql`
-  - `j236_matric`
-  - `j236_anousu`
-- Coluna temporal: `j236_anousu`
-- Candidatas a chave de negocio: j236_idbql, j236_matric, j236_totalconstruidolote
-- Candidatas a coluna temporal: j236_anousu
-
-### Colunas principais
-
-- `j236_anousu`: Preencher significado.
-- `j236_areacomumlote`: Preencher significado.
-- `j236_areadevila`: Preencher significado.
-- `j236_arealote`: Preencher significado.
-- `j236_facaoareacomumlote`: Preencher significado.
-- `j236_idbql`: Preencher significado.
-- `j236_matric`: Preencher significado.
-- `j236_totalconstruidolote`: Preencher significado.
-
-### Metricas atomicas
-
-- `j236_areacomumlote`
-- `j236_areadevila`
-- `j236_arealote`
-- `j236_facaoareacomumlote`
-- `j236_totalconstruidolote`
-
-### Dimensoes
-
-- `j236_anousu`
-- `j236_matric`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalcconfrec`
-
-### Identidade
-
-- Nome humano: Configuracao de calculo por matricula.
-- O que representa: Configuracao de calculo por matricula
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j23_sequencial`
-- Coluna temporal: `j23_anousu`
-- Candidatas a chave de negocio: j23_matric, j23_sequencial
-- Candidatas a coluna temporal: j23_anousu
-
-### Colunas principais
-
-- `j23_anousu`: Exercicio do calculo
-- `j23_matric`: Matricula do imovel do arquivo iptubase
-- `j23_recdst`: Código da Receita de Destino
-- `j23_recorg`: Código da Receita de Origem
-- `j23_sequencial`: Codigo sequencial
-- `j23_tipo`: Tipo 1 - Imposto 2 - Taxa
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j23_anousu`: Exercicio do calculo
-- `j23_matric`: Matricula do imovel do arquivo iptubase
-- `j23_sequencial`: Codigo sequencial
-- `j23_tipo`: Tipo 1 - Imposto 2 - Taxa
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j23_recdst` -> `caixa.tabrec` (k02_codigo) [iptucalcconfrec_recdst_fk]
-- `j23_recorg` -> `caixa.tabrec` (k02_codigo) [iptucalcconfrec_recorg_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalcconfrec_backup`
-
-### Identidade
-
-- Nome humano: cadastro.iptucalcconfrec_backup.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: `j23_anousu`
-- Candidatas a chave de negocio: j23_matric, j23_sequencial
-- Candidatas a coluna temporal: j23_anousu
-
-### Colunas principais
-
-- `j23_anousu`: Preencher significado.
-- `j23_matric`: Preencher significado.
-- `j23_recdst`: Preencher significado.
-- `j23_recorg`: Preencher significado.
-- `j23_sequencial`: Preencher significado.
-- `j23_tipo`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j23_anousu`
-- `j23_matric`
-- `j23_tipo`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalclog`
-
-### Identidade
-
-- Nome humano: Log do calculo do iptu.
-- O que representa: Log do calculo do iptu
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j27_codigo`
-- Coluna temporal: `j27_anousu`
-- Candidatas a chave de negocio: j27_codigo, j27_quantaproc, j27_usuario
-- Candidatas a coluna temporal: j27_anousu, j27_data
-
-### Colunas principais
-
-- `j27_anousu`: Ano
-- `j27_codigo`: Sequencial
-- `j27_data`: Data do calculo
-- `j27_hora`: Hora do calculo
-- `j27_observacao`: Campo de observações para cliente informar o que desejar ao fazer recalculo parcial de IPTU. O campo só é mostrado em cálculos parciais.
-- `j27_parcial`: Se parcial ou nao, no caso de nao ser, será geral.
-- `j27_quantaproc`: Quantidade de registros a processar, que na verdade deveriam ser processados. Entao se somando o total de registros da iptucalclogmat, temos o total de matriculas calculadas. E esse campo guarda quantas deveriam ser calculadas se nao ocorrer erro em nenhuma matricula.
-- `j27_usuario`: codigo do usuario
-
-### Metricas atomicas
-
-- `j27_quantaproc`: Quantidade de registros a processar, que na verdade deveriam ser processados. Entao se somando o total de registros da iptucalclogmat, temos o total de matriculas calculadas. E esse campo guarda quantas deveriam ser calculadas se nao ocorrer erro em nenhuma matricula.
-
-### Dimensoes
-
-- `j27_anousu`: Ano
-- `j27_codigo`: Sequencial
-- `j27_data`: Data do calculo
-- `j27_usuario`: codigo do usuario
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j27_usuario` -> `configuracoes.db_usuarios` (id_usuario) [iptucalclog_usuario_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalclogmat`
-
-### Identidade
-
-- Nome humano: Matriculas do log do calculo do iptu.
-- O que representa: Matriculas do log do calculo do iptu
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j28_codigo`
-  - `j28_matric`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j28_codigo, j28_matric, j28_tipologcalc
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j28_codigo`: Sequencial
-- `j28_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j28_obs`: Observacoes deste calculo
-- `j28_tipologcalc`: Codigo
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j28_codigo`: Sequencial
-- `j28_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j28_tipologcalc`: Codigo
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j28_codigo` -> `cadastro.iptucalclog` (j27_codigo) [iptucalclogmat_codigo_fk]
-- `j28_matric` -> `cadastro.iptubase` (j01_matric) [iptucalclogmat_matric_fk]
-- `j28_tipologcalc` -> `cadastro.iptucadlogcalc` (j62_codigo) [iptucalclogmat_tipologcalc_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalcpadrao`
-
-### Identidade
-
-- Nome humano: Calculo padrão do iptu.
-- O que representa: Calculo padrão do iptu
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j10_sequencial`
-- Coluna temporal: `j10_anousu`
-- Candidatas a chave de negocio: j10_matric, j10_sequencial
-- Candidatas a coluna temporal: j10_anousu
-
-### Colunas principais
-
-- `j10_aliq`: Aliquota
-- `j10_anousu`: Exercicio
-- `j10_matric`: Matrícula
-- `j10_perccorre`: Percentual de correção
-- `j10_sequencial`: Código sequencial
-- `j10_vlrter`: Valor
-
-### Metricas atomicas
-
-- `j10_aliq`: Aliquota
-- `j10_perccorre`: Percentual de correção
-- `j10_vlrter`: Valor
-
-### Dimensoes
-
-- `j10_anousu`: Exercicio
-- `j10_matric`: Matrícula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j10_matric` -> `cadastro.iptubase` (j01_matric) [iptucalcpadrao_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalcpadraoconstr`
-
-### Identidade
-
-- Nome humano: Construções.
-- O que representa: Construções
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j11_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j11_idcons, j11_matric, j11_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j11_idcons`: Código da construção
-- `j11_iptucalcpadrao`: calculo padrao
-- `j11_matric`: Matrícula
-- `j11_sequencial`: Código
-- `j11_vlrcons`: Valor da construção
-
-### Metricas atomicas
-
-- `j11_vlrcons`: Valor da construção
-
-### Dimensoes
-
-- `j11_matric`: Matrícula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j11_iptucalcpadrao` -> `cadastro.iptucalcpadrao` (j10_sequencial) [iptucalcpadraoconstr_iptucalcpadrao_fk]
-- `j11_matric, j11_matric, j11_idcons, j11_idcons` -> `cadastro.iptuconstr` (j39_matric, j39_idcons, j39_idcons, j39_matric) [iptucalcpadraoconstr_matric_idcons_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalcpadraolog`
-
-### Identidade
-
-- Nome humano: Log do calculo padrão.
-- O que representa: Log do calculo padrão
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j19_sequencial`
-- Coluna temporal: `j19_data`
-- Candidatas a chave de negocio: j19_iptucalcpadrao, j19_sequencial
-- Candidatas a coluna temporal: j19_data
-
-### Colunas principais
-
-- `j19_data`: Data
-- `j19_hora`: Hora
-- `j19_iptucalcpadrao`: Codigo do calculo padrão
-- `j19_sequencial`: Código
-- `j19_usuario`: Usuário
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j19_data`: Data
-- `j19_iptucalcpadrao`: Codigo do calculo padrão
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j19_iptucalcpadrao` -> `cadastro.iptucalcpadrao` (j10_sequencial) [iptucalcpadraolog_iptucalcpadrao_fk]
-- `j19_usuario` -> `configuracoes.db_usuarios` (id_usuario) [iptucalcpadraolog_usuario_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalcpadraoorigem`
-
-### Identidade
-
-- Nome humano: dados da origem da importação.
-- O que representa: dados da origem da importação
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j27_sequencial`
-- Coluna temporal: `j27_anousu`
-- Candidatas a chave de negocio: j27_matric, j27_sequencial
-- Candidatas a coluna temporal: j27_anousu
-
-### Colunas principais
-
-- `j27_anousu`: Ano
-- `j27_iptucalcpadrao`: Iptu Padrão
-- `j27_matric`: Matrícula do imóvel
-- `j27_sequencial`: Código sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j27_anousu`: Ano
-- `j27_matric`: Matrícula do imóvel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j27_anousu, j27_anousu, j27_matric, j27_matric` -> `cadastro.iptucalc` (j23_matric, j23_anousu, j23_anousu, j23_matric) [iptucalcpadraoorigem_ae_matric_fk]
-- `j27_iptucalcpadrao` -> `cadastro.iptucalcpadrao` (j10_sequencial) [iptucalcpadraoorigem_iptucalcpadrao_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucale`
-
-### Identidade
-
-- Nome humano: Registra os valores venais calculados para as construcoes.
-- O que representa: Registra os valores venais calculados para as construcoes
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j22_anousu`
-  - `j22_matric`
-  - `j22_idcons`
-- Coluna temporal: `j22_anousu`
-- Candidatas a chave de negocio: j22_areaed, j22_idcons, j22_matric
-- Candidatas a coluna temporal: j22_anousu
-
-### Colunas principais
-
-- `j22_anousu`: Exercício do calculo dos valores venais
-- `j22_areaed`: Area construida e processado no calculo
-- `j22_idcons`: Codigo da construcao
-- `j22_matric`: matricula do Imóvel
-- `j22_pontos`: Numero de pontos processados no calculo
-- `j22_valor`: Valor venal calculado para a edificacao
-- `j22_vm2`: Valor do m2 da construcao utilizado no calculo
-
-### Metricas atomicas
-
-- `j22_anousu`: Exercício do calculo dos valores venais
-- `j22_areaed`: Area construida e processado no calculo
-- `j22_valor`: Valor venal calculado para a edificacao
-- `j22_vm2`: Valor do m2 da construcao utilizado no calculo
-
-### Dimensoes
-
-- `j22_idcons`: Codigo da construcao
-- `j22_matric`: matricula do Imóvel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j22_matric, j22_matric, j22_idcons, j22_idcons` -> `cadastro.iptuconstr` (j39_matric, j39_idcons, j39_matric, j39_idcons) [iptucale_matric_idcons_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucale_caracteristica_construcao`
-
-### Identidade
-
-- Nome humano: cadastro.iptucale_caracteristica_construcao.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j235_sequencial`
-- Coluna temporal: `j235_anousu`
-- Candidatas a chave de negocio: j235_idbql, j235_matric, j235_sequencial
-- Candidatas a coluna temporal: j235_anousu
-
-### Colunas principais
-
-- `j235_anousu`: Preencher significado.
-- `j235_caract`: Preencher significado.
-- `j235_idbql`: Preencher significado.
-- `j235_matric`: Preencher significado.
-- `j235_sequencial`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j235_anousu`
-- `j235_matric`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptucalh`
-
-### Identidade
-
-- Nome humano: Históricos do cálculo do IPTU.
-- O que representa: Históricos do cálculo do IPTU
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j17_codhis`
+  - `c67_codlan`
 - Coluna temporal: Preencher.
 - Candidatas a chave de negocio: Nenhuma inferida automaticamente.
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j17_codhis`: Código do histórico de cálculo do IPTU
-- `j17_descr`: Descrição do histórico do cálculo do IPTU
+- `c67_codele`: Código Elemento
+- `c67_codlan`: Código Lançamento
 
 ### Metricas atomicas
 
@@ -6894,7 +3383,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- Nenhum relacionamento catalogado.
+- `c67_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamele_codlan_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -6912,12 +3401,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.iptucalhconf`
+## Tabela de negocio: `contabilidade.conlancamemp`
 
 ### Identidade
 
-- Nome humano: Configuracao do iptucalh.
-- O que representa: Configuracao do iptucalh
+- Nome humano: Empenho do Lançamento.
+- O que representa: Empenho do Lançamento
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -6928,16 +3417,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j89_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j89_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+  - `c75_codlan`
+- Coluna temporal: `c75_data`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c75_data
 
 ### Colunas principais
 
-- `j89_codhis`: Código do histórico de cálculo do IPTU
-- `j89_codhispai`: Código do histórico de cálculo do IPTU
-- `j89_sequencial`: Código
+- `c75_codlan`: Código Lançamento
+- `c75_data`: Data
+- `c75_numemp`: Número Empenho
 
 ### Metricas atomicas
 
@@ -6945,7 +3434,7 @@ tags:
 
 ### Dimensoes
 
-- Preencher dimensoes de agrupamento/filtro.
+- `c75_data`: Data
 
 ### Filtros de negocio
 
@@ -6962,8 +3451,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j89_codhis` -> `cadastro.iptucalh` (j17_codhis) [iptucalhconf_codhis_codhis_fk]
-- `j89_codhispai` -> `cadastro.iptucalh` (j17_codhis) [iptucalhconf_codhis_codhispai_fk]
+- `c75_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamemp_codlan_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -6981,12 +3469,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.iptucalv`
+## Tabela de negocio: `contabilidade.conlancamimp`
 
 ### Identidade
 
-- Nome humano: Calculo dos valores gerados para o imóvel, ex: iptu, taca lixo, ....
-- O que representa: Calculo dos valores gerados para o imóvel, ex: iptu, taca lixo, ...
+- Nome humano: tabela para implantação de dados contabeis . O sql query foi modificado !.
+- O que representa: tabela para implantação de dados contabeis . O sql query foi modificado !
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -6997,2662 +3485,14 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - Preencher.
-- Coluna temporal: `j21_anousu`
-- Candidatas a chave de negocio: j21_matric, j21_quant
-- Candidatas a coluna temporal: j21_anousu
-
-### Colunas principais
-
-- `j21_anousu`: Exercicio do calculo dos valores
-- `j21_codhis`: Código do histórico de cálculo do IPTU
-- `j21_matric`: matricula do imovel do arquivo iptubase
-- `j21_quant`: Quantidade
-- `j21_receit`: Código da receita do tabrec
-- `j21_valor`: Valor do débito
-
-### Metricas atomicas
-
-- `j21_anousu`: Exercicio do calculo dos valores
-- `j21_quant`: Quantidade
-- `j21_valor`: Valor do débito
-
-### Dimensoes
-
-- `j21_matric`: matricula do imovel do arquivo iptubase
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j21_codhis` -> `cadastro.iptucalh` (j17_codhis) [iptucalv_codhis_fk]
-- `j21_matric` -> `cadastro.iptubase` (j01_matric) [iptucalv_matric_fk]
-- `j21_receit` -> `caixa.tabrec` (k02_codigo) [iptucalv_receit_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuconstr`
-
-### Identidade
-
-- Nome humano: Cadastro das construcoes que foram medidas pelo municipio.
-- O que representa: Cadastro das construcoes que foram medidas pelo municipio
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j39_matric`
-  - `j39_idcons`
-- Coluna temporal: `j39_ano`
-- Candidatas a chave de negocio: j39_codigo, j39_idaument, j39_idcons, j39_idprinc, j39_matric
-- Candidatas a coluna temporal: j39_ano, j39_dtdemo, j39_dtlan
-
-### Colunas principais
-
-- `j39_ano`: Ano em que foi edificada a construção.
-- `j39_area`: Área da construção em metros quadrados.
-- `j39_areajirau`: Area do Jirau
-- `j39_areajiraudeposito`: Area do Jirau - 50%
-- `j39_areamezanino`: Area do Mezanino
-- `j39_areap`: Área da construção de uso privado.
-- `j39_codigo`: Informe o logradouro para onde a construção faz frente.
-- `j39_codprotdemo`: Código do Processo de Protocolo
-- `j39_compl`: Complemento da numeração da casa
-- `j39_dtdemo`: Data da demolição da construção
-- `j39_dtlan`: data da inclusao da construcao
-- `j39_habite`: Preencher significado.
-- `j39_idaument`: Código da da origem da construção
-- `j39_idcons`: Código para identificar as construção
-- `j39_idprinc`: Identificador da construção principal
-- `j39_matric`: Número da matrícula que essa construção pertence.
-- `j39_numero`: Número de endereço onde a construção está localizada no logradouro.
-- `j39_obs`: Observações
-- `j39_pavim`: Pavimento
-
-### Metricas atomicas
-
-- `j39_area`: Área da construção em metros quadrados.
-- `j39_areajirau`: Area do Jirau
-- `j39_areajiraudeposito`: Area do Jirau - 50%
-- `j39_areamezanino`: Area do Mezanino
-- `j39_areap`: Área da construção de uso privado.
-
-### Dimensoes
-
-- `j39_ano`: Ano em que foi edificada a construção.
-- `j39_codigo`: Informe o logradouro para onde a construção faz frente.
-- `j39_dtdemo`: Data da demolição da construção
-- `j39_dtlan`: data da inclusao da construcao
-- `j39_matric`: Número da matrícula que essa construção pertence.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j39_codigo` -> `cadastro.ruas` (j14_codigo) [iptuconstr_codigo_fk]
-- `j39_matric` -> `cadastro.iptubase` (j01_matric) [iptuconstr_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuconstrdemo`
-
-### Identidade
-
-- Nome humano: Tabela com demolições de construções.
-- O que representa: Tabela com demolições de construções
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j60_matric`
-  - `j60_idcons`
-  - `j60_seq`
-- Coluna temporal: `j60_data`
-- Candidatas a chave de negocio: j60_idcons, j60_matric, j60_usuario
-- Candidatas a coluna temporal: j60_data, j60_datademo
-
-### Colunas principais
-
-- `j60_area`: Area da demoliçao
-- `j60_codproc`: Código do processo
-- `j60_data`: Data da operação
-- `j60_datademo`: Data da demolição
-- `j60_hora`: Hora da operação
-- `j60_idcons`: Codigo para identificar as construcoes
-- `j60_matric`: Codigo da matrícula do imovel para identificar o proprietário ou proprietarios de um determinado lote.
-- `j60_seq`: Sequencia
-- `j60_usuario`: codigo do usuario
-
-### Metricas atomicas
-
-- `j60_area`: Area da demoliçao
-
-### Dimensoes
-
-- `j60_data`: Data da operação
-- `j60_datademo`: Data da demolição
-- `j60_idcons`: Codigo para identificar as construcoes
-- `j60_matric`: Codigo da matrícula do imovel para identificar o proprietário ou proprietarios de um determinado lote.
-- `j60_usuario`: codigo do usuario
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j60_matric, j60_matric, j60_idcons, j60_idcons` -> `cadastro.iptuconstr` (j39_matric, j39_idcons, j39_idcons, j39_matric) [iptuconstrdemo_matric_idcons_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuconstrhabite`
-
-### Identidade
-
-- Nome humano: Habite-se das construções.
-- O que representa: Habite-se das construções
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j131_sequencial`
-- Coluna temporal: `j131_data`
-- Candidatas a chave de negocio: j131_idcons, j131_matric, j131_sequencial
-- Candidatas a coluna temporal: j131_data, j131_dthabite, j131_dtprot
-
-### Colunas principais
-
-- `j131_cadhab`: Código do cadastro do habite-se
-- `j131_codprot`: Código do Processo de Protocolo
-- `j131_data`: Data do cadastro do habite-se para a construção
-- `j131_dthabite`: Data do Habite-se
-- `j131_dtprot`: Data do Processo de Protocolo
-- `j131_hora`: Hora em que foi realizado o cadastro do habite-se
-- `j131_idcons`: Id da construção
-- `j131_matric`: Matricula da construção
-- `j131_obs`: Observações
-- `j131_sequencial`: Sequencial de registro da tabela
-- `j131_usuario`: Código do usuário que cadastrou o habite-se
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j131_data`: Data do cadastro do habite-se para a construção
-- `j131_dthabite`: Data do Habite-se
-- `j131_dtprot`: Data do Processo de Protocolo
-- `j131_matric`: Matricula da construção
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j131_matric, j131_matric, j131_idcons, j131_idcons` -> `cadastro.iptuconstr` (j39_idcons, j39_matric, j39_idcons, j39_matric) [iptuconstrhabite_matric_idcons_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuconstrobrasconstr`
-
-### Identidade
-
-- Nome humano: Tabela de ligação entre iptuconstr e obrasconstr.
-- O que representa: Tabela de ligação entre iptuconstr e obrasconstr
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j132_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j132_idconstr, j132_matric, j132_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j132_idconstr`: FK da tabela iptuconstr
-- `j132_matric`: FK da tabela iptuconstr
-- `j132_obrasconstr`: FK da tabela obrasconstr
-- `j132_sequencial`: Sequencial da tabela iptuconstrobrasconstr
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j132_matric`: FK da tabela iptuconstr
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j132_matric, j132_matric, j132_idconstr, j132_idconstr` -> `cadastro.iptuconstr` (j39_idcons, j39_matric, j39_matric, j39_idcons) [iptuconstrobrasconstr_matric_idconstr_fk]
-- `j132_obrasconstr` -> `projetos.obrasconstr` (ob08_codconstr) [iptuconstrobrasconstr_obrasconstr_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuconstrpontos`
-
-### Identidade
-
-- Nome humano: Pontos por construcao.
-- O que representa: Pontos por construcao
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j83_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j83_codigo, j83_idcons, j83_matric
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j83_codigo`: Código sequencial
-- `j83_idcons`: Código da construcao
-- `j83_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j83_pontos`: Pontos
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j83_codigo`: Código sequencial
-- `j83_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j83_matric, j83_matric, j83_idcons, j83_idcons` -> `cadastro.iptuconstr` (j39_matric, j39_idcons, j39_matric, j39_idcons) [iptuconstrpontos_matric_idcons_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptudiversos`
-
-### Identidade
-
-- Nome humano: Informações diversas sobre a matricula.
-- O que representa: Informações diversas sobre a matricula
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j80_matric`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j80_matric, j80_profund
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j80_areatrib`: Área Tributada
-- `j80_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j80_profund`: Profundidade
-
-### Metricas atomicas
-
-- `j80_areatrib`: Área Tributada
-
-### Dimensoes
-
-- `j80_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j80_matric` -> `cadastro.iptubase` (j01_matric) [iptudiversos_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuender`
-
-### Identidade
-
-- Nome humano: Cadastro de endereco de entrega dos carnes de iptu.
-- O que representa: Cadastro de endereco de entrega dos carnes de iptu
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j43_matric`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j43_codigo, j43_matric, j43_munic, j43_uf
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j43_bairro`: Código do bairro
-- `j43_cep`: Numero do cep no correio
-- `j43_codbairro`: Preencher significado.
-- `j43_codigo`: Preencher significado.
-- `j43_comple`: complemento do endereço
-- `j43_cxpost`: caixa postal
-- `j43_dest`: Nome do destinatário do carnê
-- `j43_ender`: Nome do logradouro para onde quer enviar o carnê de IPTU
-- `j43_matric`: Código da matrícula do imóvel
-- `j43_munic`: Nome da cidade do endereço de entrega.
-- `j43_numimo`: numero do imóvel para enviar o carnê de IPTU
-- `j43_uf`: Identificacao do estado
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j43_bairro`: Código do bairro
-- `j43_codbairro`
-- `j43_codigo`
-- `j43_matric`: Código da matrícula do imóvel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j43_matric` -> `cadastro.iptubase` (j01_matric) [iptuender_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuerro`
-
-### Identidade
-
-- Nome humano: Resgistro dos erros do iptu quando executado um calculo. Esta tabela nao tem e referencia, pois é utilizada somente para registrar os erro para serem resolvidos posteriormente.
-- O que representa: Resgistro dos erros do iptu quando executado um calculo. Esta tabela nao tem e referencia, pois é utilizada somente para registrar os erro para serem resolvidos posteriormente
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: `j24_anousu`
-- Candidatas a chave de negocio: j24_erro, j24_idbql, j24_matric
-- Candidatas a coluna temporal: j24_anousu
-
-### Colunas principais
-
-- `j24_anousu`: Exercicio do Erro
-- `j24_descr`: Descricao do Erro
-- `j24_erro`: Codigo do Erro
-- `j24_idbql`: Código do Lote
-- `j24_matric`: Matricula do Imovel
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j24_anousu`: Exercicio do Erro
-- `j24_erro`: Codigo do Erro
-- `j24_matric`: Matricula do Imovel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptufrac`
-
-### Identidade
-
-- Nome humano: Fracionamento dos lotes. É utilizado para calcular a area ou testada fracionada para uma matricula. É bastante comum utilizar em lote que tenham construcoes do tipo apartamento, onde devemos fracionar o valor vanel de um imovel.
-- O que representa: Fracionamento dos lotes. É utilizado para calcular a area ou testada fracionada para uma matricula. É bastante comum utilizar em lote que tenham construcoes do tipo apartamento, onde devemos fracionar o valor vanel de um imovel
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j25_anousu`
-  - `j25_matric`
-- Coluna temporal: `j25_anousu`
-- Candidatas a chave de negocio: j25_fracao, j25_idbql, j25_matric
-- Candidatas a coluna temporal: j25_anousu
-
-### Colunas principais
-
-- `j25_anousu`: Exercico da fracao
-- `j25_fracao`: Percentual referente a fracao a que corresponde uma matricula
-- `j25_idbql`: Lote a que se refere esta fracao
-- `j25_matric`: matricula do imovel
-
-### Metricas atomicas
-
-- `j25_fracao`: Percentual referente a fracao a que corresponde uma matricula
-
-### Dimensoes
-
-- `j25_anousu`: Exercico da fracao
-- `j25_matric`: matricula do imovel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j25_matric` -> `cadastro.iptubase` (j01_matric) [iptufrac_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptuisen`
-
-### Identidade
-
-- Nome humano: cadastro das matricula com suas isencoes.
-- O que representa: cadastro das matricula com suas isencoes
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j46_codigo`
-- Coluna temporal: `j46_dtfim`
-- Candidatas a chave de negocio: j46_codigo, j46_idusu, j46_matric
-- Candidatas a coluna temporal: j46_dtfim, j46_dtinc, j46_dtini
-
-### Colunas principais
-
-- `j46_arealo`: Área do lote em metros quadrados
-- `j46_codigo`: Código para identificar uma isenção atribuída a uma matrícula
-- `j46_dtfim`: Data Final da Isenção
-- `j46_dtinc`: Data da inclusão da isenção
-- `j46_dtini`: Data de início da isenção
-- `j46_hist`: Histórico da Isenção
-- `j46_idusu`: Código do login do usuário
-- `j46_matric`: Código da matrícula de um imóvel
-- `j46_perc`: Percentual de isenção
-- `j46_tipo`: Código do tipo de isenção
-
-### Metricas atomicas
-
-- `j46_arealo`: Área do lote em metros quadrados
-- `j46_perc`: Percentual de isenção
-
-### Dimensoes
-
-- `j46_codigo`: Código para identificar uma isenção atribuída a uma matrícula
-- `j46_dtfim`: Data Final da Isenção
-- `j46_dtinc`: Data da inclusão da isenção
-- `j46_dtini`: Data de início da isenção
-- `j46_matric`: Código da matrícula de um imóvel
-- `j46_tipo`: Código do tipo de isenção
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j46_matric` -> `cadastro.iptubase` (j01_matric) [iptuisen_matric_fk]
-- `j46_tipo` -> `cadastro.tipoisen` (j45_tipo) [iptuisen_tipo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptumatzonaentrega`
-
-### Identidade
-
-- Nome humano: Ligacao das matriculas com a zona de entrega.
-- O que representa: Ligacao das matriculas com a zona de entrega
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j86_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j86_iptucadzonaentrega, j86_matric, j86_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j86_iptucadzonaentrega`: Codigo da zona de entrega
-- `j86_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j86_sequencial`: Sequencial do iptumatzonaentrega
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j86_iptucadzonaentrega`: Codigo da zona de entrega
-- `j86_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j86_iptucadzonaentrega` -> `cadastro.iptucadzonaentrega` (j85_codigo) [iptumatzonaentrega_iptucadzonaentrega_fk]
-- `j86_matric` -> `cadastro.iptubase` (j01_matric) [iptumatzonaentrega_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptunaogeracarne`
-
-### Identidade
-
-- Nome humano: Nao gera carne.
-- O que representa: Nao gera carne
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j66_sequencial`
-- Coluna temporal: `j66_data`
-- Candidatas a chave de negocio: j66_sequencial, j66_usuario
-- Candidatas a coluna temporal: j66_data
-
-### Colunas principais
-
-- `j66_data`: Data de lancamento
-- `j66_sequencial`: Sequencial
-- `j66_usuario`: codigo do usuario
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j66_data`: Data de lancamento
-- `j66_usuario`: codigo do usuario
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j66_usuario` -> `configuracoes.db_usuarios` (id_usuario) [iptunaogeracarne_usuario_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptunaogeracarnecgm`
-
-### Identidade
-
-- Nome humano: Cgms que nao devem gerar carne na emissao geral do IPTU.
-- O que representa: Cgms que nao devem gerar carne na emissao geral do IPTU
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j68_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j68_naogeracarne, j68_numcgm, j68_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j68_naogeracarne`: Sequencial
-- `j68_numcgm`: Numero de Identificação do Contribuinte ou Empresa no Cadastro geral do Município
-- `j68_sequencial`: Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j68_naogeracarne` -> `cadastro.iptunaogeracarne` (j66_sequencial) [iptunaogeracarnecgm_naogeracarne_fk]
-- `j68_numcgm` -> `protocolo.cgm` (z01_numcgm) [iptunaogeracarnecgm_numcgm_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptunaogeracarnematric`
-
-### Identidade
-
-- Nome humano: cadastro.iptunaogeracarnematric.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j131_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j131_matric, j131_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j131_matric`: Preencher significado.
-- `j131_naogeracarne`: Preencher significado.
-- `j131_sequencial`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j131_matric`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j131_matric` -> `cadastro.iptubase` (j01_matric) [iptunaogeracarnematric_matric_fk]
-- `j131_naogeracarne` -> `cadastro.iptunaogeracarne` (j66_sequencial) [iptunaogeracarnematric_naogeracarne_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptunaogeracarnesetqua`
-
-### Identidade
-
-- Nome humano: Setor/Quadra que nao gera carne.
-- O que representa: Setor/Quadra que nao gera carne
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j67_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j67_naogeracarne, j67_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j67_naogeracarne`: Sequencial
-- `j67_quadra`: Quadra
-- `j67_sequencial`: Sequencial
-- `j67_setor`: Código do setor
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j67_setor`: Código do setor
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j67_naogeracarne` -> `cadastro.iptunaogeracarne` (j66_sequencial) [iptunaogeracarnesetqua_naogeracarne_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptunump`
-
-### Identidade
-
-- Nome humano: Contem dados referentes aos numpres (códigos de arrecadacao) gerados para os carnês.
-- O que representa: Contem dados referentes aos numpres (códigos de arrecadacao) gerados para os carnês
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j20_anousu`
-  - `j20_matric`
-- Coluna temporal: `j20_anousu`
-- Candidatas a chave de negocio: j20_matric, j20_numpre
-- Candidatas a coluna temporal: j20_anousu
-
-### Colunas principais
-
-- `j20_anousu`: Exercicio do calculo.
-- `j20_matric`: Matricula do imóvel
-- `j20_numpre`: Código de arrecadacao do gerado para identificar um débito
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j20_anousu`: Exercicio do calculo.
-- `j20_matric`: Matricula do imóvel
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j20_matric` -> `cadastro.iptubase` (j01_matric) [iptunump_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptunumpold`
-
-### Identidade
-
-- Nome humano: iptunumpold.
-- O que representa: iptunumpold
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j130_sequencial`
-- Coluna temporal: `j130_anousu`
-- Candidatas a chave de negocio: j130_matric, j130_sequencial
-- Candidatas a coluna temporal: j130_anousu
-
-### Colunas principais
-
-- `j130_anousu`: Exercício
-- `j130_matric`: Matrícula
-- `j130_numpre`: Numpre
-- `j130_sequencial`: Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j130_anousu`: Exercício
-- `j130_matric`: Matrícula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptupadraoconstr`
-
-### Identidade
-
-- Nome humano: Padrão Construção.
-- O que representa: Padrão Construção
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j115_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j115_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j115_descricao`: Descrição
-- `j115_sequencial`: Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptupadraoconstrarea`
-
-### Identidade
-
-- Nome humano: Construção Padrao Área.
-- O que representa: Construção Padrao Área
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j116_sequencial`
-- Coluna temporal: `j116_anousu`
-- Candidatas a chave de negocio: j116_sequencial
-- Candidatas a coluna temporal: j116_anousu
-
-### Colunas principais
-
-- `j116_anousu`: Ano Uso
-- `j116_areafim`: Área Final
-- `j116_areaini`: Área Inicial
-- `j116_caracter`: Caracter
-- `j116_iptupadraoconstr`: Iptu Padrão Construção
-- `j116_peso`: Peso
-- `j116_sequencial`: Sequencial
-
-### Metricas atomicas
-
-- `j116_areafim`: Área Final
-- `j116_areaini`: Área Inicial
-
-### Dimensoes
-
-- `j116_anousu`: Ano Uso
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j116_caracter` -> `cadastro.caracter` (j31_codigo) [iptupadraoconstrarea_caracter_fk]
-- `j116_iptupadraoconstr` -> `cadastro.iptupadraoconstr` (j115_sequencial) [iptupadraoconstrarea_iptupadraoconstr_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptupadraoconstrfator`
-
-### Identidade
-
-- Nome humano: Iptu Padrão Construção Fator.
-- O que representa: Iptu Padrão Construção Fator
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j117_sequencial`
-- Coluna temporal: `j117_anousu`
-- Candidatas a chave de negocio: j117_sequencial
-- Candidatas a coluna temporal: j117_anousu
-
-### Colunas principais
-
-- `j117_anousu`: Ano Uso
-- `j117_fator`: Fator
-- `j117_iptupadraoconstr`: Iptu Padrão Construção
-- `j117_sequencial`: Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j117_anousu`: Ano Uso
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j117_iptupadraoconstr` -> `cadastro.iptupadraoconstr` (j115_sequencial) [iptupadraoconstrfator_iptupadraoconstr_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptupadraoconstrpontos`
-
-### Identidade
-
-- Nome humano: Iptu Padrão Construção Ponto.
-- O que representa: Iptu Padrão Construção Ponto
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j118_sequencial`
-- Coluna temporal: `j118_anousu`
-- Candidatas a chave de negocio: j118_sequencial
-- Candidatas a coluna temporal: j118_anousu
-
-### Colunas principais
-
-- `j118_anousu`: Ano Usu
-- `j118_caracter`: Caracter
-- `j118_fatorreajuste`: Fator Reajuste
-- `j118_iptupadraoconstr`: Iptu Padrão Construção
-- `j118_pontosfim`: Ponto Final
-- `j118_pontosini`: Ponto Inicial
-- `j118_sequencial`: Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j118_anousu`: Ano Usu
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j118_caracter` -> `cadastro.caracter` (j31_codigo) [iptupadraoconstrpontos_caracter_fk]
-- `j118_iptupadraoconstr` -> `cadastro.iptupadraoconstr` (j115_sequencial) [iptupadraoconstrpontos_iptupadraoconstr_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptupercentualexercicio`
-
-### Identidade
-
-- Nome humano: Percentual do Exercício.
-- O que representa: Percentual do Exercício
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j145_sequencial`
-- Coluna temporal: `j145_anousu`
-- Candidatas a chave de negocio: j145_sequencial
-- Candidatas a coluna temporal: j145_anousu
-
-### Colunas principais
-
-- `j145_anousu`: Exercício
-- `j145_sequencial`: Código Sequencial
-- `j145_valor`: Valor
-
-### Metricas atomicas
-
-- `j145_valor`: Valor
-
-### Dimensoes
-
-- `j145_anousu`: Exercício
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptusocial`
-
-### Identidade
-
-- Nome humano: cadastro.iptusocial.
-- O que representa: Preencher em linguagem de negocio.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j151_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j151_comprovante_titularidade, j151_identidade, j151_matricula, j151_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j151_cadastro`: Preencher significado.
-- `j151_comprovante_renda`: Preencher significado.
-- `j151_comprovante_titularidade`: Preencher significado.
-- `j151_identidade`: Preencher significado.
-- `j151_matricula`: Preencher significado.
-- `j151_protocolo`: Preencher significado.
-- `j151_sequencial`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j151_matricula`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j151_matricula` -> `cadastro.iptubase` (j01_matric) [cadastro_iptusocial_j151_matricula_foreign]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutabelas`
-
-### Identidade
-
-- Nome humano: iptutabelas.
-- O que representa: iptutabelas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j121_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j121_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j121_codarq`: Código do Arquivo
-- `j121_sequencial`: Código Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j121_codarq` -> `configuracoes.db_sysarquivo` (codarq) [iptutabelas_codarq_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutabelasconfig`
-
-### Identidade
-
-- Nome humano: iptutabelasconfig.
-- O que representa: iptutabelasconfig
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j122_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j122_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j122_iptutabelas`: Código da Tabela
-- `j122_sequencial`: Código Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j122_iptutabelas` -> `cadastro.iptutabelas` (j121_sequencial) [iptutabelasconfig_iptutabelas_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutabelasconfigcampochave`
-
-### Identidade
-
-- Nome humano: iptutabelasconfigcampochave.
-- O que representa: iptutabelasconfigcampochave
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j124_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j124_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j124_codcam`: Código do Campo
-- `j124_iptutabelasconfig`: Código da Tabela de Configuração
-- `j124_sequencial`: Código Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j124_codcam` -> `configuracoes.db_syscampo` (codcam) [iptutabelasconfigcampochave_codcam_fk]
-- `j124_iptutabelasconfig` -> `cadastro.iptutabelasconfig` (j122_sequencial) [iptutabelasconfigcampochave_iptutabelasconfig_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutabelasconfigcampocorrecao`
-
-### Identidade
-
-- Nome humano: iptutabelasconfigcampocorrecao.
-- O que representa: iptutabelasconfigcampocorrecao
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j123_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j123_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j123_codcam`: Código do Campo
-- `j123_iptutabelasconfig`: Código da Tabela de Configuração
-- `j123_sequencial`: Código Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j123_codcam` -> `configuracoes.db_syscampo` (codcam) [iptutabelasconfigcampocorrecao_codcam_fk]
-- `j123_iptutabelasconfig` -> `cadastro.iptutabelasconfig` (j122_sequencial) [iptutabelasconfigcampocorrecao_iptutabelasconfig_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutabelasconfigvirada`
-
-### Identidade
-
-- Nome humano: iptutabelasconfigvirada.
-- O que representa: iptutabelasconfigvirada
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j129_sequencial`
-- Coluna temporal: `j129_anousu`
-- Candidatas a chave de negocio: j129_sequencial
-- Candidatas a coluna temporal: j129_anousu
-
-### Colunas principais
-
-- `j129_anousu`: Ano Virada
-- `j129_iptutabelasconfig`: Código Tabela Configuração
-- `j129_sequencial`: Código Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j129_anousu`: Ano Virada
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j129_iptutabelasconfig` -> `cadastro.iptutabelasconfig` (j122_sequencial) [iptutabelasconfigvirada_iptutabelasconfig_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutabelasdepend`
-
-### Identidade
-
-- Nome humano: iptutabelasdepend.
-- O que representa: iptutabelasdepend
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j128_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j128_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j128_iptutabelas`: Código Tabela
-- `j128_iptutabelasdepend`: Código Tabela Dependente
-- `j128_sequencial`: Código Sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j128_iptutabelasdepend` -> `cadastro.iptutabelas` (j121_sequencial) [iptutabelasdepend_iptutabelasdepend_fk]
-- `j128_iptutabelas` -> `cadastro.iptutabelas` (j121_sequencial) [iptutabelasdepend_iptutabelas_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutaxa`
-
-### Identidade
-
-- Nome humano: Esta tabela contem as taxas que serao cobradas juntamente com o iptu.
-- O que representa: Esta tabela contem as taxas que serao cobradas juntamente com o iptu
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j19_anousu`
-  - `j19_receit`
-- Coluna temporal: `j19_anousu`
-- Candidatas a chave de negocio: j19_receit, j19_valor
-- Candidatas a coluna temporal: j19_anousu
-
-### Colunas principais
-
-- `j19_anousu`: Exercicio do calculo
-- `j19_receit`: Codigo da receita do arquivo tabrec
-- `j19_valor`: Valor incluido para a receita, podendo ser percentual e outros
-
-### Metricas atomicas
-
-- `j19_valor`: Valor incluido para a receita, podendo ser percentual e outros
-
-### Dimensoes
-
-- `j19_anousu`: Exercicio do calculo
-- `j19_receit`: Codigo da receita do arquivo tabrec
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j19_receit` -> `caixa.tabrec` (k02_codigo) [iptutaxa_receit_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutaxamatric`
-
-### Identidade
-
-- Nome humano: Tabela que ligação com a iptucadtaxa por matricula.
-- O que representa: Tabela que ligação com a iptucadtaxa por matricula
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j09_iptutaxamatric`
-- Coluna temporal: `j09_iptucadtaxaexe`
-- Candidatas a chave de negocio: j09_iptutaxamatric, j09_matric
-- Candidatas a coluna temporal: j09_iptucadtaxaexe
-
-### Colunas principais
-
-- `j09_iptucadtaxaexe`: Taxa
-- `j09_iptutaxamatric`: Codigo sequencial/chave primaria
-- `j09_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j09_valor`: Valor
-
-### Metricas atomicas
-
-- `j09_valor`: Valor
-
-### Dimensoes
-
-- `j09_iptutaxamatric`: Codigo sequencial/chave primaria
-- `j09_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j09_matric` -> `cadastro.iptubase` (j01_matric) [iptutaxamatric_matric_fk]
-- `j09_iptucadtaxaexe` -> `cadastro.iptucadtaxaexe` (j08_iptucadtaxaexe) [iptutaxamatric_taxaexe_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.iptutaxamatricexe`
-
-### Identidade
-
-- Nome humano: Exercicios da tabela iptutaxamatric.
-- O que representa: Exercicios da tabela iptutaxamatric
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j10_iptutaxamatricexe`
-- Coluna temporal: `j10_anousu`
-- Candidatas a chave de negocio: j10_iptutaxamatric, j10_iptutaxamatricexe
-- Candidatas a coluna temporal: j10_anousu, j10_iptutaxamatricexe
-
-### Colunas principais
-
-- `j10_anousu`: Exercicio
-- `j10_iptutaxamatric`: Codigo sequencial/chave primaria
-- `j10_iptutaxamatricexe`: Tabela com os anos da tabela iptutaxamatric
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j10_anousu`: Exercicio
-- `j10_iptutaxamatric`: Codigo sequencial/chave primaria
-- `j10_iptutaxamatricexe`: Tabela com os anos da tabela iptutaxamatric
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j10_iptutaxamatric` -> `cadastro.iptutaxamatric` (j09_iptutaxamatric) [iptutaxamatricexe_iptutaxamatric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.isenexe`
-
-### Identidade
-
-- Nome humano: Cadastro dos exercicios da isencao.
-- O que representa: Cadastro dos exercicios da isencao
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j47_codigo`
-  - `j47_anousu`
-- Coluna temporal: `j47_anousu`
-- Candidatas a chave de negocio: j47_codigo
-- Candidatas a coluna temporal: j47_anousu
-
-### Colunas principais
-
-- `j47_anousu`: Exercicio da isencao
-- `j47_codigo`: Codigo da Isencao
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j47_anousu`: Exercicio da isencao
-- `j47_codigo`: Codigo da Isencao
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j47_codigo` -> `cadastro.iptuisen` (j46_codigo) [isenexe_codigo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.isenproc`
-
-### Identidade
-
-- Nome humano: guarda o codigo de isenção da matricula e o codigo do processo.
-- O que representa: guarda o codigo de isenção da matricula e o codigo do processo
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j61_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j61_codigo`: Codigo para identificar uma isencao atribuida a uma matricula
-- `j61_codproc`: Código do processo
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j61_codigo`: Codigo para identificar uma isencao atribuida a uma matricula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j61_codigo` -> `cadastro.iptuisen` (j46_codigo) [isenproc_codigo_fk]
-- `j61_codproc` -> `protocolo.protprocesso` (p58_codproc) [isenproc_codproc_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.isentaxa`
-
-### Identidade
-
-- Nome humano: Cadastro das taxas a serem isentas para uma determinada isencao. Se estiverem neste arquivo estao isentas..
-- O que representa: Cadastro das taxas a serem isentas para uma determinada isencao. Se estiverem neste arquivo estao isentas.
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j56_codigo`
-  - `j56_receit`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j56_codigo, j56_receit
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j56_codigo`: Codigo da isencao do arquivo iptuisen
-- `j56_perc`: Percentual de isenção da taxa
-- `j56_receit`: Codigo da receita do tabrec
-
-### Metricas atomicas
-
-- `j56_perc`: Percentual de isenção da taxa
-
-### Dimensoes
-
-- `j56_codigo`: Codigo da isencao do arquivo iptuisen
-- `j56_receit`: Codigo da receita do tabrec
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j56_codigo` -> `cadastro.iptuisen` (j46_codigo) [isentaxa_codigo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.localidaderural`
-
-### Identidade
-
-- Nome humano: cadastro de localidade rural.
-- O que representa: cadastro de localidade rural
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j137_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j137_descricao, j137_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j137_descricao`: Descrição da localidade
-- `j137_sequencial`: Código da Localidade Rural
-- `j137_valormaximo`: Descrição do valor máximo
-- `j137_valorminimo`: Valor Minimo do hectare
-
-### Metricas atomicas
-
-- `j137_valormaximo`: Descrição do valor máximo
-- `j137_valorminimo`: Valor Minimo do hectare
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.logradcep`
-
-### Identidade
-
-- Nome humano: Cep por logradouro, utilizada para casos em que o municipio tem cep por logradouro e esta tabela interliga o cadastro imobiliario ao cadastro de ceps.
-- O que representa: Cep por logradouro, utilizada para casos em que o municipio tem cep por logradouro e esta tabela interliga o cadastro imobiliario ao cadastro de ceps
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
+  - `c88_codlan`
 - Coluna temporal: Preencher.
 - Candidatas a chave de negocio: Nenhuma inferida automaticamente.
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j65_ceplog`: Código do Logradouro
-- `j65_lograd`: código do logradouro cadastrado no sistema
+- `c88_codlan`: Código Lançamento de implantação
 
 ### Metricas atomicas
 
@@ -9677,8 +3517,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j65_ceplog` -> `protocolo.db_ceplog` (db11_codlog) [logradcep_ceplog_fk]
-- `j65_lograd` -> `cadastro.ruas` (j14_codigo) [logradcep_lograd_fk]
+- `c88_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamimp_codlan_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -9696,12 +3535,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.lote`
+## Tabela de negocio: `contabilidade.conlancaminfocomplementarvalor`
 
 ### Identidade
 
-- Nome humano: cadastro de Lotes do Municipio.
-- O que representa: cadastro de Lotes do Municipio
+- Nome humano: Vínculo de informações complementares dos lançamentos.
+- O que representa: Vínculo de informações complementares dos lançamentos
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -9712,36 +3551,27 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j34_idbql`
+  - `c126_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j34_areal, j34_idbql, j34_lote, j34_quadra
+- Candidatas a chave de negocio: c126_reduz, c126_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j34_area`: Área do lote em metros quadrados
-- `j34_areal`: Área medida pela prefeitura. Diferente da escritura.
-- `j34_areapreservada`: Area Preservada
-- `j34_bairro`: Código do bairro onde o lote está localizado.
-- `j34_idbql`: Código de identificação do lote
-- `j34_lote`: Número Identificação do Lote
-- `j34_quadra`: Identificação da Quadra onde o lote está localizado
-- `j34_quamat`: Número de matrículas cadastradas para este lote.
-- `j34_setor`: Código do setor onde o lote está localizado
-- `j34_totcon`: Total construído no lote
-- `j34_zona`: Zona Fiscal de enquadramento do lote
+- `c126_codlan`: Código do lançamento
+- `c126_infocomplementar`: Código da Informação complementar
+- `c126_reduz`: Reduzido da conta
+- `c126_sequencial`: Sequencial da tabela
+- `c126_tiposistema`: Tipo do sistema do sistema que o registro faz referencia (SICONFI etc)
+- `c126_valor`: Valor da informação complementar
 
 ### Metricas atomicas
 
-- `j34_area`: Área do lote em metros quadrados
-- `j34_areal`: Área medida pela prefeitura. Diferente da escritura.
-- `j34_areapreservada`: Area Preservada
-- `j34_totcon`: Total construído no lote
+- `c126_valor`: Valor da informação complementar
 
 ### Dimensoes
 
-- `j34_bairro`: Código do bairro onde o lote está localizado.
-- `j34_setor`: Código do setor onde o lote está localizado
+- `c126_tiposistema`: Tipo do sistema do sistema que o registro faz referencia (SICONFI etc)
 
 ### Filtros de negocio
 
@@ -9758,8 +3588,9 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j34_bairro` -> `cadastro.bairro` (j13_codi) [lote_bairro_fk]
-- `j34_setor` -> `cadastro.setor` (j30_codi) [lote_setor_fk]
+- `c126_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancaminfocomplementarvalor_codlan_fk]
+- `c126_infocomplementar` -> `contabilidade.conplanoinfocomplementar` (c121_sequencial) [conlancaminfocomplementarvalor_infocomplementar_fk]
+- `c126_tiposistema` -> `contabilidade.conplanosistema` (c122_sequencial) [conlancaminfocomplementarvalor_tiposistema_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -9777,12 +3608,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.loteam`
+## Tabela de negocio: `contabilidade.conlancaminscrestosapagar`
 
 ### Identidade
 
-- Nome humano: Cadastro dos Loteamentos Incluidos e liberados pelo Municipio.
-- O que representa: Cadastro dos Loteamentos Incluidos e liberados pelo Municipio
+- Nome humano: Tabela de vínculo entre as inscrições de restos a pagar processados e não processados com os lançamentos da contabilidade.
+- O que representa: Tabela de vínculo entre as inscrições de restos a pagar processados e não processados com os lançamentos da contabilidade
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -9793,24 +3624,3124 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j34_loteam`
+  - `c108_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c108_inscricaorestosapagar, c108_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c108_codlan`: Código Lançamento
+- `c108_inscricaorestosapagar`: Chave primária sequencial da tabela de inscrição de restos a pagar não processados
+- `c108_sequencial`: Chave primária sequencial da tabela de vínculo entre os lançamentos da contabilidade com a inscriçaõ de restos a pagar não processados
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c108_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancaminscrestosapagar_codlan_fk]
+- `c108_inscricaorestosapagar` -> `contabilidade.inscricaorestosapagar` (c107_sequencial) [conlancaminscrestosapagar_inscricaorestosapagarna]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancaminscricaopassivo`
+
+### Identidade
+
+- Nome humano: Tabela que vai realizar o vinculo com o lançamento contabil.
+- O que representa: Tabela que vai realizar o vinculo com o lançamento contabil
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c37_sequencial`
+- Coluna temporal: `c37_data`
+- Candidatas a chave de negocio: c37_inscricaopassivo, c37_sequencial
+- Candidatas a coluna temporal: c37_data
+
+### Colunas principais
+
+- `c37_conlancam`: Vinculo com lançamento Lançamento
+- `c37_data`: Data do Lançamento
+- `c37_inscricaopassivo`: Vinculo Inscrição Passiva
+- `c37_instit`: Instituição
+- `c37_sequencial`: Sequência o vinculo com o lançamento contabil
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c37_data`: Data do Lançamento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c37_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancaminscricaopassivo_conlancam_fk]
+- `c37_inscricaopassivo` -> `contabilidade.inscricaopassivo` (c36_sequencial) [conlancaminscricaopassivo_inscricaopassivo_fk]
+- `c37_instit` -> `configuracoes.db_config` (codigo) [conlancaminscricaopassivo_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancaminstit`
+
+### Identidade
+
+- Nome humano: Tabela de vinculo entre o lançamento e a instituição.
+- O que representa: Tabela de vinculo entre o lançamento e a instituição
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c02_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c02_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c02_codlan`: Código do lançamento contábil.
+- `c02_instit`: Instituição do lançamento contábil.
+- `c02_sequencial`: Sequencial da tabela conlancaminstit
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c02_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancaminstit_codlan_fk]
+- `c02_instit` -> `configuracoes.db_config` (codigo) [conlancaminstit_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancaminventario`
+
+### Identidade
+
+- Nome humano: controle de lançamento dos inventarios.
+- O que representa: controle de lançamento dos inventarios
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c85_sequencial`
+- Coluna temporal: `c85_anousu`
+- Candidatas a chave de negocio: c85_reduz, c85_sequencial
+- Candidatas a coluna temporal: c85_anousu
+
+### Colunas principais
+
+- `c85_anousu`: Exercício
+- `c85_codlan`: Lançamento
+- `c85_escriturainventario`: Escritura Inventário
+- `c85_reduz`: Código Reduzido da conta dentro do exercício
+- `c85_sequencial`: Sequencia lançamento inventario
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c85_anousu`: Exercício
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c85_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancaminventario_codlan_fk]
+- `c85_escriturainventario` -> `contabilidade.escriturainventario` (c88_sequencial) [conlancaminventario_escriturainventario_fk]
+- `c85_reduz, c85_reduz, c85_anousu, c85_anousu` -> `contabilidade.conplanoreduz` (c61_anousu, c61_reduz, c61_reduz, c61_anousu) [conlancaminventario_reduz_ae_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamlogatributos`
+
+### Identidade
+
+- Nome humano: conlancamlogatributos.
+- O que representa: conlancamlogatributos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c134_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c134_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c134_codlan`: Código do lançamento
+- `c134_mensagem`: Mensagem
+- `c134_sequencial`: Sequecial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c134_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamlogatributos_codlan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamlr`
+
+### Identidade
+
+- Nome humano: Controle dos lançamentos previstos no sistema.
+- O que representa: Controle dos lançamentos previstos no sistema
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c81_sequen`
+  - `c81_seqtranslr`
 - Coluna temporal: Preencher.
 - Candidatas a chave de negocio: Nenhuma inferida automaticamente.
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j34_areacc`: Área construída do Condomínio
-- `j34_areapc`: Área Pública do Condomínio
-- `j34_areato`: Área total do Condomínio
-- `j34_descr`: Descrição do loteamento
-- `j34_loteam`: Código do Loteamento
+- `c81_seqtranslr`: Sequencia Translr
+- `c81_sequen`: Código Lançamento
 
 ### Metricas atomicas
 
-- `j34_areacc`: Área construída do Condomínio
-- `j34_areapc`: Área Pública do Condomínio
-- `j34_areato`: Área total do Condomínio
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c81_seqtranslr` -> `contabilidade.contranslr` (c47_seqtranslr) [conlancamlr_seqtranslr_fk]
+- `c81_sequen` -> `contabilidade.conlancamval` (c69_sequen) [conlancamlr_sequen_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancammatestoqueinimei`
+
+### Identidade
+
+- Nome humano: Tabela de vínculo dos lançamentos com o estoque.
+- O que representa: Tabela de vínculo dos lançamentos com o estoque
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c103_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c103_matestoqueinimei, c103_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c103_conlancam`: Código Lançamento
+- `c103_matestoqueinimei`: Sequencial do lançamento da saída manual
+- `c103_sequencial`: Chave primária sequencial da tabela de vinculo entre lançamentos e o estoque
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c103_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancammatestoqueinimei_conlancam_fk]
+- `c103_matestoqueinimei` -> `material.matestoqueinimei` (m82_codigo) [conlancammatestoqueinimei_matestoqueinimei_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamnota`
+
+### Identidade
+
+- Nome humano: Numero das notas fiscais de um lancamento contábil.
+- O que representa: Numero das notas fiscais de um lancamento contábil
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c66_codlan`
+  - `c66_codnota`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c66_codlan`: Código Lançamento
+- `c66_codnota`: Nota
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c66_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamnota_codlan_fk]
+- `c66_codnota` -> `empenho.empnota` (e69_codnota) [conlancamnota_codnota_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamord`
+
+### Identidade
+
+- Nome humano: Pagamentos da ordem de pagamento.
+- O que representa: Pagamentos da ordem de pagamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c80_codlan`
+- Coluna temporal: `c80_data`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c80_data
+
+### Colunas principais
+
+- `c80_codlan`: Código Lançamento
+- `c80_codord`: Código da ordem de pagamento
+- `c80_data`: Data
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c80_data`: Data
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c80_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamord_codlan_fk]
+- `c80_codord` -> `empenho.pagordem` (e50_codord) [conlancamord_codord_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamordem`
+
+### Identidade
+
+- Nome humano: conlancamordem.
+- O que representa: conlancamordem
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c03_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c03_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c03_codlan`: Código do Lançamento
+- `c03_ordem`: Ordem
+- `c03_sequencial`: Código
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c03_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamordem_codlan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancampag`
+
+### Identidade
+
+- Nome humano: Reduzido dos pagamentos.
+- O que representa: Reduzido dos pagamentos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c82_codlan`
+- Coluna temporal: `c82_anousu`
+- Candidatas a chave de negocio: c82_reduz
+- Candidatas a coluna temporal: c82_anousu
+
+### Colunas principais
+
+- `c82_anousu`: Ano
+- `c82_codlan`: Código Lançamento
+- `c82_reduz`: Código Reduzido da conta dentro do exercício
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c82_anousu`: Ano
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c82_anousu, c82_anousu, c82_reduz, c82_reduz` -> `contabilidade.conplanoexe` (c62_reduz, c62_anousu, c62_anousu, c62_reduz) [conlancampag_ae_reduz_fk]
+- `c82_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancampag_codlan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamprogramacaofinanceiraparcela`
+
+### Identidade
+
+- Nome humano: Tabela de vinculo entra a conlancam e programacaofinanceiraparcela.
+- O que representa: Tabela de vinculo entra a conlancam e programacaofinanceiraparcela
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c118_conlancam`
+  - `c118_programacaofinanceiraparcela`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c118_conlancam`: Código do lançamento contabil
+- `c118_programacaofinanceiraparcela`: Vinculo com a tabela programacaofinanceiraparcela
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c118_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancamprogramacaofinanceiraparcela_c118_conlancam]
+- `c118_programacaofinanceiraparcela` -> `caixa.programacaofinanceiraparcela` (k118_sequencial) [conlancamprogramacaofinanceiraparcela_c118_programacaofinanceir]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamprovisaodecimoterceiro`
+
+### Identidade
+
+- Nome humano: Lançamento contábil de provisão de 13º salário.
+- O que representa: Lançamento contábil de provisão de 13º salário
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c100_sequencial`
+- Coluna temporal: `c100_ano`
+- Candidatas a chave de negocio: c100_sequencial
+- Candidatas a coluna temporal: c100_ano
+
+### Colunas principais
+
+- `c100_ano`: Ano dos lançamentos de provisão de 13º salário
+- `c100_codlan`: Código Lançamento
+- `c100_escrituraprovisao`: Escritura de Provisao
+- `c100_instit`: Código da Instituição
+- `c100_mes`: Mês dos lançamentos de provisão de 13º salário
+- `c100_sequencial`: Chave primária dos lançamentos de provisão de 13º salário
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c100_ano`: Ano dos lançamentos de provisão de 13º salário
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c100_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamprovisaodecimoterceiro_codlan_fk]
+- `c100_escrituraprovisao` -> `contabilidade.escrituraprovisao` (c102_sequencial) [conlancamprovisaodecimoterceiro_escrituraprovisao_fk]
+- `c100_instit` -> `configuracoes.db_config` (codigo) [conlancamprovisaodecimoterceiro_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamprovisaoferias`
+
+### Identidade
+
+- Nome humano: Lançamento contábil de provisão de férias.
+- O que representa: Lançamento contábil de provisão de férias
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c101_sequencial`
+- Coluna temporal: `c101_ano`
+- Candidatas a chave de negocio: c101_sequencial
+- Candidatas a coluna temporal: c101_ano
+
+### Colunas principais
+
+- `c101_ano`: Ano dos lançamentos de provisão de férias
+- `c101_codlan`: Código Lançamento
+- `c101_escrituraprovisao`: Escritura Provisao
+- `c101_instit`: Código da Instituição
+- `c101_mes`: Mês dos lançamentos de provisão de férias
+- `c101_sequencial`: Chave primária dos lançamentos de provisão de férias
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c101_ano`: Ano dos lançamentos de provisão de férias
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c101_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamprovisaoferias_codlan_fk]
+- `c101_escrituraprovisao` -> `contabilidade.escrituraprovisao` (c102_sequencial) [conlancamprovisaoferias_escrituraprovisao_fk]
+- `c101_instit` -> `configuracoes.db_config` (codigo) [conlancamprovisaoferias_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamrec`
+
+### Identidade
+
+- Nome humano: Receita do Lançamento.
+- O que representa: Receita do Lançamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c74_codlan`
+- Coluna temporal: `c74_anousu`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c74_anousu, c74_data
+
+### Colunas principais
+
+- `c74_anousu`: Exercício
+- `c74_codlan`: Código Lançamento
+- `c74_codrec`: Código da receita do orcamento
+- `c74_data`: Data
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c74_anousu`: Exercício
+- `c74_data`: Data
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c74_anousu, c74_anousu, c74_codrec, c74_codrec` -> `orcamento.orcreceita` (o70_codrec, o70_anousu, o70_anousu, o70_codrec) [conlancamrec_ae_codrec_fk]
+- `c74_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamrec_codlan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamreconhecimentocontabil`
+
+### Identidade
+
+- Nome humano: Ligacao entre reconhecimento contabil e lancamento contabil.
+- O que representa: Ligacao entre reconhecimento contabil e lancamento contabil
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c113_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c113_reconhecimentocontabil, c113_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c113_codlan`: Código Lançamento
+- `c113_reconhecimentocontabil`: Codigo do Reconhecimento Contabil
+- `c113_sequencial`: sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c113_reconhecimentocontabil`: Codigo do Reconhecimento Contabil
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c113_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamreconhecimentocontabil_codlan_fk]
+- `c113_reconhecimentocontabil` -> `contabilidade.reconhecimentocontabil` (c112_sequencial) [conlancamreconhecimentocontabil_reconhecimentocontabil_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamrecurso`
+
+### Identidade
+
+- Nome humano: Recursos do lançamento contabil.
+- O que representa: Recursos do lançamento contabil
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c130_sequencial`
+- Coluna temporal: `c130_anousu`
+- Candidatas a chave de negocio: c130_sequencial
+- Candidatas a coluna temporal: c130_anousu
+
+### Colunas principais
+
+- `c130_anousu`: Ano da Conta
+- `c130_conlancam`: Código do lançamento
+- `c130_conta`: Fonte de Recurso
+- `c130_natureza`: Natureza da Conta
+- `c130_orctiporec`: Fonte de Recurso
+- `c130_sequencial`: Código
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c130_anousu`: Ano da Conta
+- `c130_orctiporec`: Fonte de Recurso
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c130_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancamrecurso_conlancam_fk]
+- `c130_conta, c130_conta, c130_anousu, c130_anousu` -> `contabilidade.conplanoreduz` (c61_reduz, c61_anousu, c61_reduz, c61_anousu) [conlancamrecurso_conta_ae_fk]
+- `c130_orctiporec` -> `orcamento.orctiporec` (o15_codigo) [conlancamrecurso_orctiporec_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamretencao`
+
+### Identidade
+
+- Nome humano: Retençao vinculada ao lançamento.
+- O que representa: Retençao vinculada ao lançamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c127_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c127_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c127_conlancam`: Código do Lancamento
+- `c127_retencaotiporec`: Retenção
+- `c127_sequencial`: Código Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c127_retencaotiporec`: Retenção
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c127_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancamretencao_conlancam_fk]
+- `c127_retencaotiporec` -> `empenho.retencaotiporec` (e21_sequencial) [conlancamretencao_retencaotiporec_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamretif`
+
+### Identidade
+
+- Nome humano: tabela para conter o documento de origem de um estorno (retificação ).
+- O que representa: tabela para conter o documento de origem de um estorno (retificação )
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c79_codlan`
+- Coluna temporal: `c79_data`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c79_data
+
+### Colunas principais
+
+- `c79_coddoc`: documento que originou o documento de estorno contigo na tabela conlancamdoc
+- `c79_codlan`: Código Lançamento
+- `c79_codsup`: Código Suplementação
+- `c79_data`: Data
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c79_data`: Data
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c79_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamretif_codlan_fk]
+- `c79_codsup` -> `orcamento.orcsuplem` (o46_codsup) [conlancamretif_codsup_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamretificacao`
+
+### Identidade
+
+- Nome humano: Tabela que armazena os lançamento envolvidos em uma retificacao.
+- O que representa: Tabela que armazena os lançamento envolvidos em uma retificacao
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c135_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c135_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c135_codlanestorno`: Código de Lançamento de Estorno
+- `c135_codlaninclusao`: Código de Lançamento Original
+- `c135_codlannovo`: Código de Lançamento Novo
+- `c135_sequencial`: Código
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c135_codlanestorno` -> `contabilidade.conlancam` (c70_codlan) [conlancamretificacao_codlanestorno_fk]
+- `c135_codlaninclusao` -> `contabilidade.conlancam` (c70_codlan) [conlancamretificacao_codlaninclusao_fk]
+- `c135_codlannovo` -> `contabilidade.conlancam` (c70_codlan) [conlancamretificacao_codlannovo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamslip`
+
+### Identidade
+
+- Nome humano: Tabela que vincula lançamento contábil a um slip.
+- O que representa: Tabela que vincula lançamento contábil a um slip
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c84_conlancam`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c84_conlancam`: Código do Lançamento, fk com conlacam
+- `c84_slip`: Código do Slip, fk com tabela slip
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c84_conlancam` -> `contabilidade.conlancam` (c70_codlan) [conlancamslip_conlancam_fk]
+- `c84_slip` -> `caixa.slip` (k17_codigo) [conlancamslip_slip_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamsup`
+
+### Identidade
+
+- Nome humano: Lançamentos de Suplementação.
+- O que representa: Lançamentos de Suplementação
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c79_codlan`
+- Coluna temporal: `c79_data`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c79_data
+
+### Colunas principais
+
+- `c79_codlan`: Código Lançamento
+- `c79_codsup`: Código Suplementação
+- `c79_data`: Data
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c79_data`: Data
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c79_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamsup_codlan_fk]
+- `c79_codsup` -> `orcamento.orcsuplem` (o46_codsup) [conlancamsup_codsup_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamtef`
+
+### Identidade
+
+- Nome humano: lancamentos do TEF.
+- O que representa: lancamentos do TEF
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c137_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c137_codlan, c137_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c137_codlan`: Codigo do lancamento codlan
+- `c137_operacoesrealizadastef`: Operação TEF
+- `c137_sequencial`: Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c137_codlan`: Codigo do lancamento codlan
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c137_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamtef_codlan_fk]
+- `c137_operacoesrealizadastef` -> `caixa.operacoesrealizadastef` (k198_sequencial) [conlancamtef_operacoesrealizadastef_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conlancamval`
+
+### Identidade
+
+- Nome humano: Valores e contas dos lançamentos.
+- O que representa: Valores e contas dos lançamentos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c69_sequen`
+- Coluna temporal: `c69_anousu`
+- Candidatas a chave de negocio: c69_credito, c69_debito
+- Candidatas a coluna temporal: c69_anousu, c69_data
+
+### Colunas principais
+
+- `c69_anousu`: Exercício
+- `c69_codhist`: Código do histórico do lançamento contábil
+- `c69_codlan`: Código do lançamento
+- `c69_credito`: Código Reduzido da conta dentro do exercício
+- `c69_data`: Data Lançamento
+- `c69_debito`: Código Reduzido da conta dentro do exercício
+- `c69_ordem`: Ordem do Lançamento
+- `c69_sequen`: Sequenca de lançamento
+- `c69_valor`: Valor do Lançamento
+
+### Metricas atomicas
+
+- `c69_valor`: Valor do Lançamento
+
+### Dimensoes
+
+- `c69_anousu`: Exercício
+- `c69_data`: Data Lançamento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c69_anousu, c69_anousu, c69_credito, c69_credito` -> `contabilidade.conplanoexe` (c62_anousu, c62_reduz, c62_anousu, c62_reduz) [conlancamval_ae_credito_fk]
+- `c69_codhist` -> `contabilidade.conhist` (c50_codhist) [conlancamval_codhist_fk]
+- `c69_codlan` -> `contabilidade.conlancam` (c70_codlan) [conlancamval_codlan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conparametro`
+
+### Identidade
+
+- Nome humano: Parametro Contabilidade.
+- O que representa: Parametro Contabilidade
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - Preencher.
+- Coluna temporal: `c90_confirmadata`
+- Candidatas a chave de negocio: c90_estrutcontabil
+- Candidatas a coluna temporal: c90_confirmadata, c90_estrutsistema
+
+### Colunas principais
+
+- `c90_codestrut`: Código de estrutura
+- `c90_confirmadata`: Confirma data antes da escrituração
+- `c90_estrutcontabil`: Estrutural Contabilidade
+- `c90_estrutsistema`: Estrutural Sistema ( plano de contas antigo)
+- `c90_usapcasp`: Parâmetro criado para usuários usarem pcasp
+- `c90_utilcontabancaria`: Utiliza Conta Bancária
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c90_confirmadata`: Confirma data antes da escrituração
+- `c90_estrutsistema`: Estrutural Sistema ( plano de contas antigo)
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplano`
+
+### Identidade
+
+- Nome humano: Plano de contas para 2005/PCASP..
+- O que representa: Plano de contas para 2005/PCASP.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c60_codcon`
+  - `c60_anousu`
+- Coluna temporal: `c60_anousu`
+- Candidatas a chave de negocio: c60_codigo, c60_estrut, c60_finali, c60_identificadorfinanceiro
+- Candidatas a coluna temporal: c60_anousu, c60_codsis, c60_descr
+
+### Colunas principais
+
+- `c60_anousu`: Exercício
+- `c60_codcla`: Classificação da conta conforme o poderrnExecutivornLegislativo ...
+- `c60_codcon`: Código da Conta
+- `c60_codigo`: Código único da conta
+- `c60_codsis`: Código do Sistema Contábil do plano de contas anterior
+- `c60_consistemaconta`: consistemaconta
+- `c60_descr`: Descrição da conta do plano de contas
+- `c60_estrut`: Código Estrutural da Contabilidade
+- `c60_finali`: Finalidade da conta
+- `c60_funcao`: Função da conta
+- `c60_identificadorfinanceiro`: Identificador financeiro
+- `c60_naturezasaldo`: naturezasaldo
+- `c60_saldocontinuo`: Saldo Contínuo
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c60_anousu`: Exercício
+- `c60_codigo`: Código único da conta
+- `c60_codsis`: Código do Sistema Contábil do plano de contas anterior
+- `c60_descr`: Descrição da conta do plano de contas
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c60_codcla` -> `contabilidade.conclass` (c51_codcla) [conplano_codcla_fk]
+- `c60_codsis` -> `contabilidade.consistema` (c52_codsis) [conplano_codsis_fk]
+- `c60_consistemaconta` -> `contabilidade.consistemaconta` (c65_sequencial) [conplano_consistemaconta_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoatributolancamentos`
+
+### Identidade
+
+- Nome humano: Lançamentos realizados para as contas e suas respectivas informações complementares.
+- O que representa: Lançamentos realizados para as contas e suas respectivas informações complementares
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c124_sequencial`
+- Coluna temporal: `c124_conplanosistema`
+- Candidatas a chave de negocio: c124_sequencial
+- Candidatas a coluna temporal: c124_conplanosistema, c124_data
+
+### Colunas principais
+
+- `c124_conplanosistema`: Código do Sistema
+- `c124_data`: Data do lançamento
+- `c124_lancamento`: Código do lançamento (conlancam).
+- `c124_natureza`: Natureza do valor D ou C (Débito ou Crédito).
+- `c124_sequencial`: Sequencial
+- `c124_tipo`: Tipo do lançamento realizado
+- `c124_valor`: Valor do lançamento
+
+### Metricas atomicas
+
+- `c124_natureza`: Natureza do valor D ou C (Débito ou Crédito).
+- `c124_valor`: Valor do lançamento
+
+### Dimensoes
+
+- `c124_conplanosistema`: Código do Sistema
+- `c124_data`: Data do lançamento
+- `c124_tipo`: Tipo do lançamento realizado
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c124_conplanosistema` -> `contabilidade.conplanosistema` (c122_sequencial) [conplanoatributolancamentos_conplanosistema_fk]
+- `c124_lancamento` -> `contabilidade.conlancam` (c70_codlan) [conplanoatributolancamentos_lancamento_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoatributos`
+
+### Identidade
+
+- Nome humano: Cadastro das informações complementares das contas do plano orçamentário.
+- O que representa: Cadastro das informações complementares das contas do plano orçamentário
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c120_sequencial`
+- Coluna temporal: `c120_anousu`
+- Candidatas a chave de negocio: c120_sequencial
+- Candidatas a coluna temporal: c120_anousu, c120_conplano, c120_conplanosistema
+
+### Colunas principais
+
+- `c120_anousu`: Ano
+- `c120_conplano`: Código da Conplano
+- `c120_conplanosistema`: conplanosistema
+- `c120_infocomplementar`: Código da informação complementar
+- `c120_sequencial`: Sequencial do campo
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c120_anousu`: Ano
+- `c120_conplano`: Código da Conplano
+- `c120_conplanosistema`: conplanosistema
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c120_conplano, c120_conplano, c120_anousu, c120_anousu` -> `contabilidade.conplano` (c60_anousu, c60_codcon, c60_anousu, c60_codcon) [conplanoatributos_conplano_ae_fk]
+- `c120_conplanosistema` -> `contabilidade.conplanosistema` (c122_sequencial) [conplanoatributos_conplanosistema_fk]
+- `c120_infocomplementar` -> `contabilidade.conplanoinfocomplementar` (c121_sequencial) [conplanoatributos_infocomplementar_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoatributosaldo`
+
+### Identidade
+
+- Nome humano: Saldo do conta corrente por mês e ano.
+- O que representa: Saldo do conta corrente por mês e ano
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c125_sequencial`
+- Coluna temporal: `c125_anousu`
+- Candidatas a chave de negocio: c125_sequencial
+- Candidatas a coluna temporal: c125_anousu, c125_conplanosistema
+
+### Colunas principais
+
+- `c125_anousu`: Ano
+- `c125_conplanosistema`: Sistema do Saldo
+- `c125_hashcontaatributos`: Hash de Atributos
+- `c125_instit`: Instituição
+- `c125_mesusu`: Mês
+- `c125_natureza`: Natureza que pode ser D (débito) ou C (crédito)
+- `c125_sequencial`: Código sequencial da tabela.
+- `c125_tipo`: Define se o saldo é valor calculado ou implantado.
+- `c125_tiposaldo`: Preencher significado.
+- `c125_valor`: Valor Monetário
+
+### Metricas atomicas
+
+- `c125_tipo`: Define se o saldo é valor calculado ou implantado.
+- `c125_valor`: Valor Monetário
+
+### Dimensoes
+
+- `c125_anousu`: Ano
+- `c125_conplanosistema`: Sistema do Saldo
+- `c125_tiposaldo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c125_conplanosistema` -> `contabilidade.conplanosistema` (c122_sequencial) [conplanoatributosaldo_conplanosistema_fk]
+- `c125_instit` -> `configuracoes.db_config` (codigo) [conplanoatributosaldo_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoconplanoorcamento`
+
+### Identidade
+
+- Nome humano: Tabela de ligação entre conplano e conplanoorcamento.
+- O que representa: Tabela de ligação entre conplano e conplanoorcamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c72_sequencial`
+- Coluna temporal: `c72_anousu`
+- Candidatas a chave de negocio: c72_sequencial
+- Candidatas a coluna temporal: c72_anousu, c72_conplano, c72_conplanoorcamento, c72_sequencial
+
+### Colunas principais
+
+- `c72_anousu`: Anousu
+- `c72_conplano`: Código da conplano
+- `c72_conplanoorcamento`: Código da conplanoorcamento
+- `c72_sequencial`: Código ligação entre conplano e conplano
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c72_anousu`: Anousu
+- `c72_conplano`: Código da conplano
+- `c72_conplanoorcamento`: Código da conplanoorcamento
+- `c72_sequencial`: Código ligação entre conplano e conplano
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c72_conplano, c72_conplano, c72_anousu, c72_anousu` -> `contabilidade.conplano` (c60_anousu, c60_codcon, c60_codcon, c60_anousu) [conplanoconplanoorcamento_conplano_ae_fk]
+- `c72_conplanoorcamento, c72_conplanoorcamento, c72_anousu, c72_anousu` -> `contabilidade.conplanoorcamento` (c60_anousu, c60_codcon, c60_codcon, c60_anousu) [conplanoconplanoorcamento_conplanoorcamento_ae_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoconsaldo`
+
+### Identidade
+
+- Nome humano: conplanoconsaldo.
+- O que representa: conplanoconsaldo
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c59_anoexe`
+  - `c59_codcon`
+  - `c59_instit`
+  - `c59_mes`
+- Coluna temporal: `c59_anoexe`
+- Candidatas a chave de negocio: c59_instit
+- Candidatas a coluna temporal: c59_anoexe
+
+### Colunas principais
+
+- `c59_anoexe`: Exercicío
+- `c59_codcon`: Código da Conta
+- `c59_credito`: Crédito
+- `c59_debito`: Débito
+- `c59_instit`: codigo da instituicao
+- `c59_mes`: Mês
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c59_anoexe`: Exercicío
+- `c59_instit`: codigo da instituicao
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c59_codcon, c59_codcon, c59_anoexe, c59_anoexe` -> `contabilidade.conplano` (c60_anousu, c60_codcon, c60_codcon, c60_anousu) [conplanoconsaldo_codcon_anoexe_fk]
+- `c59_instit` -> `configuracoes.db_config` (codigo) [conplanoconsaldo_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoconta`
+
+### Identidade
+
+- Nome humano: Banco da Conta do Plano.
+- O que representa: Banco da Conta do Plano
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - Preencher.
+- Coluna temporal: `c63_anousu`
+- Candidatas a chave de negocio: c63_codcon, c63_codigooperacao, c63_identificador, c63_reduz
+- Candidatas a coluna temporal: c63_anousu
+
+### Colunas principais
+
+- `c63_agencia`: Agência
+- `c63_anousu`: Exercício
+- `c63_banco`: Banco
+- `c63_codcon`: Código Reduzido da conta dentro do exercício
+- `c63_codigooperacao`: Código da Operação
+- `c63_conta`: Conta Bancária
+- `c63_dvagencia`: Dígito verificador da agência
+- `c63_dvconta`: Dígito verificador da conta
+- `c63_identificador`: Identificador do Banco
+- `c63_reduz`: Reduzido
+- `c63_tipoconta`: Tipo da Conta
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c63_anousu`: Exercício
+- `c63_codigooperacao`: Código da Operação
+- `c63_tipoconta`: Tipo da Conta
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c63_banco` -> `configuracoes.db_bancos` (db90_codban) [conplanoconta_banco_fk]
+- `c63_codcon, c63_codcon, c63_anousu, c63_anousu` -> `contabilidade.conplano` (c60_codcon, c60_anousu, c60_anousu, c60_codcon) [conplanoconta_codcon_ae_fk]
+- `c63_reduz, c63_reduz, c63_anousu, c63_anousu` -> `contabilidade.conplanoreduz` (c61_anousu, c61_reduz, c61_anousu, c61_reduz) [conplanoconta_reduz_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanocontabancaria`
+
+### Identidade
+
+- Nome humano: Ligação conta bancaria com a contabilidade.
+- O que representa: Ligação conta bancaria com a contabilidade
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c56_sequencial`
+- Coluna temporal: `c56_anousu`
+- Candidatas a chave de negocio: c56_contabancaria, c56_reduz, c56_sequencial
+- Candidatas a coluna temporal: c56_anousu
+
+### Colunas principais
+
+- `c56_anousu`: Exercício
+- `c56_codcon`: Código da Conta
+- `c56_contabancaria`: Codigo sequencial da conta bancaria
+- `c56_reduz`: Código Reduzido da conta dentro do exercício
+- `c56_sequencial`: Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c56_anousu`: Exercício
+- `c56_contabancaria`: Codigo sequencial da conta bancaria
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c56_codcon, c56_codcon, c56_anousu, c56_anousu` -> `contabilidade.conplano` (c60_anousu, c60_codcon, c60_anousu, c60_codcon) [conplanocontabancaria_codcon_ae_fk]
+- `c56_contabancaria` -> `configuracoes.contabancaria` (db83_sequencial) [conplanocontabancaria_contabancaria_fk]
+- `c56_reduz, c56_reduz, c56_anousu, c56_anousu` -> `contabilidade.conplanoreduz` (c61_reduz, c61_anousu, c61_reduz, c61_anousu) [conplanocontabancaria_reduz_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanocontacorrente`
+
+### Identidade
+
+- Nome humano: Vinculo do plano PCASP com conta corrente.
+- O que representa: Vinculo do plano PCASP com conta corrente
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c18_sequencial`
+- Coluna temporal: `c18_anousu`
+- Candidatas a chave de negocio: c18_sequencial
+- Candidatas a coluna temporal: c18_anousu
+
+### Colunas principais
+
+- `c18_anousu`: Ano da conta vinculada
+- `c18_codcon`: Código da conta PCASP
+- `c18_contacorrente`: Código da conta corrente
+- `c18_sequencial`: Código sequencial da tabela de vinculo do PCASP com conta corrente
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c18_anousu`: Ano da conta vinculada
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c18_codcon, c18_codcon, c18_anousu, c18_anousu` -> `contabilidade.conplano` (c60_codcon, c60_anousu, c60_anousu, c60_codcon) [conplanocontacorrente_codcon_fk]
+- `c18_contacorrente` -> `contabilidade.contacorrente` (c17_sequencial) [conplanocontacorrente_contacorrente_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoexe`
+
+### Identidade
+
+- Nome humano: Plano de Contas Exercício.
+- O que representa: Plano de Contas Exercício
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c62_anousu`
+  - `c62_reduz`
+- Coluna temporal: `c62_anousu`
+- Candidatas a chave de negocio: c62_codrec, c62_reduz
+- Candidatas a coluna temporal: c62_anousu
+
+### Colunas principais
+
+- `c62_anousu`: Exercício
+- `c62_codrec`: Codigo do Tipo de Recurso
+- `c62_reduz`: Código Reduzido da conta dentro do exercício
+- `c62_vlrcre`: Saldo Abertura
+- `c62_vlrdeb`: Saldo Abertura à débito
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c62_anousu`: Exercício
+- `c62_codrec`: Codigo do Tipo de Recurso
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c62_codrec` -> `orcamento.orctiporec` (o15_codigo) [conplanoexe_codrec_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoexeconciliarp`
+
+### Identidade
+
+- Nome humano: contabilidade.conplanoexeconciliarp.
+- O que representa: Preencher em linguagem de negocio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c162_codigo`
+- Coluna temporal: `c162_exercicio`
+- Candidatas a chave de negocio: c162_codigo, c162_reduzido
+- Candidatas a coluna temporal: c162_exercicio
+
+### Colunas principais
+
+- `c162_ai`: Preencher significado.
+- `c162_codigo`: Preencher significado.
+- `c162_elemento`: Preencher significado.
+- `c162_exercicio`: Preencher significado.
+- `c162_funcao`: Preencher significado.
+- `c162_natureza`: Preencher significado.
+- `c162_recurso`: Preencher significado.
+- `c162_reduzido`: Preencher significado.
+- `c162_subfuncao`: Preencher significado.
+- `c162_valor`: Preencher significado.
+
+### Metricas atomicas
+
+- `c162_valor`
+
+### Dimensoes
+
+- `c162_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c162_elemento, c162_elemento, c162_ai, c162_ai` -> `orcamento.orcelemento` (o56_codele, o56_anousu, o56_anousu, o56_codele) [conplanoexeconciliarp_c162_elemento_fkey]
+- `c162_funcao` -> `orcamento.orcfuncao` (o52_funcao) [conplanoexeconciliarp_c162_funcao_fkey]
+- `c162_recurso` -> `orcamento.orctiporec` (o15_codigo) [conplanoexeconciliarp_c162_recurso_fkey]
+- `c162_reduzido, c162_reduzido, c162_exercicio, c162_exercicio` -> `contabilidade.conplanoreduz` (c61_anousu, c61_reduz, c61_reduz, c61_anousu) [conplanoexeconciliarp_c162_reduzido_fkey]
+- `c162_subfuncao` -> `orcamento.orcsubfuncao` (o53_subfuncao) [conplanoexeconciliarp_c162_subfuncao_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoexecontacorrente`
+
+### Identidade
+
+- Nome humano: Saldo inicial da conta por conta corrente.
+- O que representa: Saldo inicial da conta por conta corrente
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `id`
+- Coluna temporal: `c143_conplanoreduz`
+- Candidatas a chave de negocio: c143_conplanoreduz, id
+- Candidatas a coluna temporal: c143_conplanoreduz, c143_conplanosistema, c143_exercicio
+
+### Colunas principais
+
+- `c143_conplanoreduz`: Reduzido da conta
+- `c143_conplanosistema`: Vínculo com a Conta Corrente
+- `c143_exercicio`: Exercício
+- `c143_natureza`: Natureza do saldo
+- `c143_saldo`: Saldo da conta para uma conta corrente
+- `id`: id
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c143_conplanoreduz`: Reduzido da conta
+- `c143_conplanosistema`: Vínculo com a Conta Corrente
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c143_conplanoreduz, c143_conplanoreduz, c143_exercicio, c143_exercicio` -> `contabilidade.conplanoreduz` (c61_reduz, c61_anousu, c61_anousu, c61_reduz) [conplanoexecontacorrente_c143_conplanoreduz_fkey]
+- `c143_conplanosistema` -> `contabilidade.conplanosistema` (c122_sequencial) [conplanoexecontacorrente_c143_conplanosistema_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoexecontacorrenteatributo`
+
+### Identidade
+
+- Nome humano: Atributos que compõe o saldo inicial da conta corrente.
+- O que representa: Atributos que compõe o saldo inicial da conta corrente
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `id`
+- Coluna temporal: `c144_conplanoexecontacorrente`
+- Candidatas a chave de negocio: id
+- Candidatas a coluna temporal: c144_conplanoexecontacorrente, c144_conplanoinfocomplementar
+
+### Colunas principais
+
+- `c144_conplanoexecontacorrente`: Vínculo com o saldo inicial
+- `c144_conplanoinfocomplementar`: Vínculo com o atributo
+- `c144_valor`: Valor do atributo
+- `id`: id
+
+### Metricas atomicas
+
+- `c144_valor`: Valor do atributo
+
+### Dimensoes
+
+- `c144_conplanoexecontacorrente`: Vínculo com o saldo inicial
+- `c144_conplanoinfocomplementar`: Vínculo com o atributo
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c144_conplanoexecontacorrente` -> `contabilidade.conplanoexecontacorrente` (id) [conplanoexecontacorrenteatrib_c144_conplanoexecontacorrent_fkey]
+- `c144_conplanoinfocomplementar` -> `contabilidade.conplanoinfocomplementar` (c121_sequencial) [conplanoexecontacorrenteatrib_c144_conplanoinfocomplementa_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoexeempenho`
+
+### Identidade
+
+- Nome humano: contabilidade.conplanoexeempenho.
+- O que representa: Preencher em linguagem de negocio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c151_codigo`
+- Coluna temporal: `c151_exercicio`
+- Candidatas a chave de negocio: c151_codigo, c151_reduzido
+- Candidatas a coluna temporal: c151_exercicio
+
+### Colunas principais
+
+- `c151_codigo`: Preencher significado.
+- `c151_empenho`: Preencher significado.
+- `c151_exercicio`: Preencher significado.
+- `c151_natureza`: Preencher significado.
+- `c151_reduzido`: Preencher significado.
+- `c151_valor`: Preencher significado.
+
+### Metricas atomicas
+
+- `c151_valor`
+
+### Dimensoes
+
+- `c151_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c151_empenho` -> `empenho.empempenho` (e60_numemp) [conplanoexeempenho_c151_empenho_fkey]
+- `c151_reduzido, c151_reduzido, c151_exercicio, c151_exercicio` -> `contabilidade.conplanoreduz` (c61_anousu, c61_reduz, c61_reduz, c61_anousu) [conplanoexeempenho_c151_reduzido_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoexerecurso`
+
+### Identidade
+
+- Nome humano: esta tabela serve para guardar os valores relativos a inscrição inicial dos valores dos recursos. a conplanoexe guarda os valores iniciais por reduzido e esta tabela aqui quarda por recurso..
+- O que representa: esta tabela serve para guardar os valores relativos a inscrição inicial dos valores dos recursos. a conplanoexe guarda os valores iniciais por reduzido e esta tabela aqui quarda por recurso.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c89_anousu`
+  - `c89_recurso`
+  - `c89_reduz`
+- Coluna temporal: `c89_anousu`
+- Candidatas a chave de negocio: c89_recurso, c89_reduz
+- Candidatas a coluna temporal: c89_anousu
+
+### Colunas principais
+
+- `c89_anousu`: Exercício
+- `c89_recurso`: Codigo do Tipo de Recurso
+- `c89_reduz`: Código Reduzido da conta dentro do exercício
+- `c89_vlrcre`: Saldo Abertura
+- `c89_vlrdeb`: Saldo Abertura à débito
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c89_anousu`: Exercício
+- `c89_recurso`: Codigo do Tipo de Recurso
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c89_recurso` -> `orcamento.orctiporec` (o15_codigo) [conplanoexerecurso_recurso_fk]
+- `c89_reduz, c89_reduz, c89_anousu, c89_anousu` -> `contabilidade.conplanoreduz` (c61_reduz, c61_anousu, c61_reduz, c61_anousu) [conplanoexerecurso_reduz_anousu_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoexesaldo`
+
+### Identidade
+
+- Nome humano: Saldos das contas por exercicio e mes.
+- O que representa: Saldos das contas por exercicio e mes
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c68_anousu`
+  - `c68_reduz`
+  - `c68_mes`
+- Coluna temporal: `c68_anousu`
+- Candidatas a chave de negocio: c68_reduz
+- Candidatas a coluna temporal: c68_anousu
+
+### Colunas principais
+
+- `c68_anousu`: Exercício
+- `c68_credito`: Valor Crédito
+- `c68_debito`: Valor Débito
+- `c68_mes`: Mês do saldo
+- `c68_reduz`: Código Reduzido da conta dentro do exercício
+
+### Metricas atomicas
+
+- `c68_credito`: Valor Crédito
+- `c68_debito`: Valor Débito
+
+### Dimensoes
+
+- `c68_anousu`: Exercício
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c68_anousu, c68_anousu, c68_reduz, c68_reduz` -> `contabilidade.conplanoexe` (c62_anousu, c62_reduz, c62_reduz, c62_anousu) [conplanoexesaldo_ae_reduz_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoextra`
+
+### Identidade
+
+- Nome humano: Tabela auxiliar do plano de contas para guardas informações de contas extras usadas pelo TCE.
+- O que representa: Tabela auxiliar do plano de contas para guardas informações de contas extras usadas pelo TCE
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c33_anousu`
+  - `c33_instit`
+  - `c33_reduz`
+- Coluna temporal: `c33_anousu`
+- Candidatas a chave de negocio: c33_reduz
+- Candidatas a coluna temporal: c33_anousu
+
+### Colunas principais
+
+- `c33_anousu`: Exercício
+- `c33_codcla`: classificação da conta usada pelo tribunal
+- `c33_instit`: Instituição
+- `c33_reduz`: Código Reduzido da conta dentro do exercício
+- `c33_tipo`: indica se é receita ou despesa extra R/D
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c33_anousu`: Exercício
+- `c33_tipo`: indica se é receita ou despesa extra R/D
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c33_reduz, c33_reduz, c33_anousu, c33_anousu` -> `contabilidade.conplanoreduz` (c61_reduz, c61_anousu, c61_reduz, c61_anousu) [conplanoextra_reduz_anousu_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanogrupo`
+
+### Identidade
+
+- Nome humano: Plano de Contas e seus grupos.
+- O que representa: Plano de Contas e seus grupos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c21_sequencial`
+- Coluna temporal: `c21_anousu`
+- Candidatas a chave de negocio: c21_sequencial
+- Candidatas a coluna temporal: c21_anousu
+
+### Colunas principais
+
+- `c21_anousu`: Ano de exercício.
+- `c21_codcon`: Código de conta.
+- `c21_congrupo`: Grupo
+- `c21_sequencial`: Cód. Sequencial.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c21_anousu`: Ano de exercício.
+- `c21_congrupo`: Grupo
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c21_codcon, c21_codcon, c21_anousu, c21_anousu` -> `contabilidade.conplano` (c60_anousu, c60_codcon, c60_anousu, c60_codcon) [conplanogrupo_codcon_ae_fk]
+- `c21_congrupo` -> `contabilidade.congrupo` (c20_sequencial) [conplanogrupo_congrupo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoinfocomplementar`
+
+### Identidade
+
+- Nome humano: Informação complementar das contas do plano de contas contábil.
+- O que representa: Informação complementar das contas do plano de contas contábil
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c121_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c121_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c121_ajuda`: texto de ajuda para o preenchimento do atributo
+- `c121_descricao`: Descrição
+- `c121_nomepropriedade`: Nome da propriedade dentro do conta corrente. Deve ser um nome Unico.
+- `c121_sequencial`: Sequencial
+- `c121_sigla`: Sigla
+- `c121_sql`: Consulta para descobrir a origem dos dados do atributo atraves dos lancamentos
+- `c121_valorpadrao`: Valor Padrão do Atributo
+
+### Metricas atomicas
+
+- `c121_valorpadrao`: Valor Padrão do Atributo
 
 ### Dimensoes
 
@@ -9849,12 +6780,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.loteamcgm`
+## Tabela de negocio: `contabilidade.conplanoorcamento`
 
 ### Identidade
 
-- Nome humano: Loteamento CGM.
-- O que representa: Loteamento CGM
+- Nome humano: Tabela com a estrutura anterior ao plano PCASP implantando em 2011/2012.
+- O que representa: Tabela com a estrutura anterior ao plano PCASP implantando em 2011/2012
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -9865,16 +6796,541 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j120_sequencial`
+  - `c60_codcon`
+  - `c60_anousu`
+- Coluna temporal: `c60_anousu`
+- Candidatas a chave de negocio: c60_codigo, c60_estrut, c60_finali, c60_identificadoresultadoprimario, c60_identificadorfinanceiro
+- Candidatas a coluna temporal: c60_anousu, c60_codsis, c60_descr
+
+### Colunas principais
+
+- `c60_anousu`: Exercício
+- `c60_codcla`: Classificação da conta conforme o poderrnExecutivornLegislativo ...
+- `c60_codcon`: Código da Conta
+- `c60_codigo`: Preencher significado.
+- `c60_codsis`: Código do Sistema Contábil do plano de contas anterior
+- `c60_consistemaconta`: consistemaconta
+- `c60_descr`: Descrição da conta do plano de contas
+- `c60_estrut`: Código Estrutural da Contabilidade
+- `c60_finali`: Finalidade da conta
+- `c60_funcao`: Função da conta
+- `c60_identificadoresultadoprimario`: Identificador do Resultado Primário
+- `c60_identificadorfinanceiro`: Identificador financeiro
+- `c60_naturezasaldo`: naturezasaldo
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c60_anousu`: Exercício
+- `c60_codigo`
+- `c60_codsis`: Código do Sistema Contábil do plano de contas anterior
+- `c60_descr`: Descrição da conta do plano de contas
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c60_codcla` -> `contabilidade.conclass` (c51_codcla) [conplanoorcamento_codcla_fk]
+- `c60_codsis` -> `contabilidade.consistema` (c52_codsis) [conplanoorcamento_codsis_fk]
+- `c60_consistemaconta` -> `contabilidade.consistemaconta` (c65_sequencial) [conplanoorcamento_consistemaconta_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoorcamentoanalitica`
+
+### Identidade
+
+- Nome humano: conplanoorcamentoanalitica.
+- O que representa: conplanoorcamentoanalitica
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c61_reduz`
+  - `c61_anousu`
+- Coluna temporal: `c61_anousu`
+- Candidatas a chave de negocio: c61_codigo, c61_contrapartida, c61_reduz
+- Candidatas a coluna temporal: c61_anousu
+
+### Colunas principais
+
+- `c61_anousu`: Exercício
+- `c61_codcon`: Código da Conta
+- `c61_codigo`: Codigo do Tipo de Recurso
+- `c61_contrapartida`: Contra Partida do Reduzido
+- `c61_instit`: Instituição
+- `c61_reduz`: Código Reduzido da conta dentro do exercício
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c61_anousu`: Exercício
+- `c61_codigo`: Codigo do Tipo de Recurso
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c61_codcon, c61_codcon, c61_anousu, c61_anousu` -> `contabilidade.conplanoorcamento` (c60_anousu, c60_codcon, c60_codcon, c60_anousu) [conplanoorcamentoanalitica_codcon_ae_fk]
+- `c61_codigo` -> `orcamento.orctiporec` (o15_codigo) [conplanoorcamentoanalitica_codigo_fk]
+- `c61_instit` -> `configuracoes.db_config` (codigo) [conplanoorcamentoanalitica_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoorcamentoconta`
+
+### Identidade
+
+- Nome humano: Conta do Plano Orçamentário.
+- O que representa: Conta do Plano Orçamentário
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c63_codcon`
+  - `c63_anousu`
+- Coluna temporal: `c63_anousu`
+- Candidatas a chave de negocio: c63_codcon, c63_codigooperacao, c63_identificador
+- Candidatas a coluna temporal: c63_anousu
+
+### Colunas principais
+
+- `c63_agencia`: Agência
+- `c63_anousu`: Exercício
+- `c63_banco`: Banco
+- `c63_codcon`: Código Reduzido da conta dentro do exercício
+- `c63_codigooperacao`: Código da Operação
+- `c63_conta`: Conta Bancária
+- `c63_dvagencia`: Dígito verificador da agência
+- `c63_dvconta`: Dígito verificador da conta
+- `c63_identificador`: Identificador do Banco
+- `c63_tipoconta`: Tipo da Conta
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c63_anousu`: Exercício
+- `c63_codigooperacao`: Código da Operação
+- `c63_tipoconta`: Tipo da Conta
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c63_banco` -> `configuracoes.db_bancos` (db90_codban) [conplanoorcamentoconta_banco_fk]
+- `c63_codcon, c63_codcon, c63_anousu, c63_anousu` -> `contabilidade.conplanoorcamento` (c60_codcon, c60_anousu, c60_codcon, c60_anousu) [conplanoorcamentoconta_codcon_ae_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoorcamentocontabancaria`
+
+### Identidade
+
+- Nome humano: Contas bancárias da conplanoorcamento.
+- O que representa: Contas bancárias da conplanoorcamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c56_sequencial`
+- Coluna temporal: `c56_anousu`
+- Candidatas a chave de negocio: c56_contabancaria, c56_sequencial
+- Candidatas a coluna temporal: c56_anousu
+
+### Colunas principais
+
+- `c56_anousu`: Exercício
+- `c56_codcon`: Código da Conta
+- `c56_contabancaria`: Codigo sequencial da conta bancaria
+- `c56_sequencial`: Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c56_anousu`: Exercício
+- `c56_contabancaria`: Codigo sequencial da conta bancaria
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c56_codcon, c56_codcon, c56_anousu, c56_anousu` -> `contabilidade.conplanoorcamento` (c60_anousu, c60_codcon, c60_codcon, c60_anousu) [conplanoorcamentocontabancaria_codcon_ae_fk]
+- `c56_contabancaria` -> `configuracoes.contabancaria` (db83_sequencial) [conplanoorcamentocontabancaria_contabancaria_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoorcamentogrupo`
+
+### Identidade
+
+- Nome humano: conplanoorcamentogrupo.
+- O que representa: conplanoorcamentogrupo
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c21_sequencial`
+- Coluna temporal: `c21_anousu`
+- Candidatas a chave de negocio: c21_sequencial
+- Candidatas a coluna temporal: c21_anousu
+
+### Colunas principais
+
+- `c21_anousu`: Ano de exercício.
+- `c21_codcon`: Código de conta.
+- `c21_congrupo`: Grupo
+- `c21_instit`: Instituição
+- `c21_sequencial`: Cód. Sequencial.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c21_anousu`: Ano de exercício.
+- `c21_congrupo`: Grupo
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c21_codcon, c21_codcon, c21_anousu, c21_anousu` -> `contabilidade.conplanoorcamento` (c60_codcon, c60_anousu, c60_anousu, c60_codcon) [conplanoorcamentogrupo_codcon_ae_fk]
+- `c21_congrupo` -> `contabilidade.congrupo` (c20_sequencial) [conplanoorcamentogrupo_congrupo_fk]
+- `c21_instit` -> `configuracoes.db_config` (codigo) [conplanoorcamentogrupo_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoreduz`
+
+### Identidade
+
+- Nome humano: Código Reduzido do Plano de contas.
+- O que representa: Código Reduzido do Plano de contas
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c61_reduz`
+  - `c61_anousu`
+- Coluna temporal: `c61_anousu`
+- Candidatas a chave de negocio: c61_codigo, c61_contrapartida, c61_reduz
+- Candidatas a coluna temporal: c61_anousu
+
+### Colunas principais
+
+- `c61_anousu`: Exercício
+- `c61_codcon`: Código da Conta
+- `c61_codigo`: Codigo do Tipo de Recurso
+- `c61_contrapartida`: Contra Partida do Reduzido
+- `c61_instit`: Instituição
+- `c61_reduz`: Código Reduzido da conta dentro do exercício
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c61_anousu`: Exercício
+- `c61_codigo`: Codigo do Tipo de Recurso
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c61_codcon, c61_codcon, c61_anousu, c61_anousu` -> `contabilidade.conplano` (c60_anousu, c60_codcon, c60_anousu, c60_codcon) [conplanoreduz_codcon_ae_fk]
+- `c61_codigo` -> `orcamento.orctiporec` (o15_codigo) [conplanoreduz_codigo_fk]
+- `c61_instit` -> `configuracoes.db_config` (codigo) [conplanoreduz_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoreduzcgm`
+
+### Identidade
+
+- Nome humano: Cgm identificador da conta reduzida.
+- O que representa: Cgm identificador da conta reduzida
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c22_sequencial`
+- Coluna temporal: `c22_anousu`
+- Candidatas a chave de negocio: c22_numcgm, c22_reduz, c22_sequencial
+- Candidatas a coluna temporal: c22_anousu
+
+### Colunas principais
+
+- `c22_anousu`: Ano da conta
+- `c22_numcgm`: Código do CGM
+- `c22_reduz`: Reduzido
+- `c22_sequencial`: Código Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c22_anousu`: Ano da conta
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c22_reduz, c22_reduz, c22_anousu, c22_anousu` -> `contabilidade.conplanoreduz` (c61_anousu, c61_reduz, c61_reduz, c61_anousu) [conplanoreduzcgm_reduz_anousu_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanoref`
+
+### Identidade
+
+- Nome humano: Esta tabela possui a referencia entre a tabela conplano e conplanosis.
+- O que representa: Esta tabela possui a referencia entre a tabela conplano e conplanosis
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c65_codcon`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j120_sequencial
+- Candidatas a chave de negocio: c65_codpla
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j120_cgm`: CGM
-- `j120_loteam`: Loteamento
-- `j120_sequencial`: Sequencial
+- `c65_codcon`: Código da Conta
+- `c65_codpla`: Código Reduzido
 
 ### Metricas atomicas
 
@@ -9899,8 +7355,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j120_cgm` -> `protocolo.cgm` (z01_numcgm) [loteamcgm_cgm_fk]
-- `j120_loteam` -> `cadastro.loteam` (j34_loteam) [loteamcgm_loteam_fk]
+- `c65_codpla` -> `contabilidade.conplanosis` (c64_codpla) [conplanoref_codpla_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -9918,11 +7373,1823 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.lotecentroide`
+## Tabela de negocio: `contabilidade.conplanosis`
 
 ### Identidade
 
-- Nome humano: cadastro.lotecentroide.
+- Nome humano: Grupo de contas do plano de contas valido ate 2004.
+- O que representa: Grupo de contas do plano de contas valido ate 2004
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c64_codpla`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c64_codpla
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c64_codpla`: Código Reduzido
+- `c64_descr`: Descrição
+- `c64_estrut`: Estrutural
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanosistema`
+
+### Identidade
+
+- Nome humano: Sistema que utiliza as informações complementares no e-cidade.
+- O que representa: Sistema que utiliza as informações complementares no e-cidade
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c122_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c122_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c122_descricao`: Descrição do campo
+- `c122_sequencial`: Sequencial do campo
+- `c122_tipo`: Tipo de sistema. 1 - SICONF, 2 - Conta Corrente
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c122_tipo`: Tipo de sistema. 1 - SICONF, 2 - Conta Corrente
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conplanosistemaatributos`
+
+### Identidade
+
+- Nome humano: Atributos do sistema de conta (conta corrente).
+- O que representa: Atributos do sistema de conta (conta corrente)
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c129_sequencial`
+- Coluna temporal: `c129_conplanoinfocomplementar`
+- Candidatas a chave de negocio: c129_sequencial
+- Candidatas a coluna temporal: c129_conplanoinfocomplementar, c129_conplanosistema
+
+### Colunas principais
+
+- `c129_conplanoinfocomplementar`: Informações Complementar
+- `c129_conplanosistema`: Código do Sistema
+- `c129_ordem`: Ordem de execução
+- `c129_sequencial`: Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c129_conplanoinfocomplementar`: Informações Complementar
+- `c129_conplanosistema`: Código do Sistema
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c129_conplanoinfocomplementar` -> `contabilidade.conplanoinfocomplementar` (c121_sequencial) [conplanosistemaatributos_conplanoinfocomplementar_fk]
+- `c129_conplanosistema` -> `contabilidade.conplanosistema` (c122_sequencial) [conplanosistemaatributos_conplanosistema_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conrelinfo`
+
+### Identidade
+
+- Nome humano: tabela para guardar informações constantes em relatorios.
+- O que representa: tabela para guardar informações constantes em relatorios
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c83_codigo`
+- Coluna temporal: `c83_anousu`
+- Candidatas a chave de negocio: c83_codigo
+- Candidatas a coluna temporal: c83_anousu
+
+### Colunas principais
+
+- `c83_anousu`: Ano de exercicio.
+- `c83_codigo`: codigo sequencial da tabela
+- `c83_codrel`: código do relatório da tabela orcparamrel
+- `c83_variavel`: variavel do relatorio
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c83_anousu`: Ano de exercicio.
+- `c83_codigo`: codigo sequencial da tabela
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c83_codrel` -> `orcamento.orcparamrel` (o42_codparrel) [conrelinfo_codrel_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conrelparametro`
+
+### Identidade
+
+- Nome humano: Tabela de parametros dos relatorios contábeis.
+- O que representa: Tabela de parametros dos relatorios contábeis
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c18_parametro`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c18_parametro`: parametro, nome do parametro
+- `c18_valor`: valor do parametro
+
+### Metricas atomicas
+
+- `c18_valor`: valor do parametro
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conreltitulos`
+
+### Identidade
+
+- Nome humano: tabela auxiliar do relatorio da lei 4320 da divida fundada interna.
+- O que representa: tabela auxiliar do relatorio da lei 4320 da divida fundada interna
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c44_sequencia`
+- Coluna temporal: `c44_anousu`
+- Candidatas a chave de negocio: c44_quantidade
+- Candidatas a coluna temporal: c44_anousu, c44_quantidade, c44_saldoqtd, c44_saldovalor
+
+### Colunas principais
+
+- `c44_anousu`: Exercício
+- `c44_instit`: Instituição
+- `c44_lei`: Numero da Lei
+- `c44_movemiss`: Emissão
+- `c44_movresgate`: Resgate do valor
+- `c44_quantidade`: Quantidade/Datas
+- `c44_saldo`: Saldo anterior/inicial
+- `c44_saldoqtd`: Qtd para o proximo exercicio
+- `c44_saldovalor`: valor para o proximo exercicio
+- `c44_sequencia`: Sequencia da tabela
+- `c44_valemiss`: Valor de emissão
+
+### Metricas atomicas
+
+- `c44_movresgate`: Resgate do valor
+- `c44_quantidade`: Quantidade/Datas
+- `c44_saldovalor`: valor para o proximo exercicio
+- `c44_valemiss`: Valor de emissão
+
+### Dimensoes
+
+- `c44_anousu`: Exercício
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c44_instit` -> `configuracoes.db_config` (codigo) [conreltitulos_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.conrelvalor`
+
+### Identidade
+
+- Nome humano: consta informações das variaveis dos relatorios.
+- O que representa: consta informações das variaveis dos relatorios
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c83_codigo`
+  - `c83_instit`
+  - `c83_periodo`
+- Coluna temporal: `c83_anousu`
+- Candidatas a chave de negocio: c83_codigo
+- Candidatas a coluna temporal: c83_anousu
+
+### Colunas principais
+
+- `c83_anousu`: Ano de exercicio.
+- `c83_codigo`: codigo sequencial da tabela
+- `c83_informacao`: conteudo da variavel
+- `c83_instit`: indica a qual instituição o valor pertence
+- `c83_periodo`: Periodo podendo ser 1B, 2B, 3B, 4B, 5B, 6B, 1S e 2S
+
+### Metricas atomicas
+
+- `c83_instit`: indica a qual instituição o valor pertence
+
+### Dimensoes
+
+- `c83_anousu`: Ano de exercicio.
+- `c83_codigo`: codigo sequencial da tabela
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c83_codigo` -> `contabilidade.conrelinfo` (c83_codigo) [conrelvalor_codi_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.consistema`
+
+### Identidade
+
+- Nome humano: Identificação da Conta do plano de contas antigo.
+- O que representa: Identificação da Conta do plano de contas antigo
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c52_codsis`
+- Coluna temporal: `c52_codsis`
+- Candidatas a chave de negocio: c52_descrred
+- Candidatas a coluna temporal: c52_codsis
+
+### Colunas principais
+
+- `c52_codsis`: Código do Sistema Contábil do plano de contas anterior
+- `c52_descr`: Descrição do sistema
+- `c52_descrred`: Descrição Reduzida do sistema de contas
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c52_codsis`: Código do Sistema Contábil do plano de contas anterior
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.consistemaconta`
+
+### Identidade
+
+- Nome humano: Sub-sistema de contas.
+- O que representa: Sub-sistema de contas
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c65_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c65_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c65_descricao`: Descrição do Sub-sistema da conta
+- `c65_sequencial`: Código Sub-sistema da conta
+- `c65_sigla`: Sigla que deve ser enviada para o PAD.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contacorrente`
+
+### Identidade
+
+- Nome humano: Cadastro de contas correntes utilizada no plano de contas PCASP.
+- O que representa: Cadastro de contas correntes utilizada no plano de contas PCASP
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c17_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c17_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c17_contacorrente`: Código da conta
+- `c17_descricao`: Descrição da conta corrente
+- `c17_sequencial`: Código sequencial da conta corrente
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contacorrentedetalhe`
+
+### Identidade
+
+- Nome humano: Tabelão com os dados dos lançamentos ocorridos em uma conta corrente..
+- O que representa: Tabelão com os dados dos lançamentos ocorridos em uma conta corrente.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c19_sequencial`
+- Coluna temporal: `c19_conplanoreduzanousu`
+- Candidatas a chave de negocio: c19_acordo, c19_contabancaria, c19_contacorrente, c19_numcgm, c19_numemp
+- Candidatas a coluna temporal: c19_conplanoreduzanousu, c19_orcdotacaoanousu, c19_orcorgaoanousu, c19_orcunidadeanousu
+
+### Colunas principais
+
+- `c19_acordo`: Código sequencial do acordo
+- `c19_concarpeculiar`: Característica Peculiar
+- `c19_conplanoreduzanousu`: Exercício
+- `c19_contabancaria`: Codigo sequencial da conta bancaria
+- `c19_contacorrente`: Código sequencial da conta corrente
+- `c19_estrutural`: Estrutural
+- `c19_instit`: Código da Instituição
+- `c19_numcgm`: Numero de Identificação do Contribuinte ou Empresa no Cadastro geral do Município
+- `c19_numemp`: Sequencial do Empenho
+- `c19_orcdotacao`: Orcdotação
+- `c19_orcdotacaoanousu`: Orcdotação Ano
+- `c19_orcorgaoanousu`: Exercício
+- `c19_orcorgaoorgao`: Código Orgão
+- `c19_orctiporec`: Codigo do Tipo de Recurso
+- `c19_orcunidadeanousu`: Exercício
+- `c19_orcunidadeorgao`: Código Orgão
+- `c19_orcunidadeunidade`: Código Unidade
+- `c19_reduz`: Código da Conta
+- `c19_sequencial`: Sequencial da tabela contacorrentedetalhe
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c19_conplanoreduzanousu`: Exercício
+- `c19_contabancaria`: Codigo sequencial da conta bancaria
+- `c19_orcdotacaoanousu`: Orcdotação Ano
+- `c19_orcorgaoanousu`: Exercício
+- `c19_orctiporec`: Codigo do Tipo de Recurso
+- `c19_orcunidadeanousu`: Exercício
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c19_acordo` -> `acordos.acordo` (ac16_sequencial) [contacorrentedetalhe_acordo_fk]
+- `c19_orcdotacaoanousu, c19_orcdotacaoanousu, c19_orcdotacao, c19_orcdotacao` -> `orcamento.orcdotacao` (o58_coddot, o58_anousu, o58_coddot, o58_anousu) [contacorrentedetalhe_ae_orcdotacao_fk]
+- `c19_orcorgaoanousu, c19_orcorgaoanousu, c19_orcorgaoorgao, c19_orcorgaoorgao` -> `orcamento.orcorgao` (o40_anousu, o40_orgao, o40_anousu, o40_orgao) [contacorrentedetalhe_ae_orcorgaoorgao_fk]
+- `c19_orcunidadeanousu, c19_orcunidadeanousu, c19_orcunidadeanousu, c19_orcunidadeorgao, c19_orcunidadeorgao, c19_orcunidadeorgao, c19_orcunidadeunidade, c19_orcunidadeunidade, c19_orcunidadeunidade` -> `orcamento.orcunidade` (o41_orgao, o41_unidade, o41_anousu, o41_anousu, o41_unidade, o41_orgao, o41_unidade, o41_orgao, o41_anousu) [contacorrentedetalhe_ae_orcunidadeorgao_orcunidadeunidade_fk]
+- `c19_reduz, c19_reduz, c19_conplanoreduzanousu, c19_conplanoreduzanousu` -> `contabilidade.conplanoreduz` (c61_anousu, c61_reduz, c61_anousu, c61_reduz) [contacorrentedetalhe_ae_reduz_fk]
+- `c19_concarpeculiar` -> `contabilidade.concarpeculiar` (c58_sequencial) [contacorrentedetalhe_concarpeculiar_fk]
+- `c19_contabancaria` -> `configuracoes.contabancaria` (db83_sequencial) [contacorrentedetalhe_contabancaria_fk]
+- `c19_contacorrente` -> `contabilidade.contacorrente` (c17_sequencial) [contacorrentedetalhe_contacorrente_fk]
+- `c19_instit` -> `configuracoes.db_config` (codigo) [contacorrentedetalhe_instit_fk]
+- `c19_numcgm` -> `protocolo.cgm` (z01_numcgm) [contacorrentedetalhe_numcgm_fk]
+- `c19_numemp` -> `empenho.empempenho` (e60_numemp) [contacorrentedetalhe_numemp_fk]
+- `c19_orctiporec` -> `orcamento.orctiporec` (o15_codigo) [contacorrentedetalhe_orctiporec_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contacorrentedetalheconlancamval`
+
+### Identidade
+
+- Nome humano: Ligação entre a tabela contacorretedetalhe e valores do lançamento.
+- O que representa: Ligação entre a tabela contacorretedetalhe e valores do lançamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c28_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c28_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c28_conlancamval`: Ligação com a tabela conlancamval
+- `c28_contacorrentedetalhe`: Detalhamento da conta corrente
+- `c28_sequencial`: Sequencial do vínculo
+- `c28_tipo`: Define se a conta entrou com valor a crédito ou a débito
+
+### Metricas atomicas
+
+- `c28_tipo`: Define se a conta entrou com valor a crédito ou a débito
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c28_contacorrentedetalhe` -> `contabilidade.contacorrentedetalhe` (c19_sequencial) [contacorrentedetalheconlancamval_contacorrentedetalhe_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contacorrenteregravinculo`
+
+### Identidade
+
+- Nome humano: Vinculo regra conta corrente.
+- O que representa: Vinculo regra conta corrente
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c27_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c27_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c27_contacorrente`: Chave estrangeira com a conta corrente
+- `c27_estrutural`: Estrutural para vinculo
+- `c27_sequencial`: Sequencial vinculo conta corrente regra
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c27_contacorrente` -> `contabilidade.contacorrente` (c17_sequencial) [contacorrenteregravinculo_contacorrente_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contacorrentesaldo`
+
+### Identidade
+
+- Nome humano: Tabela que guarda o saldo das contas correntes.
+- O que representa: Tabela que guarda o saldo das contas correntes
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c29_sequencial`
+- Coluna temporal: `c29_anousu`
+- Candidatas a chave de negocio: c29_contacorrentedetalhe, c29_sequencial
+- Candidatas a coluna temporal: c29_anousu
+
+### Colunas principais
+
+- `c29_anousu`: Ano da tabela contacorrentesaldo
+- `c29_contacorrentedetalhe`: Sequencial da tabela contacorrentedetalhe
+- `c29_credito`: Valor de crédito. Tabela contacorrentesaldo
+- `c29_debito`: Valor de quanto foi o débito. Tabela contacorrentesaldo
+- `c29_mesusu`: Mês da tabela contacorrentesaldo
+- `c29_sequencial`: Sequencial da tabela contacorrentesaldo
+
+### Metricas atomicas
+
+- `c29_credito`: Valor de crédito. Tabela contacorrentesaldo
+- `c29_debito`: Valor de quanto foi o débito. Tabela contacorrentesaldo
+
+### Dimensoes
+
+- `c29_anousu`: Ano da tabela contacorrentesaldo
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c29_contacorrentedetalhe` -> `contabilidade.contacorrentedetalhe` (c19_sequencial) [contacorrentesaldo_contacorrentedetalhe_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contcearquivo`
+
+### Identidade
+
+- Nome humano: Log dos arquivos gerados.
+- O que representa: Log dos arquivos gerados
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c11_sequencial`
+- Coluna temporal: `c11_concadtce`
+- Candidatas a chave de negocio: c11_codigoremessa, c11_concadtce, c11_sequencial
+- Candidatas a coluna temporal: c11_concadtce, c11_datafim, c11_datageracao, c11_dataini
+
+### Colunas principais
+
+- `c11_codigoremessa`: Codigo da remessa do lote
+- `c11_concadtce`: Codigo tribunal de contas
+- `c11_datafim`: Data final do periodo de geração do arquivo
+- `c11_datageracao`: Data de Geração
+- `c11_dataini`: Data inicial do periodo de geração do arquivo
+- `c11_diapagtofolha`: Dia de pagamento da follha
+- `c11_infleiame`: Informações Adicionais leiame
+- `c11_instit`: Código da Instituição
+- `c11_sequencial`: Codigo sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c11_codigoremessa`: Codigo da remessa do lote
+- `c11_concadtce`: Codigo tribunal de contas
+- `c11_datafim`: Data final do periodo de geração do arquivo
+- `c11_datageracao`: Data de Geração
+- `c11_dataini`: Data inicial do periodo de geração do arquivo
+- `c11_sequencial`: Codigo sequencial
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c11_concadtce` -> `contabilidade.concadtce` (c10_sequencial) [contcearquivo_concadtce_fk]
+- `c11_instit` -> `configuracoes.db_config` (codigo) [contcearquivo_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contcearquivolayoutgeracao`
+
+### Identidade
+
+- Nome humano: contcearquivolayoutgeracao.
+- O que representa: contcearquivolayoutgeracao
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c15_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c15_contcearquivo, c15_db_layouttxtgeracao, c15_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c15_contcearquivo`: Codigo sequencial
+- `c15_db_layouttxtgeracao`: Codigo da geração do arquivo
+- `c15_sequencial`: Codigo sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c15_contcearquivo`: Codigo sequencial
+- `c15_db_layouttxtgeracao`: Codigo da geração do arquivo
+- `c15_sequencial`: Codigo sequencial
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c15_contcearquivo` -> `contabilidade.contcearquivo` (c11_sequencial) [contcearquivolayoutgeracao_contcearquivo_fk]
+- `c15_db_layouttxtgeracao` -> `configuracoes.db_layouttxtgeracao` (db55_sequencial) [contcearquivolayoutgeracao_layouttxtgeracao_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contcearquivooid`
+
+### Identidade
+
+- Nome humano: Guarda no campo c14_arquivo o arquivo gerado pelo sistema.
+- O que representa: Guarda no campo c14_arquivo o arquivo gerado pelo sistema
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c14_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c14_contcearquivo, c14_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c14_arquivo`: Arquivo gerado
+- `c14_contcearquivo`: Codigo sequencial
+- `c14_sequencial`: Codigo sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c14_contcearquivo`: Codigo sequencial
+- `c14_sequencial`: Codigo sequencial
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c14_contcearquivo` -> `contabilidade.contcearquivo` (c11_sequencial) [contcearquivooid_contcearquivo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contcearquivoresp`
+
+### Identidade
+
+- Nome humano: Responsaveis pela geração do arquivo.
+- O que representa: Responsaveis pela geração do arquivo
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c12_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c12_contcearquivo, c12_sequencial, c12_tipodoc
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c12_cargo`: Cargo
+- `c12_contcearquivo`: Codigo sequencial
+- `c12_nome`: Nome
+- `c12_nrodoc`: Numero do documento
+- `c12_sequencial`: Codigo sequencial
+- `c12_tipo`: 1-Titular Reponsavel 2-Responsavel da epoca 3-Responsavel Geracao dos Dados 4-Contador Reponsavel pelas Informacoes 5-Responsavel Controle Interno
+- `c12_tipodoc`: TIdo de documento( 1 - CPF, 2 - CRC)
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c12_contcearquivo`: Codigo sequencial
+- `c12_sequencial`: Codigo sequencial
+- `c12_tipo`: 1-Titular Reponsavel 2-Responsavel da epoca 3-Responsavel Geracao dos Dados 4-Contador Reponsavel pelas Informacoes 5-Responsavel Controle Interno
+- `c12_tipodoc`: TIdo de documento( 1 - CPF, 2 - CRC)
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c12_contcearquivo` -> `contabilidade.contcearquivo` (c11_sequencial) [contcearquivoresp_contcearquivo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contcearquivorespcgm`
+
+### Identidade
+
+- Nome humano: Tabela de ligação do responsavel com cgm.
+- O que representa: Tabela de ligação do responsavel com cgm
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c13_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c13_contcearquivoresp, c13_numcgm, c13_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c13_contcearquivoresp`: Codigo sequencial
+- `c13_numcgm`: Numero de Identificação do Contribuinte ou Empresa no Cadastro geral do Município
+- `c13_sequencial`: Codigo sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c13_contcearquivoresp`: Codigo sequencial
+- `c13_sequencial`: Codigo sequencial
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c13_contcearquivoresp` -> `contabilidade.contcearquivoresp` (c12_sequencial) [contcearquivorespcgm_contcearquivoresp_fk]
+- `c13_numcgm` -> `protocolo.cgm` (z01_numcgm) [contcearquivorespcgm_numcgm_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contrans`
+
+### Identidade
+
+- Nome humano: Cadastro das Transações dos lançamentos automáticos.
+- O que representa: Cadastro das Transações dos lançamentos automáticos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c45_seqtrans`
+- Coluna temporal: `c45_anousu`
+- Candidatas a chave de negocio: c45_coddoc, c45_instit
+- Candidatas a coluna temporal: c45_anousu
+
+### Colunas principais
+
+- `c45_anousu`: Exercício
+- `c45_coddoc`: Código do Documento que identifica o lançamento automático
+- `c45_instit`: codigo da instituicao
+- `c45_seqtrans`: Código Transação
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c45_anousu`: Exercício
+- `c45_instit`: codigo da instituicao
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c45_coddoc` -> `contabilidade.conhistdoc` (c53_coddoc) [contrans_coddoc_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contranslan`
+
+### Identidade
+
+- Nome humano: Valores dos Lançamentos Automáticos.
+- O que representa: Valores dos Lançamentos Automáticos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c46_seqtranslan`
+- Coluna temporal: `c46_evento`
+- Candidatas a chave de negocio: c46_seqtranslan
+- Candidatas a coluna temporal: c46_evento
+
+### Colunas principais
+
+- `c46_codhist`: Código do histórico do lançamento contábil
+- `c46_descricao`: Decrição do lançamento
+- `c46_evento`: Evento automatico quando da inclusao no plano de contas
+- `c46_obrigatorio`: Obrigatório
+- `c46_obs`: Observações
+- `c46_ordem`: Ordem do lançamento
+- `c46_seqtrans`: Cód. Contrans
+- `c46_seqtranslan`: Código sequencial do lançamento
+- `c46_valor`: Valor
+
+### Metricas atomicas
+
+- `c46_valor`: Valor
+
+### Dimensoes
+
+- `c46_evento`: Evento automatico quando da inclusao no plano de contas
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c46_codhist` -> `contabilidade.conhist` (c50_codhist) [contranslan_codhist_fk]
+- `c46_seqtrans` -> `contabilidade.contrans` (c45_seqtrans) [contranslan_seqtrans_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contranslr`
+
+### Identidade
+
+- Nome humano: Contas dos Lançamentos.
+- O que representa: Contas dos Lançamentos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c47_seqtranslr`
+- Coluna temporal: `c47_anousu`
+- Candidatas a chave de negocio: c47_credito, c47_debito, c47_instit, c47_tiporesto
+- Candidatas a coluna temporal: c47_anousu
+
+### Colunas principais
+
+- `c47_anousu`: Ano
+- `c47_compara`: Compara
+- `c47_credito`: Código Reduzido da conta crédito dentro do exercício
+- `c47_debito`: Código Reduzido da conta débito dentro do exercício
+- `c47_instit`: id da instituição
+- `c47_obs`: Observações
+- `c47_ref`: Campo referência
+- `c47_seqtranslan`: Evento Contábil
+- `c47_seqtranslr`: Sequencia Translr (Regra)
+- `c47_tiporesto`: codigo do tipo INSS - LIvre INSS - Outros
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c47_anousu`: Ano
+- `c47_tiporesto`: codigo do tipo INSS - LIvre INSS - Outros
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c47_seqtranslan` -> `contabilidade.contranslan` (c46_seqtranslan) [contranslr_seqtranslan_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contranslrelemento`
+
+### Identidade
+
+- Nome humano: vinculo das linhas de regras de lançamentos contabeis com os elementos..
+- O que representa: vinculo das linhas de regras de lançamentos contabeis com os elementos.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c114_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c114_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c114_contranslr`: Lançamento do elemento
+- `c114_elemento`: Elemento da transação
+- `c114_sequencial`: Sequencial da tabela contranslanelemento
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c114_contranslr` -> `contabilidade.contranslr` (c47_seqtranslr) [contranslrelemento_contranslr_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.contranslrvinculo`
+
+### Identidade
+
+- Nome humano: Vinculo das regras de lançamento entre documentos de inclusão e estorno.
+- O que representa: Vinculo das regras de lançamento entre documentos de inclusão e estorno
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c116_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c116_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c116_contranslrestorno`: Regras de lançamentos para documentos de estorno.
+- `c116_contranslrinclusao`: Regras de lançamento para documentos de inclusão
+- `c116_sequencial`: Sequencial da tabela contranslrvinculo
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c116_contranslrestorno` -> `contabilidade.contranslr` (c47_seqtranslr) [contranslrvinculo_contranslrestorno_fk]
+- `c116_contranslrinclusao` -> `contabilidade.contranslr` (c47_seqtranslr) [contranslrvinculo_contranslrinclusao_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.cornumpdesconto`
+
+### Identidade
+
+- Nome humano: Descontos gerados na autenticação de receita que tiveram descontos.
+- O que representa: Descontos gerados na autenticação de receita que tiveram descontos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - Preencher.
+- Coluna temporal: `k12_data`
+- Candidatas a chave de negocio: k12_id, k12_numpar
+- Candidatas a coluna temporal: k12_data
+
+### Colunas principais
+
+- `k12_autent`: Código da Autenticação gerado pelo caixa. Este numero começa em um para cada caixa e cada dia que possuir autenticação
+- `k12_data`: Data da geração da autenticação
+- `k12_id`: Código gerado para autenticação
+- `k12_numdig`: Dígito de Controle do código de arrecadacao
+- `k12_numnov`: Código de arrecadacao gerado pela emissao de recibo e carne da tesouraria
+- `k12_numpar`: Número da parcela do codigo de arrecadação
+- `k12_numpre`: Primeiros oitos digitos do código de arrecadação
+- `k12_numtot`: Número total de parcelas
+- `k12_receit`: Código da receita do tabrec
+- `k12_receitaprincipal`: Receita principal do desconto
+- `k12_valor`: Valor da autenticação
+
+### Metricas atomicas
+
+- `k12_numtot`: Número total de parcelas
+- `k12_valor`: Valor da autenticação
+
+### Dimensoes
+
+- `k12_data`: Data da geração da autenticação
+- `k12_numpar`: Número da parcela do codigo de arrecadação
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `k12_id, k12_id, k12_id, k12_data, k12_data, k12_data, k12_autent, k12_autent, k12_autent` -> `caixa.corrente` (k12_id, k12_data, k12_autent, k12_id, k12_autent, k12_data, k12_autent, k12_id, k12_data) [cornumpdesconto_id_data_autent_fk]
+- `k12_receitaprincipal` -> `caixa.tabrec` (k02_codigo) [cornumpdesconto_receitaprincipal_fk]
+- `k12_receit` -> `caixa.tabrec` (k02_codigo) [cornumpdesconto_receit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.emissoeslrf`
+
+### Identidade
+
+- Nome humano: contabilidade.emissoeslrf.
 - O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
@@ -9934,18 +9201,23 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j85_sequencial`
+  - `c181_codigo`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j85_idbql, j85_sequencial
+- Candidatas a chave de negocio: c181_codigo
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
+- `c181_codigo`: Preencher significado.
+- `c181_filtrosemissao`: Preencher significado.
+- `c181_instituicao`: Preencher significado.
+- `c181_periodo`: Preencher significado.
+- `c181_publicado`: Preencher significado.
+- `c181_relatorio`: Preencher significado.
+- `c181_status`: Preencher significado.
+- `c181_storage`: Preencher significado.
+- `c181_usuario`: Preencher significado.
 - `created_at`: Preencher significado.
-- `j85_idbql`: Preencher significado.
-- `j85_latitude`: Preencher significado.
-- `j85_longitude`: Preencher significado.
-- `j85_sequencial`: Preencher significado.
 - `updated_at`: Preencher significado.
 
 ### Metricas atomicas
@@ -9954,6 +9226,525 @@ tags:
 
 ### Dimensoes
 
+- `c181_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c181_instituicao` -> `configuracoes.db_config` (codigo) [emissoeslrf_c181_instituicao_fkey]
+- `c181_periodo` -> `configuracoes.periodo` (o114_sequencial) [emissoeslrf_c181_periodo_fkey]
+- `c181_relatorio` -> `orcamento.orcparamrel` (o42_codparrel) [emissoeslrf_c181_relatorio_fkey]
+- `c181_usuario` -> `configuracoes.db_usuarios` (id_usuario) [emissoeslrf_c181_usuario_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.escriturainventario`
+
+### Identidade
+
+- Nome humano: Tabela cabecalho do lancamento da escrituracao.
+- O que representa: Tabela cabecalho do lancamento da escrituracao
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c88_sequencial`
+- Coluna temporal: `c88_data`
+- Candidatas a chave de negocio: c88_sequencial
+- Candidatas a coluna temporal: c88_data
+
+### Colunas principais
+
+- `c88_data`: Data do lancamento
+- `c88_estornado`: Define se o processamento da escrituracao foi estornado
+- `c88_inventario`: Código do inventario
+- `c88_sequencial`: Sequencia da tabela escriturainventario
+- `c88_usuario`: Usuario que fez o lancamento
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c88_data`: Data do lancamento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c88_inventario` -> `patrimonio.inventario` (t75_sequencial) [escriturainventario_inventario_fk]
+- `c88_usuario` -> `configuracoes.db_usuarios` (id_usuario) [escriturainventario_usuario_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.escrituraprovisao`
+
+### Identidade
+
+- Nome humano: Escrituras de provisão.
+- O que representa: Escrituras de provisão
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c102_sequencial`
+- Coluna temporal: `c102_ano`
+- Candidatas a chave de negocio: c102_sequencial, c102_usuario
+- Candidatas a coluna temporal: c102_ano, c102_data
+
+### Colunas principais
+
+- `c102_ano`: Ano do processamento
+- `c102_data`: Data da escritura da provisão
+- `c102_instit`: Código da Instituição
+- `c102_mes`: Mes do processado
+- `c102_processado`: Campo lógico para informar se a provisão já foi processada
+- `c102_sequencial`: Sequencial das escrituras das provisões
+- `c102_tipoprovisao`: Tipo de Provisão
+- `c102_usuario`: codigo do usuario
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c102_ano`: Ano do processamento
+- `c102_data`: Data da escritura da provisão
+- `c102_tipoprovisao`: Tipo de Provisão
+- `c102_usuario`: codigo do usuario
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c102_instit` -> `configuracoes.db_config` (codigo) [escrituraprovisao_instit_fk]
+- `c102_usuario` -> `configuracoes.db_usuarios` (id_usuario) [escrituraprovisao_usuario_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.importacaoplanoconta`
+
+### Identidade
+
+- Nome humano: importacaoplanoconta.
+- O que representa: importacaoplanoconta
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c96_sequencial`
+- Coluna temporal: `c96_data`
+- Candidatas a chave de negocio: c96_sequencial
+- Candidatas a coluna temporal: c96_data, c96_modeloplanoconta
+
+### Colunas principais
+
+- `c96_data`: Data do processamento
+- `c96_modeloplanoconta`: Modelos do Plano de Contas
+- `c96_sequencial`: Codigo
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c96_data`: Data do processamento
+- `c96_modeloplanoconta`: Modelos do Plano de Contas
+- `c96_sequencial`: Codigo
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c96_modeloplanoconta` -> `contabilidade.modeloplanoconta` (c94_sequencial) [importacaoplanoconta_modeloplanoconta_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.infocomplementarvalor`
+
+### Identidade
+
+- Nome humano: Cadastros dos valores das informações complementares da tabela conplanoatributos..
+- O que representa: Cadastros dos valores das informações complementares da tabela conplanoatributos.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c123_sequencial`
+- Coluna temporal: `c123_conplanoatributolancamentos`
+- Candidatas a chave de negocio: c123_reduzido, c123_sequencial, c123_valor
+- Candidatas a coluna temporal: c123_conplanoatributolancamentos, c123_conplanosistema, c123_infocomplementar
+
+### Colunas principais
+
+- `c123_conplanoatributolancamentos`: Chave estrangeira da tabela conplanoatributolancamentos
+- `c123_conplanosistema`: Chave estrangeira da tabela conplanosistema.
+- `c123_infocomplementar`: Chave estrangeira da tabela conplanoinfocomplementar.
+- `c123_reduzido`: Conta Reduzida
+- `c123_sequencial`: Sequencial
+- `c123_valor`: Numero ou valor da informação complementar no e-cidade.
+
+### Metricas atomicas
+
+- `c123_valor`: Numero ou valor da informação complementar no e-cidade.
+
+### Dimensoes
+
+- `c123_conplanoatributolancamentos`: Chave estrangeira da tabela conplanoatributolancamentos
+- `c123_conplanosistema`: Chave estrangeira da tabela conplanosistema.
+- `c123_infocomplementar`: Chave estrangeira da tabela conplanoinfocomplementar.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c123_infocomplementar` -> `contabilidade.conplanoinfocomplementar` (c121_sequencial) [infocomplementarvalor_infcomplementar_fk]
+- `c123_conplanosistema` -> `contabilidade.conplanosistema` (c122_sequencial) [infocomplementarvalor_sistema_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.inscricaopassivaanulada`
+
+### Identidade
+
+- Nome humano: Tabela com as Inscrição do Passivos sem Suporte Orçamentário anuladas.
+- O que representa: Tabela com as Inscrição do Passivos sem Suporte Orçamentário anuladas
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c39_sequencial`
+- Coluna temporal: `c39_data`
+- Candidatas a chave de negocio: c39_inscricaopassivo, c39_sequencial
+- Candidatas a coluna temporal: c39_data
+
+### Colunas principais
+
+- `c39_data`: Data da Anulação
+- `c39_db_usuarios`: Usuário que efetuou a anulação
+- `c39_inscricaopassivo`: Código da Inscrição Passiva sem Suporte Orçamentário
+- `c39_observacao`: Motivo da anulação
+- `c39_sequencial`: Código da Anulação da Inscrição
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c39_data`: Data da Anulação
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c39_inscricaopassivo` -> `contabilidade.inscricaopassivo` (c36_sequencial) [inscricaopassivaanulada_inscricaopassivo_fk]
+- `c39_db_usuarios` -> `configuracoes.db_usuarios` (id_usuario) [inscricaopassivaanulada_usuarios_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.inscricaopassivo`
+
+### Identidade
+
+- Nome humano: Tabela de Inscrição do Passivos sem Suporte Orçamentário.
+- O que representa: Tabela de Inscrição do Passivos sem Suporte Orçamentário
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c36_sequencial`
+- Coluna temporal: `c36_anousu`
+- Candidatas a chave de negocio: c36_cgm, c36_data, c36_sequencial
+- Candidatas a coluna temporal: c36_anousu, c36_data
+
+### Colunas principais
+
+- `c36_anousu`: Ano
+- `c36_cgm`: Favorecido
+- `c36_codele`: Desdobramento
+- `c36_conhist`: Histórico contábíl
+- `c36_data`: Data Inscricao
+- `c36_db_usuarios`: Usuário logado
+- `c36_instit`: Instituição
+- `c36_observacaoconhist`: Observação do Histórico
+- `c36_sequencial`: Inscrição Passiva
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c36_anousu`: Ano
+- `c36_data`: Data Inscricao
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c36_cgm` -> `protocolo.cgm` (z01_numcgm) [inscricaopassivo_cgm_fk]
+- `c36_codele, c36_codele, c36_anousu, c36_anousu` -> `orcamento.orcelemento` (o56_anousu, o56_codele, o56_anousu, o56_codele) [inscricaopassivo_codele_ae_fk]
+- `c36_conhist` -> `contabilidade.conhist` (c50_codhist) [inscricaopassivo_conhist_fk]
+- `c36_instit` -> `configuracoes.db_config` (codigo) [inscricaopassivo_instit_fk]
+- `c36_db_usuarios` -> `configuracoes.db_usuarios` (id_usuario) [inscricaopassivo_usuarios_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.inscricaopassivoitem`
+
+### Identidade
+
+- Nome humano: Itens da Inscrição do Passivos sem Suporte Orçamentário.
+- O que representa: Itens da Inscrição do Passivos sem Suporte Orçamentário
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c38_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c38_inscricaopassivo, c38_quantidade, c38_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c38_inscricaopassivo`: Vinculo com a inscrição passiva
+- `c38_observacao`: Observação
+- `c38_pcmater`: Código do Item
+- `c38_quantidade`: Quantidade
+- `c38_sequencial`: Código do Item da Iscrição Passiva
+- `c38_valortotal`: Valor total
+- `c38_valorunitario`: Valor unitário
+
+### Metricas atomicas
+
+- `c38_quantidade`: Quantidade
+- `c38_valortotal`: Valor total
+- `c38_valorunitario`: Valor unitário
+
+### Dimensoes
+
 - Preencher dimensoes de agrupamento/filtro.
 
 ### Filtros de negocio
@@ -9971,7 +9762,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j85_idbql` -> `cadastro.lote` (j34_idbql) [cadastro_lotecentroide_j85_idbql_foreign]
+- `c38_inscricaopassivo` -> `contabilidade.inscricaopassivo` (c36_sequencial) [inscricaopassivoitem_inscricaopassivo_fk]
+- `c38_pcmater` -> `compras.pcmater` (pc01_codmater) [inscricaopassivoitem_pcmater_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -9989,12 +9781,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.lotedist`
+## Tabela de negocio: `contabilidade.inscricaopassivoslip`
 
 ### Identidade
 
-- Nome humano: Identificacao da distancia do lote em relacao ao logradouro mais próximo.
-- O que representa: Identificacao da distancia do lote em relacao ao logradouro mais próximo
+- Nome humano: Slips de inscrição gerados atravéz de pagamento de diversas origes, baixa por pagamento.
+- O que representa: Slips de inscrição gerados atravéz de pagamento de diversas origes, baixa por pagamento
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -10005,161 +9797,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j54_idbql`
+  - `c109_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j54_codigo, j54_distan, j54_idbql, j54_orientacao
+- Candidatas a chave de negocio: c109_inscricaopassiva, c109_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j54_codigo`: Código do logradouro de referência da esquina
-- `j54_distan`: Distância em metros lineares da matricula em relacao ao logradouro mais proximo
-- `j54_idbql`: Codigo de identificacao do Lote
-- `j54_orientacao`: Codigo
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j54_codigo`: Código do logradouro de referência da esquina
-- `j54_distan`: Distância em metros lineares da matricula em relacao ao logradouro mais proximo
-- `j54_idbql`: Codigo de identificacao do Lote
-- `j54_orientacao`: Codigo
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j54_codigo` -> `cadastro.ruas` (j14_codigo) [lotedist_codigo_fk]
-- `j54_idbql` -> `cadastro.lote` (j34_idbql) [lotedist_idbql_fk]
-- `j54_orientacao` -> `cadastro.orientacao` (j64_sequencial) [lotedist_orientacao_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.loteloc`
-
-### Identidade
-
-- Nome humano: loteloc.
-- O que representa: loteloc
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j06_idbql`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j06_idbql
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j06_idbql`: Codigo de identificacao do lote
-- `j06_lote`: Lote de Localização
-- `j06_quadraloc`: Quadra de Localização
-- `j06_setorloc`: Código
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j06_idbql`: Codigo de identificacao do lote
-- `j06_setorloc`: Código
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j06_idbql` -> `cadastro.lote` (j34_idbql) [loteloc_idbql_fk]
-- `j06_setorloc` -> `cadastro.setorloc` (j05_codigo) [loteloc_setorloc_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.loteloteam`
-
-### Identidade
-
-- Nome humano: Arquivo para identificar o loteamento de um determinado lote.
-- O que representa: Arquivo para identificar o loteamento de um determinado lote
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j34_idbql`
-  - `j34_loteam`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j34_idbql
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j34_idbql`: Código de identificação do lote
-- `j34_loteam`: Código do Loteamento
+- `c109_inscricaopassiva`: Inscrição Passiva
+- `c109_sequencial`: Sequencial da tabela inscricaopassivoslip
+- `c109_slip`: Código do documento de transferência
 
 ### Metricas atomicas
 
@@ -10184,8 +9831,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j34_idbql` -> `cadastro.lote` (j34_idbql) [loteloteam_idbql_fk]
-- `j34_loteam` -> `cadastro.loteam` (j34_loteam) [loteloteam_loteam_fk]
+- `c109_inscricaopassiva` -> `contabilidade.inscricaopassivo` (c36_sequencial) [inscricaopassivoslip_inscricaopassiva_fk]
+- `c109_slip` -> `caixa.slip` (k17_codigo) [inscricaopassivoslip_slip_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -10203,12 +9850,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.lotenumero`
+## Tabela de negocio: `contabilidade.inscricaorestosapagar`
 
 ### Identidade
 
-- Nome humano: Armazena o numero do Lote.
-- O que representa: Armazena o numero do Lote
+- Nome humano: Inscrição de RP's.
+- O que representa: Inscrição de RP's
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -10219,18 +9866,19 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j12_codigo`
-- Coluna temporal: `j12_data`
-- Candidatas a chave de negocio: j12_codigo, j12_idbql, j12_lograd
-- Candidatas a coluna temporal: j12_data
+  - `c107_sequencial`
+- Coluna temporal: `c107_ano`
+- Candidatas a chave de negocio: c107_ano, c107_sequencial, c107_usuario
+- Candidatas a coluna temporal: c107_ano
 
 ### Colunas principais
 
-- `j12_codigo`: Código sequencial da tabela
-- `j12_data`: Data
-- `j12_idbql`: Codigo de identificacao do lote
-- `j12_lograd`: Codigo da rua ou avenida cadastrada no sistema
-- `j12_numero`: Numero
+- `c107_ano`: Ano da inscrição de restos a pagar não processados
+- `c107_instit`: Código da Instituição
+- `c107_processado`: Campo de controle, se foi processado ou não.
+- `c107_sequencial`: Chave primária sequencial da tabela de inscrição de restos a pagar não processados
+- `c107_tipo`: Tipo de RP
+- `c107_usuario`: codigo do usuario
 
 ### Metricas atomicas
 
@@ -10238,10 +9886,9 @@ tags:
 
 ### Dimensoes
 
-- `j12_codigo`: Código sequencial da tabela
-- `j12_data`: Data
-- `j12_idbql`: Codigo de identificacao do lote
-- `j12_lograd`: Codigo da rua ou avenida cadastrada no sistema
+- `c107_ano`: Ano da inscrição de restos a pagar não processados
+- `c107_tipo`: Tipo de RP
+- `c107_usuario`: codigo do usuario
 
 ### Filtros de negocio
 
@@ -10258,8 +9905,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j12_idbql` -> `cadastro.lote` (j34_idbql) [lotenumero_idbql_fk]
-- `j12_lograd` -> `cadastro.ruas` (j14_codigo) [lotenumero_lograd_fk]
+- `c107_instit` -> `configuracoes.db_config` (codigo) [inscricaorestosapagar_instit_fk]
+- `c107_usuario` -> `configuracoes.db_usuarios` (id_usuario) [inscricaorestosapagar_usuario_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -10277,12 +9924,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.lotenumero_proc`
+## Tabela de negocio: `contabilidade.lancamentolote`
 
 ### Identidade
 
-- Nome humano: armazena o numero do processo.
-- O que representa: armazena o numero do processo
+- Nome humano: contabilidade.lancamentolote.
+- O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -10293,15 +9940,17 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j11_codigo`
+  - `c155_codigo`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j11_codigo
+- Candidatas a chave de negocio: c155_codigo
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j11_codigo`: Código do cadastro de cartão magnético
-- `j11_processo`: Código do processo
+- `c155_ativo`: Preencher significado.
+- `c155_codigo`: Preencher significado.
+- `c155_descricao`: Preencher significado.
+- `c155_serial`: Preencher significado.
 
 ### Metricas atomicas
 
@@ -10309,285 +9958,7 @@ tags:
 
 ### Dimensoes
 
-- `j11_codigo`: Código do cadastro de cartão magnético
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j11_codigo` -> `cadastro.lotenumero` (j12_codigo) [lotenumero_proc_codigo_fk]
-- `j11_processo` -> `protocolo.protprocesso` (p58_codproc) [lotenumero_proc_processo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.lotesetorfiscal`
-
-### Identidade
-
-- Nome humano: Lote Setor Fiscal.
-- O que representa: Lote Setor Fiscal
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j91_idbql`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j91_codigo, j91_idbql
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j91_codigo`: Codigo do setor fiscal
-- `j91_idbql`: Codigo de identificacao do lote
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j91_codigo`: Codigo do setor fiscal
-- `j91_idbql`: Codigo de identificacao do lote
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j91_codigo` -> `cadastro.setorfiscal` (j90_codigo) [lotesetorfiscal_codigo_fk]
-- `j91_idbql` -> `cadastro.lote` (j34_idbql) [lotesetorfiscal_idbql_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.massafalida`
-
-### Identidade
-
-- Nome humano: Tabela de massas falidas.
-- O que representa: Tabela de massas falidas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j58_codigo`
-- Coluna temporal: `j58_data`
-- Candidatas a chave de negocio: j58_codigo, j58_data, j58_numcgm, j58_obs
-- Candidatas a coluna temporal: j58_data
-
-### Colunas principais
-
-- `j58_codigo`: Código de lançamento da massa falida
-- `j58_data`: Data da declaração de massa falida
-- `j58_numcgm`: CGM do responsável pela massa falida (síndico)
-- `j58_obs`: Texto de observação a respeito dessa massa falida.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j58_codigo`: Código de lançamento da massa falida
-- `j58_data`: Data da declaração de massa falida
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j58_numcgm` -> `protocolo.cgm` (z01_numcgm) [massafalida_numcgm_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.massamat`
-
-### Identidade
-
-- Nome humano: Tabela com massas falidas.
-- O que representa: Tabela com massas falidas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j59_codigo`
-  - `j59_matric`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j59_codigo, j59_matric
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j59_codigo`: Código da sequencia
-- `j59_matric`: Código da massa falida
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j59_codigo`: Código da sequencia
-- `j59_matric`: Código da massa falida
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j59_codigo` -> `cadastro.massafalida` (j58_codigo) [massamat_codigo_fk]
-- `j59_matric` -> `cadastro.iptubase` (j01_matric) [massamat_matric_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.matricobs`
-
-### Identidade
-
-- Nome humano: Observações da matrícula.
-- O que representa: Observações da matrícula
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j26_matric`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j26_matric, j26_obs
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j26_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j26_obs`: Observações da matricula
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j26_matric`: Codigo da matrícula do imovel para identificar o proprietário de um determinado lote.
-- `j26_obs`: Observações da matricula
+- `c155_codigo`
 
 ### Filtros de negocio
 
@@ -10622,12 +9993,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.mobimportacao`
+## Tabela de negocio: `contabilidade.lancamentoscontabeislog`
 
 ### Identidade
 
-- Nome humano: Dados Importados.
-- O que representa: Dados Importados
+- Nome humano: contabilidade.lancamentoscontabeislog.
+- O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -10638,17 +10009,18 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j95_codimporta`
-- Coluna temporal: `j95_data`
-- Candidatas a chave de negocio: j95_idusuario
-- Candidatas a coluna temporal: j95_data
+  - `sequencial`
+- Coluna temporal: `data`
+- Candidatas a chave de negocio: id_usuario, sequencial
+- Candidatas a coluna temporal: data
 
 ### Colunas principais
 
-- `j95_codimporta`: Código Importação
-- `j95_data`: Data
-- `j95_idusuario`: codigo do usuario
-- `j95_pda`: Pda
+- `codlan`: Preencher significado.
+- `data`: Preencher significado.
+- `id_usuario`: Preencher significado.
+- `sequencial`: Preencher significado.
+- `tipo_movimento`: Preencher significado.
 
 ### Metricas atomicas
 
@@ -10656,8 +10028,8 @@ tags:
 
 ### Dimensoes
 
-- `j95_data`: Data
-- `j95_idusuario`: codigo do usuario
+- `data`
+- `tipo_movimento`
 
 ### Filtros de negocio
 
@@ -10674,7 +10046,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j95_idusuario` -> `configuracoes.db_usuarios` (id_usuario) [mobimportacao_idusuario_fk]
+- Nenhum relacionamento catalogado.
 
 ### Regras de negocio existentes no catalogo
 
@@ -10692,12 +10064,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.moblevantamentoedi`
+## Tabela de negocio: `contabilidade.linhaspacto`
 
 ### Identidade
 
-- Nome humano: Constrições das Matrículas.
-- O que representa: Constrições das Matrículas
+- Nome humano: Cadastro de linhas de pacto utilizadas na previsão de despesa.
+- O que representa: Cadastro de linhas de pacto utilizadas na previsão de despesa
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -10708,261 +10080,20 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j96_sequen`
+  - `c07_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j96_codigo, j96_idade, j96_matric, j96_sequen
+- Candidatas a chave de negocio: c07_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j96_cobertura`: Cobertura
-- `j96_codigo`: Logradouro
-- `j96_codimporta`: Código Importação
-- `j96_compl`: Complemento
-- `j96_esquadrias`: Esquadrias
-- `j96_forro`: Forro
-- `j96_idade`: Idade Aparente
-- `j96_insteletrica`: Inst. Elétrica
-- `j96_instsanitario`: Inst. Sanitária
-- `j96_matric`: Matrícula
-- `j96_numero`: Número
-- `j96_paredes`: Paredes
-- `j96_pintura`: Pintura
-- `j96_piso`: Piso
-- `j96_revexterno`: Revestimento Externo
-- `j96_revinterno`: Revest. Interno
-- `j96_sequen`: Sequencial
-- `j96_subtitulo`: Sub Título
-- `j96_tipoconstr`: Tipo Construção
+- `c07_sequencial`: Código sequencial
+- `c07_titulo`: Título
+- `c07_valor`: Valor
 
 ### Metricas atomicas
 
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j96_codigo`: Logradouro
-- `j96_matric`: Matrícula
-- `j96_tipoconstr`: Tipo Construção
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j96_codimporta` -> `cadastro.mobimportacao` (j95_codimporta) [moblevantamentoedi_codimporta_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.moblevantamentolog`
-
-### Identidade
-
-- Nome humano: Logradouros da Matricula.
-- O que representa: Logradouros da Matricula
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j98_sequen`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j98_codigo, j98_matric, j98_sequen
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j98_agua`: Água
-- `j98_codigo`: Logradouro
-- `j98_codimporta`: Código Importação
-- `j98_eletrica`: Elétrica
-- `j98_esgoto`: Esgoto
-- `j98_iluminacao`: Iluminação
-- `j98_lixo`: Coleta Lixo
-- `j98_matric`: Matrícula
-- `j98_meiofio`: Meio-Fio
-- `j98_pavim`: Pavimentação
-- `j98_sequen`: Sequencial
-- `j98_telefonia`: Telefonia
-- `j98_testada`: Testada
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j98_codigo`: Logradouro
-- `j98_matric`: Matrícula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j98_codimporta` -> `cadastro.mobimportacao` (j95_codimporta) [moblevantamentolog_codimporta_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.moblevatamento`
-
-### Identidade
-
-- Nome humano: Levantamento do cadastro PDA.
-- O que representa: Levantamento do cadastro PDA
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j97_sequen`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j97_cidade, j97_matric, j97_profun, j97_sequen
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j97_calcada`: Calçada
-- `j97_cidade`: CIdade
-- `j97_codimporta`: Código Importação
-- `j97_endcor`: Endereço Correspondencia
-- `j97_matric`: Matrícula
-- `j97_muro`: Muro
-- `j97_pedol`: Pedologia
-- `j97_profun`: Profundidade
-- `j97_sequen`: Sequencial
-- `j97_sitterreno`: Situação terreno
-- `j97_topog`: Topografia
-- `j97_vistoria`: Vistoria
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j97_matric`: Matrícula
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j97_codimporta` -> `cadastro.mobimportacao` (j95_codimporta) [moblevatamento_codimporta_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.orientacao`
-
-### Identidade
-
-- Nome humano: Cadastro de Orientaçoes.
-- O que representa: Cadastro de Orientaçoes
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j64_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j64_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j64_descricao`: Descrição
-- `j64_sequencial`: Código da orientação
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
+- `c07_valor`: Valor
 
 ### Dimensoes
 
@@ -11001,12 +10132,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.predio`
+## Tabela de negocio: `contabilidade.lotelancamentoconlancam`
 
 ### Identidade
 
-- Nome humano: Prédio.
-- O que representa: Prédio
+- Nome humano: contabilidade.lotelancamentoconlancam.
+- O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -11017,16 +10148,307 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j111_sequencial`
+  - `c161_codigo`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j111_sequencial
+- Candidatas a chave de negocio: c161_codigo
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j111_condominio`: Código do condomínio
-- `j111_nome`: Nome Predio
-- `j111_sequencial`: Código Sequencial
+- `c161_codigo`: Preencher significado.
+- `c161_conlancam`: Preencher significado.
+- `c161_lotelancamento`: Preencher significado.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c161_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c161_conlancam` -> `contabilidade.conlancam` (c70_codlan) [contabilidade_lotelancamentoconlancam_c161_conlancam_foreign]
+- `c161_lotelancamento` -> `contabilidade.lotelancamentos` (c160_codigo) [contabilidade_lotelancamentoconlancam_c161_lotelancamento_forei]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.lotelancamentos`
+
+### Identidade
+
+- Nome humano: contabilidade.lotelancamentos.
+- O que representa: Preencher em linguagem de negocio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c160_codigo`
+- Coluna temporal: `c160_exercicio`
+- Candidatas a chave de negocio: c160_codigo
+- Candidatas a coluna temporal: c160_exercicio
+
+### Colunas principais
+
+- `c160_codigo`: Preencher significado.
+- `c160_exercicio`: Preencher significado.
+- `c160_instituicao`: Preencher significado.
+- `c160_lote`: Preencher significado.
+- `created_at`: Preencher significado.
+- `updated_at`: Preencher significado.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c160_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c160_instituicao` -> `configuracoes.db_config` (codigo) [contabilidade_lotelancamentos_c160_instituicao_foreign]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.lrfvalormanual`
+
+### Identidade
+
+- Nome humano: contabilidade.lrfvalormanual.
+- O que representa: Preencher em linguagem de negocio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c180_codigo`
+- Coluna temporal: `c180_exercicio`
+- Candidatas a chave de negocio: c180_codigo
+- Candidatas a coluna temporal: c180_exercicio
+
+### Colunas principais
+
+- `c180_codigo`: Preencher significado.
+- `c180_coluna`: Preencher significado.
+- `c180_exercicio`: Preencher significado.
+- `c180_instituicao`: Preencher significado.
+- `c180_linha`: Preencher significado.
+- `c180_mes`: Preencher significado.
+- `c180_relatorio`: Preencher significado.
+- `c180_valor`: Preencher significado.
+- `created_at`: Preencher significado.
+- `updated_at`: Preencher significado.
+
+### Metricas atomicas
+
+- `c180_valor`
+
+### Dimensoes
+
+- `c180_codigo`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c180_instituicao` -> `configuracoes.db_config` (codigo) [lrfvalormanual_c180_instituicao_fkey]
+- `c180_relatorio` -> `orcamento.orcparamrel` (o42_codparrel) [lrfvalormanual_c180_relatorio_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.matriz_saldo_contabil`
+
+### Identidade
+
+- Nome humano: Matriz Saldo Contábil.
+- O que representa: Matriz Saldo Contábil
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c132_sequencial`
+- Coluna temporal: `c132_ano`
+- Candidatas a chave de negocio: c132_sequencial
+- Candidatas a coluna temporal: c132_ano
+
+### Colunas principais
+
+- `c132_ano`: Ano
+- `c132_mes`: Mês
+- `c132_sequencial`: Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c132_ano`: Ano
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.matriz_saldo_contabil_lancamentos`
+
+### Identidade
+
+- Nome humano: Matriz Saldo Contábil Lançamentos.
+- O que representa: Matriz Saldo Contábil Lançamentos
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c133_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c133_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c133_atributos`: Atributos
+- `c133_beginning_balance`: Beginning Balance
+- `c133_ending_balance`: Ending Balance
+- `c133_estrutural`: Estrutural
+- `c133_matriz_saldo_contabil`: Matriz Saldo Contábil
+- `c133_natureza`: Natureza
+- `c133_natureza_final`: Natureza Final
+- `c133_period_change_credit`: Period Change Credit
+- `c133_period_change_debit`: Period Change Debit
+- `c133_sequencial`: Sequencial
 
 ### Metricas atomicas
 
@@ -11051,7 +10473,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- `j111_condominio` -> `cadastro.condominio` (j107_sequencial) [predio_condominio_fk]
+- `c133_matriz_saldo_contabil` -> `contabilidade.matriz_saldo_contabil` (c132_sequencial) [matriz_saldo_contabil_lancamentos_matriz_saldo_contabil_c132_se]
 
 ### Regras de negocio existentes no catalogo
 
@@ -11069,11 +10491,1589 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.processadne`
+## Tabela de negocio: `contabilidade.meiocomunicacaosigap`
 
 ### Identidade
 
-- Nome humano: cadastro.processadne.
+- Nome humano: meiocomunicacaosigap.
+- O que representa: meiocomunicacaosigap
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c49_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c49_codigocomunicacao, c49_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c49_codigocomunicacao`: Código Comunicação
+- `c49_descricao`: Descrição
+- `c49_sequencial`: Código Sequencial
+- `c49_uf`: UF
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c49_codigocomunicacao`: Código Comunicação
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.modeloplanoconta`
+
+### Identidade
+
+- Nome humano: Modelos do Plano de Contas.
+- O que representa: Modelos do Plano de Contas
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c94_sequencial`
+- Coluna temporal: `c94_exercicio`
+- Candidatas a chave de negocio: c94_sequencial
+- Candidatas a coluna temporal: c94_exercicio
+
+### Colunas principais
+
+- `c94_exercicio`: Exercício
+- `c94_nome`: Nome
+- `c94_sequencial`: Código sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- Preencher dimensoes de agrupamento/filtro.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.movimentacoesauditoria`
+
+### Identidade
+
+- Nome humano: Tabela para salvar: Adições da Auditoria; Exclusões da Auditoria; Restos a Pagar Inscritos no Exercício sem Disponibilidade Financeira de Recursos do MDE;.
+- O que representa: Tabela para salvar: Adições da Auditoria; Exclusões da Auditoria; Restos a Pagar Inscritos no Exercício sem Disponibilidade Financeira de Recursos do MDE;
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c170_anousu`
+  - `c170_mes`
+- Coluna temporal: `c170_anousu`
+- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a coluna temporal: c170_anousu, c170_mes
+
+### Colunas principais
+
+- `c170_adicaoauditoria`: c170_adicaoauditoria relatorio mde
+- `c170_anousu`: Ano comp
+- `c170_exclusaoauditoria`: Exclusões da Auditoria, relatorios mde
+- `c170_mes`: Mes de exercicio
+- `c170_resto`: Preencher significado.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c170_anousu`: Ano comp
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.orcamentoreceita`
+
+### Identidade
+
+- Nome humano: orcamentoreceita.
+- O que representa: orcamentoreceita
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c98_sequencial`
+- Coluna temporal: `c98_anousu`
+- Candidatas a chave de negocio: c98_finalidade, c98_identificadorfinanceiro, c98_sequencial
+- Candidatas a coluna temporal: c98_anousu, c98_datacriacao
+
+### Colunas principais
+
+- `c98_anousu`: Ano da Conta
+- `c98_codcla`: Classificação
+- `c98_codcon`: Código da Conta no Orçamento
+- `c98_codrec`: Código da Receita
+- `c98_codsis`: Código do Sistema
+- `c98_concarpeculiar`: CP / CA
+- `c98_consistemaconta`: Código de Conta do Sistema
+- `c98_datacriacao`: Data de Criação
+- `c98_descricao`: Descrição
+- `c98_estrutural`: Estrutural
+- `c98_finalidade`: Finalidade
+- `c98_funcao`: Função
+- `c98_identificadorfinanceiro`: Identificador Financeiro
+- `c98_instit`: Instituição
+- `c98_naturezasaldo`: Natureza Saldo
+- `c98_receitalancada`: Receita Lançada
+- `c98_recurso`: Recurso
+- `c98_sequencial`: Código
+- `c98_valor`: Valor
+
+### Metricas atomicas
+
+- `c98_valor`: Valor
+
+### Dimensoes
+
+- `c98_anousu`: Ano da Conta
+- `c98_datacriacao`: Data de Criação
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.padsigapsubsidiosvereadores`
+
+### Identidade
+
+- Nome humano: Dados para o arquivo SubsidioVereadores.xml , do sipag - Pad de Rondonia.
+- O que representa: Dados para o arquivo SubsidioVereadores.xml , do sipag - Pad de Rondonia
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c16_sequencial`
+- Coluna temporal: `c16_ano`
+- Candidatas a chave de negocio: c16_numcgm, c16_sequencial, c16_subsidioextraordinario, c16_subsidiomensal
+- Candidatas a coluna temporal: c16_ano
+
+### Colunas principais
+
+- `c16_ano`: Ano
+- `c16_instit`: Instituição
+- `c16_mes`: Mês
+- `c16_numcgm`: Vereador
+- `c16_sequencial`: Código Sequencial
+- `c16_subsidioextraordinario`: Valor do Subsídio Extraordináro
+- `c16_subsidiomensal`: Valor do Subsídio mensal
+
+### Metricas atomicas
+
+- `c16_subsidioextraordinario`: Valor do Subsídio Extraordináro
+- `c16_subsidiomensal`: Valor do Subsídio mensal
+
+### Dimensoes
+
+- `c16_ano`: Ano
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c16_numcgm` -> `protocolo.cgm` (z01_numcgm) [padsigapsubsidiosvereadores_numcgm_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.parametrointegracaopatrimonial`
+
+### Identidade
+
+- Nome humano: Parametros que irão validar se será realizado um lançamento contabil nas rotinas do patrimonio..
+- O que representa: Parametros que irão validar se será realizado um lançamento contabil nas rotinas do patrimonio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c01_sequencial`
+- Coluna temporal: `c01_data`
+- Candidatas a chave de negocio: c01_sequencial
+- Candidatas a coluna temporal: c01_data
+
+### Colunas principais
+
+- `c01_data`: Data da Implantação
+- `c01_instit`: Código da Instituição
+- `c01_modulo`: Modulo
+- `c01_sequencial`: Sequencial
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c01_data`: Data da Implantação
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c01_instit` -> `configuracoes.db_config` (codigo) [parametrointegracaopatrimonial_instit_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.pcasp`
+
+### Identidade
+
+- Nome humano: Plano de Contas padãr.
+- O que representa: Plano de Contas padãr
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `id`
+- Coluna temporal: `exercicio`
+- Candidatas a chave de negocio: id, indicador
+- Candidatas a coluna temporal: exercicio, sintetica, uniao
+
+### Colunas principais
+
+- `classe`: Classe
+- `conta`: Conta
+- `created_at`: Preencher significado.
+- `desdobramento1`: Primeiro desdobramento do estrutural
+- `desdobramento2`: Segundo desdobramento do estrutural
+- `desdobramento3`: Terceiro desdobramento do estrutural
+- `exercicio`: Exercício
+- `funcao`: função do ítem
+- `grupo`: Grupo do estrutural
+- `id`: id
+- `indicador`: Indicador de superávit financeiro. Valores válidos: - N - F - P - F/P
+- `informacoescomplementares`: Informações complementares da conta
+- `item`: Item do estrutural
+- `natureza`: Natureza do saldo; - D - C - C/D
+- `nome`: nome do usuario
+- `sintetica`: Se a conta é sintética no plano
+- `subgrupo`: Subgrupo do estrutural
+- `subitem`: Subitem do estrutural
+- `subtitulo`: subtitulo do estrutural
+- `titulo`: Titulo
+- `uniao`: Se verdadeiro é o plano da União, se não é do estado
+- `updated_at`: Preencher significado.
+
+### Metricas atomicas
+
+- `indicador`: Indicador de superávit financeiro. Valores válidos: - N - F - P - F/P
+
+### Dimensoes
+
+- `grupo`: Grupo do estrutural
+- `sintetica`: Se a conta é sintética no plano
+- `subgrupo`: Subgrupo do estrutural
+- `uniao`: Se verdadeiro é o plano da União, se não é do estado
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.pcaspconplano`
+
+### Identidade
+
+- Nome humano: Vínculo do plano padrão com o plano do ecidade.
+- O que representa: Vínculo do plano padrão com o plano do ecidade
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `id`
+- Coluna temporal: `conplano_codigo`
+- Candidatas a chave de negocio: conplano_codigo, id, pcasp_id
+- Candidatas a coluna temporal: conplano_codigo
+
+### Colunas principais
+
+- `conplano_codigo`: Vínculo plano contas e-cidade
+- `created_at`: Criado em
+- `id`: id
+- `pcasp_id`: Vínculo Pcasp
+- `updated_at`: Alterado em
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `conplano_codigo`: Vínculo plano contas e-cidade
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `pcasp_id` -> `contabilidade.pcasp` (id) [pcaspconplano_pcasp_id_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.planocontadetalhe`
+
+### Identidade
+
+- Nome humano: planocontadetalhe.
+- O que representa: planocontadetalhe
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c95_sequencial`
+- Coluna temporal: `c95_modeloplanoconta`
+- Candidatas a chave de negocio: c95_sequencial
+- Candidatas a coluna temporal: c95_modeloplanoconta
+
+### Colunas principais
+
+- `c95_analitica`: Conta Analítica
+- `c95_estrutural`: Estrutural
+- `c95_excluir`: Indica se é para excluir ou não a conta.
+- `c95_funcao`: Função
+- `c95_indicadorsuperavit`: Indicador de Superavit
+- `c95_modeloplanoconta`: Modelos do Plano de Contas
+- `c95_naturezasaldo`: Natureza do Saldo
+- `c95_sequencial`: Código
+- `c95_sistema`: Sistema
+- `c95_titulo`: Título
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c95_modeloplanoconta`: Modelos do Plano de Contas
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c95_modeloplanoconta` -> `contabilidade.modeloplanoconta` (c94_sequencial) [planocontadetalhe_modeloplanoconta_fk]
+- `c95_sistema` -> `contabilidade.consistemaconta` (c65_sequencial) [planocontadetalhe_sistema_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.planocontadetalheconplanoorcamento`
+
+### Identidade
+
+- Nome humano: planocontadetalheconplanoorcamento.
+- O que representa: planocontadetalheconplanoorcamento
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c97_sequencial`
+- Coluna temporal: `c97_conplanoorcamento`
+- Candidatas a chave de negocio: c97_sequencial
+- Candidatas a coluna temporal: c97_conplanoorcamento, c97_planocontadetalhe
+
+### Colunas principais
+
+- `c97_conplanoorcamento`: Código da Conta no Orçamento
+- `c97_planocontadetalhe`: Código do Ementário
+- `c97_sequencial`: Código
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c97_conplanoorcamento`: Código da Conta no Orçamento
+- `c97_planocontadetalhe`: Código do Ementário
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c97_planocontadetalhe` -> `contabilidade.planocontadetalhe` (c95_sequencial) [planocontadetalheconplanoorcamento_c97_planocontadetalhe]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.planodespesa`
+
+### Identidade
+
+- Nome humano: Plano orçamentário padrão da Despesa.
+- O que representa: Plano orçamentário padrão da Despesa
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `id`
+- Coluna temporal: `exercicio`
+- Candidatas a chave de negocio: id, modalidade
+- Candidatas a coluna temporal: exercicio, sintetica, uniao
+
+### Colunas principais
+
+- `classe`: Classe
+- `conta`: Conta
+- `created_at`: Criado em
+- `desdobramento1`: Primeiro desdobramento do estrutural
+- `desdobramento2`: Segundo desdobramento do estrutural
+- `desdobramento3`: Terceiro desdobramento do estrutural
+- `elemento`: Elemento
+- `exercicio`: Exercício
+- `funcao`: função do ítem
+- `grupo`: Grupo do estrutural
+- `id`: id
+- `modalidade`: Modalidade
+- `nome`: nome do usuario
+- `sintetica`: Se a conta é sintética no plano
+- `subelemento`: Subelemento
+- `uniao`: Se verdadeiro é o plano da União, se não é do estado
+- `updated_at`: Alterado em
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `grupo`: Grupo do estrutural
+- `sintetica`: Se a conta é sintética no plano
+- `uniao`: Se verdadeiro é o plano da União, se não é do estado
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.planodespesaconplanoorcamento`
+
+### Identidade
+
+- Nome humano: Vínculo do plano padrão da despesa com o do ecidade.
+- O que representa: Vínculo do plano padrão da despesa com o do ecidade
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `id`
+- Coluna temporal: `conplanoorcamento_codigo`
+- Candidatas a chave de negocio: conplanoorcamento_codigo, id, planodespesa_id
+- Candidatas a coluna temporal: conplanoorcamento_codigo, planodespesa_id
+
+### Colunas principais
+
+- `conplanoorcamento_codigo`: Vínculo conplano orçamento
+- `id`: id
+- `planodespesa_id`: Plano da despesa
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `conplanoorcamento_codigo`: Vínculo conplano orçamento
+- `planodespesa_id`: Plano da despesa
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `planodespesa_id` -> `contabilidade.planodespesa` (id) [planodespesaconplanoorcamento_planodespesa_id_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.planoreceita`
+
+### Identidade
+
+- Nome humano: Plano orçamentário padrão da Receita.
+- O que representa: Plano orçamentário padrão da Receita
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `id`
+- Coluna temporal: `exercicio`
+- Candidatas a chave de negocio: id, tipo
+- Candidatas a coluna temporal: exercicio, sintetica, uniao
+
+### Colunas principais
+
+- `categoria`: Categoria
+- `classe`: Classe
+- `conta`: Conta
+- `created_at`: Criado em
+- `desdobramento1`: Primeiro desdobramento do estrutural
+- `desdobramento2`: Segundo desdobramento do estrutural
+- `desdobramento3`: Terceiro desdobramento do estrutural
+- `desdobramento4`: Quarto desdobramento
+- `desdobramento5`: Quinto desdobramento
+- `desdobramento6`: Sexto desdobramento
+- `especie`: Especie
+- `exercicio`: Exercício
+- `funcao`: função do ítem
+- `id`: id
+- `nome`: Preencher significado.
+- `origem`: Forma de entrega: informar sempre "D".
+- `sintetica`: Se a conta é sintética no plano
+- `tipo`: tipo de ouvidoria
+- `uniao`: Se verdadeiro é o plano da União, se não é do estado
+- `updated_at`: Alterado em
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `sintetica`: Se a conta é sintética no plano
+- `tipo`: tipo de ouvidoria
+- `uniao`: Se verdadeiro é o plano da União, se não é do estado
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.planoreceitaconplanoorcamento`
+
+### Identidade
+
+- Nome humano: Vínculo do plano padrão da receita com o do ecidade.
+- O que representa: Vínculo do plano padrão da receita com o do ecidade
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `id`
+- Coluna temporal: `conplanoorcamento_codigo`
+- Candidatas a chave de negocio: conplanoorcamento_codigo, id, planoreceita_id
+- Candidatas a coluna temporal: conplanoorcamento_codigo, planoreceita_id
+
+### Colunas principais
+
+- `conplanoorcamento_codigo`: Vínculo conplano orçamento
+- `id`: id
+- `planoreceita_id`: Vínculo com o plano da receita
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `conplanoorcamento_codigo`: Vínculo conplano orçamento
+- `planoreceita_id`: Vínculo com o plano da receita
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `planoreceita_id` -> `contabilidade.planoreceita` (id) [planoreceitaconplanoorcamento_planoreceita_id_fkey]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.previsaodespesa`
+
+### Identidade
+
+- Nome humano: LOA 2019 previsão da despesa.
+- O que representa: LOA 2019 previsão da despesa
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c333_sequencial`
+- Coluna temporal: `c333_ano`
+- Candidatas a chave de negocio: c333_identificadorresultadoprimario, c333_identificadoruso, c333_orcunidade, c333_sequencial
+- Candidatas a coluna temporal: c333_ano, c333_conplanoorcamento, c333_planoorcamentario
+
+### Colunas principais
+
+- `c333_ano`: Ano
+- `c333_conplanoorcamento`: Natureza da Despesa
+- `c333_esferaorcamentaria`: Esfera orçamentária
+- `c333_especificacaofonte`: Especificação da Fonte
+- `c333_grupofonterecursos`: Grupo da fonte de recursos
+- `c333_identificadorresultadoprimario`: Identificador de Resultado Primário
+- `c333_identificadoruso`: Identificador de Uso
+- `c333_orcfuncao`: Função
+- `c333_orcorgao`: Orgão
+- `c333_orcprograma`: Programa
+- `c333_orcprojativ`: Ação
+- `c333_orcsubfuncao`: Subfunção
+- `c333_orcunidade`: Unidade
+- `c333_planoorcamentario`: Plano Orçamentáario
+- `c333_ppasubtitulolocalizadorgasto`: Subtítulo
+- `c333_previsao`: Previsão
+- `c333_sequencial`: Código
+- `c333_tipodetalhamento`: Tipo de Detalhamento
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c333_ano`: Ano
+- `c333_conplanoorcamento`: Natureza da Despesa
+- `c333_grupofonterecursos`: Grupo da fonte de recursos
+- `c333_planoorcamentario`: Plano Orçamentáario
+- `c333_tipodetalhamento`: Tipo de Detalhamento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.previsaodespesalinhaspacto`
+
+### Identidade
+
+- Nome humano: Vínculo de previsão de despesa com linhas de pacto.
+- O que representa: Vínculo de previsão de despesa com linhas de pacto
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c41_sequencial`
+- Coluna temporal: `c41_previsaodespesaplano`
+- Candidatas a chave de negocio: c41_sequencial
+- Candidatas a coluna temporal: c41_previsaodespesaplano
+
+### Colunas principais
+
+- `c41_linhaspacto`: LInhas pacto
+- `c41_previsaodespesa`: Previsão despesa
+- `c41_previsaodespesaplano`: Plano orçamentário
+- `c41_sequencial`: Código
+- `c41_valorlinha`: Valor da linha de impacto
+
+### Metricas atomicas
+
+- `c41_valorlinha`: Valor da linha de impacto
+
+### Dimensoes
+
+- `c41_previsaodespesaplano`: Plano orçamentário
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c41_linhaspacto` -> `contabilidade.linhaspacto` (c07_sequencial) [previsaodespesalinhaspacto_linhaspacto_fk]
+- `c41_previsaodespesa` -> `contabilidade.previsaodespesa` (c333_sequencial) [previsaodespesalinhaspacto_previsaodespesa_fk]
+- `c41_previsaodespesaplano` -> `contabilidade.previsaodespesaplano` (c55_sequencial) [previsaodespesalinhaspacto_previsaodespesaplano_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.previsaodespesaplano`
+
+### Identidade
+
+- Nome humano: Tabela que armazena os registros de planos orçamentários da despesa..
+- O que representa: Tabela que armazena os registros de planos orçamentários da despesa.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c55_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c55_codigo, c55_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c55_codigo`: Código de ordenação da previsão da despesa.
+- `c55_previsaodespesa`: Previsão despesa
+- `c55_sequencial`: Sequencial
+- `c55_titulo`: Título
+- `c55_valor`: Valor
+
+### Metricas atomicas
+
+- `c55_valor`: Valor
+
+### Dimensoes
+
+- `c55_codigo`: Código de ordenação da previsão da despesa.
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c55_previsaodespesa` -> `contabilidade.previsaodespesa` (c333_sequencial) [previsaodespesaplano_previsaodespesa_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.publicidadesigap`
+
+### Identidade
+
+- Nome humano: publicidadesigap.
+- O que representa: publicidadesigap
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c48_sequencial`
+- Coluna temporal: `c48_ano`
+- Candidatas a chave de negocio: c48_sequencial
+- Candidatas a coluna temporal: c48_ano, c48_datapublicacao
+
+### Colunas principais
+
+- `c48_ano`: Ano
+- `c48_datapublicacao`: Data de Publicação
+- `c48_descricao`: Descrição
+- `c48_instit`: Instituição
+- `c48_meiocomunicacaosigap`: Meio de Comunicação
+- `c48_mes`: Mês
+- `c48_sequencial`: Código Sequencial
+- `c48_tiporelatoriofiscal`: Tipo Relatório Fiscal
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c48_ano`: Ano
+- `c48_datapublicacao`: Data de Publicação
+- `c48_tiporelatoriofiscal`: Tipo Relatório Fiscal
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c48_instit` -> `configuracoes.db_config` (codigo) [publicidadesigap_instit_fk]
+- `c48_meiocomunicacaosigap` -> `contabilidade.meiocomunicacaosigap` (c49_sequencial) [publicidadesigap_meiocomunicacaosigap_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.publicidadesigapfiscal`
+
+### Identidade
+
+- Nome humano: Armazena as informações de publicidade do sigap fiscal.
+- O que representa: Armazena as informações de publicidade do sigap fiscal
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c136_codigo`
+- Coluna temporal: `c136_ano`
+- Candidatas a chave de negocio: c136_codigo, c136_tipo_relatorio
+- Candidatas a coluna temporal: c136_ano, c136_data_publicacao
+
+### Colunas principais
+
+- `c136_ano`: Ano
+- `c136_codigo`: Código
+- `c136_data_publicacao`: Data da Publicação
+- `c136_descricao`: Descrição
+- `c136_instituicao`: Instituição
+- `c136_link`: Link da Transparência
+- `c136_local_publicacao`: Local de Publicação
+- `c136_meio_comunicacao`: Código do meio de comunicação
+- `c136_periodo`: Período de referência
+- `c136_tipo_relatorio`: Tipo do Relatório 01 - Relatório Resumido de Execução Orçamentária; 02 - Relatório de Gestão Fiscal
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c136_ano`: Ano
+- `c136_codigo`: Código
+- `c136_data_publicacao`: Data da Publicação
+- `c136_tipo_relatorio`: Tipo do Relatório 01 - Relatório Resumido de Execução Orçamentária; 02 - Relatório de Gestão Fiscal
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c136_meio_comunicacao` -> `contabilidade.meiocomunicacaosigap` (c49_sequencial) [publicidadesigapfiscal_comunicacao_fk]
+- `c136_instituicao` -> `configuracoes.db_config` (codigo) [publicidadesigapfiscal_instituicao_fk]
+- `c136_periodo` -> `configuracoes.periodo` (o114_sequencial) [publicidadesigapfiscal_periodo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.reconhecimentocontabil`
+
+### Identidade
+
+- Nome humano: Reconhecimento contabil.
+- O que representa: Reconhecimento contabil
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c112_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c112_numcgm, c112_reconhecimentocontabiltipo, c112_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c112_estornado`: Se esta estornado
+- `c112_numcgm`: Numero de Identificação do Contribuinte ou Empresa no Cadastro geral do Município
+- `c112_processoadm`: Processo administrativo
+- `c112_reconhecimentocontabiltipo`: Codigo do Tipos de Rec. Contábil
+- `c112_sequencial`: Codigo do Reconhecimento Contabil
+- `c112_valor`: Valor do reconhecimento contabil
+
+### Metricas atomicas
+
+- `c112_valor`: Valor do reconhecimento contabil
+
+### Dimensoes
+
+- `c112_reconhecimentocontabiltipo`: Codigo do Tipos de Rec. Contábil
+- `c112_sequencial`: Codigo do Reconhecimento Contabil
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c112_numcgm` -> `protocolo.cgm` (z01_numcgm) [reconhecimentocontabil_numcgm_fk]
+- `c112_reconhecimentocontabiltipo` -> `contabilidade.reconhecimentocontabiltipo` (c111_sequencial) [reconhecimentocontabil_reconhecimentocontabiltipo_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.reconhecimentocontabiltipo`
+
+### Identidade
+
+- Nome humano: Cadastro de tipo de reconhecimento contabil..
+- O que representa: Cadastro de tipo de reconhecimento contabil.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c111_sequencial`
+- Coluna temporal: Preencher.
+- Candidatas a chave de negocio: c111_conhistdoc, c111_conhistdocestorno, c111_sequencial
+- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+
+### Colunas principais
+
+- `c111_conhistdoc`: Código do Documento que identifica o lançamento automático
+- `c111_conhistdocestorno`: Código do Documento que identifica o lançamento automático
+- `c111_descricao`: Descrição do tipo de reconhecimento contábil.
+- `c111_sequencial`: Sequencial de Tipos de Rec. Contábil
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c111_descricao`: Descrição do tipo de reconhecimento contábil.
+- `c111_sequencial`: Sequencial de Tipos de Rec. Contábil
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c111_conhistdocestorno` -> `contabilidade.conhistdoc` (c53_coddoc) [reconhecimentocontabiltipo_conhistdocestorno_fk]
+- `c111_conhistdoc` -> `contabilidade.conhistdoc` (c53_coddoc) [reconhecimentocontabiltipo_conhistdoc_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.recurso_exercicio`
+
+### Identidade
+
+- Nome humano: contabilidade.recurso_exercicio.
 - O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
@@ -11086,18 +12086,22 @@ tags:
 - Entidade principal: Preencher.
 - Chave de negocio:
   - Preencher.
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+- Coluna temporal: `exercicio`
+- Candidatas a chave de negocio: classificacaofr_id, codigo_siconfi, o15_codigo
+- Candidatas a coluna temporal: exercicio
 
 ### Colunas principais
 
-- `aviso`: Preencher significado.
-- `bairro`: Preencher significado.
-- `endereco`: Preencher significado.
-- `ilograd`: Preencher significado.
-- `numero`: Preencher significado.
-- `tipoend`: Preencher significado.
+- `classificacaofr_id`: Preencher significado.
+- `codigo_siconfi`: Preencher significado.
+- `descricao`: Preencher significado.
+- `exercicio`: Preencher significado.
+- `gestao`: Preencher significado.
+- `o15_codigo`: Preencher significado.
+- `o15_complemento`: Preencher significado.
+- `o15_descr`: Preencher significado.
+- `o15_recurso`: Preencher significado.
+- `tipo_detalhamento`: Preencher significado.
 
 ### Metricas atomicas
 
@@ -11105,8 +12109,9 @@ tags:
 
 ### Dimensoes
 
-- `bairro`
-- `tipoend`
+- `codigo_siconfi`
+- `o15_codigo`
+- `tipo_detalhamento`
 
 ### Filtros de negocio
 
@@ -11141,12 +12146,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.promitente`
+## Tabela de negocio: `contabilidade.regraencerramentonaturezaorcamentaria`
 
 ### Identidade
 
-- Nome humano: Cadastro dos promitente compradores. Identificacao dos contribuintes que compram imoveis financiados e so averbam em seu nome apos o termino do pagamento..
-- O que representa: Cadastro dos promitente compradores. Identificacao dos contribuintes que compram imoveis financiados e so averbam em seu nome apos o termino do pagamento.
+- Nome humano: Regra Encerramento Natureza Orçamentária.
+- O que representa: Regra Encerramento Natureza Orçamentária
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -11157,18 +12162,18 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j41_matric`
-  - `j41_numcgm`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j41_matric, j41_numcgm
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
+  - `c117_sequencial`
+- Coluna temporal: `c117_anousu`
+- Candidatas a chave de negocio: c117_sequencial
+- Candidatas a coluna temporal: c117_anousu
 
 ### Colunas principais
 
-- `j41_matric`: Matricula do imovel
-- `j41_numcgm`: Numero do constribuinte no CGM
-- `j41_promitipo`: C - com contrato S - Sem contrato V - Contrato Compra/Venda P - Possuior U - Usufrutuário R - Representante do Espólio I - Inventariante E - Escritura
-- `j41_tipopro`: Tipo do promitente, principal ou secundario.
+- `c117_anousu`: Ano
+- `c117_contacredora`: Se refere ao estrutural do PCASP
+- `c117_contadevedora`: Se refere ao estrutural do PCASP
+- `c117_instit`: Instituição
+- `c117_sequencial`: Sequencial
 
 ### Metricas atomicas
 
@@ -11176,446 +12181,7 @@ tags:
 
 ### Dimensoes
 
-- `j41_matric`: Matricula do imovel
-- `j41_promitipo`: C - com contrato S - Sem contrato V - Contrato Compra/Venda P - Possuior U - Usufrutuário R - Representante do Espólio I - Inventariante E - Escritura
-- `j41_tipopro`: Tipo do promitente, principal ou secundario.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j41_matric` -> `cadastro.iptubase` (j01_matric) [promitente_matric_fk]
-- `j41_numcgm` -> `protocolo.cgm` (z01_numcgm) [promitente_numcgm_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.propri`
-
-### Identidade
-
-- Nome humano: Cadastro dos outros proprietarios do imovel.
-- O que representa: Cadastro dos outros proprietarios do imovel
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j42_matric`
-  - `j42_numcgm`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j42_matric, j42_numcgm
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j42_matric`: Matricula do imovel
-- `j42_numcgm`: Codigo do contribuinte no CGM
-- `j42_tipo_contribuinte`: Preencher significado.
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j42_matric`: Matricula do imovel
-- `j42_numcgm`: Codigo do contribuinte no CGM
-- `j42_tipo_contribuinte`
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j42_matric` -> `cadastro.iptubase` (j01_matric) [propri_matric_fk]
-- `j42_numcgm` -> `protocolo.cgm` (z01_numcgm) [propri_numcgm_fk]
-- `j42_tipo_contribuinte, j42_tipo_contribuinte, j42_tipo_contribuinte` -> `cadastro.tipocontribuinte` (j147_sequencial, j147_sequencial, j147_sequencial) [tipocontribuinte_sequencial_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.ruas`
-
-### Identidade
-
-- Nome humano: Cadastro de todas as ruas e avenidas do municipio.
-- O que representa: Cadastro de todas as ruas e avenidas do municipio
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j14_codigo`
-- Coluna temporal: `j14_dtlei`
-- Candidatas a chave de negocio: j14_codigo, j14_tipo
-- Candidatas a coluna temporal: j14_dtlei
-
-### Colunas principais
-
-- `j14_bairro`: Bairro
-- `j14_codigo`: código do logradouro cadastrado no sistema
-- `j14_descnova`: Preencher significado.
-- `j14_dtlei`: Data Lei
-- `j14_lei`: Lei
-- `j14_nome`: Descricao do logradouro do municipio
-- `j14_obs`: Campo observação da tabela ruas
-- `j14_rural`: indica se a rua cadastrada é do meio Rural
-- `j14_tipo`: Tipo do logradouro (tabela ruastipo.j88_codigo) 1 - Não Informado - (NI) 2 - Alameda (AL) 3 - Rua (R) 4 - Avenida (AV) 5 - Travessa (TR) 6 - Outros (O) 7 - Praça (PRC) 8 - Rodovia (ROD) 9 - Beco (BC) 10 - Estrada (EST)
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j14_bairro`: Bairro
-- `j14_codigo`: código do logradouro cadastrado no sistema
-- `j14_dtlei`: Data Lei
-- `j14_tipo`: Tipo do logradouro (tabela ruastipo.j88_codigo) 1 - Não Informado - (NI) 2 - Alameda (AL) 3 - Rua (R) 4 - Avenida (AV) 5 - Travessa (TR) 6 - Outros (O) 7 - Praça (PRC) 8 - Rodovia (ROD) 9 - Beco (BC) 10 - Estrada (EST)
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j14_tipo` -> `cadastro.ruastipo` (j88_codigo) [ruas_tipo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.ruasbairro`
-
-### Identidade
-
-- Nome humano: Bairro da rua.
-- O que representa: Bairro da rua
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j16_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j16_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j16_bairro`: Código do bairro
-- `j16_codigo`: Código Sequencial do registro
-- `j16_lograd`: código do logradouro cadastrado no sistema
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j16_bairro`: Código do bairro
-- `j16_codigo`: Código Sequencial do registro
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j16_bairro` -> `cadastro.bairro` (j13_codi) [ruasbairro_bairro_fk]
-- `j16_lograd` -> `cadastro.ruas` (j14_codigo) [ruasbairro_lograd_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.ruascep`
-
-### Identidade
-
-- Nome humano: Cadastro dos ceps das ruas.
-- O que representa: Cadastro dos ceps das ruas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j29_codigo`
-  - `j29_inicio`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j29_cep, j29_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j29_cep`: Codigo do Cep atribuido pelo Correio
-- `j29_codigo`: Codigo da rua do arquivo ruas
-- `j29_final`: Numeracao Final do CEP
-- `j29_inicio`: Numeracao Inicial do Cep
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j29_cep`: Codigo do Cep atribuido pelo Correio
-- `j29_codigo`: Codigo da rua do arquivo ruas
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j29_codigo` -> `cadastro.ruas` (j14_codigo) [ruascep_codigo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.ruashistorico`
-
-### Identidade
-
-- Nome humano: Histórico das alterações do cadastro de ruas.
-- O que representa: Histórico das alterações do cadastro de ruas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j136_sequencial`
-- Coluna temporal: `j136_dataalteracao`
-- Candidatas a chave de negocio: j136_sequencial
-- Candidatas a coluna temporal: j136_dataalteracao, j136_datalei
-
-### Colunas principais
-
-- `j136_dataalteracao`: Data da alteração do nome do logradouro.
-- `j136_datalei`: Data da lei para alteração.
-- `j136_lei`: Lei que resolveu a alteração.
-- `j136_nomeanterior`: Nome do logradouro anterior a alteração.
-- `j136_ruas`: código do logradouro cadastrado no sistema
-- `j136_ruastipo`: Código do Tipo de Logradouro
-- `j136_sequencial`: Código sequencial do cadastro de alteração de ruas
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j136_dataalteracao`: Data da alteração do nome do logradouro.
-- `j136_datalei`: Data da lei para alteração.
-- `j136_ruastipo`: Código do Tipo de Logradouro
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j136_ruas` -> `cadastro.ruas` (j14_codigo) [ruashistorico_ruas_fk]
-- `j136_ruastipo` -> `cadastro.ruastipo` (j88_codigo) [ruashistorico_ruastipo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.ruastipo`
-
-### Identidade
-
-- Nome humano: Cadastro de Tipos de Logradouros (Rua, Avenida, Travessa, Viela, etc).
-- O que representa: Cadastro de Tipos de Logradouros (Rua, Avenida, Travessa, Viela, etc)
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j88_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j88_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j88_codigo`: Código do Tipo de Logradouro
-- `j88_descricao`: Descrição completa do Tipo de Logradouro
-- `j88_sigla`: Sigla do Tipo de Logradouro
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j88_codigo`: Código do Tipo de Logradouro
-- `j88_descricao`: Descrição completa do Tipo de Logradouro
-- `j88_sigla`: Sigla do Tipo de Logradouro
+- `c117_anousu`: Ano
 
 ### Filtros de negocio
 
@@ -11650,926 +12216,11 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.setor`
+## Tabela de negocio: `contabilidade.resumo_consulta_lancamento_manual`
 
 ### Identidade
 
-- Nome humano: Cadastro dos setores que identificao os lotes incluido no sistema.
-- O que representa: Cadastro dos setores que identificao os lotes incluido no sistema
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j30_codi`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j30_codi
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j30_alipre`: Aliquota para imóveis tipo predial
-- `j30_aliter`: Alíquota para ímóveis tipo territorial
-- `j30_codi`: Codigo que identifica um setor
-- `j30_descr`: Descricao do setor
-
-### Metricas atomicas
-
-- `j30_alipre`: Aliquota para imóveis tipo predial
-
-### Dimensoes
-
-- `j30_aliter`: Alíquota para ímóveis tipo territorial
-- `j30_codi`: Codigo que identifica um setor
-- `j30_descr`: Descricao do setor
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.setorfiscal`
-
-### Identidade
-
-- Nome humano: Setor Fiscal.
-- O que representa: Setor Fiscal
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j90_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j90_codigo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j90_codigo`: Codigo do setor fiscal
-- `j90_descr`: Descriçao do setor fiscal
-- `j90_valor`: Valor
-
-### Metricas atomicas
-
-- `j90_valor`: Valor
-
-### Dimensoes
-
-- `j90_codigo`: Codigo do setor fiscal
-- `j90_descr`: Descriçao do setor fiscal
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.setorfiscalvalor`
-
-### Identidade
-
-- Nome humano: Valores por ano dos setores fiscais de m2 terreno.
-- O que representa: Valores por ano dos setores fiscais de m2 terreno
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j82_codigo`
-- Coluna temporal: `j82_anousu`
-- Candidatas a chave de negocio: j82_codigo, j82_setorfiscal
-- Candidatas a coluna temporal: j82_anousu
-
-### Colunas principais
-
-- `j82_anousu`: Ano
-- `j82_codigo`: Codigo sequencial
-- `j82_setorfiscal`: Codigo do setor fiscal
-- `j82_valorterreno`: Valor m2 terreno
-
-### Metricas atomicas
-
-- `j82_valorterreno`: Valor m2 terreno
-
-### Dimensoes
-
-- `j82_anousu`: Ano
-- `j82_codigo`: Codigo sequencial
-- `j82_setorfiscal`: Codigo do setor fiscal
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j82_setorfiscal` -> `cadastro.setorfiscal` (j90_codigo) [setorfiscalvalor_setorfiscal_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.setorloc`
-
-### Identidade
-
-- Nome humano: setorloc.
-- O que representa: setorloc
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j05_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j05_codigo, j05_codigoproprio
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j05_codigo`: Código
-- `j05_codigoproprio`: Código do setor de localização
-- `j05_descr`: Descrição
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j05_codigo`: Código
-- `j05_codigoproprio`: Código do setor de localização
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.setorlocvalor`
-
-### Identidade
-
-- Nome humano: setorlocvalor.
-- O que representa: setorlocvalor
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: `j05_anousu`
-- Candidatas a chave de negocio: j05_sequencial
-- Candidatas a coluna temporal: j05_anousu
-
-### Colunas principais
-
-- `j05_anousu`: Anousu setorlocvalor
-- `j05_sequencial`: Sequencial da tanela setorlocvalor
-- `j05_setorloc`: Setor localização
-- `j05_valor`: Valor
-
-### Metricas atomicas
-
-- `j05_anousu`: Anousu setorlocvalor
-- `j05_sequencial`: Sequencial da tanela setorlocvalor
-- `j05_valor`: Valor
-
-### Dimensoes
-
-- `j05_setorloc`: Setor localização
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.setorregimovel`
-
-### Identidade
-
-- Nome humano: Setor do registro de imóveis.
-- O que representa: Setor do registro de imóveis
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j69_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j69_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j69_descr`: Descrição
-- `j69_sequencial`: Código sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- Preencher dimensoes de agrupamento/filtro.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.tesinter`
-
-### Identidade
-
-- Nome humano: Cadastro das testadas internas dos lotes.
-- O que representa: Cadastro das testadas internas dos lotes
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j39_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j39_idbql, j39_sequencial, j39_testle
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j39_idbql`: Codigo do lote no arquivo lote
-- `j39_orientacao`: Código
-- `j39_sequencial`: Código
-- `j39_testad`: Valor em metros lineares da testada interna.
-- `j39_testle`: Quantidades em metros lineares da testada
-
-### Metricas atomicas
-
-- `j39_testad`: Valor em metros lineares da testada interna.
-- `j39_testle`: Quantidades em metros lineares da testada
-
-### Dimensoes
-
-- `j39_idbql`: Codigo do lote no arquivo lote
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j39_idbql` -> `cadastro.lote` (j34_idbql) [tesinter_idbql_fk]
-- `j39_orientacao` -> `cadastro.orientacao` (j64_sequencial) [tesinter_orientacao_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.tesinterlote`
-
-### Identidade
-
-- Nome humano: Ligacao da tabela lote com tesinter.
-- O que representa: Ligacao da tabela lote com tesinter
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j69_tesinter`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j69_idbql, j69_tesinter
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j69_idbql`: Codigo de identificacao do lote
-- `j69_tesinter`: Codigo
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j69_idbql`: Codigo de identificacao do lote
-- `j69_tesinter`: Codigo
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j69_idbql` -> `cadastro.lote` (j34_idbql) [tesinterlote_idbql_fk]
-- `j69_tesinter` -> `cadastro.tesinter` (j39_sequencial) [tesinterlote_tesinter_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.tesinteroutros`
-
-### Identidade
-
-- Nome humano: tesinteroutros.
-- O que representa: tesinteroutros
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - Preencher.
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j84_tesinter, j84_tesintertipo
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j84_tesinter`: Codigo
-- `j84_tesintertipo`: Codigo sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j84_tesinter`: Codigo
-- `j84_tesintertipo`: Codigo sequencial
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j84_tesinter` -> `cadastro.tesinter` (j39_sequencial) [tesinteroutros_tesinter_fk]
-- `j84_tesintertipo` -> `cadastro.tesintertipo` (j92_sequencial) [tesinteroutros_tesintertipo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.tesintertipo`
-
-### Identidade
-
-- Nome humano: Cadastro de tipo de testadas internas.
-- O que representa: Cadastro de tipo de testadas internas
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j92_sequencial`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j92_sequencial
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j92_descr`: Descrição do tipo
-- `j92_sequencial`: Codigo sequencial
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j92_descr`: Descrição do tipo
-- `j92_sequencial`: Codigo sequencial
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.testada`
-
-### Identidade
-
-- Nome humano: Cadastro para identificar a testada dos lotes.
-- O que representa: Cadastro para identificar a testada dos lotes
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j36_idbql`
-  - `j36_face`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j36_codigo, j36_face, j36_idbql, j36_testle
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j36_codigo`: Codigo da rua do arquivos ruas
-- `j36_face`: Codigo da face de quadra
-- `j36_idbql`: Codigo de identificacao do lote no arquivo lote.
-- `j36_testad`: Valor em metros lineares da testada do lote
-- `j36_testle`: Valor em metros lineares da testada medida
-
-### Metricas atomicas
-
-- `j36_testad`: Valor em metros lineares da testada do lote
-- `j36_testle`: Valor em metros lineares da testada medida
-
-### Dimensoes
-
-- `j36_codigo`: Codigo da rua do arquivos ruas
-- `j36_face`: Codigo da face de quadra
-- `j36_idbql`: Codigo de identificacao do lote no arquivo lote.
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j36_codigo` -> `cadastro.ruas` (j14_codigo) [testada_codigo_fk]
-- `j36_idbql` -> `cadastro.lote` (j34_idbql) [testada_idbql_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.testadanumero`
-
-### Identidade
-
-- Nome humano: Numero do imovel.
-- O que representa: Numero do imovel
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j15_codigo`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j15_codigo, j15_face, j15_idbql
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j15_codigo`: Codigo sequencial
-- `j15_compl`: Complemento
-- `j15_face`: Codigo da face de quadra que identifica um setor, quadra e rua
-- `j15_idbql`: Codigo de identificacao do lote
-- `j15_numero`: Numero do imovel
-- `j15_obs`: Observacoes
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j15_codigo`: Codigo sequencial
-- `j15_face`: Codigo da face de quadra que identifica um setor, quadra e rua
-- `j15_idbql`: Codigo de identificacao do lote
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j15_idbql, j15_idbql, j15_face, j15_face` -> `cadastro.testada` (j36_face, j36_idbql, j36_face, j36_idbql) [testadanumero_idbql_face_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.testpri`
-
-### Identidade
-
-- Nome humano: Testada principal ou testadas principais.
-- O que representa: Testada principal ou testadas principais
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j49_idbql`
-  - `j49_face`
-- Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j49_codigo, j49_face, j49_idbql
-- Candidatas a coluna temporal: Nenhuma inferida automaticamente.
-
-### Colunas principais
-
-- `j49_codigo`: Codigo da rua no cadastro ruas
-- `j49_face`: Codigo da face de quadra
-- `j49_idbql`: Codigo de identificacao do Lote
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j49_codigo`: Codigo da rua no cadastro ruas
-- `j49_face`: Codigo da face de quadra
-- `j49_idbql`: Codigo de identificacao do Lote
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j49_codigo` -> `cadastro.ruas` (j14_codigo) [testpri_codigo_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.tipocontribuinte`
-
-### Identidade
-
-- Nome humano: cadastro.tipocontribuinte.
+- Nome humano: contabilidade.resumo_consulta_lancamento_manual.
 - O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
@@ -12581,16 +12232,425 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j147_sequencial`
+  - Preencher.
+- Coluna temporal: `c70_anousu`
+- Candidatas a chave de negocio: c160_codigo, c76_numcgm
+- Candidatas a coluna temporal: c70_anousu, c70_data
+
+### Colunas principais
+
+- `c02_instit`: Preencher significado.
+- `c160_codigo`: Preencher significado.
+- `c160_lote`: Preencher significado.
+- `c50_descr`: Preencher significado.
+- `c53_coddoc`: Preencher significado.
+- `c53_descr`: Preencher significado.
+- `c53_tipo`: Preencher significado.
+- `c69_codhist`: Preencher significado.
+- `c70_anousu`: Preencher significado.
+- `c70_codlan`: Preencher significado.
+- `c70_data`: Preencher significado.
+- `c70_valor`: Preencher significado.
+- `c72_complem`: Preencher significado.
+- `c73_coddot`: Preencher significado.
+- `c74_codrec`: Preencher significado.
+- `c75_numemp`: Preencher significado.
+- `c76_numcgm`: Preencher significado.
+- `credito`: Preencher significado.
+- `debito`: Preencher significado.
+- `recurso_credito`: Preencher significado.
+- `recurso_debito`: Preencher significado.
+- `tem_extorno`: Preencher significado.
+
+### Metricas atomicas
+
+- `c70_valor`
+
+### Dimensoes
+
+- `c160_codigo`
+- `c53_tipo`
+- `c70_anousu`
+- `c70_data`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- Nenhum relacionamento catalogado.
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.sagresarquivogerado`
+
+### Identidade
+
+- Nome humano: Arquivos gerados no SAGRES.
+- O que representa: Arquivos gerados no SAGRES
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c141_sequencial`
+- Coluna temporal: `c141_data`
+- Candidatas a chave de negocio: c141_codlayout, c141_sequencial
+- Candidatas a coluna temporal: c141_data
+
+### Colunas principais
+
+- `c141_codlayout`: Código de identificação do layout
+- `c141_data`: Data de execução
+- `c141_json`: JSON
+- `c141_nomearquivo`: Nome do arquivo
+- `c141_sequencial`: Sequencial
+- `c141_usuario`: Usuário
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c141_data`: Data de execução
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c141_usuario` -> `configuracoes.db_usuarios` (id_usuario) [sagresarquivogerado_usuario_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.sagresordenadordespesa`
+
+### Identidade
+
+- Nome humano: contabilidade.sagresordenadordespesa.
+- O que representa: Preencher em linguagem de negocio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c139_sequencial`
+- Coluna temporal: `c139_datafim`
+- Candidatas a chave de negocio: c139_datainatividade, c139_idusuario, c139_sequencial, c139_tipoatojuridico
+- Candidatas a coluna temporal: c139_datafim, c139_datafimsub, c139_datainatividade, c139_datainicio, c139_datainiciosub
+
+### Colunas principais
+
+- `c139_ativo`: Preencher significado.
+- `c139_cgm`: Preencher significado.
+- `c139_cgmsubstituto`: Preencher significado.
+- `c139_datafim`: Preencher significado.
+- `c139_datafimsub`: Preencher significado.
+- `c139_datainatividade`: Preencher significado.
+- `c139_datainicio`: Preencher significado.
+- `c139_datainiciosub`: Preencher significado.
+- `c139_idusuario`: Preencher significado.
+- `c139_instit`: Preencher significado.
+- `c139_principal`: Preencher significado.
+- `c139_sequencial`: Preencher significado.
+- `c139_substituto`: Preencher significado.
+- `c139_tipoatojuridico`: Preencher significado.
+- `c139_titulo`: Preencher significado.
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c139_datafim`
+- `c139_datafimsub`
+- `c139_datainatividade`
+- `c139_datainicio`
+- `c139_datainiciosub`
+- `c139_tipoatojuridico`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c139_instit` -> `configuracoes.db_config` (codigo) [sagresordenadordespesa_instit_fk]
+- `c139_cgm` -> `protocolo.cgm` (z01_numcgm) [sagresordenadordespesa_numcgm_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.sagresresponsavelunidadeorcamentaria`
+
+### Identidade
+
+- Nome humano: Responsável pela Unidade Orçamentária do SAGRES.
+- O que representa: Responsável pela Unidade Orçamentária do SAGRES
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c140_sequencial`
+- Coluna temporal: `c140_anousu`
+- Candidatas a chave de negocio: c140_datainatividade, c140_idusuario, c140_instit, c140_sequencial, c140_tipoatojuridico
+- Candidatas a coluna temporal: c140_anousu, c140_datafim, c140_datafimsub, c140_datainatividade, c140_datainicio
+
+### Colunas principais
+
+- `c140_anousu`: Campo anousu
+- `c140_ativo`: Ativo
+- `c140_cgm`: CGM
+- `c140_cgmsubstituto`: CGM Substituto
+- `c140_datafim`: Data fim
+- `c140_datafimsub`: Data Fim Substituto
+- `c140_datainatividade`: Data de inativação
+- `c140_datainicio`: Data Inicio
+- `c140_datainiciosub`: Data Substituto
+- `c140_idusuario`: Identificação do usuário
+- `c140_instit`: Codigo Instituição
+- `c140_orgao`: Código do Órgão
+- `c140_principal`: Responsável Principal
+- `c140_sequencial`: Sequencial
+- `c140_substituto`: Responsável Substituto
+- `c140_tipoatojuridico`: Tipo ato juridico
+- `c140_unidade`: Código da Unidade
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c140_anousu`: Campo anousu
+- `c140_datafim`: Data fim
+- `c140_datafimsub`: Data Fim Substituto
+- `c140_datainatividade`: Data de inativação
+- `c140_datainicio`: Data Inicio
+- `c140_datainiciosub`: Data Substituto
+- `c140_instit`: Codigo Instituição
+- `c140_tipoatojuridico`: Tipo ato juridico
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c140_instit` -> `configuracoes.db_config` (codigo) [sagresresponsavelunidadeorcamentaria_instit_fk]
+- `c140_cgm` -> `protocolo.cgm` (z01_numcgm) [sagresresponsavelunidadeorcamentaria_numcgm_fk]
+- `c140_anousu, c140_anousu, c140_orgao, c140_orgao` -> `orcamento.orcorgao` (o40_orgao, o40_anousu, o40_orgao, o40_anousu) [sagresresponsavelunidadeorcamentaria_orgao_fk]
+- `c140_anousu, c140_anousu, c140_anousu, c140_orgao, c140_orgao, c140_orgao, c140_unidade, c140_unidade, c140_unidade` -> `orcamento.orcunidade` (o41_unidade, o41_orgao, o41_anousu, o41_orgao, o41_anousu, o41_unidade, o41_anousu, o41_orgao, o41_unidade) [sagresresponsavelunidadeorcamentaria_unidade_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.siconfidotacaofinalidade`
+
+### Identidade
+
+- Nome humano: siconfidotacaofinalidade.
+- O que representa: siconfidotacaofinalidade
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c119_sequencial`
+- Coluna temporal: `c119_anousu`
+- Candidatas a chave de negocio: c119_sequencial, c119_tipo
+- Candidatas a coluna temporal: c119_anousu
+
+### Colunas principais
+
+- `c119_anousu`: Ano da Dotação
+- `c119_coddot`: Código da Dotação
+- `c119_sequencial`: Código Sequencial
+- `c119_tipo`: Tipo de Finalidade
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `c119_anousu`: Ano da Dotação
+- `c119_tipo`: Tipo de Finalidade
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c119_anousu, c119_anousu, c119_coddot, c119_coddot` -> `orcamento.orcdotacao` (o58_coddot, o58_anousu, o58_anousu, o58_coddot) [siconfidotacaofinalidade_dotacao_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.sigfiscgmprocesso`
+
+### Identidade
+
+- Nome humano: sigfiscgmprocesso.
+- O que representa: sigfiscgmprocesso
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - Preencher.
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j147_sequencial
+- Candidatas a chave de negocio: sp01_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j147_ativo`: Preencher significado.
-- `j147_descricao`: Preencher significado.
-- `j147_sequencial`: Preencher significado.
+- `sp01_cgm`: Campo cgm da tabela sigfiscgmprocesso
+- `sp01_fornecedor`: campo fornecedor da tabela sigfiscgmprocesso
+- `sp01_sequencial`: Sequencial da tabela sigfiscgmprocesso
 
 ### Metricas atomicas
 
@@ -12633,12 +12693,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.tipoisen`
+## Tabela de negocio: `contabilidade.sigfisunidadegestora`
 
 ### Identidade
 
-- Nome humano: Cadastro dos Tipos de Isencao.
-- O que representa: Cadastro dos Tipos de Isencao
+- Nome humano: contabilidade.sigfisunidadegestora.
+- O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -12649,18 +12709,19 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j45_tipo`
+  - `c179_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: j45_obscertidao, j45_tipis
+- Candidatas a chave de negocio: c179_codigo, c179_codigofolha, c179_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j45_descr`: Descrição da isenção cadastrada
-- `j45_obscertidao`: Observação certidão
-- `j45_taxas`: Se campo falso, o sistema pede para ver quais as taxas a serem isentas e se verdadeiro o sistema isenta todas as taxas
-- `j45_tipis`: Tipo da Isenção - 0 - Isento 1 - Imune 2 - nao incidente
-- `j45_tipo`: Código do tipo de isenção
+- `c179_cgmordenadordespesa`: Preencher significado.
+- `c179_codigo`: Preencher significado.
+- `c179_codigofolha`: Preencher significado.
+- `c179_instit`: Preencher significado.
+- `c179_responsavelfolha`: Preencher significado.
+- `c179_sequencial`: Preencher significado.
 
 ### Metricas atomicas
 
@@ -12668,8 +12729,237 @@ tags:
 
 ### Dimensoes
 
-- `j45_tipis`: Tipo da Isenção - 0 - Isento 1 - Imune 2 - nao incidente
-- `j45_tipo`: Código do tipo de isenção
+- `c179_codigo`
+- `c179_codigofolha`
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c179_cgmordenadordespesa` -> `protocolo.cgm` (z01_numcgm) [contabilidade_sigfisunidadegestora_c179_cgmordenadordespesa_for]
+- `c179_instit` -> `configuracoes.db_config` (codigo) [contabilidade_sigfisunidadegestora_c179_instit_foreign]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.taborcvinculodeducao`
+
+### Identidade
+
+- Nome humano: taborcvinculodeducao.
+- O que representa: taborcvinculodeducao
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `k164_sequencial`
+- Coluna temporal: `k164_anousu`
+- Candidatas a chave de negocio: k164_sequencial
+- Candidatas a coluna temporal: k164_anousu
+
+### Colunas principais
+
+- `k164_anousu`: Ano da receita
+- `k164_sequencial`: Código Sequencial
+- `k164_taborcdeducao`: Código da Receita de deducao
+- `k164_taborcprincipal`: Código da Receita Principal
+
+### Metricas atomicas
+
+- Preencher apenas se houver coluna numerica com significado de negocio.
+
+### Dimensoes
+
+- `k164_anousu`: Ano da receita
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `k164_taborcprincipal, k164_taborcprincipal, k164_anousu, k164_anousu` -> `caixa.taborc` (k02_codigo, k02_anousu, k02_anousu, k02_codigo) [taborcvinculodeducao_taborcprincipal_ae_fk]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.teto_orcamentario`
+
+### Identidade
+
+- Nome humano: Teto Orçamentário.
+- O que representa: Teto Orçamentário
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - `c40_sequencial`
+  - `c40_ano`
+- Coluna temporal: `c40_ano`
+- Candidatas a chave de negocio: c40_identificador_uso, c40_sequencial, c40_unidade
+- Candidatas a coluna temporal: c40_ano
+
+### Colunas principais
+
+- `c40_ano`: Ano
+- `c40_especificacao_fonte`: Especificação da Fonte
+- `c40_grupo_fonte_recursos`: Grupo de Fonte de Recursos
+- `c40_grupo_natureza_despesa`: Grupo da Natureza da Despesa
+- `c40_identificador_uso`: Identificador de Uso
+- `c40_orgao`: Órgão
+- `c40_sequencial`: Sequencial
+- `c40_tipo_detalhamento`: Tipo de Detalhamento
+- `c40_unidade`: Unidade
+- `c40_valor_disponivel`: Valos Disponível
+- `c40_valor_teto`: Valor do Teto
+
+### Metricas atomicas
+
+- `c40_valor_disponivel`: Valos Disponível
+- `c40_valor_teto`: Valor do Teto
+
+### Dimensoes
+
+- `c40_ano`: Ano
+- `c40_grupo_fonte_recursos`: Grupo de Fonte de Recursos
+- `c40_grupo_natureza_despesa`: Grupo da Natureza da Despesa
+- `c40_tipo_detalhamento`: Tipo de Detalhamento
+
+### Filtros de negocio
+
+- Preencher filtros obrigatorios ou comuns.
+
+### Regra de contagem
+
+- Definir o que uma linha representa antes de contar.
+- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
+
+### Regra de agregacao
+
+- Preencher como somar, contar ou agrupar sem mudar o grao.
+
+### Relacionamentos importantes
+
+- `c40_ano, c40_ano, c40_orgao, c40_orgao` -> `orcamento.orcorgao` (o40_anousu, o40_orgao, o40_anousu, o40_orgao) [teto_orcamentario_c40_ano_fkey]
+- `c40_ano, c40_ano, c40_ano, c40_orgao, c40_orgao, c40_orgao, c40_unidade, c40_unidade, c40_unidade` -> `orcamento.orcunidade` (o41_orgao, o41_anousu, o41_unidade, o41_orgao, o41_unidade, o41_anousu, o41_orgao, o41_unidade, o41_anousu) [teto_orcamentario_c40_ano_fkey1]
+
+### Regras de negocio existentes no catalogo
+
+- Preencher regras validadas por pessoa de negocio.
+
+### Riscos de duplicidade
+
+- Preencher onde joins podem multiplicar linhas ou valores.
+
+### O que nao inferir
+
+- Nao inferir regra de negocio apenas pelo nome tecnico.
+
+### Cuidados
+
+- Preencher ambiguidades, excecoes e limites conhecidos.
+
+## Tabela de negocio: `contabilidade.v_resumo_saldo_empenho`
+
+### Identidade
+
+- Nome humano: contabilidade.v_resumo_saldo_empenho.
+- O que representa: Preencher em linguagem de negocio.
+- Quando usar:
+  - Preencher com perguntas/casos de negocio.
+- Quando evitar:
+  - Preencher com tabelas ou cenarios mais adequados.
+
+### Grao e chaves
+
+- Grao: Preencher.
+- Entidade principal: Preencher.
+- Chave de negocio:
+  - Preencher.
+- Coluna temporal: `c70_data`
+- Candidatas a chave de negocio: valor_liquidado
+- Candidatas a coluna temporal: c70_data, e60_anousu
+
+### Colunas principais
+
+- `c70_data`: Preencher significado.
+- `e60_anousu`: Preencher significado.
+- `e60_instit`: Preencher significado.
+- `e60_numemp`: Preencher significado.
+- `valor_anulado`: Preencher significado.
+- `valor_empenhado`: Preencher significado.
+- `valor_liquidado`: Preencher significado.
+- `valor_pago`: Preencher significado.
+
+### Metricas atomicas
+
+- `valor_anulado`
+- `valor_empenhado`
+- `valor_liquidado`
+- `valor_pago`
+
+### Dimensoes
+
+- `c70_data`
+- `e60_anousu`
 
 ### Filtros de negocio
 
@@ -12704,12 +12994,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.zonafator`
+## Tabela de negocio: `contabilidade.vinculoeventoscontabeis`
 
 ### Identidade
 
-- Nome humano: Zona Fator.
-- O que representa: Zona Fator
+- Nome humano: Vinculo dos eventos contábeis.
+- O que representa: Vinculo dos eventos contábeis
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -12720,156 +13010,16 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j110_sequencial`
-- Coluna temporal: `j110_anousu`
-- Candidatas a chave de negocio: j110_sequencial
-- Candidatas a coluna temporal: j110_anousu
-
-### Colunas principais
-
-- `j110_anousu`: Campo Ano Uso
-- `j110_fator`: Campo Fator
-- `j110_sequencial`: Campo Sequencial
-- `j110_zona`: Campo Zona
-
-### Metricas atomicas
-
-- Preencher apenas se houver coluna numerica com significado de negocio.
-
-### Dimensoes
-
-- `j110_anousu`: Campo Ano Uso
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j110_zona` -> `cadastro.zonas` (j50_zona) [zonafator_zona_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.zonafatorarea`
-
-### Identidade
-
-- Nome humano: Zona Fator Area.
-- O que representa: Zona Fator Area
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j113_sequencial`
-- Coluna temporal: `j113_anousu`
-- Candidatas a chave de negocio: j113_sequencial
-- Candidatas a coluna temporal: j113_anousu
-
-### Colunas principais
-
-- `j113_anousu`: Ano Usu
-- `j113_areafim`: Area Final
-- `j113_areaini`: Area Inicial
-- `j113_fator`: Campo Fator
-- `j113_sequencial`: Campo Sequencial
-- `j113_zona`: Campo Zona
-
-### Metricas atomicas
-
-- `j113_areafim`: Area Final
-- `j113_areaini`: Area Inicial
-
-### Dimensoes
-
-- `j113_anousu`: Ano Usu
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j113_zona` -> `cadastro.zonas` (j50_zona) [zonafatorarea_zona_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.zonas`
-
-### Identidade
-
-- Nome humano: Zonas fiscais.
-- O que representa: Zonas fiscais
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j50_zona`
+  - `c115_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a chave de negocio: c115_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j50_descr`: Descrição da zona fiscal
-- `j50_zona`: Código da zona fiscai
+- `c115_conhistdocestorno`: Histórico de lançamentos de estorno
+- `c115_conhistdocinclusao`: Histórico de lançamentos de inclusão
+- `c115_sequencial`: Sequencial da tabela vinculoeventoscontabeis
 
 ### Metricas atomicas
 
@@ -12894,7 +13044,8 @@ tags:
 
 ### Relacionamentos importantes
 
-- Nenhum relacionamento catalogado.
+- `c115_conhistdocestorno` -> `contabilidade.conhistdoc` (c53_coddoc) [vinculoeventoscontabeis_conhistdocestorno_fk]
+- `c115_conhistdocinclusao` -> `contabilidade.conhistdoc` (c53_coddoc) [vinculoeventoscontabeis_conhistdocinclusao_fk]
 
 ### Regras de negocio existentes no catalogo
 
@@ -12912,12 +13063,12 @@ tags:
 
 - Preencher ambiguidades, excecoes e limites conhecidos.
 
-## Tabela de negocio: `cadastro.zonasaliq`
+## Tabela de negocio: `contabilidade.visaocontacorrente`
 
 ### Identidade
 
-- Nome humano: Aliquotas por zona.
-- O que representa: Aliquotas por zona
+- Nome humano: contabilidade.visaocontacorrente.
+- O que representa: Preencher em linguagem de negocio.
 - Quando usar:
   - Preencher com perguntas/casos de negocio.
 - Quando evitar:
@@ -12928,21 +13079,21 @@ tags:
 - Grao: Preencher.
 - Entidade principal: Preencher.
 - Chave de negocio:
-  - `j70_zona`
+  - `c131_sequencial`
 - Coluna temporal: Preencher.
-- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
+- Candidatas a chave de negocio: c131_sequencial
 - Candidatas a coluna temporal: Nenhuma inferida automaticamente.
 
 ### Colunas principais
 
-- `j70_alipre`: Aliquota predial
-- `j70_aliter`: Aliquota territorial
-- `j70_zona`: Código da zona fiscal
+- `c131_db_itensmenu`: Preencher significado.
+- `c131_filtros`: Preencher significado.
+- `c131_nome`: Preencher significado.
+- `c131_sequencial`: Preencher significado.
 
 ### Metricas atomicas
 
-- `j70_alipre`: Aliquota predial
-- `j70_aliter`: Aliquota territorial
+- Preencher apenas se houver coluna numerica com significado de negocio.
 
 ### Dimensoes
 
@@ -12963,227 +13114,7 @@ tags:
 
 ### Relacionamentos importantes
 
-- Nenhum relacionamento catalogado.
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.zonassetorvalor`
-
-### Identidade
-
-- Nome humano: Estrutura criada para armazenar valor por zona e setor.
-- O que representa: Estrutura criada para armazenar valor por zona e setor
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j141_anousu`
-  - `j141_zonas`
-  - `j141_setor`
-- Coluna temporal: `j141_anousu`
-- Candidatas a chave de negocio: j141_sequencial
-- Candidatas a coluna temporal: j141_anousu
-
-### Colunas principais
-
-- `j141_anousu`: Ano de execício
-- `j141_sequencial`: Sequencial da tabela zonasetorvalor
-- `j141_setor`: Código do setor
-- `j141_valorm2`: Valor do metro quadrado
-- `j141_valorminimo`: Valor mínimo
-- `j141_zonas`: Código da zona
-
-### Metricas atomicas
-
-- `j141_sequencial`: Sequencial da tabela zonasetorvalor
-- `j141_valorm2`: Valor do metro quadrado
-- `j141_valorminimo`: Valor mínimo
-
-### Dimensoes
-
-- `j141_anousu`: Ano de execício
-- `j141_setor`: Código do setor
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j141_setor` -> `cadastro.setor` (j30_codi) [zonassetorvalor_setor_fk]
-- `j141_zonas` -> `cadastro.zonas` (j50_zona) [zonassetorvalor_zonas_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.zonastaxa`
-
-### Identidade
-
-- Nome humano: Taxas por zona/ano.
-- O que representa: Taxas por zona/ano
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j57_zona`
-  - `j57_receit`
-  - `j57_anousu`
-- Coluna temporal: `j57_anousu`
-- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
-- Candidatas a coluna temporal: j57_anousu, j57_valor
-
-### Colunas principais
-
-- `j57_anousu`: Ano
-- `j57_receit`: Código da Receita
-- `j57_valor`: Valor da taxa para determinada receita e para determinado ano.
-- `j57_zona`: Código da zona fiscai
-
-### Metricas atomicas
-
-- `j57_valor`: Valor da taxa para determinada receita e para determinado ano.
-
-### Dimensoes
-
-- `j57_anousu`: Ano
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j57_receit` -> `caixa.tabrec` (k02_codigo) [zonastaxa_receit_fk]
-- `j57_zona` -> `cadastro.zonas` (j50_zona) [zonastaxa_zona_fk]
-
-### Regras de negocio existentes no catalogo
-
-- Preencher regras validadas por pessoa de negocio.
-
-### Riscos de duplicidade
-
-- Preencher onde joins podem multiplicar linhas ou valores.
-
-### O que nao inferir
-
-- Nao inferir regra de negocio apenas pelo nome tecnico.
-
-### Cuidados
-
-- Preencher ambiguidades, excecoes e limites conhecidos.
-
-## Tabela de negocio: `cadastro.zonasvalor`
-
-### Identidade
-
-- Nome humano: Valores por zona fiscal e por ano.
-- O que representa: Valores por zona fiscal e por ano
-- Quando usar:
-  - Preencher com perguntas/casos de negocio.
-- Quando evitar:
-  - Preencher com tabelas ou cenarios mais adequados.
-
-### Grao e chaves
-
-- Grao: Preencher.
-- Entidade principal: Preencher.
-- Chave de negocio:
-  - `j51_zona`
-  - `j51_anousu`
-- Coluna temporal: `j51_anousu`
-- Candidatas a chave de negocio: Nenhuma inferida automaticamente.
-- Candidatas a coluna temporal: j51_anousu
-
-### Colunas principais
-
-- `j51_anousu`: Exercício
-- `j51_valorm2c`: Valor do metro quadrado da construção
-- `j51_valorm2t`: Valor do Terreno por metro quadrado.
-- `j51_zona`: Código de Zona Fiscal
-
-### Metricas atomicas
-
-- `j51_valorm2c`: Valor do metro quadrado da construção
-- `j51_valorm2t`: Valor do Terreno por metro quadrado.
-
-### Dimensoes
-
-- `j51_anousu`: Exercício
-
-### Filtros de negocio
-
-- Preencher filtros obrigatorios ou comuns.
-
-### Regra de contagem
-
-- Definir o que uma linha representa antes de contar.
-- Se houver join que multiplique o grao, usar contagem distinta pela chave de negocio.
-
-### Regra de agregacao
-
-- Preencher como somar, contar ou agrupar sem mudar o grao.
-
-### Relacionamentos importantes
-
-- `j51_zona` -> `cadastro.zonas` (j50_zona) [zonasvalor_zona_fk]
+- `c131_db_itensmenu` -> `configuracoes.db_itensmenu` (id_item) [visaocontacorrente_db_itensmenu_fk]
 
 ### Regras de negocio existentes no catalogo
 
