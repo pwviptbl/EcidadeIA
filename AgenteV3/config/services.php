@@ -35,4 +35,19 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Servidor MCP (Model Context Protocol)
+    |--------------------------------------------------------------------------
+    |
+    | Configurações de conexão com o servidor MCP do e-Cidade.
+    | O McpClient utiliza estes valores via config() em runtime.
+    |
+    */
+
+    'mcp' => [
+        'url' => env('MCP_SERVER_URL', 'http://host.docker.internal:8010/mcp'),
+        'timeout' => (int) env('MCP_TIMEOUT', 30),
+    ],
+
 ];

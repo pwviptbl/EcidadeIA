@@ -3,7 +3,12 @@
 namespace App\Services\Agent;
 
 use App\Events\AgentStepStreamed;
+use App\Services\Mcp\McpClient;
+use App\Tools\McpCatalogRagSearchTool;
+use App\Tools\McpDescribeTableTool;
 use App\Tools\McpExecutionTool;
+use App\Tools\McpListSchemasTool;
+use App\Tools\McpRelationshipsTool;
 use App\Tools\RagSearchTool;
 use Prism\Prism\Facades\Prism;
 use Prism\Prism\Enums\Provider;
@@ -16,6 +21,12 @@ use Illuminate\Support\Str;
 
 class Orchestrator
 {
+    public function __construct(
+        private readonly McpClient $mcpClient,
+        private readonly AgentPreflightPlanner $preflightPlanner
+    ) {
+    }
+
     /**
      * Executa a pergunta do usuário no loop agentivo do Prism com suporte a streaming de passos via WebSockets.
      *
@@ -36,12 +47,44 @@ class Orchestrator
         ]);
 
         $messages     = $this->buildMessageHistory($sessionId, $question);
-        $tools        = [new RagSearchTool(), new McpExecutionTool()];
+        $tools        = $this->buildTools();
         $steps        = [];
         $executedSqls = [];
         $maxSteps     = 15;
         $currentStep  = 1;
         $finalText    = '';
+        $circuitBreaker = new CircuitBreaker((int) env('AGENT_CIRCUIT_BREAKER_LIMIT', 3));
+
+        $preflight = $this->preflightPlanner->plan($question);
+        $preflightStep = $this->buildPreflightStep($preflight, $currentStep);
+        $steps[] = $preflightStep;
+        event(new AgentStepStreamed($sessionId, $this->buildBroadcastStep($preflightStep)));
+        $currentStep++;
+
+        if (! $preflight['approved']) {
+            $finalText = (string) $preflight['answer_if_blocked'];
+
+            \App\Models\AgentConversation::create([
+                'session_id' => $sessionId,
+                'question'   => $question,
+                'response'   => $finalText,
+                'sql_used'   => null,
+            ]);
+
+            return [
+                'session_id' => $sessionId,
+                'response'   => $finalText,
+                'sql_used'   => null,
+                'steps'      => $steps,
+            ];
+        }
+
+        $messages[] = new AssistantMessage((string) $preflight['context']);
+        $messages[] = new UserMessage(
+            "Continue a pergunta original usando o PREFLIGHT_AGENTICO aprovado. "
+            . "Gere SQL somente se respeitar o query_spec, as evidências e a crítica pré-SQL. "
+            . "Depois da execução, responda apenas com base nas linhas retornadas."
+        );
 
         while ($currentStep <= $maxSteps) {
             Log::info("Orchestrator: Passo {$currentStep}.", ['session_id' => $sessionId]);
@@ -70,7 +113,7 @@ class Orchestrator
 
             if ($lastStep->finishReason->value === 'tool-calls') {
                 [$toolResults, $stepData] = $this->executeToolCalls(
-                    $lastStep, $tools, $stepData, $executedSqls, $sessionId
+                    $lastStep, $tools, $stepData, $executedSqls, $sessionId, $circuitBreaker
                 );
 
                 $steps[] = $stepData;
@@ -115,6 +158,66 @@ class Orchestrator
     // ─────────────────────────────────────────────────────────────────────────
 
     /**
+     * Monta as ferramentas disponíveis para o loop ReAct.
+     *
+     * Mantém `rag_search` por compatibilidade com o prompt atual, mas expõe
+     * também as ferramentas MCP estruturadas para catálogo, metadados e joins.
+     *
+     * @return array<int, object>
+     */
+    private function buildTools(): array
+    {
+        return [
+            new RagSearchTool($this->mcpClient),
+            new McpCatalogRagSearchTool($this->mcpClient),
+            new McpListSchemasTool($this->mcpClient),
+            new McpDescribeTableTool($this->mcpClient),
+            new McpRelationshipsTool($this->mcpClient),
+            new McpExecutionTool($this->mcpClient),
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $preflight
+     * @return array<string, mixed>
+     */
+    private function buildPreflightStep(array $preflight, int $stepCount): array
+    {
+        $plan = $preflight['plan'] ?? [];
+        $approved = (bool) ($preflight['approved'] ?? false);
+        $answerOnly = (bool) ($plan['answer_only'] ?? false);
+
+        $summary = match (true) {
+            $approved => 'Preflight agentico aprovado.',
+            $answerOnly => 'Preflight identificou dúvida de conhecimento e desativou SQL.',
+            default => 'Preflight agentico bloqueou a execução SQL.',
+        };
+
+        return [
+            'text' => $summary . "\n\n"
+                . json_encode($plan, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+            'finishReason' => $approved ? 'preflight-approved' : ($answerOnly ? 'preflight-answer-only' : 'preflight-blocked'),
+            'toolCalls' => [
+                [
+                    'name' => 'preflight_router_queryspec_critic',
+                    'arguments' => ['question' => $preflight['question'] ?? null],
+                ],
+            ],
+            'toolResults' => [
+                [
+                    'tool_name' => 'preflight_router_queryspec_critic',
+                    'result' => json_encode([
+                        'approved' => $approved,
+                        'evidence_count' => count((array) ($preflight['evidence'] ?? [])),
+                        'answer_if_blocked' => $preflight['answer_if_blocked'] ?? null,
+                    ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
+                ],
+            ],
+            'stepCount' => $stepCount,
+        ];
+    }
+
+    /**
      * Monta o histórico de mensagens da sessão + a pergunta atual.
      *
      * @return array<int, UserMessage|AssistantMessage>
@@ -155,7 +258,8 @@ class Orchestrator
         array $tools,
         array $stepData,
         array &$executedSqls,
-        string $sessionId
+        string $sessionId,
+        CircuitBreaker $circuitBreaker
     ): array {
         $toolResults = [];
 
@@ -184,6 +288,14 @@ class Orchestrator
                 $resultText = 'Erro na execução da ferramenta: ' . $e->getMessage();
             }
 
+            $resultText = $this->applyCircuitBreaker(
+                $circuitBreaker,
+                $toolCall->name,
+                $toolCall->arguments(),
+                $resultText,
+                $sessionId
+            );
+
             $toolResults[] = new ToolResult(
                 toolCallId:       $toolCall->id,
                 toolName:         $toolCall->name,
@@ -196,6 +308,69 @@ class Orchestrator
         $stepData['toolResults'] = $this->truncateToolResultsForDashboard($toolResults);
 
         return [$toolResults, $stepData];
+    }
+
+    /**
+     * Registra o resultado de uma tool no circuit breaker e devolve orientação
+     * explícita para o modelo quando ele estiver repetindo a mesma falha.
+     *
+     * @param array<string, mixed> $arguments
+     */
+    private function applyCircuitBreaker(
+        CircuitBreaker $circuitBreaker,
+        string $toolName,
+        array $arguments,
+        string $resultText,
+        string $sessionId
+    ): string {
+        if (! $this->isToolError($resultText)) {
+            $circuitBreaker->recordSuccess();
+            return $resultText;
+        }
+
+        $circuitBreaker->recordError($toolName, $resultText, $arguments);
+
+        if (! $circuitBreaker->shouldBreak()) {
+            return $resultText;
+        }
+
+        $summary = $circuitBreaker->getErrorSummary();
+        $strategy = $circuitBreaker->getSuggestedStrategy();
+
+        Log::warning('Orchestrator: Circuit breaker acionado.', [
+            'session_id' => $sessionId,
+            'tool' => $toolName,
+            'summary' => $summary,
+            'strategy' => $strategy,
+        ]);
+
+        return $resultText
+            . "\n\n[ORIENTACAO_DO_ORQUESTRADOR]\n"
+            . "A mesma falha se repetiu em chamadas recentes. Pare de repetir a mesma ferramenta com os mesmos pressupostos.\n"
+            . "Estratégia sugerida: {$strategy}\n"
+            . "Antes de tentar nova execução SQL, refaça a rota, consulte evidências alternativas e revise o query_spec.";
+    }
+
+    /**
+     * Detecta falhas retornadas por tools em texto ou JSON.
+     */
+    private function isToolError(string $resultText): bool
+    {
+        $lower = strtolower($resultText);
+
+        return str_contains($lower, '"error":true')
+            || str_contains($lower, '"error": true')
+            || str_contains($lower, 'erro na execução')
+            || str_contains($lower, 'falha de comunicação')
+            || str_contains($lower, 'error executing tool')
+            || str_contains($lower, 'exception')
+            || str_contains($lower, 'sqlstate')
+            || str_contains($lower, 'undefined column')
+            || str_contains($lower, 'column does not exist')
+            || str_contains($lower, 'tabela fora do catalogo')
+            || str_contains($lower, 'fora do catalogo')
+            || str_contains($lower, 'allowlist')
+            || str_contains($lower, 'syntax error');
     }
 
     /**
@@ -350,9 +525,9 @@ Você opera sob um loop ReAct (Reasoning and Acting). Raciocine antes de agir e 
 
 ## SUAS DIRETRIZES DE OPERAÇÃO
 
-1. **Sempre consulte o RAG primeiro:** Use `rag_search` com termos de negócio da pergunta antes de escrever qualquer SQL. Se a busca retornar vazio, tente termos mais simples ou sinônimos técnicos.
+1. **Sempre consulte o catálogo/RAG primeiro:** Use `rag_search` ou `ecidade_catalog_rag_search` com termos de negócio da pergunta antes de escrever qualquer SQL. Se a busca retornar vazio, tente termos mais simples, sinônimos técnicos e nomes de tabelas prováveis.
 
-2. **Nunca suponha estrutura:** Não invente nomes de colunas ou schemas. Se não tiver certeza, use `ecidade_describe_table` ou `ecidade_catalog_search` para verificar.
+2. **Nunca suponha estrutura:** Não invente nomes de colunas ou schemas. Use `ecidade_list_schemas` para descobrir módulos disponíveis, `ecidade_describe_table` para confirmar colunas reais e `ecidade_get_relationships` para confirmar joins.
 
 3. **PROIBIDO consultar `information_schema` diretamente via SQL:** O SQL Guard bloqueará qualquer query que referencie `information_schema`. Para inspecionar colunas de uma tabela, use a ferramenta `ecidade_describe_table` do MCP.
 
@@ -366,6 +541,26 @@ Você opera sob um loop ReAct (Reasoning and Acting). Raciocine antes de agir e 
 6. **Responda em Português:** De forma técnica, clara e objetiva. Apresente os dados em tabela quando houver múltiplos registros. Informe a fonte dos dados (tabelas e critérios utilizados) nas notas técnicas.
 
 7. **SQL exibido na resposta = SQL que gerou os dados:** Nunca exiba ou mencione uma query que falhou ou foi usada apenas para inspeção de estrutura.
+
+---
+
+## FLUXO AGENTICO OBRIGATÓRIO
+
+Antes de chamar `mcp_execute_sql`, produza no texto do passo um plano curto com:
+
+- `rota`: conceito de negócio, domínio/schema provável e tabelas candidatas;
+- `evidências`: documentos, regras ou metadados usados;
+- `query_spec`: entidade principal, grão, medida, filtros obrigatórios, eixo temporal e joins;
+- `crítica pré-SQL`: por que as tabelas/joins/filtros são suficientes e quais lacunas permanecem.
+
+Se faltar ano, entidade, relacionamento ou regra de contagem para responder corretamente, não invente. Faça nova busca com termos alternativos ou explique a lacuna ao usuário antes de executar SQL.
+
+Para montar SQL, siga esta ordem:
+
+1. Use consulta validada do RAG/catálogo quando existir.
+2. Use relacionamentos confirmados por `ecidade_get_relationships`.
+3. Use colunas confirmadas por `ecidade_describe_table`.
+4. Só gere SQL livre quando o `query_spec` estiver coerente com as evidências disponíveis.
 PROMPT;
     }
 }
