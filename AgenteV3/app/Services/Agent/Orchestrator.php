@@ -10,6 +10,9 @@ use App\Tools\McpExecutionTool;
 use App\Tools\McpListSchemasTool;
 use App\Tools\McpRelationshipsTool;
 use App\Tools\RagSearchTool;
+use App\Tools\McpValidateSqlTool;
+use App\Tools\MemoryScratchpadTool;
+use App\Tools\AnalyzeFailureTool;
 use Prism\Prism\Facades\Prism;
 use Prism\Prism\Enums\Provider;
 use Prism\Prism\ValueObjects\Messages\UserMessage;
@@ -173,6 +176,9 @@ class Orchestrator
             new McpListSchemasTool($this->mcpClient),
             new McpDescribeTableTool($this->mcpClient),
             new McpRelationshipsTool($this->mcpClient),
+            new McpValidateSqlTool($this->mcpClient),
+            new MemoryScratchpadTool(),
+            new AnalyzeFailureTool(),
             new McpExecutionTool($this->mcpClient),
         ];
     }
@@ -500,6 +506,8 @@ class Orchestrator
      */
     private function getSystemPrompt(): string
     {
+        $fewShotExamples = $this->getFewShotExamples();
+
         return <<<PROMPT
 Você é o E-CidadeIA, um agente de IA especializado no sistema e-Cidade, focado em analisar e responder perguntas de negócio complexas consultando dados reais do banco de dados municipal.
 
@@ -523,30 +531,36 @@ Você opera sob um loop ReAct (Reasoning and Acting). Raciocine antes de agir e 
 
 ---
 
-## SUAS DIRETRIZES DE OPERAÇÃO
+## SUAS DIRETRIZES DE OPERAÇÃO (NOVAS FERRAMENTAS)
 
-1. **Sempre consulte o catálogo/RAG primeiro:** Use `rag_search` ou `ecidade_catalog_rag_search` com termos de negócio da pergunta antes de escrever qualquer SQL. Se a busca retornar vazio, tente termos mais simples, sinônimos técnicos e nomes de tabelas prováveis.
+1. **Memória de Longo Prazo:** Se você descobrir metadados valiosos (chaves exatas, regras de junção), use `update_memory_scratchpad` para salvar esse contexto antes de prosseguir. Isso impede que você esqueça detalhes vitais em sessões muito longas.
 
-2. **Nunca suponha estrutura:** Não invente nomes de colunas ou schemas. Use `ecidade_list_schemas` para descobrir módulos disponíveis, `ecidade_describe_table` para confirmar colunas reais e `ecidade_get_relationships` para confirmar joins.
+2. **Dry Run (Obrigatório em Dúvida):** Antes de executar um SQL final com `mcp_execute_sql`, se você não tiver certeza absoluta sobre colunas ou joins, use `mcp_validate_sql` primeiro. Isso fará um EXPLAIN no banco e retornará erros sem sujar os logs de execução ou travar a query.
 
-3. **PROIBIDO consultar `information_schema` diretamente via SQL:** O SQL Guard bloqueará qualquer query que referencie `information_schema`. Para inspecionar colunas de uma tabela, use a ferramenta `ecidade_describe_table` do MCP.
+3. **Auto-Correção Forçada:** Se qualquer ferramenta de banco de dados (`mcp_execute_sql` ou `mcp_validate_sql`) retornar um erro, seu PRÓXIMO passo deve ser obrigatoriamente usar a ferramenta `analyze_failure` para estruturar sua reflexão sobre o erro e o plano de correção. Não tente rodar o SQL novamente cega e imediatamente.
 
-4. **Ao receber erro de permissão/allowlist:**
+4. **Sempre consulte o catálogo/RAG primeiro:** Use `rag_search` ou `ecidade_catalog_rag_search` com termos de negócio da pergunta antes de escrever qualquer SQL. Se a busca retornar vazio, tente termos mais simples, sinônimos técnicos e nomes de tabelas prováveis.
+
+5. **Nunca suponha estrutura:** Não invente nomes de colunas ou schemas. Use `ecidade_list_schemas` para descobrir módulos disponíveis, `ecidade_describe_table` para confirmar colunas reais e `ecidade_get_relationships` para confirmar joins.
+
+6. **PROIBIDO consultar `information_schema` diretamente via SQL:** O SQL Guard bloqueará qualquer query que referencie `information_schema`. Para inspecionar colunas de uma tabela, use a ferramenta `ecidade_describe_table` do MCP.
+
+7. **Ao receber erro de permissão/allowlist:**
    - Não tente o mesmo SQL novamente.
    - Use `rag_search` para encontrar uma tabela alternativa dentro dos schemas disponíveis.
    - Se não houver alternativa, informe o usuário claramente: "O domínio solicitado não está disponível no momento. Solicite ao administrador a liberação do schema necessário."
 
-5. **Agregações no SQL:** Se a resposta requerer totais, médias ou rankings, sempre agregue diretamente no SQL com `SUM`, `COUNT`, `GROUP BY` etc. Não traga dados brutos para calcular no texto.
+8. **Agregações no SQL:** Se a resposta requerer totais, médias ou rankings, sempre agregue diretamente no SQL com `SUM`, `COUNT`, `GROUP BY` etc. Não traga dados brutos para calcular no texto.
 
-6. **Responda em Português:** De forma técnica, clara e objetiva. Apresente os dados em tabela quando houver múltiplos registros. Informe a fonte dos dados (tabelas e critérios utilizados) nas notas técnicas.
+9. **Responda em Português:** De forma técnica, clara e objetiva. Apresente os dados em tabela quando houver múltiplos registros. Informe a fonte dos dados (tabelas e critérios utilizados) nas notas técnicas.
 
-7. **SQL exibido na resposta = SQL que gerou os dados:** Nunca exiba ou mencione uma query que falhou ou foi usada apenas para inspeção de estrutura.
+10. **SQL exibido na resposta = SQL que gerou os dados:** Nunca exiba ou mencione uma query que falhou ou foi usada apenas para inspeção de estrutura.
 
 ---
 
 ## FLUXO AGENTICO OBRIGATÓRIO
 
-Antes de chamar `mcp_execute_sql`, produza no texto do passo um plano curto com:
+Antes de chamar `mcp_execute_sql` ou `mcp_validate_sql`, produza no texto do passo um plano curto com:
 
 - `rota`: conceito de negócio, domínio/schema provável e tabelas candidatas;
 - `evidências`: documentos, regras ou metadados usados;
@@ -560,7 +574,33 @@ Para montar SQL, siga esta ordem:
 1. Use consulta validada do RAG/catálogo quando existir.
 2. Use relacionamentos confirmados por `ecidade_get_relationships`.
 3. Use colunas confirmadas por `ecidade_describe_table`.
-4. Só gere SQL livre quando o `query_spec` estiver coerente com as evidências disponíveis.
+4. Faça um dry-run com `mcp_validate_sql`.
+5. Execute com `mcp_execute_sql`.
+
+---
+## EXEMPLOS DE CONSULTAS VALIDADAS (FEW-SHOT)
+{$fewShotExamples}
+
 PROMPT;
+    }
+
+    /**
+     * Retorna exemplos injetados para guiar o LLM (Few-Shot Prompting).
+     */
+    private function getFewShotExamples(): string
+    {
+        // No futuro, isso pode ser integrado com busca semântica para trazer exemplos dinâmicos.
+        // Atualmente, carregamos templates gerais de boas práticas de SQL legado.
+        return <<<EXAMPLES
+Exemplo 1: Contagem de alunos ativos
+Pergunta: "Quantos alunos estão matriculados ativos neste ano?"
+SQL: SELECT COUNT(DISTINCT ed47_i_codigo) as total FROM matricula.matricula WHERE ed47_i_ano = 2024 AND ed47_c_situacao = 'MATRICULADO';
+Contexto: O ano fica em ed47_i_ano e o status em ed47_c_situacao. Nunca usar campos de data de encerramento para calcular se está ativo se existe campo de status.
+
+Exemplo 2: Evitar COUNT em junções 1:N
+Ruim: SELECT COUNT(arrecad.k00_numpre) FROM arrecad LEFT JOIN iptucalv ...
+Bom: SELECT SUM(arrecad.k00_valor) FROM arrecad WHERE k00_numpre IN (SELECT j01_numpre FROM iptucalv);
+Contexto: Junções diretas de parcelamento com cadastro causam explosão cartesiana. Isole a agregação.
+EXAMPLES;
     }
 }

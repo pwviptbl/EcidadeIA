@@ -226,3 +226,23 @@ def ecidade_readonly_query(sql: str, limit: int = 1000, statement_timeout_ms: in
 
 if __name__ == "__main__":
     mcp.run(transport=MCP_TRANSPORT)
+
+@mcp.tool()
+def ecidade_validate_sql_explain(sql: str) -> dict[str, Any]:
+    """Executa um EXPLAIN na query para validar estaticamente se a sintaxe e as tabelas/colunas estao corretas antes da execucao real."""
+    log_event("tool.explain.start", {"sql": sql})
+    validated_sql = guard.validate(sql)
+    explain_sql = f"EXPLAIN {validated_sql}"
+    try:
+        payload = db.fetch_all(explain_sql)
+        result = {
+            "valid": True,
+            "explain_plan": payload["rows"]
+        }
+    except Exception as e:
+        result = {
+            "valid": False,
+            "error": str(e)
+        }
+    log_event("tool.explain.done", {"sql": validated_sql, "valid": result["valid"]})
+    return result
