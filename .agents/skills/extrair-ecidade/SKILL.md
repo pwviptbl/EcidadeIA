@@ -1,15 +1,19 @@
 ---
 name: extrair-ecidade
-description: Extrair consultas SQL e regras de negocio relevantes de arquivos PHP legados do e-Cidade e documenta-las em Markdown para o RAG do projeto. Usar quando o usuario informar uma classe, arquivo ou metodo do e-Cidade, como `classes/db_iptuConstr_classe.php` ou `sql_query_proprietario_nome`, e pedir para entender, registrar ou alimentar `knowledge/rag/*` com SQL, joins, filtros, parametros, cardinalidade, significado e cuidados de uso.
-
-O objetivo é ter informações suficientes para o agente poder usar o conhecimento para responder perguntas e tomar decisões. Para isso, as informações devem ser ricas para o agente entender a logica de negócio do sistema e como ele funciona com RAG.
-
-O foco é na regra de negocio para que a o agetnte seja capaz de criar seus proprios queries, o SQL é apenas um caminho rapido.
+description: >-
+  Extrair consultas SQL e regras de negocio relevantes de arquivos PHP legados
+  do e-Cidade e documenta-las em Markdown para o RAG do projeto.
 ---
 
 # Extrair e-Cidade
 
 Analisar codigo PHP do e-Cidade manualmente e transformar consultas relevantes em conhecimento auditavel para o agente. Nao criar script de extracao e nao executar SQL no banco.
+
+## Objetivo
+
+Ter informacoes suficientes para o agente usar o conhecimento para responder perguntas e tomar decisoes. Para isso, as informacoes devem ser ricas para o agente entender a logica de negocio do sistema e como ele funciona com RAG.
+
+O foco e na regra de negocio para que o agente seja capaz de criar suas proprias queries; o SQL e apenas um caminho rapido.
 
 ## Fluxo
 
