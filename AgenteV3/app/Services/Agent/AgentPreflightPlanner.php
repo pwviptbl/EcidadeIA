@@ -78,6 +78,19 @@ class AgentPreflightPlanner
         }
 
         $approved = $this->isApproved($plan);
+        $intent = data_get($plan, 'query_spec.intent');
+
+        if (! $approved && $intent === 'conhecimento') {
+            return [
+                'approved' => false,
+                'phase' => 'preflight-answer-only',
+                'question' => $question,
+                'evidence' => $evidence,
+                'plan' => $plan,
+                'context' => $this->buildContext($question, $plan, $evidence, false),
+                'answer_if_blocked' => $this->buildKnowledgeAnswer($question, $plan, $evidence),
+            ];
+        }
 
         return [
             'approved' => $approved,
@@ -157,6 +170,12 @@ class AgentPreflightPlanner
             'so duvida',
             'apenas dúvida',
             'apenas duvida',
+            'para que serve',
+            'o que faz',
+            'função da',
+            'funcao da',
+            'estrutura da',
+            'sobre a tabela',
         ];
 
         foreach ($answerOnlyHints as $hint) {
@@ -278,7 +297,7 @@ Contrato JSON:
   "selected_route_index": 0,
   "route_vote_reason": "por que a rota vencedora venceu",
   "query_spec": {
-    "intent": "ranking|contagem|soma|detalhamento|comparacao|desconhecido",
+    "intent": "ranking|contagem|soma|detalhamento|comparacao|conhecimento|desconhecido",
     "main_entity": "string",
     "grain": "string",
     "measure": "string|null",
@@ -305,6 +324,7 @@ Regras:
 - Se a pergunta exigir recorte temporal e ele não estiver explícito nem evidente, bloqueie e liste a lacuna.
 - Se houver risco de duplicidade por join, bloqueie ou exija regra de contagem/agregação.
 - Se as evidências forem fracas, gere search_repairs com consultas alternativas.
+- IMPORTANTE: Se a pergunta for sobre definições de tabela, finalidade, "para que serve" ou metadados, defina a intent como "conhecimento" e bloqueie o SQL (approved_for_sql: false).
 PROMPT;
     }
 
