@@ -49,7 +49,14 @@ class Orchestrator
             'session_id' => $sessionId,
         ]);
 
-        $messages     = $this->buildMessageHistory($sessionId, $question);
+        $limit   = (int) env('AGENT_MEMORY_LIMIT', 3);
+        $history = \App\Models\AgentConversation::where('session_id', $sessionId)
+            ->latest('id')
+            ->take($limit)
+            ->get()
+            ->reverse();
+
+        $messages     = $this->buildMessageHistoryFromCollection($history, $question);
         $tools        = $this->buildTools();
         $steps        = [];
         $executedSqls = [];
@@ -58,7 +65,7 @@ class Orchestrator
         $finalText    = '';
         $circuitBreaker = new CircuitBreaker((int) env('AGENT_CIRCUIT_BREAKER_LIMIT', 3));
 
-        $preflight = $this->preflightPlanner->plan($question);
+        $preflight = $this->preflightPlanner->plan($question, $history);
         $preflightStep = $this->buildPreflightStep($preflight, $currentStep);
         $steps[] = $preflightStep;
         event(new AgentStepStreamed($sessionId, $this->buildBroadcastStep($preflightStep)));
@@ -224,19 +231,13 @@ class Orchestrator
     }
 
     /**
-     * Monta o histórico de mensagens da sessão + a pergunta atual.
+     * Monta o histórico de mensagens da sessão + a pergunta atual a partir de uma coleção.
      *
+     * @param \Illuminate\Support\Collection $history
      * @return array<int, UserMessage|AssistantMessage>
      */
-    private function buildMessageHistory(string $sessionId, string $question): array
+    private function buildMessageHistoryFromCollection($history, string $question): array
     {
-        $limit   = (int) env('AGENT_MEMORY_LIMIT', 3);
-        $history = \App\Models\AgentConversation::where('session_id', $sessionId)
-            ->latest('id')
-            ->take($limit)
-            ->get()
-            ->reverse();
-
         $messages = [];
         foreach ($history as $interaction) {
             $messages[] = new UserMessage($interaction->question);

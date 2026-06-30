@@ -21,9 +21,9 @@ class AgentPreflightPlanner
      *
      * @return array<string, mixed>
      */
-    public function plan(string $question): array
+    public function plan(string $question, $history = []): array
     {
-        $evidence = $this->collectEvidence($question, $this->buildSearchQueries($question));
+        $evidence = $this->collectEvidence($question, $this->buildSearchQueries($question, $history));
         $answerOnly = $this->isAnswerOnlyQuestion($question);
 
         if (! $this->hasUsableEvidence($evidence)) {
@@ -66,14 +66,14 @@ class AgentPreflightPlanner
             ];
         }
 
-        $plan = $this->askPlanner($question, $evidence, []);
+        $plan = $this->askPlanner($question, $evidence, [], $history);
 
         if (! $this->isApproved($plan)) {
             $repairs = $this->repairQueries($plan);
             if (! empty($repairs)) {
                 $repairEvidence = $this->collectEvidence($question, $repairs);
                 $evidence = array_merge($evidence, $repairEvidence);
-                $plan = $this->askPlanner($question, $evidence, $repairs);
+                $plan = $this->askPlanner($question, $evidence, $repairs, $history);
             }
         }
 
@@ -104,9 +104,11 @@ class AgentPreflightPlanner
     }
 
     /**
+     * @param string $question
+     * @param mixed $history
      * @return array<int, string>
      */
-    private function buildSearchQueries(string $question): array
+    private function buildSearchQueries(string $question, $history = []): array
     {
         $normalized = strtolower($question);
         $queries = [$question];
@@ -124,6 +126,22 @@ class AgentPreflightPlanner
         foreach ($domainHints as $needle => $query) {
             if (str_contains($normalized, $needle)) {
                 $queries[] = $query;
+            }
+        }
+
+        // Se a pergunta tem pronomes demonstrativos ou refere-se a termos/entidades citadas anteriormente,
+        // buscamos números que representem IDs no histórico para enriquecer a busca.
+        $hasReference = preg_match('/\b(essa|esse|este|esta|daquela|daquele|dele|dela|referente|citad[oa]|anterior)\b/ui', $question);
+        if ($hasReference && ! empty($history)) {
+            $lastInteraction = is_array($history) ? end($history) : $history->last();
+            if ($lastInteraction) {
+                $textToScan = $lastInteraction->question . ' ' . $lastInteraction->response;
+                if (preg_match_all('/\b\d{4,8}\b/', $textToScan, $matches)) {
+                    foreach ($matches[0] as $num) {
+                        $queries[] = $num;
+                        $queries[] = $question . ' ' . $num;
+                    }
+                }
             }
         }
 
@@ -235,12 +253,14 @@ class AgentPreflightPlanner
     /**
      * @param array<int, array<string, mixed>> $evidence
      * @param array<int, string> $repairQueries
+     * @param mixed $history
      * @return array<string, mixed>
      */
-    private function askPlanner(string $question, array $evidence, array $repairQueries): array
+    private function askPlanner(string $question, array $evidence, array $repairQueries, $history = []): array
     {
         $payload = [
             'question' => $question,
+            'conversation_history' => $this->formatHistoryForPlanner($history),
             'repair_queries_used' => $repairQueries,
             'evidence' => array_slice($evidence, 0, 12),
         ];
@@ -272,6 +292,27 @@ class AgentPreflightPlanner
                 'search_repairs' => [],
             ];
         }
+    }
+
+    /**
+     * @param mixed $history
+     * @return array<int, array<string, string>>
+     */
+    private function formatHistoryForPlanner($history): array
+    {
+        $formatted = [];
+        if (empty($history)) {
+            return $formatted;
+        }
+
+        foreach ($history as $interaction) {
+            $formatted[] = [
+                'user' => $interaction->question,
+                'assistant' => $interaction->response,
+            ];
+        }
+
+        return $formatted;
     }
 
     private function plannerPrompt(): string
@@ -318,6 +359,7 @@ Contrato JSON:
 }
 
 Regras:
+- Utilize o histórico da conversa (`conversation_history`) para resolver pronomes e referências (como "essa inscrição", "aquele cgm", etc.) contidos na pergunta atual. Se um número de inscrição ou matrícula foi fornecido em turnos anteriores e a pergunta atual se refere a ele ("essa", "dele", etc.), preencha a informação faltante no query_spec como filtro.
 - Gere 2 ou 3 rotas candidatas quando houver evidência suficiente.
 - Faça votação simples pela maior coerência entre pergunta, tabelas, grão, filtros e relacionamentos.
 - Aprove SQL apenas se houver rota, entidade principal, grão, tabelas, medida/finalidade e joins/filtros suficientes.
